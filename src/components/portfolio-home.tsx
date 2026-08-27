@@ -34,9 +34,21 @@ const directIcon = {
   social: Code2,
 };
 
+const featuredOrder = [
+  "go-to-nature",
+  "whatsapp-ai-sales-agent",
+  "argus-ai",
+  "solitaire",
+];
+
 export function PortfolioHome({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
-  const featured = projects.filter((project) => project.featured);
+  const featured = projects
+    .filter((project) => project.featured)
+    .sort(
+      (left, right) =>
+        featuredOrder.indexOf(left.slug) - featuredOrder.indexOf(right.slug),
+    );
   const additional = projects.filter(
     (project) => !project.featured && !project.slug.startsWith("argus-"),
   );

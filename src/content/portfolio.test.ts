@@ -81,6 +81,11 @@ describe("customer-first portfolio content", () => {
     );
   });
 
+  it("leads the commercial work with Go To Nature", () => {
+    expect(getProject("go-to-nature")?.featured).toBe(true);
+    expect(getProject("camp-and-hike")?.featured).toBe(false);
+  });
+
   it("exposes three customer-outcome service paths", () => {
     expect(services.map((service) => service.id)).toEqual([
       "product",

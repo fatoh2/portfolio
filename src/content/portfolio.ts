@@ -248,7 +248,7 @@ export const projects: PortfolioProject[] = [
     nextStep: tx("Continue validating live purchase and booking journeys as operations grow.", "مواصلة اختبار مسارات الشراء والحجز مع توسع التشغيل.", "להמשיך לאמת מסלולי רכישה והזמנה עם צמיחת התפעול."),
     media: [{ src: "/work/camp-and-hike-home.png", alt: tx("Camp & Hike Arabic homepage over a mountain landscape", "الصفحة العربية لكامب أند هايك فوق منظر جبلي", "דף הבית בערבית של Camp & Hike על רקע הרים"), caption: tx("Public Arabic production homepage", "الصفحة العربية العامة", "דף הבית הציבורי בערבית") }],
     links: [liveLink("https://camp-and-hike.vercel.app/")],
-    featured: true,
+    featured: false,
     customerPath: "business",
   },
   {
@@ -428,7 +428,7 @@ export const projects: PortfolioProject[] = [
     nextStep: tx("Keep booking and content operations measurable as new programs are introduced.", "جعل الحجز وتشغيل المحتوى قابلين للقياس مع إضافة برامج جديدة.", "לשמור על מדידות של הזמנות ותפעול תוכן עם הוספת תכניות."),
     media: [{ src: "/work/go-to-nature-home.png", alt: tx("Go To Nature Arabic community homepage", "الصفحة العربية لمجتمع Go To Nature", "דף הקהילה בערבית של Go To Nature"), caption: tx("Public Arabic production homepage", "الصفحة العربية العامة", "דף הבית הציבורי בערבית") }],
     links: [liveLink("https://go-to-nature.vercel.app/")],
-    featured: false,
+    featured: true,
     customerPath: "business",
   },
   {

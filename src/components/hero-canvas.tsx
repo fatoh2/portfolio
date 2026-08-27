@@ -11,8 +11,8 @@ export function HeroCanvas({ locale }: { locale: Locale }) {
       <div className="canvas-line canvas-line-b" aria-hidden="true" />
       <figure className="canvas-frame canvas-main">
         <Image
-          src="/work/camp-and-hike-home.png"
-          alt="Camp & Hike live Arabic product homepage"
+          src="/work/go-to-nature-home.png"
+          alt="Go To Nature live Arabic community homepage"
           fill
           priority
           sizes="(min-width: 900px) 45vw, 92vw"
@@ -20,7 +20,7 @@ export function HeroCanvas({ locale }: { locale: Locale }) {
         />
         <figcaption>
           <span className="live-dot" aria-hidden="true" />
-          Camp & Hike · {dictionary.hero.live}
+          Go To Nature · {dictionary.hero.live}
         </figcaption>
       </figure>
       <figure className="canvas-frame canvas-lulu">
