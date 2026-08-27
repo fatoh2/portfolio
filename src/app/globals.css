@@ -2145,9 +2145,8 @@ html[dir="rtl"] .project-hero-copy {
   *,
   *::before,
   *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
+    animation: none !important;
     scroll-behavior: auto !important;
-    transition-duration: 0.001ms !important;
+    transition: none !important;
   }
 }
