@@ -1,4 +1,5 @@
 import { ArrowUpRight, Menu } from "lucide-react";
+import Image from "next/image";
 import { getDictionary } from "@/content/ui";
 import {
   localizedPath,
@@ -43,7 +44,16 @@ export function SiteHeader({
           eventData={{ target: "home", locale }}
           aria-label="Fathallah Haj"
         >
-          <span className="brand-mark" aria-hidden="true">FH</span>
+          <Image
+            src="/brand/fh-monogram-acid.svg"
+            className="brand-mark"
+            width={750}
+            height={550}
+            alt=""
+            aria-hidden="true"
+            loading="eager"
+            unoptimized
+          />
           <span className="brand-copy">
             <strong>Fathallah Haj</strong>
             <small>Product · AI · DevOps</small>

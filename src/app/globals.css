@@ -111,16 +111,12 @@ img {
 }
 
 .brand-mark {
-  display: grid;
-  width: 38px;
-  height: 38px;
-  flex: 0 0 38px;
-  place-items: center;
-  border: 1px solid var(--acid);
-  border-radius: 4px;
-  color: var(--acid);
-  font-size: 13px;
-  font-weight: 800;
+  display: block;
+  width: 58px;
+  height: auto;
+  flex: 0 0 58px;
+  aspect-ratio: 15 / 11;
+  object-fit: contain;
 }
 
 .brand-copy {
@@ -1918,9 +1914,12 @@ html[dir="rtl"] .project-hero-copy {
   }
 
   .brand-mark {
-    width: 34px;
-    height: 34px;
-    flex-basis: 34px;
+    width: 48px;
+    flex-basis: 48px;
+  }
+
+  .brand-link {
+    gap: 8px;
   }
 
   .language-switch a {

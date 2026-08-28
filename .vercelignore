@@ -6,4 +6,6 @@ tmp
 *.log
 coverage
 scripts
+design
 **/*.test.ts
+**/*.test.tsx
