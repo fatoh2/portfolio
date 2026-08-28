@@ -37,7 +37,7 @@ export type ProjectMedia = {
   src: string;
   alt: LocalizedText;
   caption: LocalizedText;
-  portrait?: boolean;
+  fit?: "cover" | "contain";
 };
 
 export type ProofLink = {
@@ -197,6 +197,27 @@ const commonLive = tx(
   "منتج مباشر؛ الشيفرة خاصة",
   "מוצר חי; קוד פרטי",
 );
+
+export const solitaireMedia = {
+  lobby: {
+    src: "/labs/solitaire/solitaire-lobby-desktop.jpg",
+    alt: tx("SOLitaire redesigned green-and-gold app lobby with solo play and competition options", "ردهة تطبيق SOLitaire بتصميم أخضر وذهبي وخيارات اللعب الفردي والمنافسة", "לובי SOLitaire בעיצוב ירוק וזהב עם אפשרויות למשחק יחיד ותחרות"),
+    caption: tx("Redesigned desktop lobby", "ردهة سطح المكتب بتصميم جديد", "לובי המחשב בעיצוב החדש"),
+    fit: "contain",
+  },
+  mobileLobby: {
+    src: "/labs/solitaire/solitaire-lobby-mobile.jpg",
+    alt: tx("SOLitaire mobile lobby with Play Solitaire, challenges, and bottom navigation", "ردهة SOLitaire على الموبايل مع اللعب والتحديات وشريط التنقل السفلي", "לובי SOLitaire במובייל עם משחק, אתגרים וניווט תחתון"),
+    caption: tx("Responsive mobile lobby", "ردهة متجاوبة على الموبايل", "לובי מותאם למובייל"),
+    fit: "contain",
+  },
+  gameplay: {
+    src: "/labs/solitaire/solitaire-table-mobile.jpg",
+    alt: tx("SOLitaire updated mobile Klondike table with seven card columns, score, timer, and game controls", "طاولة Klondike المحدثة في SOLitaire على الموبايل مع سبعة أعمدة ونقاط ومؤقت وأدوات اللعب", "שולחן Klondike המעודכן של SOLitaire במובייל עם שבע עמודות, ניקוד, שעון ופקדי משחק"),
+    caption: tx("Updated solo Klondike gameplay", "لعب Klondike الفردي بتصميم محدث", "משחק Klondike יחיד בעיצוב המעודכן"),
+    fit: "contain",
+  },
+} satisfies Record<string, ProjectMedia>;
 
 const liveLink = (href: string): ProofLink => ({
   label: tx("Visit live product", "زيارة المنتج", "למוצר החי"),
@@ -360,14 +381,14 @@ export const projects: PortfolioProject[] = [
     slug: "solitaire",
     title: "SOLitaire",
     category: tx("Competitive mobile product", "منتج موبايل تنافسي", "מוצר מובייל תחרותי"),
-    summary: tx("A polished competitive Klondike experience spanning a public marketing site, mobile gameplay, Solana wallet authentication, and escrow-oriented match flows.", "تجربة Klondike تنافسية مصقولة تشمل موقعاً عاماً ولعباً على الموبايل ودخول محفظة Solana ومسارات مباريات مبنية على الضمان.", "חוויית Klondike תחרותית מלוטשת הכוללת אתר ציבורי, משחק מובייל, אימות ארנק Solana ותהליכי משחק מבוססי escrow."),
+    summary: tx("A competitive Klondike app with a redesigned lobby, responsive gameplay, Solana wallet authentication, and escrow-oriented match flows.", "تطبيق Klondike تنافسي مع ردهة بتصميم جديد ولعب متجاوب ودخول بمحفظة Solana ومسارات مباريات مبنية على الضمان.", "אפליקציית Klondike תחרותית עם לובי מעוצב מחדש, משחק רספונסיבי, אימות ארנק Solana ותהליכי משחק מבוססי escrow."),
     problem: tx("A competitive card product must keep onboarding, wallet state, match creation, gameplay, and transaction feedback understandable.", "يجب أن يبقي منتج الورق التنافسي التسجيل والمحفظة وإنشاء المباراة واللعب وحالة المعاملة واضحة.", "מוצר קלפים תחרותי צריך לשמור על הצטרפות, מצב ארנק, יצירת משחק, משחק ומשוב עסקה ברורים."),
     audience: tx("Web3 game players and product partners", "لاعبي Web3 وشركاء المنتج", "שחקני Web3 ושותפי מוצר"),
     role: tx("Product engineering and infrastructure", "هندسة المنتج والبنية التحتية", "הנדסת מוצר ותשתיות"),
     status: "live-product",
     statusNote: commonLive,
     capabilities: [tx("Public marketing experience and mobile-first onboarding.", "موقع تسويقي عام وبدء استخدام للموبايل.", "אתר שיווק ציבורי והצטרפות מותאמת מובייל."), tx("Solana wallet authentication and escrow-oriented match creation.", "دخول بمحفظة Solana وإنشاء مباريات موجه للضمان.", "אימות ארנק Solana ויצירת משחק מבוססת escrow."), tx("Competitive Klondike gameplay, scoring, and transaction-aware state.", "لعب Klondike تنافسي وتسجيل نقاط وحالة واعية بالمعاملات.", "משחק Klondike תחרותי, ניקוד ומצב מודע לעסקאות." )],
-    evidence: [tx("Public marketing product", "منتج تسويقي عام", "מוצר שיווק ציבורי"), tx("Captured gameplay surfaces", "واجهات لعب موثّقة", "מסכי משחק מתועדים"), tx("Product and chain integration", "تكامل المنتج والسلسلة", "שילוב מוצר ושרשרת")],
+    evidence: [tx("Redesigned app lobby", "ردهة التطبيق بتصميم جديد", "לובי אפליקציה מעוצב מחדש"), tx("Responsive Klondike gameplay", "لعب Klondike متجاوب", "משחק Klondike רספונסיבי"), tx("Product and chain integration", "تكامل المنتج والسلسلة", "שילוב מוצר ושרשרת")],
     stack: ["Expo", "React Native", "Supabase", "Solana", "Anchor", "TypeScript", "Vitest"],
     architecture: [
       { label: tx("Player experience", "تجربة اللاعب", "חוויית שחקן"), detail: tx("Onboarding, wallet connection, matchmaking, and gameplay.", "بدء الاستخدام وربط المحفظة والمباريات واللعب.", "הצטרפות, חיבור ארנק, התאמת משחק ומשחקיות.") },
@@ -375,10 +396,7 @@ export const projects: PortfolioProject[] = [
       { label: tx("Chain boundary", "حد السلسلة", "גבול השרשרת"), detail: tx("Wallet authentication and escrow-oriented transaction flows.", "دخول بالمحفظة وتدفقات معاملات موجهة للضمان.", "אימות ארנק ותהליכי עסקה מבוססי escrow.") },
     ],
     nextStep: tx("Continue hardening transaction recovery and gameplay telemetry.", "مواصلة تقوية استعادة المعاملات وقياس اللعب.", "להמשיך לחזק התאוששות מעסקאות וטלמטריית משחק."),
-    media: [
-      { src: "/labs/solitaire/solitaire-banner.png", alt: tx("SOLitaire competitive card game banner", "لافتة لعبة SOLitaire التنافسية", "כרזת משחק הקלפים SOLitaire"), caption: tx("Public product identity", "هوية المنتج العامة", "זהות המוצר הציבורית") },
-      { src: "/labs/solitaire/solitaire-gameplay.png", alt: tx("SOLitaire mobile Klondike gameplay", "لعب SOLitaire Klondike على الموبايل", "משחק Klondike במובייל של SOLitaire"), caption: tx("Mobile gameplay", "اللعب على الموبايل", "משחק מובייל"), portrait: true },
-    ],
+    media: [solitaireMedia.lobby, solitaireMedia.mobileLobby, solitaireMedia.gameplay],
     links: [liveLink("https://sol-solitaire.com")],
     featured: true,
     customerPath: "startup",

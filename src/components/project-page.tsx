@@ -77,7 +77,7 @@ export function ProjectPage({
                 fill
                 priority
                 sizes="(min-width: 920px) 50vw, 100vw"
-                className={primaryMedia.portrait ? "project-hero-image contain" : "project-hero-image"}
+                className={primaryMedia.fit === "contain" ? "project-hero-image contain" : "project-hero-image"}
               />
             ) : (
               <SystemVisual project={project} locale={locale} />
@@ -125,7 +125,7 @@ export function ProjectPage({
                   alt={t(media.alt, locale)}
                   fill
                   sizes="(min-width: 920px) 42vw, 90vw"
-                  className={media.portrait ? "contain" : ""}
+                  className={media.fit === "contain" ? "contain" : ""}
                 />
                 <figcaption>{t(media.caption, locale)}</figcaption>
               </figure>

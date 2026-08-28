@@ -8,6 +8,7 @@ import {
   profile,
   projects,
   services,
+  solitaireMedia,
   t,
 } from "./portfolio";
 
@@ -84,6 +85,24 @@ describe("customer-first portfolio content", () => {
   it("leads the commercial work with Go To Nature", () => {
     expect(getProject("go-to-nature")?.featured).toBe(true);
     expect(getProject("camp-and-hike")?.featured).toBe(false);
+  });
+
+  it("leads SOLitaire with the redesigned app and keeps gameplay captures current", () => {
+    const project = getProject("solitaire");
+    expect(project?.media).toEqual([
+      solitaireMedia.lobby,
+      solitaireMedia.mobileLobby,
+      solitaireMedia.gameplay,
+    ]);
+    expect(project?.media.every((media) => media.fit === "contain")).toBe(true);
+    expect(project?.media.some((media) => media.src.includes("banner"))).toBe(false);
+    expect(project?.links[0].href).toBe("https://sol-solitaire.com");
+    for (const locale of locales) {
+      for (const media of Object.values(solitaireMedia)) {
+        expect(t(media.alt, locale).length).toBeGreaterThan(20);
+        expect(t(media.caption, locale).length).toBeGreaterThan(5);
+      }
+    }
   });
 
   it("exposes three customer-outcome service paths", () => {

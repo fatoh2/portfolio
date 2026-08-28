@@ -724,7 +724,6 @@ html[dir="rtl"] .audience-grid article {
 .feature-image.contain {
   object-fit: contain;
   background: #0b2418;
-  padding: 28px;
 }
 
 .feature-index {
@@ -1434,7 +1433,6 @@ html[dir="rtl"] .project-hero-copy {
 
 .project-hero-image.contain {
   object-fit: contain;
-  padding: 60px;
   background: #0b2418;
 }
 
@@ -1869,6 +1867,11 @@ html[dir="rtl"] .project-hero-copy {
     min-height: 500px;
   }
 
+  .project-hero-media:has(.project-hero-image.contain) {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
   .project-facts {
     grid-template-columns: 1fr;
   }
@@ -2129,10 +2132,6 @@ html[dir="rtl"] .project-hero-copy {
 
   .project-hero-media {
     min-height: 360px;
-  }
-
-  .project-hero-image.contain {
-    padding: 28px;
   }
 
   .project-gallery figure {

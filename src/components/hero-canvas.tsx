@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { Locale } from "@/content/portfolio";
+import { solitaireMedia, t, type Locale } from "@/content/portfolio";
 import { getDictionary } from "@/content/ui";
 
 export function HeroCanvas({ locale }: { locale: Locale }) {
@@ -36,8 +36,8 @@ export function HeroCanvas({ locale }: { locale: Locale }) {
       </figure>
       <figure className="canvas-frame canvas-solitaire">
         <Image
-          src="/labs/solitaire/solitaire-gameplay.png"
-          alt="SOLitaire mobile gameplay"
+          src={solitaireMedia.gameplay.src}
+          alt={t(solitaireMedia.gameplay.alt, locale)}
           fill
           sizes="(min-width: 900px) 11vw, 25vw"
           className="canvas-image canvas-contain"

@@ -164,7 +164,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
                         alt={t(media.alt, locale)}
                         fill
                         sizes="(min-width: 960px) 54vw, 100vw"
-                        className={media.portrait ? "feature-image contain" : "feature-image"}
+                        className={media.fit === "contain" ? "feature-image contain" : "feature-image"}
                       />
                     ) : (
                       <SystemVisual project={project} locale={locale} compact />
