@@ -378,6 +378,79 @@ export const projects: PortfolioProject[] = [
     customerPath: "startup",
   },
   {
+    slug: "seeker-radar",
+    title: "Seeker Radar",
+    category: tx("App discovery & monitoring", "اكتشاف التطبيقات ومتابعتها", "גילוי אפליקציות ומעקב"),
+    summary: tx(
+      "An independent discovery platform that turns a changing Solana Mobile app catalog into searchable briefs, daily updates, saved apps, and personalized alerts.",
+      "منصة اكتشاف مستقلة تحوّل كتالوج تطبيقات Solana Mobile المتغير إلى ملفات قابلة للبحث وتحديثات يومية وتطبيقات محفوظة وتنبيهات مخصصة.",
+      "פלטפורמת גילוי עצמאית שהופכת קטלוג משתנה של אפליקציות Solana Mobile לסקירות ניתנות לחיפוש, עדכונים יומיים, אפליקציות שמורות והתראות מותאמות אישית.",
+    ),
+    problem: tx(
+      "Help users discover useful apps and follow meaningful changes without sorting through promotional noise or routine rating fluctuations.",
+      "مساعدة المستخدمين على اكتشاف تطبيقات مفيدة ومتابعة التغييرات المهمة دون الغرق في الضجيج الترويجي أو التقلبات المعتادة في التقييمات.",
+      "לעזור למשתמשים לגלות אפליקציות שימושיות ולעקוב אחר שינויים משמעותיים בלי לסנן רעש שיווקי או תנודות שגרתיות בדירוגים.",
+    ),
+    audience: tx("Seeker users, app builders, and ecosystem researchers", "مستخدمي Seeker ومطوري التطبيقات والباحثين في المنظومة", "משתמשי Seeker, מפתחי אפליקציות וחוקרי האקוסיסטם"),
+    role: tx("Creator, product engineer, and platform engineer", "المنشئ ومهندس المنتج والمنصة", "יוצר, מהנדס מוצר ומהנדס פלטפורמה"),
+    status: "live-product",
+    statusNote: tx("Live independent product; private source. Not affiliated with Solana Mobile.", "منتج مستقل مباشر؛ الشيفرة خاصة. غير تابع لـSolana Mobile.", "מוצר עצמאי פעיל; קוד פרטי. ללא זיקה רשמית ל-Solana Mobile."),
+    capabilities: [
+      tx("Searchable app catalog with category, score, rating, and reward filters, plus app briefs with screenshots and source-linked evidence.", "كتالوج تطبيقات قابل للبحث والتصفية حسب الفئة والدرجة والتقييم والمكافآت، مع ملفات تضم لقطات شاشة وأدلة مرتبطة بمصادرها.", "קטלוג ניתן לחיפוש ולסינון לפי קטגוריה, ציון, דירוג ותגמולים, לצד סקירות עם צילומי מסך וראיות המקושרות למקורות."),
+      tx("Daily catalog snapshots and a public change feed for launches, removals, meaningful listing changes, and significant score movement.", "لقطات يومية للكتالوج وسجل تغييرات عام للإطلاقات والإزالات وتعديلات القوائم المهمة والتغيرات الملحوظة في الدرجات.", "תמונות מצב יומיות של הקטלוג ויומן ציבורי של השקות, הסרות, שינויים משמעותיים ברשומות ותזוזות בולטות בציונים."),
+      tx("Saved apps, community ratings, and custom alert rules with email or signed-wallet account flows and browser push support.", "تطبيقات محفوظة وتقييمات مجتمعية وقواعد تنبيه مخصصة، مع حسابات عبر البريد أو توقيع المحفظة ودعم إشعارات المتصفح.", "אפליקציות שמורות, דירוגי קהילה וכללי התראה אישיים, עם חשבונות דרך אימייל או חתימת ארנק ותמיכה בהתראות דפדפן."),
+      tx("Builder corrections and reward updates go through review before publishing; the installable web app keeps discovery mobile-first.", "تمر تصحيحات المطورين وتحديثات المكافآت بالمراجعة قبل النشر، مع تطبيق ويب قابل للتثبيت مصمم للموبايل أولاً.", "תיקוני מפתחים ועדכוני תגמולים עוברים בדיקה לפני פרסום; אפליקציית הווב הניתנת להתקנה מתוכננת קודם למובייל."),
+    ],
+    evidence: [
+      tx("Live searchable app catalog", "كتالوج تطبيقات مباشر قابل للبحث", "קטלוג אפליקציות חי וניתן לחיפוש"),
+      tx("Public daily change history", "سجل تغييرات يومي عام", "היסטוריית שינויים יומית ציבורית"),
+      tx("Source-linked app briefs", "ملفات تطبيقات مرتبطة بالمصادر", "סקירות אפליקציות עם קישורים למקורות"),
+    ],
+    stack: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "GitHub Actions", "PWA", "Web Push", "Vitest", "Playwright"],
+    architecture: [
+      {
+        label: tx("Catalog pipeline", "خط بيانات الكتالوج", "תהליך נתוני הקטלוג"),
+        detail: tx("Scheduled ingestion validates Store data, creates snapshots and meaningful diffs, and checks freshness before publishing generated catalog files.", "يجمع المسار المجدول بيانات المتجر ويتحقق منها، وينشئ لقطات وفروقاً ذات معنى، ويفحص حداثة البيانات قبل نشر ملفات الكتالوج المولّدة.", "איסוף מתוזמן מאמת נתוני חנות, יוצר תמונות מצב והבדלים משמעותיים ובודק עדכניות לפני פרסום קובצי הקטלוג."),
+      },
+      {
+        label: tx("Discovery experience", "تجربة الاكتشاف", "חוויית גילוי"),
+        detail: tx("Next.js renders public app briefs and a cached catalog API powers search, filters, and pagination without exposing private account data.", "يعرض Next.js ملفات التطبيقات العامة، وتدعم واجهة كتالوج مخزنة مؤقتاً البحث والتصفية وتقسيم الصفحات دون كشف بيانات الحسابات الخاصة.", "Next.js מציג סקירות ציבוריות, ו-API קטלוג עם מטמון מפעיל חיפוש, סינון ודפדוף בעמודים בלי לחשוף נתוני חשבון פרטיים."),
+      },
+      {
+        label: tx("Accounts & alerts", "الحسابات والتنبيهات", "חשבונות והתראות"),
+        detail: tx("Supabase stores identity-scoped saves, ratings, alert preferences, and reviewed submissions; snapshot changes feed the alert workflow.", "يخزن Supabase المحفوظات والتقييمات وتفضيلات التنبيه والمساهمات المراجعة حسب هوية المستخدم، وتغذي تغييرات اللقطات مسار التنبيهات.", "Supabase שומר מועדפים, דירוגים, העדפות התראה והגשות לבדיקה לפי זהות המשתמש; שינויי תמונות המצב מזינים את תהליך ההתראות."),
+      },
+    ],
+    nextStep: tx(
+      "Strengthen device-level push checks and snapshot failure monitoring before extending the product to native Android.",
+      "تعزيز فحوصات الإشعارات على الأجهزة ومراقبة فشل اللقطات قبل توسيع المنتج إلى تطبيق Android أصلي.",
+      "לחזק בדיקות התראות במכשירים וניטור כשלים בתמונות מצב לפני הרחבת המוצר לאפליקציית Android מקורית.",
+    ),
+    media: [
+      {
+        src: "/work/seeker-radar/discovery-desktop.jpg",
+        alt: tx("Seeker Radar desktop app catalog with discovery navigation, filters, app listings, and evidence scores", "كتالوج Seeker Radar على سطح المكتب مع تنقل الاكتشاف والتصفية وقوائم التطبيقات ودرجات الأدلة", "קטלוג האפליקציות של Seeker Radar במחשב עם ניווט, מסננים, רשומות וציונים מבוססי ראיות"),
+        caption: tx("Live discovery catalog and filters", "كتالوج الاكتشاف المباشر وأدوات التصفية", "קטלוג גילוי חי ומסננים"),
+        fit: "contain",
+      },
+      {
+        src: "/work/seeker-radar/app-brief-mobile.jpg",
+        alt: tx("Seeker Radar mobile TokenRun app brief with Store artwork, rating, evidence summary, and app actions", "ملف TokenRun على Seeker Radar للموبايل مع صور المتجر والتقييم وملخص الأدلة وإجراءات التطبيق", "סקירת TokenRun במובייל של Seeker Radar עם תמונות מהחנות, דירוג, סיכום ראיות ופעולות"),
+        caption: tx("Mobile app brief with listing evidence", "ملف تطبيق على الموبايل مع أدلة من المتجر", "סקירת אפליקציה במובייל עם ראיות מהרשומה"),
+        fit: "contain",
+      },
+      {
+        src: "/work/seeker-radar/updates-mobile.jpg",
+        alt: tx("Seeker Radar mobile daily update feed showing snapshot totals and apps with meaningful changes", "سجل Seeker Radar اليومي على الموبايل مع ملخص اللقطة والتطبيقات ذات التغييرات المهمة", "יומן העדכונים היומי של Seeker Radar במובייל עם סיכומי תמונת מצב ואפליקציות שהשתנו"),
+        caption: tx("Daily change feed on mobile", "سجل التغييرات اليومي على الموبايل", "יומן שינויים יומי במובייל"),
+        fit: "contain",
+      },
+    ],
+    links: [liveLink("https://seeker-radar.app")],
+    featured: true,
+    customerPath: "startup",
+  },
+  {
     slug: "solitaire",
     title: "SOLitaire",
     category: tx("Competitive mobile product", "منتج موبايل تنافسي", "מוצר מובייל תחרותי"),

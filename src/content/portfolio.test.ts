@@ -105,6 +105,32 @@ describe("customer-first portfolio content", () => {
     }
   });
 
+  it("features Seeker Radar with public evidence and complete localized content", () => {
+    const project = getProject("seeker-radar");
+    expect(project?.featured).toBe(true);
+    expect(project?.status).toBe("live-product");
+    expect(project?.links.map(({ href, kind }) => ({ href, kind }))).toEqual([
+      { href: "https://seeker-radar.app", kind: "live" },
+    ]);
+    expect(project?.statusNote.en).toContain("Not affiliated with Solana Mobile");
+    expect(project?.media).toHaveLength(3);
+    expect(project?.media.every((media) => media.fit === "contain")).toBe(true);
+    if (!project) throw new Error("Missing Seeker Radar project");
+    const textRecords = [
+      project.category, project.summary, project.problem, project.audience,
+      project.role, project.statusNote, project.nextStep,
+      ...project.capabilities, ...project.evidence,
+      ...project.architecture.flatMap((node) => [node.label, node.detail]),
+      ...project.media.flatMap((media) => [media.alt, media.caption]),
+    ];
+    for (const locale of locales) {
+      expect(getProjectParams()).toContainEqual({ locale, slug: project.slug });
+      for (const value of textRecords) {
+        expect(t(value, locale).length).toBeGreaterThan(5);
+      }
+    }
+  });
+
   it("exposes three customer-outcome service paths", () => {
     expect(services.map((service) => service.id)).toEqual([
       "product",

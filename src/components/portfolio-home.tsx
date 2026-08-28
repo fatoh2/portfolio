@@ -36,6 +36,7 @@ const directIcon = {
 
 const featuredOrder = [
   "go-to-nature",
+  "seeker-radar",
   "whatsapp-ai-sales-agent",
   "argus-ai",
   "solitaire",
