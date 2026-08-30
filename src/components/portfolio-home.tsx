@@ -245,6 +245,21 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
               <p className="eyebrow">{dictionary.lab.eyebrow}</p>
               <h3>{focusQuest.title}</h3>
               <p>{t(focusQuest.summary, locale)}</p>
+              <div className="hero-actions" style={{ marginTop: "1rem" }}>
+                <TrackedAnchor
+                  href={focusQuest.apkUrl}
+                  className="button button-acid"
+                  download
+                  eventName="focusquest_apk_download"
+                  eventData={{ locale }}
+                >
+                  {t(focusQuest.downloadLabel, locale)}
+                  <Download aria-hidden="true" size={18} />
+                </TrackedAnchor>
+              </div>
+              <p className="eyebrow" style={{ marginTop: "0.6rem" }}>
+                {t(focusQuest.downloadNote, locale)}
+              </p>
             </div>
             <div className="lab-stack">
               {focusQuest.stack.map((item) => <span key={item}>{item}</span>)}

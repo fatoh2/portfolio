@@ -562,6 +562,17 @@ export const focusQuest = {
   ),
   status: "in-development" as ProjectStatus,
   stack: ["Flutter", "Firebase", "Android", "iOS", "Accessibility"],
+  apkUrl: "/downloads/FocusQuest-arm64.apk",
+  downloadLabel: tx(
+    "Download Android beta (APK)",
+    "تحميل نسخة أندرويد التجريبية (APK)",
+    "הורדת גרסת בטא לאנדרואיד (APK)",
+  ),
+  downloadNote: tx(
+    "Direct install build — Android will ask you to allow installs from your browser.",
+    "نسخة تثبيت مباشر — سيطلب أندرويد السماح بالتثبيت من المتصفح.",
+    "גרסת התקנה ישירה — אנדרואיד יבקש לאשר התקנה מהדפדפן.",
+  ),
 };
 
 export const getProject = (slug: string) =>
