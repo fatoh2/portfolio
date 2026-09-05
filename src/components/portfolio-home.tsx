@@ -1,14 +1,9 @@
 import {
-  ArrowDownRight,
   ArrowUp,
   ArrowUpRight,
-  Bot,
-  Check,
-  Code2,
   Download,
   Mail,
   MessageCircle,
-  MoveRight,
 } from "lucide-react";
 import Image from "next/image";
 import {
@@ -21,18 +16,14 @@ import {
   type Locale,
 } from "@/content/portfolio";
 import { getDictionary, statusLabels } from "@/content/ui";
+import { BrandMonogram } from "./brand-monogram";
+import { BrandPortal } from "./brand-portal";
 import { ContactForm } from "./contact-form";
-import { HeroCanvas } from "./hero-canvas";
+import { HomeProjectSummary } from "./home-project-summary";
 import { SiteHeader } from "./site-header";
 import { SystemVisual } from "./system-visual";
 import { TrackedAnchor, TrackedLink } from "./tracked-link";
-
-const directIcon = {
-  email: Mail,
-  whatsapp: MessageCircle,
-  resume: Download,
-  social: Code2,
-};
+import "./homepage.css";
 
 const featuredOrder = [
   "go-to-nature",
@@ -44,256 +35,157 @@ const featuredOrder = [
 
 export function PortfolioHome({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
+  const copy = dictionary.home;
   const featured = projects
     .filter((project) => project.featured)
     .sort(
-      (left, right) =>
-        featuredOrder.indexOf(left.slug) - featuredOrder.indexOf(right.slug),
+      (a, b) => featuredOrder.indexOf(a.slug) - featuredOrder.indexOf(b.slug),
     );
-  const additional = projects.filter(
-    (project) => !project.featured && !project.slug.startsWith("argus-"),
-  );
+  const additional = projects.filter((project) => !project.featured);
+  const disciplines = {
+    product: copy.product,
+    automation: copy.ai,
+    reliability: copy.infrastructure,
+  };
 
   return (
-    <div id="top" className="site-shell">
+    <div id="top" className="site-shell home-page">
       <SiteHeader locale={locale} />
       <main>
-        <section className="hero-section">
-          <div className="hero-copy">
-            <p className="eyebrow hero-eyebrow">{dictionary.hero.eyebrow}</p>
-            <h1>{t(profile.headline, locale)}</h1>
-            <p className="hero-summary">{t(profile.summary, locale)}</p>
-            <div className="hero-actions">
-              <TrackedLink
-                href={localizedPath(locale, "/#work")}
-                className="button button-acid"
-                eventName="cta_click"
-                eventData={{ placement: "hero", target: "work", locale }}
-              >
-                {dictionary.hero.primary}
-                <ArrowDownRight aria-hidden="true" size={18} />
-              </TrackedLink>
-              <TrackedLink
-                href={localizedPath(locale, "/#contact")}
-                className="button button-ghost-dark"
-                eventName="cta_click"
-                eventData={{ placement: "hero", target: "contact", locale }}
-              >
-                {dictionary.hero.secondary}
-                <MoveRight aria-hidden="true" size={18} />
-              </TrackedLink>
-            </div>
-          </div>
-          <HeroCanvas locale={locale} />
-        </section>
+        <BrandPortal locale={locale} />
 
-        <div className="proof-ribbon" aria-label="Proof signals">
-          <div>
-            {dictionary.proof.map((item) => (
-              <span key={item}>
-                <Check aria-hidden="true" size={15} />
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <section className="section section-paper audience-section">
-          <div className="section-intro wide-intro">
-            <p className="eyebrow">{dictionary.paths.eyebrow}</p>
-            <h2>{dictionary.paths.title}</h2>
-          </div>
-          <div className="audience-grid">
-            <article>
-              <span>01</span>
-              <h3>{dictionary.paths.businessTitle}</h3>
-              <p>{dictionary.paths.businessText}</p>
-              <a href="#work" aria-label={dictionary.paths.businessTitle}>
-                <ArrowDownRight aria-hidden="true" size={22} />
-              </a>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>{dictionary.paths.startupTitle}</h3>
-              <p>{dictionary.paths.startupText}</p>
-              <a href="#work" aria-label={dictionary.paths.startupTitle}>
-                <ArrowDownRight aria-hidden="true" size={22} />
-              </a>
-            </article>
-          </div>
-        </section>
-
-        <section id="services" className="section section-cobalt services-section">
-          <div className="section-intro">
-            <p className="eyebrow">{dictionary.services.eyebrow}</p>
-            <h2>{dictionary.services.title}</h2>
-            <p>{dictionary.services.summary}</p>
-          </div>
-          <div className="service-list">
-            {services.map((service) => (
-              <article key={service.id}>
-                <span className="service-number">{service.number}</span>
-                <div>
-                  <h3>{t(service.title, locale)}</h3>
-                  <p>{t(service.summary, locale)}</p>
-                </div>
-                <div className="signal-list">
-                  {service.signals.map((signal) => (
-                    <span key={signal}>{signal}</span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="work" className="section section-paper work-section">
-          <div className="section-intro wide-intro">
-            <p className="eyebrow">{dictionary.work.eyebrow}</p>
-            <h2>{dictionary.work.title}</h2>
-            <p>{dictionary.work.summary}</p>
-          </div>
+        <section className="home-work" aria-labelledby="selected-work-title">
+          <h2 id="selected-work-title" className="sr-only">
+            {copy.selectedWork}
+          </h2>
           <div className="featured-work">
-            {featured.map((project, index) => {
-              const media = project.media[0];
-              return (
-                <article className="feature-row" key={project.slug}>
-                  <div className="feature-media">
-                    {media ? (
-                      <Image
-                        src={media.src}
-                        alt={t(media.alt, locale)}
-                        fill
-                        sizes="(min-width: 960px) 54vw, 100vw"
-                        className={media.fit === "contain" ? "feature-image contain" : "feature-image"}
-                      />
-                    ) : (
-                      <SystemVisual project={project} locale={locale} compact />
-                    )}
-                    <span className="feature-index">0{index + 1}</span>
-                  </div>
-                  <div className="feature-copy">
-                    <div className="feature-meta">
-                      <span>{t(project.category, locale)}</span>
-                      <span>{statusLabels[project.status][locale]}</span>
+            {featured
+              .filter((project) => project.slug !== "go-to-nature")
+              .map((project) => {
+                const media = project.media[0];
+                return (
+                  <article
+                    className="feature-row home-feature"
+                    key={project.slug}
+                    data-project={project.slug}
+                  >
+                    <div className="home-feature-media">
+                      {media ? (
+                        <Image
+                          src={media.src}
+                          alt={t(media.alt, locale)}
+                          fill
+                          sizes="(min-width: 960px) 58vw, 92vw"
+                          className={`feature-image ${media.fit === "contain" ? "contain" : ""}`}
+                        />
+                      ) : (
+                        <SystemVisual
+                          project={project}
+                          locale={locale}
+                          compact
+                        />
+                      )}
                     </div>
-                    <h3>{project.title}</h3>
-                    <p>{t(project.summary, locale)}</p>
-                    <ul>
-                      {project.evidence.map((item) => (
-                        <li key={item.en}>
-                          <Check aria-hidden="true" size={15} />
-                          {t(item, locale)}
-                        </li>
-                      ))}
-                    </ul>
-                    <TrackedLink
-                      href={localizedPath(locale, `/work/${project.slug}`)}
-                      className="text-link"
-                      eventName="case_study_open"
-                      eventData={{ slug: project.slug, locale }}
-                    >
-                      {dictionary.work.caseStudy}
-                      <ArrowUpRight aria-hidden="true" size={18} />
-                    </TrackedLink>
-                  </div>
-                </article>
-              );
-            })}
+                    <HomeProjectSummary project={project} locale={locale} />
+                  </article>
+                );
+              })}
           </div>
         </section>
 
-        <section className="section section-ink more-work-section">
-          <div className="section-intro">
-            <p className="eyebrow">{dictionary.work.liveWork}</p>
-            <h2>{dictionary.work.liveSummary}</h2>
+        <section className="home-index" aria-labelledby="more-work-title">
+          <div className="home-index-heading">
+            <h2 id="more-work-title">{copy.moreWork}</h2>
+            <p>{copy.workIntro}</p>
           </div>
-          <div className="project-grid">
-            {additional.map((project) => {
-              const media = project.media[0];
-              return (
-                <TrackedLink
-                  key={project.slug}
-                  href={localizedPath(locale, `/work/${project.slug}`)}
-                  className="project-card"
-                  eventName="case_study_open"
-                  eventData={{ slug: project.slug, locale }}
-                >
-                  {media ? (
-                    <span className="project-card-media">
-                      <Image
-                        src={media.src}
-                        alt={t(media.alt, locale)}
-                        fill
-                        sizes="(min-width: 900px) 31vw, 92vw"
-                        className="project-card-image"
-                      />
-                    </span>
-                  ) : null}
-                  <span className="project-card-copy">
-                    <small>{t(project.category, locale)}</small>
-                    <strong>{project.title}</strong>
-                    <span>{t(project.summary, locale)}</span>
-                    <ArrowUpRight aria-hidden="true" size={20} />
-                  </span>
-                </TrackedLink>
-              );
-            })}
+          <div className="home-project-index">
+            {additional.map((project) => (
+              <TrackedLink
+                key={project.slug}
+                href={localizedPath(locale, `/work/${project.slug}`)}
+                className="home-index-link"
+                eventName="case_study_open"
+                eventData={{ slug: project.slug, locale }}
+              >
+                <span className="home-index-name" dir="auto">
+                  {project.title}
+                </span>
+                <span className="home-index-category">
+                  {t(project.category, locale)}
+                </span>
+                <span className="home-index-status">
+                  {statusLabels[project.status][locale]}
+                </span>
+                <ArrowUpRight aria-hidden="true" size={22} />
+              </TrackedLink>
+            ))}
           </div>
-          <article className="lab-row">
+          <article className="home-lab">
             <div>
-              <p className="eyebrow">{dictionary.lab.eyebrow}</p>
-              <h3>{focusQuest.title}</h3>
-              <p>{t(focusQuest.summary, locale)}</p>
-              <div className="hero-actions" style={{ marginTop: "1rem" }}>
-                <TrackedAnchor
-                  href={focusQuest.apkUrl}
-                  className="button button-acid"
-                  download
-                  eventName="focusquest_apk_download"
-                  eventData={{ locale }}
-                >
-                  {t(focusQuest.downloadLabel, locale)}
-                  <Download aria-hidden="true" size={18} />
-                </TrackedAnchor>
-              </div>
-              <p className="eyebrow" style={{ marginTop: "0.6rem" }}>
-                {t(focusQuest.downloadNote, locale)}
+              <p className="home-lab-label">
+                {copy.lab} / {dictionary.lab.eyebrow}
               </p>
+              <h3>{focusQuest.title}</h3>
             </div>
-            <div className="lab-stack">
-              {focusQuest.stack.map((item) => <span key={item}>{item}</span>)}
+            <p>{t(focusQuest.summary, locale)}</p>
+            <div className="home-lab-download">
+              <TrackedAnchor
+                href={focusQuest.apkUrl}
+                className="home-project-link"
+                download
+                eventName="focusquest_apk_download"
+                eventData={{ locale }}
+              >
+                {t(focusQuest.downloadLabel, locale)}
+                <Download aria-hidden="true" size={18} />
+              </TrackedAnchor>
+              <small>{t(focusQuest.downloadNote, locale)}</small>
             </div>
-            <Bot aria-hidden="true" size={32} />
           </article>
         </section>
 
-        <section className="section section-signal technical-section">
-          <div className="section-intro">
-            <p className="eyebrow">{dictionary.proofSection.eyebrow}</p>
-            <h2>{dictionary.proofSection.title}</h2>
-            <p>{dictionary.proofSection.summary}</p>
+        <section
+          id="services"
+          className="home-approach"
+          aria-labelledby="approach-title"
+        >
+          <div className="home-approach-intro">
+            <h2 id="approach-title">{copy.approachTitle}</h2>
+            <p>{copy.approachSummary}</p>
           </div>
-          <div className="technical-grid">
-            {dictionary.proofSection.groups.map((group, index) => (
-              <article key={group.title}>
-                <span>0{index + 1}</span>
-                <h3>{group.title}</h3>
-                <p>{group.text}</p>
+          <div className="home-service-list">
+            {services.map((service) => (
+              <article key={service.id}>
+                <h3>{disciplines[service.id]}</h3>
+                <div>
+                  <h4>{t(service.title, locale)}</h4>
+                  <p>{t(service.summary, locale)}</p>
+                  <ul
+                    className="home-service-tools"
+                    aria-label={disciplines[service.id]}
+                  >
+                    {service.signals.map((signal) => (
+                      <li key={signal}>{signal}</li>
+                    ))}
+                  </ul>
+                </div>
               </article>
             ))}
           </div>
         </section>
 
-        <section id="process" className="section section-paper process-section">
-          <div className="section-intro">
-            <p className="eyebrow">{dictionary.process.eyebrow}</p>
-            <h2>{dictionary.process.title}</h2>
-          </div>
-          <ol className="process-list">
+        <section
+          id="process"
+          className="home-process"
+          aria-labelledby="process-title"
+        >
+          <h2 id="process-title">{copy.processTitle}</h2>
+          <ol>
             {dictionary.process.steps.map((step, index) => (
               <li key={step.title}>
-                <span>0{index + 1}</span>
+                <span className="home-step" aria-hidden="true">
+                  0{index + 1}
+                </span>
                 <h3>{step.title}</h3>
                 <p>{step.text}</p>
               </li>
@@ -301,17 +193,24 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
           </ol>
         </section>
 
-        <section id="contact" className="section contact-section">
-          <div className="contact-copy">
-            <p className="eyebrow">{dictionary.contact.eyebrow}</p>
-            <h2>{dictionary.contact.title}</h2>
-            <p>{dictionary.contact.summary}</p>
-            <div className="direct-contact">
-              <strong>{dictionary.contact.direct}</strong>
+        <section
+          id="contact"
+          className="home-contact"
+          aria-labelledby="contact-title"
+        >
+          <div className="home-contact-copy">
+            <div className="home-signature-mark">
+              <BrandMonogram />
+            </div>
+            <h2 id="contact-title">{copy.contactTitle}</h2>
+            <p>{copy.contactSummary}</p>
+            <div className="home-direct-contact">
               {profile.contactLinks
-                .filter((link) => link.kind === "email" || link.kind === "whatsapp")
+                .filter(
+                  (link) => link.kind === "email" || link.kind === "whatsapp",
+                )
                 .map((link) => {
-                  const Icon = directIcon[link.kind];
+                  const Icon = link.kind === "email" ? Mail : MessageCircle;
                   return (
                     <TrackedAnchor
                       key={link.kind}
@@ -329,7 +228,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
                 })}
             </div>
           </div>
-          <div className="contact-form-wrap">
+          <div className="home-contact-form">
             <ContactForm locale={locale} />
             <p className="privacy-note">{dictionary.contact.privacy}</p>
           </div>
@@ -339,7 +238,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
       <footer className="site-footer">
         <div>
           <strong>Fathallah Haj</strong>
-          <span>{dictionary.footer.line}</span>
+          <span>{copy.signature}</span>
         </div>
         <div className="footer-links">
           {profile.contactLinks.slice(2).map((link) => (
@@ -348,7 +247,9 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
               href={link.href}
               target={link.kind === "social" ? "_blank" : undefined}
               rel={link.kind === "social" ? "noreferrer" : undefined}
-              eventName={link.kind === "resume" ? "resume_download" : "social_click"}
+              eventName={
+                link.kind === "resume" ? "resume_download" : "social_click"
+              }
               eventData={{ target: link.kind, locale }}
             >
               {t(link.label, locale)}

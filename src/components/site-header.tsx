@@ -1,11 +1,9 @@
-import { ArrowUpRight, Menu } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { getDictionary } from "@/content/ui";
-import {
-  localizedPath,
-  type Locale,
-} from "@/content/portfolio";
-import { TrackedLink } from "./tracked-link";
+import { localizedPath, type Locale } from "@/content/portfolio";
+import { TrackedAnchor, TrackedLink } from "./tracked-link";
+import { MobileMenu } from "./mobile-menu";
 
 const languageNames: Record<Locale, string> = {
   en: "EN",
@@ -21,8 +19,14 @@ export function SiteHeader({
   currentPath?: string;
 }) {
   const dictionary = getDictionary(locale);
+  // On the homepage these are native section jumps, including repeated hashes.
+  // Case-study navigation still uses the router to return to the home route.
+  const SectionLink = currentPath === "/" ? TrackedAnchor : TrackedLink;
   const nav = [
-    { label: dictionary.nav.services, href: localizedPath(locale, "/#services") },
+    {
+      label: dictionary.nav.services,
+      href: localizedPath(locale, "/#services"),
+    },
     { label: dictionary.nav.work, href: localizedPath(locale, "/#work") },
     { label: dictionary.nav.process, href: localizedPath(locale, "/#process") },
     { label: dictionary.nav.contact, href: localizedPath(locale, "/#contact") },
@@ -62,14 +66,14 @@ export function SiteHeader({
 
         <nav className="desktop-nav" aria-label="Primary navigation">
           {nav.map((item) => (
-            <TrackedLink
+            <SectionLink
               key={item.href}
               href={item.href}
               eventName="navigation"
               eventData={{ target: item.label, locale }}
             >
               {item.label}
-            </TrackedLink>
+            </SectionLink>
           ))}
         </nav>
 
@@ -89,7 +93,7 @@ export function SiteHeader({
               </TrackedLink>
             ))}
           </div>
-          <TrackedLink
+          <SectionLink
             href={localizedPath(locale, "/#contact")}
             className="header-cta"
             eventName="cta_click"
@@ -97,24 +101,21 @@ export function SiteHeader({
           >
             {dictionary.nav.start}
             <ArrowUpRight aria-hidden="true" size={16} />
-          </TrackedLink>
-          <details className="mobile-menu">
-            <summary title={dictionary.nav.menu} aria-label={dictionary.nav.menu}>
-              <Menu aria-hidden="true" size={20} />
-            </summary>
+          </SectionLink>
+          <MobileMenu label={dictionary.nav.menu}>
             <nav aria-label="Mobile navigation">
               {nav.map((item) => (
-                <TrackedLink
+                <SectionLink
                   key={item.href}
                   href={item.href}
                   eventName="navigation"
                   eventData={{ target: item.label, locale }}
                 >
                   {item.label}
-                </TrackedLink>
+                </SectionLink>
               ))}
             </nav>
-          </details>
+          </MobileMenu>
         </div>
       </div>
     </header>

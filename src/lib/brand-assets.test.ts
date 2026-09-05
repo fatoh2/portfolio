@@ -1,8 +1,14 @@
 // @vitest-environment node
 import { readFile } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
+import { monogramCounter, monogramPath } from "./monogram";
 
 describe("active brand icons", () => {
+  it("keeps the animated mark and aperture faithful to the canonical vector", async () => {
+    const master = await readFile(new URL("../../design/brand/monogram-master.svg", import.meta.url), "utf8");
+    expect(monogramPath).toBe(master.match(/<path[^>]* d="([^"]+)"/)?.[1]);
+    expect(monogramPath.endsWith(monogramCounter)).toBe(true);
+  });
   it.each([
     ["favicon.ico", "favicon.ico"],
     ["favicon.svg", "icon.svg"],

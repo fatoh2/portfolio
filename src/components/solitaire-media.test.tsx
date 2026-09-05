@@ -1,19 +1,21 @@
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { getProject, locales, solitaireMedia, t } from "@/content/portfolio";
-import { HeroCanvas } from "./hero-canvas";
+import { PortfolioHome } from "./portfolio-home";
 import { ProjectPage } from "./project-page";
 
+vi.mock("./contact-form", () => ({ ContactForm: () => null }));
+
 describe("SOLitaire screenshot presentation", () => {
-  it.each(locales)("uses the current gameplay capture in the %s hero", (locale) => {
+  it.each(locales)("uses the complete current lobby in the %s homepage", (locale) => {
     const document = new DOMParser().parseFromString(
-      renderToStaticMarkup(<HeroCanvas locale={locale} />),
+      renderToStaticMarkup(<PortfolioHome locale={locale} />),
       "text/html",
     );
-    const image = document.querySelector(".canvas-solitaire img");
-    expect(image?.getAttribute("src")).toContain(encodeURIComponent(solitaireMedia.gameplay.src));
-    expect(image?.getAttribute("alt")).toBe(t(solitaireMedia.gameplay.alt, locale));
-    expect(image?.classList.contains("canvas-contain")).toBe(true);
+    const image = document.querySelector('[data-project="solitaire"] img');
+    expect(image?.getAttribute("src")).toContain(encodeURIComponent(solitaireMedia.lobby.src));
+    expect(image?.getAttribute("alt")).toBe(t(solitaireMedia.lobby.alt, locale));
+    expect(image?.classList.contains("contain")).toBe(true);
   });
 
   it.each(locales)("shows the uncropped lobby and both mobile screens in %s", (locale) => {
