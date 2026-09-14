@@ -89,11 +89,25 @@ beforeEach(() => {
 
 afterEach(() => {
   cleanup();
+  window.history.replaceState(null, "", "/");
   vi.restoreAllMocks();
   vi.unstubAllGlobals();
 });
 
 describe("portal progressive enhancement", () => {
+  it("realigns a deep-linked section after delayed image loading without repeating the jump", async () => {
+    window.history.replaceState(null, "", "/#work");
+    const complete = vi.spyOn(HTMLImageElement.prototype, "complete", "get").mockReturnValue(false);
+    const { container } = render(<><Scene /><section id="work">Selected work</section></>);
+    const anchor = container.querySelector<HTMLElement>("#work")!;
+    anchor.scrollIntoView = vi.fn();
+    complete.mockReturnValue(true);
+    await act(async () => container.querySelector("img")!.dispatchEvent(new Event("load")));
+    expect(anchor.scrollIntoView).toHaveBeenCalledExactlyOnceWith({ block: "start", behavior: "instant" });
+    await act(async () => window.dispatchEvent(new Event("pageshow")));
+    expect(anchor.scrollIntoView).toHaveBeenCalledTimes(1);
+  });
+
   it("keeps the page unpinned before media loads and after a failure or motion preference change", async () => {
     const complete = vi
       .spyOn(HTMLImageElement.prototype, "complete", "get")

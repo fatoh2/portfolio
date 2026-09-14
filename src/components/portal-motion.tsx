@@ -95,6 +95,14 @@ export function PortalMotion({ children }: { children: ReactNode }) {
         return;
       }
       // svh avoids jumps when mobile browser chrome opens and closes.
+      // Resolve a directly opened section again after the static hero becomes
+      // pinned and changes height when its image finishes loading.
+      const anchor = !enabled && window.location.hash
+        ? document.getElementById(window.location.hash.slice(1))
+        : null;
+      const anchorTop = anchor && !root!.contains(anchor)
+        ? anchor.getBoundingClientRect().top
+        : null;
       root!.setAttribute("data-motion", "ready");
       root!.style.setProperty("--portal-header", `${headerHeight}px`);
       const box = stage.getBoundingClientRect();
@@ -106,6 +114,9 @@ export function PortalMotion({ children }: { children: ReactNode }) {
       centerX = logo.left - box.left + (733 - 120) * initialScale;
       centerY = logo.top - box.top + (396 - 190) * initialScale;
       travel = Math.max(1, root!.offsetHeight - stage.offsetHeight);
+      if (anchor && anchorTop !== null && anchorTop >= 0 && anchorTop < window.innerHeight) {
+        anchor.scrollIntoView({ block: "start", behavior: "instant" });
+      }
       enabled = true;
       lastProgress = -1;
       draw();

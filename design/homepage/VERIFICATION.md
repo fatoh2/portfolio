@@ -1,5 +1,33 @@
 # Inside the Mark verification
 
+## Project deck revision — 2026-09-14
+
+Verified the revised collection against the local production build at
+http://127.0.0.1:3108/. Five featured projects share a selectable print deck;
+the opening Go To Nature reveal, additional work index and contact flow remain.
+
+- Lint and production build passed. All 39 unit tests passed, including new
+  regression coverage for canonical localized section links and deep links
+  after delayed hero image loading.
+- English, Arabic and Hebrew passed at 1440 × 900 and 360 × 640. All five
+  selections show exactly one matching preview and its localized case-study
+  link. No horizontal overflow or runtime errors were found.
+- Desktop deck height remains stable when changing projects. Phone previews
+  fit their content. Native radio controls support arrow keys and Tab reaches
+  the visible case-study link. Axe found zero WCAG 2 A/AA or 2.1 AA violations
+  in the collection in all six configurations.
+- All five selections work without JavaScript and with reduced motion in all
+  three languages. The hero retains its unpinned fallback in both modes.
+- Direct Work links, repeated Work navigation, case-study navigation and return
+  to the homepage passed. Localized homepage anchors now avoid an unnecessary
+  trailing-slash redirect. Immediate homepage anchor jumps avoid racing the
+  progressively enhanced hero height.
+- Production screenshots and the check report are in
+  `tmp/homepage/deck-verification/`. This revision was previewed locally;
+  the deployment and the separately modified FocusQuest APK were not changed.
+
+## Original homepage release — 2026-09-05
+
 Verified on 2026-09-05 against the production build served at
 http://127.0.0.1:3107/. The existing Vercel deployment was not changed.
 

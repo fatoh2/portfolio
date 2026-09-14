@@ -22,8 +22,10 @@ opening to the viewport, and resolves to the first project image. Desktop uses
 1. Recognition: the complete monogram and Fathallah Haj dominate the opening.
 2. Discovery: the opening in the mark grows into a real product. This is the
    only cinematic peak. The opening is quiet before motion begins.
-3. Confidence: five featured projects retain their facts, status and evidence;
-   an index includes the remaining projects and the FocusQuest beta download.
+3. Confidence: five featured projects share an interactive deck of signed prints.
+   Project names stay visible while a chosen print comes forward with its real
+   screenshot or architecture, summary, status and evidence. The index includes
+   the remaining projects and the FocusQuest beta download.
 4. Clarity: Product, AI and Infrastructure consolidate the offer and audience.
 5. Connection: the working process leads to a personal inquiry, signed by the
    complete mark on white. The final screen remains stable and usable.
@@ -51,7 +53,17 @@ do not modify or embed the upstream global engine, which has no destroy API.
 The normal server HTML is the complete motion-off page. Enable the cinematic
 layout only after the project image is loaded, and reset it on load failure or
 reduced-motion changes. Route changes must not retain listeners or animation
-frames. The work anchor sits outside the sticky stage so its destination is stable.
+frames. The work anchor goes directly to the project deck after the sticky stage.
+
+The September 14 refinement replaces repeated large project sections with a
+collection visitors choose from. Seeker Radar opens the deck; Go To Nature can
+also be revisited there after its hero reveal. The original palette and fonts
+remain. White print surfaces carry the exact black monogram, while an acid dot
+identifies the selected project. Desktop pairs project names with a compact
+stack; phones place a two-column selector above a print that fits its content.
+Native radio inputs keep selection, arrow keys and case-study links usable
+without JavaScript. Only the chosen print responds with a short arrival motion;
+reduced motion makes selection immediate. No carousel or animation dependency.
 
 Check desktop, compact mobile, all three locales, reduced motion, no JavaScript,
 asset failure, intermediate scroll frames, keyboard navigation, anchors,

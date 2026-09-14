@@ -5,7 +5,6 @@ import {
   Mail,
   MessageCircle,
 } from "lucide-react";
-import Image from "next/image";
 import {
   focusQuest,
   localizedPath,
@@ -19,9 +18,8 @@ import { getDictionary, statusLabels } from "@/content/ui";
 import { BrandMonogram } from "./brand-monogram";
 import { BrandPortal } from "./brand-portal";
 import { ContactForm } from "./contact-form";
-import { HomeProjectSummary } from "./home-project-summary";
+import { ProjectDeck } from "./project-deck";
 import { SiteHeader } from "./site-header";
-import { SystemVisual } from "./system-visual";
 import { TrackedAnchor, TrackedLink } from "./tracked-link";
 import "./homepage.css";
 
@@ -54,44 +52,13 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
       <main>
         <BrandPortal locale={locale} />
 
-        <section className="home-work" aria-labelledby="selected-work-title">
-          <h2 id="selected-work-title" className="sr-only">
-            {copy.selectedWork}
-          </h2>
-          <div className="featured-work">
-            {featured
-              .filter((project) => project.slug !== "go-to-nature")
-              .map((project) => {
-                const media = project.media[0];
-                return (
-                  <article
-                    className="feature-row home-feature"
-                    key={project.slug}
-                    data-project={project.slug}
-                  >
-                    <div className="home-feature-media">
-                      {media ? (
-                        <Image
-                          src={media.src}
-                          alt={t(media.alt, locale)}
-                          fill
-                          sizes="(min-width: 960px) 58vw, 92vw"
-                          className={`feature-image ${media.fit === "contain" ? "contain" : ""}`}
-                        />
-                      ) : (
-                        <SystemVisual
-                          project={project}
-                          locale={locale}
-                          compact
-                        />
-                      )}
-                    </div>
-                    <HomeProjectSummary project={project} locale={locale} />
-                  </article>
-                );
-              })}
-          </div>
-        </section>
+        <ProjectDeck
+          projects={[
+            ...featured.filter((project) => project.slug !== "go-to-nature"),
+            ...featured.filter((project) => project.slug === "go-to-nature"),
+          ]}
+          locale={locale}
+        />
 
         <section className="home-index" aria-labelledby="more-work-title">
           <div className="home-index-heading">

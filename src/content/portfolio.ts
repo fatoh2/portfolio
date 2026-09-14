@@ -91,6 +91,10 @@ export const isLocale = (value: string): value is Locale =>
   locales.includes(value as Locale);
 
 export const localizedPath = (locale: Locale, path = "/") => {
+  if (path.startsWith("/#") || path.startsWith("#")) {
+    const fragment = path.slice(path.indexOf("#"));
+    return `${locale === "en" ? "/" : `/${locale}`}${fragment}`;
+  }
   const normalized = path === "/" ? "" : path.startsWith("/") ? path : `/${path}`;
   return locale === "en" ? normalized || "/" : `/${locale}${normalized}`;
 };

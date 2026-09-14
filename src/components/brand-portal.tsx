@@ -105,7 +105,6 @@ export function BrandPortal({ locale }: { locale: Locale }) {
           </g>
         </svg>
       </div>
-      <div id="work" className="portal-work-anchor" />
     </PortalMotion>
   );
 }

@@ -45,6 +45,14 @@ describe("customer-first portfolio content", () => {
     expect(getProject("missing")).toBeUndefined();
   });
 
+  it("links homepage sections without a trailing-slash redirect in any language", () => {
+    for (const locale of locales) {
+      const home = localizedPath(locale);
+      expect(localizedPath(locale, "/#work")).toBe(`${home}#work`);
+      expect(localizedPath(locale, "#contact")).toBe(`${home}#contact`);
+    }
+  });
+
   it("keeps private work private and links only approved public evidence", () => {
     const privateProjects = projects.filter(
       (project) => project.status === "private-build",

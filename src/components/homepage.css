@@ -1,3 +1,8 @@
+/* Immediate anchor jumps avoid racing the progressively enhanced hero height. */
+html:has(.home-page) {
+  scroll-behavior: auto;
+}
+
 .home-page {
   --paper: #f7f7f4;
   --muted-dark: #b7b7b0;
@@ -173,11 +178,6 @@
 .home-page .portal-caption {
   margin: 24px 0 0;
 }
-.home-page .portal-work-anchor {
-  position: absolute;
-  top: calc(100svh - var(--portal-header));
-  inset-inline-start: 0;
-}
 .home-page .portal-veil {
   display: none;
   position: absolute;
@@ -234,12 +234,10 @@
 .home-page .brand-portal[data-motion] .portal-veil {
   display: block;
 }
-.home-page .brand-portal[data-motion] .portal-work-anchor {
-  top: calc(var(--portal-viewport) * 1.08);
-}
 
 .home-page .home-work {
-  padding: 0 var(--home-gutter);
+  padding: 40px var(--home-gutter) 64px;
+  scroll-margin-top: 12px;
 }
 .home-page .featured-work {
   max-width: none;
@@ -939,9 +937,6 @@ html[dir="rtl"]
   }
   .home-page .brand-portal {
     --portal-header: 72px;
-  }
-  .home-page .brand-portal[data-motion] .portal-work-anchor {
-    top: calc(var(--portal-viewport) * 0.65);
   }
   .home-page .brand-portal[data-motion] .portal-scene {
     padding: 18px var(--home-gutter) 24px;
