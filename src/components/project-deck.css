@@ -259,6 +259,15 @@ html[dir="rtl"] .home-page .deck-selector-title {
   font-size: 13px;
   font-weight: 600;
 }
+.home-page .deck-download { display: flex; flex-direction: column; }
+.home-page .deck-download-link { margin-top: 0; }
+.home-page .deck-download-note {
+  margin-top: 6px;
+  max-width: 44ch;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted-dark);
+}
 .home-page .deck-case-link:hover {
   text-decoration: underline;
   text-underline-offset: 5px;

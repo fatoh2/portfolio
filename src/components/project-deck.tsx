@@ -1,10 +1,10 @@
-import { ArrowUpRight, ArrowDown } from "lucide-react";
+import { ArrowUpRight, ArrowDown, Download } from "lucide-react";
 import Image from "next/image";
 import { Fragment, type CSSProperties } from "react";
 import { localizedPath, t, type Locale, type PortfolioProject } from "@/content/portfolio";
 import { getDictionary, statusLabels } from "@/content/ui";
 import { BrandMonogram } from "./brand-monogram";
-import { TrackedLink } from "./tracked-link";
+import { TrackedAnchor, TrackedLink } from "./tracked-link";
 import "./project-deck.css";
 
 /** Native radios keep the whole collection usable before hydration or without JS. */
@@ -89,6 +89,22 @@ export function ProjectDeck({ projects, locale }: { projects: PortfolioProject[]
                     >
                       {dictionary.work.caseStudy}<ArrowUpRight size={20} aria-hidden="true" />
                     </TrackedLink>
+                    {project.links
+                      .filter((link) => link.kind === "download")
+                      .map((link) => (
+                        <div key={link.href} className="deck-download">
+                          <TrackedAnchor
+                            href={link.href}
+                            className="deck-case-link deck-download-link"
+                            download
+                            eventName="apk_download"
+                            eventData={{ slug: project.slug, locale, surface: "home" }}
+                          >
+                            {t(link.label, locale)}<Download size={20} aria-hidden="true" />
+                          </TrackedAnchor>
+                          {link.note ? <small className="deck-download-note">{t(link.note, locale)}</small> : null}
+                        </div>
+                      ))}
                   </div>
                 </div>
               </article>

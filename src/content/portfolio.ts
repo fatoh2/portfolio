@@ -205,21 +205,33 @@ const commonLive = tx(
 
 export const solitaireMedia = {
   lobby: {
-    src: "/labs/solitaire/solitaire-lobby-desktop.jpg",
-    alt: tx("SOLitaire redesigned green-and-gold app lobby with solo play and competition options", "ردهة تطبيق SOLitaire بتصميم أخضر وذهبي وخيارات اللعب الفردي والمنافسة", "לובי SOLitaire בעיצוב ירוק וזהב עם אפשרויות למשחק יחיד ותחרות"),
-    caption: tx("Redesigned desktop lobby", "ردهة سطح المكتب بتصميم جديد", "לובי המחשב בעיצוב החדש"),
+    src: "/labs/solitaire/solitaire-court-lobby-desktop.jpg",
+    alt: tx(
+      "SOLitaire desktop home on emerald baize with the gold wordmark and the Play, Compete and Daily hubs",
+      "الصفحة الرئيسية لـ SOLitaire على سطح المكتب بقماش أخضر زمردي وشعار ذهبي وأقسام اللعب والمنافسة واليومي",
+      "מסך הבית של SOLitaire במחשב על שולחן ירוק אזמרגד עם לוגו זהוב ומרכזי Play, Compete ו-Daily",
+    ),
+    caption: tx("Court Table home, desktop", "الصفحة الرئيسية بتصميم Court Table على سطح المكتب", "מסך הבית בעיצוב Court Table במחשב"),
     fit: "contain",
   },
   mobileLobby: {
-    src: "/labs/solitaire/solitaire-lobby-mobile.jpg",
-    alt: tx("SOLitaire mobile lobby with Play Solitaire, challenges, and bottom navigation", "ردهة SOLitaire على الموبايل مع اللعب والتحديات وشريط التنقل السفلي", "לובי SOLitaire במובייל עם משחק, אתגרים וניווט תחתון"),
-    caption: tx("Responsive mobile lobby", "ردهة متجاوبة على الموبايل", "לובי מותאם למובייל"),
+    src: "/labs/solitaire/solitaire-court-lobby-mobile.jpg",
+    alt: tx(
+      "SOLitaire phone home with the Play, Compete and Daily hubs, daily rewards chip and bottom navigation",
+      "الصفحة الرئيسية لـ SOLitaire على الهاتف مع أقسام اللعب والمنافسة واليومي وشارة المكافآت اليومية وشريط التنقل السفلي",
+      "מסך הבית של SOLitaire בטלפון עם מרכזי Play, Compete ו-Daily, תג תגמולים יומיים וניווט תחתון",
+    ),
+    caption: tx("Court Table home, phone", "الصفحة الرئيسية على الهاتف", "מסך הבית בטלפון"),
     fit: "contain",
   },
   gameplay: {
-    src: "/labs/solitaire/solitaire-table-mobile.jpg",
-    alt: tx("SOLitaire updated mobile Klondike table with seven card columns, score, timer, and game controls", "طاولة Klondike المحدثة في SOLitaire على الموبايل مع سبعة أعمدة ونقاط ومؤقت وأدوات اللعب", "שולחן Klondike המעודכן של SOLitaire במובייל עם שבע עמודות, ניקוד, שעון ופקדי משחק"),
-    caption: tx("Updated solo Klondike gameplay", "لعب Klondike الفردي بتصميم محدث", "משחק Klondike יחיד בעיצוב המעודכן"),
+    src: "/labs/solitaire/solitaire-court-table-mobile.jpg",
+    alt: tx(
+      "SOLitaire Klondike table on a phone with seven columns, original court card art, stock pile, move counter and timer",
+      "طاولة Klondike في SOLitaire على الهاتف مع سبعة أعمدة ورسومات أصلية لأوراق الملوك وكومة السحب وعداد الحركات والمؤقت",
+      "שולחן Klondike של SOLitaire בטלפון עם שבע עמודות, איורי קלפי חצר מקוריים, ערימת משיכה, מונה מהלכים וטיימר",
+    ),
+    caption: tx("Classic Klondike table, phone", "طاولة Klondike الكلاسيكية على الهاتف", "שולחן Klondike קלאסי בטלפון"),
     fit: "contain",
   },
 } satisfies Record<string, ProjectMedia>;

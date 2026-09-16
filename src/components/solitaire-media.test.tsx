@@ -16,6 +16,8 @@ describe("SOLitaire screenshot presentation", () => {
     expect(image?.getAttribute("src")).toContain(encodeURIComponent(solitaireMedia.lobby.src));
     expect(image?.getAttribute("alt")).toBe(t(solitaireMedia.lobby.alt, locale));
     expect(image?.classList.contains("contain")).toBe(true);
+    const download = document.querySelector('[data-project="solitaire"] a[download]');
+    expect(download?.getAttribute("href")).toBe("/downloads/SOLitaire-staging.apk");
   });
 
   it.each(locales)("shows the uncropped lobby and both mobile screens in %s", (locale) => {
