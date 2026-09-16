@@ -4,6 +4,7 @@ import {
   ArrowUpRight,
   Check,
   Code2,
+  Download,
   Radio,
 } from "lucide-react";
 import Image from "next/image";
@@ -52,22 +53,43 @@ export function ProjectPage({
             <h1>{project.title}</h1>
             <p>{t(project.summary, locale)}</p>
             <div className="project-links">
-              {project.links.map((link) => (
-                <TrackedAnchor
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  eventName={link.kind === "repo" ? "repo_click" : "live_product_click"}
-                  eventData={{ slug: project.slug, locale }}
-                  className={link.kind === "live" ? "button button-acid" : "button button-ghost-dark"}
-                >
-                  {link.kind === "repo" ? <Code2 aria-hidden="true" size={17} /> : <Radio aria-hidden="true" size={17} />}
-                  {t(link.label, locale)}
-                  <ArrowUpRight aria-hidden="true" size={16} />
-                </TrackedAnchor>
-              ))}
+              {project.links.map((link) =>
+                link.kind === "download" ? (
+                  <TrackedAnchor
+                    key={link.href}
+                    href={link.href}
+                    download
+                    eventName="apk_download"
+                    eventData={{ slug: project.slug, locale }}
+                    className="button button-ghost-dark"
+                  >
+                    <Download aria-hidden="true" size={17} />
+                    {t(link.label, locale)}
+                  </TrackedAnchor>
+                ) : (
+                  <TrackedAnchor
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    eventName={link.kind === "repo" ? "repo_click" : "live_product_click"}
+                    eventData={{ slug: project.slug, locale }}
+                    className={link.kind === "live" ? "button button-acid" : "button button-ghost-dark"}
+                  >
+                    {link.kind === "repo" ? <Code2 aria-hidden="true" size={17} /> : <Radio aria-hidden="true" size={17} />}
+                    {t(link.label, locale)}
+                    <ArrowUpRight aria-hidden="true" size={16} />
+                  </TrackedAnchor>
+                ),
+              )}
             </div>
+            {project.links
+              .filter((link) => link.note)
+              .map((link) => (
+                <p key={`${link.href}-note`} className="project-link-note">
+                  {t(link.note!, locale)}
+                </p>
+              ))}
           </div>
           <div className="project-hero-media">
             {primaryMedia ? (

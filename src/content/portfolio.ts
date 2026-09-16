@@ -43,7 +43,8 @@ export type ProjectMedia = {
 export type ProofLink = {
   label: LocalizedText;
   href: string;
-  kind: "live" | "repo";
+  kind: "live" | "repo" | "download";
+  note?: LocalizedText;
 };
 
 export type ArchitectureNode = {
@@ -233,6 +234,18 @@ const repoLink = (href: string): ProofLink => ({
   label: tx("View public repository", "عرض المستودع العام", "למאגר הציבורי"),
   href,
   kind: "repo",
+});
+
+// Direct-install Android build served from public/downloads, same pattern as the FocusQuest beta.
+const apkLink = (href: string, note: LocalizedText): ProofLink => ({
+  label: tx(
+    "Download Android beta (APK)",
+    "تحميل نسخة أندرويد التجريبية (APK)",
+    "הורדת גרסת בטא לאנדרואיד (APK)",
+  ),
+  href,
+  kind: "download",
+  note,
 });
 
 export const projects: PortfolioProject[] = [
@@ -474,7 +487,17 @@ export const projects: PortfolioProject[] = [
     ],
     nextStep: tx("Continue hardening transaction recovery and gameplay telemetry.", "مواصلة تقوية استعادة المعاملات وقياس اللعب.", "להמשיך לחזק התאוששות מעסקאות וטלמטריית משחק."),
     media: [solitaireMedia.lobby, solitaireMedia.mobileLobby, solitaireMedia.gameplay],
-    links: [liveLink("https://sol-solitaire.com")],
+    links: [
+      liveLink("https://sol-solitaire.com"),
+      apkLink(
+        "/downloads/SOLitaire-staging.apk",
+        tx(
+          "Staging build for Android and Seeker testers. Android will ask you to allow installs from your browser.",
+          "نسخة staging لمختبري أندرويد وSeeker. سيطلب أندرويد السماح بالتثبيت من المتصفح.",
+          "גרסת staging לבודקי אנדרואיד ו-Seeker. אנדרואיד יבקש לאשר התקנה מהדפדפן.",
+        ),
+      ),
+    ],
     featured: true,
     customerPath: "startup",
   },

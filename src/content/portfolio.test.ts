@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   getProject,
@@ -104,7 +106,13 @@ describe("customer-first portfolio content", () => {
     ]);
     expect(project?.media.every((media) => media.fit === "contain")).toBe(true);
     expect(project?.media.some((media) => media.src.includes("banner"))).toBe(false);
-    expect(project?.links[0].href).toBe("https://sol-solitaire.com");
+    expect(project?.links.map(({ href, kind }) => ({ href, kind }))).toEqual([
+      { href: "https://sol-solitaire.com", kind: "live" },
+      { href: "/downloads/SOLitaire-staging.apk", kind: "download" },
+    ]);
+    const apk = project?.links.find((link) => link.kind === "download");
+    expect(apk?.note).toBeDefined();
+    expect(existsSync(join(process.cwd(), "public", apk?.href ?? ""))).toBe(true);
     for (const locale of locales) {
       for (const media of Object.values(solitaireMedia)) {
         expect(t(media.alt, locale).length).toBeGreaterThan(20);

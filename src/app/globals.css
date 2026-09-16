@@ -1419,6 +1419,14 @@ html[dir="rtl"] .project-hero-copy {
   margin-top: 32px;
 }
 
+.project-link-note {
+  margin: 12px 0 0;
+  max-width: 52ch;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.72;
+}
+
 .project-hero-media {
   position: relative;
   min-width: 0;
