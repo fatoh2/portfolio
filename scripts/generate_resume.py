@@ -49,7 +49,7 @@ class Project:
 
 CONTACTS = [
     ("fatoh.haj@gmail.com", "mailto:fatoh.haj@gmail.com"),
-    ("fhaj.vercel.app", "https://fhaj.vercel.app"),
+    ("fhaj.dev", "https://fhaj.dev"),
     ("LinkedIn", "https://linkedin.com/in/fathallah-haj-a59258123/"),
     ("GitHub", "https://github.com/fatoh2"),
 ]
@@ -457,7 +457,7 @@ def footer(canvas, doc) -> None:
     canvas.drawCentredString(
         A4[0] / 2,
         7 * mm,
-        f"Fathallah Haj | fhaj.vercel.app | Page {doc.page}",
+        f"Fathallah Haj | fhaj.dev | Page {doc.page}",
     )
     canvas.restoreState()
 

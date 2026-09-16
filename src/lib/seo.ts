@@ -6,7 +6,7 @@ import {
   type Locale,
 } from "@/content/portfolio";
 
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fhaj.vercel.app";
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fhaj.dev";
 
 export const languageAlternates = (path = "/") => ({
   en: localizedPath("en", path),

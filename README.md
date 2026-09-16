@@ -1,6 +1,6 @@
 # Fathallah Haj Portfolio
 
-Customer-first portfolio for [Fathallah Haj](https://fhaj.vercel.app), an independent product and DevOps engineer building multilingual products, AI automation, and reliable cloud platforms.
+Customer-first portfolio for [Fathallah Haj](https://fhaj.dev), an independent product and DevOps engineer building multilingual products, AI automation, and reliable cloud platforms.
 
 ![Portfolio social preview](public/og-image.png)
 
