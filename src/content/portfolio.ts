@@ -595,12 +595,12 @@ export const focusQuest = {
     "מוצר למידה בפיתוח",
   ),
   summary: tx(
-    "An ADHD-first Flutter learning and focus experience for young people, with parent controls, platform-aware restrictions, and Arabic/English product surfaces.",
-    "تجربة Flutter للتعلّم والتركيز مصممة أولاً لاضطراب ADHD، مع تحكم للأهل وقيود حسب المنصة وواجهات عربية وإنجليزية.",
-    "חוויית למידה וריכוז ב-Flutter שמתחילה מצרכי ADHD, עם בקרת הורים, מגבלות לפי פלטפורמה וממשקים בערבית ובאנגלית.",
+    "An Arabic-first Flutter app for children aged 5–12: short learning quests with Saqr the falcon, screen-time pauses that ask one question before more video or games, and controls that stay with the parents. Android beta for families in and around Nazareth.",
+    "تطبيق Flutter بالعربية أولًا للأطفال من 5 إلى 12 عامًا: مهمات تعلّم قصيرة مع صقر، ووقفات أثناء وقت الشاشة تطرح سؤالًا واحدًا قبل متابعة الفيديو أو الألعاب، وقرار يبقى بيد الأهل. نسخة أندرويد تجريبية لعائلات الناصرة والبلدات القريبة.",
+    "אפליקציית Flutter בערבית קודם כול לילדים בגילאי 5–12: משימות למידה קצרות עם הבז סקר, עצירות בזמן מסך ששואלות שאלה אחת לפני עוד וידאו או משחקים, ושליטה שנשארת בידי ההורים. גרסת בטא לאנדרואיד למשפחות בנצרת והסביבה.",
   ),
   status: "in-development" as ProjectStatus,
-  stack: ["Flutter", "Firebase", "Android", "iOS", "Accessibility"],
+  stack: ["Flutter", "Firebase", "Android", "RevenueCat", "Accessibility"],
   apkUrl: "/downloads/FocusQuest-arm64.apk",
   downloadLabel: tx(
     "Download Android beta (APK)",
