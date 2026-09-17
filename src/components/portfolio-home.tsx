@@ -96,16 +96,19 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
             </div>
             <p>{t(focusQuest.summary, locale)}</p>
             <div className="home-lab-download">
-              <TrackedAnchor
-                href={focusQuest.apkUrl}
-                className="home-project-link"
-                download
-                eventName="focusquest_apk_download"
-                eventData={{ locale }}
-              >
-                {t(focusQuest.downloadLabel, locale)}
-                <Download aria-hidden="true" size={18} />
-              </TrackedAnchor>
+              {focusQuest.builds.map((build) => (
+                <TrackedAnchor
+                  key={build.id}
+                  href={build.apkUrl}
+                  className="home-project-link"
+                  download
+                  eventName="focusquest_apk_download"
+                  eventData={{ locale, build: build.id }}
+                >
+                  {t(build.label, locale)}
+                  <Download aria-hidden="true" size={18} />
+                </TrackedAnchor>
+              ))}
               <small>{t(focusQuest.downloadNote, locale)}</small>
             </div>
           </article>

@@ -488,14 +488,19 @@ html:has(.home-page) {
   line-height: 1.75;
 }
 .home-page .home-lab-download {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
   min-width: 0;
 }
 .home-page .home-lab-download .home-project-link {
   margin-top: 0;
+  max-width: 34ch;
 }
 .home-page .home-lab-download small {
   display: block;
-  margin-top: 12px;
+  margin-top: 0;
   max-width: 40ch;
   font-size: 11px;
   line-height: 1.6;
