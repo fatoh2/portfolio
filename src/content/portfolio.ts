@@ -588,7 +588,7 @@ export const projects: PortfolioProject[] = [
 ];
 
 export const focusQuest = {
-  title: "FocusQuest",
+  title: "Nuqta · نقطة",
   category: tx(
     "In-development learning product",
     "منتج تعليمي قيد التطوير",
@@ -603,28 +603,19 @@ export const focusQuest = {
   stack: ["Flutter", "Firebase", "Android", "RevenueCat", "Accessibility"],
   builds: [
     {
-      id: "focusquest",
-      apkUrl: "/downloads/FocusQuest-arm64.apk",
-      label: tx(
-        "Download Android beta — FocusQuest (APK)",
-        "تحميل نسخة أندرويد التجريبية — FocusQuest (APK)",
-        "הורדת גרסת בטא לאנדרואיד — FocusQuest (APK)",
-      ),
-    },
-    {
       id: "nuqta",
       apkUrl: "/downloads/Nuqta-arm64.apk",
       label: tx(
-        "Download Android beta — Nuqta, the Arabic-branded build (APK)",
-        "تحميل نسخة أندرويد التجريبية — نقطة، النسخة بالهوية العربية (APK)",
-        "הורדת גרסת בטא לאנדרואיד — נוקטה, הגרסה עם המיתוג הערבי (APK)",
+        "Download Android beta (APK)",
+        "تحميل نسخة أندرويد التجريبية (APK)",
+        "הורדת גרסת בטא לאנדרואיד (APK)",
       ),
     },
   ],
   downloadNote: tx(
-    "Direct install builds — Android will ask you to allow installs from your browser. Both install side by side.",
-    "نسخ تثبيت مباشر — سيطلب أندرويد السماح بالتثبيت من المتصفح. النسختان تُثبَّتان جنبًا إلى جنب.",
-    "גרסאות התקנה ישירה — אנדרואיד יבקש לאשר התקנה מהדפדפן. שתיהן מותקנות זו לצד זו.",
+    "Direct install build — Android will ask you to allow installs from your browser.",
+    "نسخة تثبيت مباشر — سيطلب أندرويد السماح بالتثبيت من المتصفح.",
+    "גרסת התקנה ישירה — אנדרואיד יבקש לאשר התקנה מהדפדפן.",
   ),
 };
 
