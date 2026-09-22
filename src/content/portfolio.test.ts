@@ -110,14 +110,15 @@ describe("customer-first portfolio content", () => {
       { href: "https://sol-solitaire.com", kind: "live" },
       { href: "/downloads/SOLitaire.apk", kind: "download" },
       { href: "/downloads/SOLitaire-staging.apk", kind: "download" },
+      { href: "/downloads/SOLitaire-admin-staging.apk", kind: "download" },
     ]);
     const apks = project?.links.filter((link) => link.kind === "download") ?? [];
-    expect(apks).toHaveLength(2);
+    expect(apks).toHaveLength(3);
     for (const apk of apks) {
       expect(apk.note).toBeDefined();
       expect(existsSync(join(process.cwd(), "public", apk.href))).toBe(true);
     }
-    expect(apks.map((apk) => t(apk.label, "en"))).toEqual(["Download Android (APK)", "Download Android beta (APK)"]);
+    expect(apks.map((apk) => t(apk.label, "en"))).toEqual(["Download Android (APK)", "Download Android beta (APK)", "Admin console (staging APK)"]);
     for (const locale of locales) {
       for (const media of Object.values(solitaireMedia)) {
         expect(t(media.alt, locale).length).toBeGreaterThan(20);

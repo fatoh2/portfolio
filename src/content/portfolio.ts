@@ -518,6 +518,15 @@ export const projects: PortfolioProject[] = [
           "גרסת staging לבודקי אנדרואיד ו-Seeker. אנדרואיד יבקש לאשר התקנה מהדפדפן.",
         ),
       ),
+      apkLink(
+        "/downloads/SOLitaire-admin-staging.apk",
+        tx(
+          "Operator console for the staging environment. It only opens for allow-listed admin wallets.",
+          "لوحة المشغّل لبيئة staging. تفتح فقط لمحافظ المشرفين المصرّح بها.",
+          "קונסולת המפעיל לסביבת staging. נפתחת רק לארנקי מנהל מאושרים.",
+        ),
+        tx("Admin console (staging APK)", "لوحة الإدارة (APK staging)", "קונסולת ניהול (APK staging)"),
+      ),
     ],
     featured: true,
     customerPath: "startup",
