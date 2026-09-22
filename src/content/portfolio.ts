@@ -249,8 +249,8 @@ const repoLink = (href: string): ProofLink => ({
 });
 
 // Direct-install Android build served from public/downloads, same pattern as the FocusQuest beta.
-const apkLink = (href: string, note: LocalizedText): ProofLink => ({
-  label: tx(
+const apkLink = (href: string, note: LocalizedText, label?: LocalizedText): ProofLink => ({
+  label: label ?? tx(
     "Download Android beta (APK)",
     "تحميل نسخة أندرويد التجريبية (APK)",
     "הורדת גרסת בטא לאנדרואיד (APK)",
@@ -501,6 +501,15 @@ export const projects: PortfolioProject[] = [
     media: [solitaireMedia.lobby, solitaireMedia.mobileLobby, solitaireMedia.gameplay],
     links: [
       liveLink("https://sol-solitaire.com"),
+      apkLink(
+        "/downloads/SOLitaire.apk",
+        tx(
+          "Production build for Android and Seeker: mainnet, real USDC matches. Android will ask you to allow installs from your browser.",
+          "نسخة الإنتاج لأندرويد وSeeker: الشبكة الرئيسية ومباريات USDC حقيقية. سيطلب أندرويد السماح بالتثبيت من المتصفح.",
+          "גרסת הייצור לאנדרואיד ו-Seeker: רשת ראשית ומשחקי USDC אמיתיים. אנדרואיד יבקש לאשר התקנה מהדפדפן.",
+        ),
+        tx("Download Android (APK)", "تحميل نسخة أندرويد (APK)", "הורדת גרסת אנדרואיד (APK)"),
+      ),
       apkLink(
         "/downloads/SOLitaire-staging.apk",
         tx(
