@@ -56,3 +56,14 @@ final result: passed
 - [x] Existing case-study routes, download actions, and analytics preserved.
 - [x] Browser interaction checks and visual comparison completed.
 - [x] Local production preview left available for review.
+
+## Nuqta and SOLitaire imagery refresh — 2026-09-22
+
+- Nuqta now pairs its Arabic landing page with the Android learning journey, followed by two real interface crops and localized explanations. Its landing-page logo and headline remain visible beside the phone. The existing APK link and download event remain intact; an English/Arabic landing-page link is now available.
+- Nuqta sources: a fresh browser capture of `https://www.nuqtakids.com`; journey and quest screens rendered on 2026-09-22 by the current FocusQuest repository's `app/test/store_shots_test.dart`, with demo state and real app widgets. Output was directed into this portfolio's temporary folder. No app source was changed. These are interface captures, not device photographs.
+- SOLitaire sources: a fresh desktop lobby capture from the current local app (2026-09-22), plus `assets/store/court/listing/raw/home.png` and `board-mid-a.png` from its 2026-09-18 Court Table set. The homepage and case study share the refreshed media. Detail windows now show the Play tile and court characters during a game.
+- Image dimensions: Nuqta desktop 1430×755, app 1170×2532; SOLitaire desktop 1600×1000, app 1179×2622. New filenames prevent reuse of old cached assets. Existing screenshots remain available at their previous URLs.
+- Verified both sections at 1440px and 375px in English, Arabic, and Hebrew: all visible images loaded; no horizontal overflow; localized captions and upright image orientation. Settled screenshots are in `tmp/imagery-qa/`.
+- Lint passed, all 78 existing tests passed, and the final production build generated all 40 pages. Browser error log was empty. Existing SOLitaire case-study and APK destinations remain intact; Nuqta's APK binary was not changed.
+- Visual adjustment: reduced Nuqta's desktop frame to 77% of the stage so the phone does not obscure its brand or heading. Phone details stack vertically. No remaining actionable P0/P1/P2 findings in this refresh.
+- Local production preview: `http://127.0.0.1:3111/#nuqta`. This imagery refresh has not been pushed or deployed.

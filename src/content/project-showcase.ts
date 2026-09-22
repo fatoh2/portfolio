@@ -32,17 +32,32 @@ export const projectShowcases: Record<string, ProjectShowcase> = {
     ],
   },
   solitaire: {
-    desktopRatio: "2560 / 1600", mobileIndex: 2, mobileRatio: "860 / 1600",
+    desktopRatio: "1600 / 1000", mobileIndex: 2, mobileRatio: "1179 / 2622",
     details: [
       {
-        mediaIndex: 0, sourceSize: [2560, 1600], crop: [743, 451, 1074, 201],
+        mediaIndex: 0, sourceSize: [1600, 1000], crop: [536, 224, 528, 102],
         title: tx("Choose your game", "اختر لعبتك", "בחרו את המשחק"),
         description: tx("Classic play or a timed score run, starting from the same lobby.", "لعب كلاسيكي أو جولة نقاط محددة بوقت، من الردهة نفسها.", "משחק קלאסי או סבב ניקוד על זמן, מאותו לובי."),
       },
       {
-        mediaIndex: 2, sourceSize: [860, 1600], crop: [30, 340, 795, 391],
-        title: tx("On the table", "على طاولة اللعب", "על שולחן המשחק"),
-        description: tx("A responsive Klondike board with the cards kept front and center.", "لوحة Klondike متجاوبة تضع البطاقات في قلب التجربة.", "לוח Klondike רספונסיבי ששומר את הקלפים במרכז."),
+        mediaIndex: 2, sourceSize: [1179, 2622], crop: [679, 926, 485, 420],
+        title: tx("Meet the court", "تعرّف على أوراق البلاط", "הכירו את קלפי החצר"),
+        description: tx("Original court characters and crisp card faces, seen in a game in progress.", "شخصيات أصلية لأوراق البلاط ووجوه بطاقات واضحة، من جولة قيد اللعب.", "דמויות חצר מקוריות וקלפים חדים, מתוך משחק בעיצומו."),
+      },
+    ],
+  },
+  nuqta: {
+    desktopRatio: "1430 / 755", mobileIndex: 1, mobileRatio: "1170 / 2532",
+    details: [
+      {
+        mediaIndex: 1, sourceSize: [1170, 2532], crop: [73, 740, 1025, 525],
+        title: tx("A path to follow", "مسار للتعلّم", "מסלול ללמידה"),
+        description: tx("Maths units and visible progress give each short quest a place in the journey.", "وحدات رياضيات وتقدّم واضح يمنحان كل مهمة قصيرة مكانًا في الرحلة.", "יחידות מתמטיקה והתקדמות גלויה נותנות לכל משימה קצרה מקום במסע."),
+      },
+      {
+        mediaIndex: 2, sourceSize: [1170, 2532], crop: [130, 489, 915, 547],
+        title: tx("Make the question visual", "سؤال تراه بوضوح", "לראות את השאלה"),
+        description: tx("A fraction diagram makes an Arabic maths question concrete, one step at a time.", "رسم للكسور يقرّب سؤال الرياضيات بالعربية، خطوة بخطوة.", "תרשים שברים ממחיש שאלת מתמטיקה בערבית, צעד אחר צעד."),
       },
     ],
   },

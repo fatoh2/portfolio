@@ -18,7 +18,7 @@ import { getDictionary, statusLabels } from "@/content/ui";
 import { BrandMonogram } from "./brand-monogram";
 import { BrandPortal } from "./brand-portal";
 import { ContactForm } from "./contact-form";
-import { ProjectDeck } from "./project-deck";
+import { InterfaceDetails, ProductPortrait, ProjectDeck } from "./project-deck";
 import { SiteHeader } from "./site-header";
 import { TrackedAnchor, TrackedLink } from "./tracked-link";
 import "./homepage.css";
@@ -87,29 +87,44 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
               </TrackedLink>
             ))}
           </div>
-          <article className="home-lab">
-            <div>
+          <article id="nuqta" className="home-lab" aria-labelledby="nuqta-title">
+            <div className="home-lab-copy">
               <p className="home-lab-label">
                 {copy.lab} / {dictionary.lab.eyebrow}
               </p>
-              <h3>{focusQuest.title}</h3>
-            </div>
-            <p>{t(focusQuest.summary, locale)}</p>
-            <div className="home-lab-download">
-              {focusQuest.builds.map((build) => (
+              <h3 id="nuqta-title" dir="auto">{focusQuest.title}</h3>
+              <p>{t(focusQuest.summary, locale)}</p>
+              <div className="home-lab-download">
                 <TrackedAnchor
-                  key={build.id}
-                  href={build.apkUrl}
+                  href={locale === "en" ? `${focusQuest.website}/en` : focusQuest.website}
                   className="home-project-link"
-                  download
-                  eventName="focusquest_apk_download"
-                  eventData={{ locale, build: build.id }}
+                  eventName="live_product_open"
+                  eventData={{ slug: focusQuest.slug, locale, surface: "home" }}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  {t(build.label, locale)}
-                  <Download aria-hidden="true" size={18} />
+                  {t(focusQuest.websiteLabel, locale)}
+                  <ArrowUpRight aria-hidden="true" size={18} />
                 </TrackedAnchor>
-              ))}
-              <small>{t(focusQuest.downloadNote, locale)}</small>
+                {focusQuest.builds.map((build) => (
+                  <TrackedAnchor
+                    key={build.id}
+                    href={build.apkUrl}
+                    className="home-project-link"
+                    download
+                    eventName="focusquest_apk_download"
+                    eventData={{ locale, build: build.id }}
+                  >
+                    {t(build.label, locale)}
+                    <Download aria-hidden="true" size={18} />
+                  </TrackedAnchor>
+                ))}
+                <small>{t(focusQuest.downloadNote, locale)}</small>
+              </div>
+            </div>
+            <div className="home-lab-visuals">
+              <ProductPortrait project={focusQuest} locale={locale} />
+              <InterfaceDetails project={focusQuest} locale={locale} />
             </div>
           </article>
         </section>

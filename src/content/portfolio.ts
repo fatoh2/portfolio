@@ -205,7 +205,7 @@ const commonLive = tx(
 
 export const solitaireMedia = {
   lobby: {
-    src: "/labs/solitaire/solitaire-court-lobby-desktop.jpg",
+    src: "/labs/solitaire/solitaire-court-lobby-desktop-2026.jpg",
     alt: tx(
       "SOLitaire desktop home on emerald baize with the gold wordmark and the Play, Compete and Daily hubs",
       "الصفحة الرئيسية لـ SOLitaire على سطح المكتب بقماش أخضر زمردي وشعار ذهبي وأقسام اللعب والمنافسة واليومي",
@@ -215,7 +215,7 @@ export const solitaireMedia = {
     fit: "contain",
   },
   mobileLobby: {
-    src: "/labs/solitaire/solitaire-court-lobby-mobile.jpg",
+    src: "/labs/solitaire/solitaire-court-lobby-mobile-2026.png",
     alt: tx(
       "SOLitaire phone home with the Play, Compete and Daily hubs, daily rewards chip and bottom navigation",
       "الصفحة الرئيسية لـ SOLitaire على الهاتف مع أقسام اللعب والمنافسة واليومي وشارة المكافآت اليومية وشريط التنقل السفلي",
@@ -225,7 +225,7 @@ export const solitaireMedia = {
     fit: "contain",
   },
   gameplay: {
-    src: "/labs/solitaire/solitaire-court-table-mobile.jpg",
+    src: "/labs/solitaire/solitaire-court-table-mobile-2026.png",
     alt: tx(
       "SOLitaire Klondike table on a phone with seven columns, original court card art, stock pile, move counter and timer",
       "طاولة Klondike في SOLitaire على الهاتف مع سبعة أعمدة ورسومات أصلية لأوراق الملوك وكومة السحب وعداد الحركات والمؤقت",
@@ -597,7 +597,30 @@ export const projects: PortfolioProject[] = [
 ];
 
 export const focusQuest = {
+  slug: "nuqta",
   title: "Nuqta · نقطة",
+  website: "https://www.nuqtakids.com",
+  websiteLabel: tx("Explore Nuqta", "اكتشف نقطة", "גלו את נוקטה"),
+  media: [
+    {
+      src: "/labs/nuqta/nuqta-landing-desktop.jpg",
+      alt: tx("Nuqta’s Arabic landing page featuring Saqr the falcon and its invitation for families", "صفحة نقطة بالعربية، مع صقر ودعوة العائلات إلى التجربة", "דף הנחיתה של נוקטה בערבית, עם הבז סקר והזמנה למשפחות"),
+      caption: tx("Arabic landing page", "صفحة التعريف بالعربية", "דף נחיתה בערבית"),
+      fit: "contain",
+    },
+    {
+      src: "/labs/nuqta/nuqta-journey-ar.png",
+      alt: tx("Nuqta’s Arabic learning journey with a maths unit, progress path and Saqr", "رحلة التعلّم في نقطة بالعربية، مع وحدة رياضيات ومسار التقدّم وصقر", "מסע הלמידה של נוקטה בערבית, עם יחידת מתמטיקה, מסלול התקדמות וסקר"),
+      caption: tx("Learning journey, Android", "رحلة التعلّم على أندرويد", "מסע למידה באנדרואיד"),
+      fit: "contain",
+    },
+    {
+      src: "/labs/nuqta/nuqta-quest-ar.png",
+      alt: tx("An Arabic maths quest in Nuqta with a fraction diagram and four answer choices", "مهمة رياضيات بالعربية في نقطة، مع رسم يوضّح الكسور وأربعة خيارات للإجابة", "משימת מתמטיקה בערבית בנוקטה, עם תרשים שברים וארבע תשובות לבחירה"),
+      caption: tx("A visual maths quest", "مهمة رياضيات مصوّرة", "משימת מתמטיקה חזותית"),
+      fit: "contain",
+    },
+  ] satisfies ProjectMedia[],
   category: tx(
     "In-development learning product",
     "منتج تعليمي قيد التطوير",

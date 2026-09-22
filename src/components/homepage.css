@@ -463,12 +463,13 @@ html:has(.home-page) {
 }
 .home-page .home-lab {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr 1fr;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 2fr);
   align-items: start;
   gap: 40px;
   border-top: 1px solid #3c3c37;
   padding-top: 42px;
   margin-top: 6px;
+  scroll-margin-top: 100px;
 }
 .home-page .home-lab-label {
   margin: 0 0 14px;
@@ -477,15 +478,34 @@ html:has(.home-page) {
 }
 .home-page .home-lab h3 {
   margin: 0;
-  font-size: 30px;
+  font-size: clamp(30px, 3.4vw, 52px);
   font-weight: 500;
   letter-spacing: -0.04em;
 }
-.home-page .home-lab > p {
-  margin: 0;
+.home-page .home-lab-copy > p {
+  margin: 22px 0 28px;
   color: var(--muted-dark);
   font-size: 14px;
   line-height: 1.75;
+}
+.home-page .home-lab-visuals {
+  min-width: 0;
+}
+.home-page .home-lab .deck-desktop {
+  width: 77%;
+  top: 12%;
+}
+.home-page .home-lab .deck-mobile {
+  width: 24%;
+  bottom: 6%;
+}
+.home-page .home-lab .deck-details {
+  gap: 24px;
+  margin-top: 20px;
+}
+.home-page .home-lab .deck-detail-image {
+  height: clamp(140px, 13vw, 190px);
+  padding: 12px;
 }
 .home-page .home-lab-download {
   display: flex;
@@ -856,11 +876,8 @@ html[dir="rtl"]
     transform: none;
   }
   .home-page .home-lab {
-    grid-template-columns: 1fr 1.4fr;
+    grid-template-columns: 1fr;
     gap: 24px 36px;
-  }
-  .home-page .home-lab-download {
-    grid-column: 2;
   }
   .home-page .home-contact {
     grid-template-columns: 1fr;

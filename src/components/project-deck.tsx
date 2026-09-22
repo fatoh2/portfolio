@@ -8,7 +8,9 @@ import { BrandMonogram } from "./brand-monogram";
 import { TrackedAnchor, TrackedLink } from "./tracked-link";
 import "./project-deck.css";
 
-function ProductPortrait({ project, locale }: { project: PortfolioProject; locale: Locale }) {
+type ShowcaseProject = Pick<PortfolioProject, "slug" | "media">;
+
+export function ProductPortrait({ project, locale }: { project: ShowcaseProject; locale: Locale }) {
   const showcase = projectShowcases[project.slug];
   const desktop = project.media[0];
   const mobile = showcase?.mobileIndex !== undefined ? project.media[showcase.mobileIndex] : undefined;
@@ -27,7 +29,7 @@ function ProductPortrait({ project, locale }: { project: PortfolioProject; local
   );
 }
 
-function InterfaceDetails({ project, locale }: { project: PortfolioProject; locale: Locale }) {
+export function InterfaceDetails({ project, locale }: { project: ShowcaseProject; locale: Locale }) {
   const details = projectShowcases[project.slug]?.details;
   if (!details?.length) return null;
   return (
