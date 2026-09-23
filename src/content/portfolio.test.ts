@@ -134,7 +134,7 @@ describe("customer-first portfolio content", () => {
     expect(project?.links).toHaveLength(1);
     const apk = project?.links[0];
     expect(apk?.kind).toBe("download");
-    expect(apk?.href).toBe("/downloads/Little-Keepsakes-0.2.0-preview.apk");
+    expect(apk?.href).toBe("/downloads/Little-Keepsakes-0.3.0-preview.apk");
     if (!project || !apk) throw new Error("Missing Little Keepsakes preview");
     const apkPath = join(process.cwd(), "public", apk.href);
     expect(existsSync(apkPath)).toBe(true);

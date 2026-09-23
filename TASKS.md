@@ -4,8 +4,8 @@
 
 ## Done
 
-- Added [Little Keepsakes](https://fhaj.dev/ar/work/little-keepsakes) as a trilingual case study with real Arabic and English app captures and a versioned Android 0.1.1 preview APK. Labelled its build and validation status accurately. Production deploy, Arabic route and direct APK response passed; the public APK's SHA-256 matched the local build.
+- Added [Little Keepsakes](https://fhaj.dev/ar/work/little-keepsakes) as a trilingual case study with real app captures and a versioned Android preview APK. The 0.3.0 update shows twelve motifs, ten palettes and new customization controls. The production Arabic page returned 200 with the new text and link; the 4,366,949-byte public APK matched the local Android build at SHA-256 `FA4C275FBCE6881822582AF51EB59B4E9ED0A06016AC80246CAE72208704FC98`.
 
 ## Next
 
-- Replace the preview APK only after real-phone, Arabic/Hebrew keyboard, printing, and physical stitching checks in the Little Keepsakes project.
+- Install the preview on a real phone and check Arabic/Hebrew keyboards, printing and a physical stitched sample before preparing a store release.

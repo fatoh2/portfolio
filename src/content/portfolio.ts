@@ -502,13 +502,13 @@ export const projects: PortfolioProject[] = [
       "תצוגה מקדימה להתקנה באנדרואיד. קובץ ה-APK נבנה בהצלחה; בדיקה במכשיר וברקמה ממשית עדיין נדרשת.",
     ),
     capabilities: [
-      tx("Nine starting motifs, with editable lettering, colours, layout, and small decorations.", "تسعة تصاميم أساسية مع تعديل الكتابة والألوان والتخطيط والزخارف الصغيرة.", "תשעה דגמי פתיחה עם עריכת כיתוב, צבעים, פריסה וקישוטים קטנים."),
+      tx("Twelve starting motifs, ten palettes, exact colour codes, lettering placement, and flippable decorations.", "اثنا عشر تصميمًا وعشر مجموعات ألوان مع رموز ألوان دقيقة، وتغيير موضع الكتابة وقلب الزخارف.", "שנים עשר דגמי פתיחה, עשר ערכות צבעים, קודי צבע מדויקים, מיקום כיתוב והיפוך קישוטים."),
       tx("A supply checklist, fabric size, thread colours and recorded shop codes, plus a shareable shopping list.", "قائمة تجهيز للأدوات ومقاس القماش وألوان الخيوط ورموزها المسجلة من المتجر، مع قائمة مشتريات قابلة للمشاركة.", "רשימת ציוד, מידות בד, צבעי חוטים וקודים שנרשמו מהחנות, עם רשימת קניות לשיתוף."),
       tx("Guided stitch marking that moves to the next unfinished square, with exact progress saved across up to 30 projects.", "تحديد الغرز خطوة بخطوة والانتقال إلى المربع التالي غير المكتمل، مع حفظ التقدم الدقيق لما يصل إلى 30 مشروعًا.", "סימון תכים מודרך שמתקדם למשבצת הבאה שלא הושלמה, עם שמירת התקדמות מדויקת בעד 30 פרויקטים."),
       tx("Arabic by default, right-to-left interface for mixed Arabic and English text, plus English and Hebrew options, offline saving, export, share, and Android printing.", "العربية افتراضيًا وواجهة من اليمين إلى اليسار حتى مع نص عربي وإنجليزي مختلط، مع الإنجليزية والعبرية والحفظ دون إنترنت والتصدير والمشاركة والطباعة على أندرويد.", "ערבית כברירת מחדל וממשק מימין לשמאל גם בטקסט מעורב בערבית ובאנגלית, לצד אנגלית ועברית, שמירה ללא רשת, ייצוא, שיתוף והדפסה באנדרואיד."),
     ],
     evidence: [
-      tx("Android preview APK v0.2.0", "ملف معاينة APK لأندرويد، الإصدار 0.2.0", "קובץ APK לתצוגה מקדימה באנדרואיד, גרסה 0.2.0"),
+      tx("Android preview APK v0.3.0", "ملف معاينة APK لأندرويد، الإصدار 0.3.0", "קובץ APK לתצוגה מקדימה באנדרואיד, גרסה 0.3.0"),
       tx("Real gallery, supply and stitching captures", "صور فعلية لمعرض التصاميم وتجهيز الأدوات والتطريز", "צילומי מסך אמיתיים של הגלריה, הציוד והרקמה"),
       tx("Automated pattern, controller, and storage checks", "فحوصات آلية للأنماط والمحرر والتخزين", "בדיקות אוטומטיות לדוגמאות, לעורך ולאחסון"),
     ],
@@ -525,14 +525,15 @@ export const projects: PortfolioProject[] = [
     ),
     media: [
       { src: "/work/little-keepsakes-arabic-desktop.jpg", alt: tx("Little Keepsakes Arabic gallery showing embroidery templates on desktop", "معرض Little Keepsakes بالعربية يعرض قوالب التطريز على سطح المكتب", "גלריית Little Keepsakes בערבית עם דגמי רקמה במסך מחשב"), caption: tx("Arabic-first design gallery", "معرض التصاميم بالعربية افتراضيًا", "גלריית דגמים בערבית כברירת מחדל"), fit: "contain" },
-      { src: "/work/little-keepsakes-arabic-mobile.jpg", alt: tx("Little Keepsakes Arabic design gallery on a phone-sized screen", "معرض تصاميم Little Keepsakes بالعربية على شاشة بحجم هاتف", "גלריית הדגמים של Little Keepsakes בערבית במסך בגודל טלפון"), caption: tx("Choose from nine motifs on a phone", "اختر من تسعة تصاميم على الهاتف", "בחירה מבין תשעה דגמים בטלפון"), fit: "contain" },
+      { src: "/work/little-keepsakes-arabic-mobile.jpg", alt: tx("Little Keepsakes Arabic design gallery on a phone-sized screen", "معرض تصاميم Little Keepsakes بالعربية على شاشة بحجم هاتف", "גלריית הדגמים של Little Keepsakes בערבית במסך בגודל טלפון"), caption: tx("Choose from twelve motifs on a phone", "اختر من اثني عشر تصميمًا على الهاتف", "בחירה מבין שנים עשר דגמים בטלפון"), fit: "contain" },
       { src: "/work/little-keepsakes-editor.jpg", alt: tx("Little Keepsakes mobile editor with an embroidery name and personalization controls", "محرر Little Keepsakes للموبايل مع اسم مطرز وأدوات التخصيص", "עורך Little Keepsakes בנייד עם שם לרקמה וכלי התאמה"), caption: tx("Personalize lettering, colours, and details", "تخصيص الكتابة والألوان والتفاصيل", "התאמה של כיתוב, צבעים ופרטים"), fit: "contain" },
+      { src: "/work/little-keepsakes-customization.jpg", alt: tx("Arabic mobile editor showing the new butterfly motif and decoration controls", "المحرر العربي على الهاتف مع تصميم الفراشات الجديد وأدوات الزخرفة", "העורך בערבית בנייד עם דגם הפרפרים החדש ואפשרויות הקישוט"), caption: tx("Adjust decoration and layout while the stitch chart updates", "عدّل الزخارف والتنسيق مع تحديث مخطط الغرز مباشرة", "שינוי הקישוט והפריסה עם עדכון מידי של תרשים הרקמה"), fit: "contain" },
       { src: "/work/little-keepsakes-preparation.jpg", alt: tx("Arabic preparation checklist showing fabric and thread readiness with a recorded thread code", "قائمة تجهيز بالعربية تعرض القماش والخيوط مع رمز خيط مسجل", "רשימת הכנה בערבית עם בד וחוטים וקוד חוט שנרשם"), caption: tx("Gather fabric and threads, and save the codes you buy", "جهّز القماش والخيوط واحفظ رموزها من المتجر", "מכינים בד וחוטים ושומרים את הקודים שנקנו"), fit: "contain" },
       { src: "/work/little-keepsakes-stitching.jpg", alt: tx("Arabic guided stitch chart with a visible mark-and-next control", "مخطط تطريز بالعربية مع زر واضح لتحديد الغرزة والانتقال للتالية", "תרשים רקמה בערבית עם כפתור גלוי לסימון ומעבר לתך הבא"), caption: tx("Mark a stitch and move to the next unfinished square", "علّم غرزة وانتقل إلى المربع التالي غير المكتمل", "מסמנים תך ומתקדמים למשבצת הבאה שלא הושלמה"), fit: "contain" },
       { src: "/work/little-keepsakes-library.jpg", alt: tx("Little Keepsakes saved project library showing stitch progress", "مكتبة المشاريع المحفوظة في Little Keepsakes مع تقدم التطريز", "ספריית הפרויקטים השמורים של Little Keepsakes עם התקדמות הרקמה"), caption: tx("Saved projects and stitch progress", "المشاريع المحفوظة وتقدم الغرز", "פרויקטים שמורים והתקדמות הרקמה"), fit: "contain" },
     ],
     links: [apkLink(
-      "/downloads/Little-Keepsakes-0.2.0-preview.apk",
+      "/downloads/Little-Keepsakes-0.3.0-preview.apk",
       tx(
         "Debug-signed Android preview, not a Play Store release. It has not yet been tested on a physical phone; review the chart before stitching.",
         "معاينة لأندرويد موقعة بمفتاح تطوير وليست إصدارًا على Google Play. لم تُختبر بعد على هاتف حقيقي؛ راجع المخطط قبل التطريز.",
