@@ -29,6 +29,7 @@ const featuredOrder = [
   "whatsapp-ai-sales-agent",
   "argus-ai",
   "solitaire",
+  "little-keepsakes",
 ];
 
 export function PortfolioHome({ locale }: { locale: Locale }) {

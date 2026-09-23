@@ -16,6 +16,10 @@ type ProjectShowcase = {
 };
 
 export const projectShowcases: Record<string, ProjectShowcase> = {
+  "little-keepsakes": {
+    desktopRatio: "1365 / 900", mobileIndex: 1, mobileRatio: "390 / 844",
+    details: [],
+  },
   "seeker-radar": {
     desktopRatio: "1265 / 712", mobileIndex: 1, mobileRatio: "375 / 812",
     details: [

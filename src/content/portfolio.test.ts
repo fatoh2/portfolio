@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import {
@@ -123,6 +123,29 @@ describe("customer-first portfolio content", () => {
       for (const media of Object.values(solitaireMedia)) {
         expect(t(media.alt, locale).length).toBeGreaterThan(20);
         expect(t(media.caption, locale).length).toBeGreaterThan(5);
+      }
+    }
+  });
+
+  it("publishes the localized Little Keepsakes preview with its actual APK and captures", () => {
+    const project = getProject("little-keepsakes");
+    expect(project?.featured).toBe(true);
+    expect(project?.status).toBe("in-development");
+    expect(project?.links).toHaveLength(1);
+    const apk = project?.links[0];
+    expect(apk?.kind).toBe("download");
+    expect(apk?.href).toBe("/downloads/Little-Keepsakes-0.1.1-preview.apk");
+    if (!project || !apk) throw new Error("Missing Little Keepsakes preview");
+    const apkPath = join(process.cwd(), "public", apk.href);
+    expect(existsSync(apkPath)).toBe(true);
+    expect(statSync(apkPath).size).toBeGreaterThan(1_000_000);
+    for (const locale of locales) {
+      expect(t(project.summary, locale).length).toBeGreaterThan(40);
+      expect(t(project.statusNote, locale).length).toBeGreaterThan(40);
+      expect(t(apk.note!, locale).length).toBeGreaterThan(40);
+      for (const media of project.media) {
+        expect(existsSync(join(process.cwd(), "public", media.src))).toBe(true);
+        expect(t(media.alt, locale).length).toBeGreaterThan(20);
       }
     }
   });

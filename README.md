@@ -8,6 +8,7 @@ Customer-first portfolio for [Fathallah Haj](https://fhaj.dev), an independent p
 
 - English, Arabic, and Hebrew routes with RTL/LTR layouts and localized metadata
 - Real product case studies and approved public-facing screenshots
+- Little Keepsakes case study with the versioned Android preview APK and explicit device-testing limits
 - Customer-focused service paths for product delivery, AI automation, and platform reliability
 - Project brief delivery through a validated Next.js Server Action and Resend
 - Vercel Analytics, Speed Insights, sitemap, robots rules, and structured data
@@ -33,3 +34,5 @@ npm run build
 ## Content boundaries
 
 Public repository links are included only for public source. Private product code, administration surfaces, credentials, customer data, and sensitive systems are intentionally excluded. Case studies do not claim employers, customers, scale, revenue, or outcomes that are not supported by the referenced evidence.
+
+The Little Keepsakes APK is a debug-signed preview for direct Android installation, not a Google Play release. Its physical-phone and craft checks are still pending.

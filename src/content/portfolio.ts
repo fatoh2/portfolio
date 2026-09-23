@@ -480,6 +480,67 @@ export const projects: PortfolioProject[] = [
     customerPath: "startup",
   },
   {
+    slug: "little-keepsakes",
+    title: "Little Keepsakes",
+    category: tx("Personal embroidery studio", "استوديو تطريز شخصي", "סטודיו לרקמה אישית"),
+    summary: tx(
+      "An Arabic-first embroidery app that helps beginners turn a name and a small story into a stitchable keepsake.",
+      "تطبيق تطريز يبدأ بالعربية ويساعد المبتدئين على تحويل اسم وحكاية صغيرة إلى تذكار قابل للتطريز.",
+      "אפליקציית רקמה שמתחילה בערבית ועוזרת למתחילים להפוך שם וסיפור קטן למזכרת שאפשר לרקום.",
+    ),
+    problem: tx(
+      "Making a personal embroidered gift can mean juggling a design tool, a stitch chart, material estimates, and a separate progress tracker.",
+      "صنع هدية مطرزة شخصية قد يتطلب التنقل بين أداة تصميم ومخطط غرز وتقدير للمواد وطريقة منفصلة لمتابعة التقدم.",
+      "יצירת מתנה רקומה אישית דורשת לעיתים כלי עיצוב, תרשים תכים, הערכת חומרים ומעקב התקדמות נפרד.",
+    ),
+    audience: tx("Beginner stitchers and makers of personal gifts", "المبتدئين في التطريز وصنّاع الهدايا الشخصية", "רוקמים מתחילים ויוצרי מתנות אישיות"),
+    role: tx("Product design, pattern engine, localization, and Android packaging", "تصميم المنتج ومحرك الأنماط والتعريب وتجهيز أندرويد", "עיצוב מוצר, מנוע דוגמאות, לוקליזציה ואריזה לאנדרואיד"),
+    status: "in-development",
+    statusNote: tx(
+      "Installable Android preview. The APK builds successfully; physical-device and real-stitch validation are still pending.",
+      "معاينة قابلة للتثبيت على أندرويد. بُني ملف APK بنجاح، وما زال اختبار الهاتف الحقيقي والتطريز الفعلي قيد الانتظار.",
+      "תצוגה מקדימה להתקנה באנדרואיד. קובץ ה-APK נבנה בהצלחה; בדיקה במכשיר וברקמה ממשית עדיין נדרשת.",
+    ),
+    capabilities: [
+      tx("Nine starting motifs, with editable lettering, colours, layout, and small decorations.", "تسعة تصاميم أساسية مع تعديل الكتابة والألوان والتخطيط والزخارف الصغيرة.", "תשעה דגמי פתיחה עם עריכת כיתוב, צבעים, פריסה וקישוטים קטנים."),
+      tx("A stitch chart with counts, size and material estimates, and progress marks saved across up to 30 projects.", "مخطط غرز مع العدد والحجم وتقدير المواد، وتتبع تقدم محفوظ لما يصل إلى 30 مشروعًا.", "תרשים תכים עם ספירות, מידות והערכת חומרים, ומעקב התקדמות עד 30 פרויקטים."),
+      tx("Arabic by default, right-to-left interface for mixed Arabic and English text, plus English and Hebrew options, offline saving, export, share, and Android printing.", "العربية افتراضيًا وواجهة من اليمين إلى اليسار حتى مع نص عربي وإنجليزي مختلط، مع الإنجليزية والعبرية والحفظ دون إنترنت والتصدير والمشاركة والطباعة على أندرويد.", "ערבית כברירת מחדל וממשק מימין לשמאל גם בטקסט מעורב בערבית ובאנגלית, לצד אנגלית ועברית, שמירה ללא רשת, ייצוא, שיתוף והדפסה באנדרואיד."),
+    ],
+    evidence: [
+      tx("Android preview APK v0.1.1", "ملف معاينة APK لأندرويد، الإصدار 0.1.1", "קובץ APK לתצוגה מקדימה באנדרואיד, גרסה 0.1.1"),
+      tx("Real editor and gallery captures", "صور فعلية للمحرر ومعرض التصاميم", "צילומי מסך אמיתיים של העורך וגלריית הדגמים"),
+      tx("Automated pattern, controller, and storage checks", "فحوصات آلية للأنماط والمحرر والتخزين", "בדיקות אוטומטיות לדוגמאות, לעורך ולאחסון"),
+    ],
+    stack: ["JavaScript", "Capacitor 8", "Android", "SVG", "Canvas", "Local storage"],
+    architecture: [
+      { label: tx("Simple editor", "محرر بسيط", "עורך פשוט"), detail: tx("Choose a motif, personalize the text and colours, then review the chart.", "اختر تصميمًا وعدّل النص والألوان ثم راجع مخطط الغرز.", "בוחרים דגם, עורכים כיתוב וצבעים ובודקים את התרשים.") },
+      { label: tx("Pattern engine", "محرك الأنماط", "מנוע דוגמאות"), detail: tx("Generates a countable grid, dimensions, materials, and printable output.", "يولّد شبكة غرز قابلة للعد والأبعاد والمواد ومخرجات قابلة للطباعة.", "יוצר רשת תכים לספירה, מידות, חומרים ופלט להדפסה.") },
+      { label: tx("On-device library", "مكتبة على الجهاز", "ספרייה במכשיר"), detail: tx("Keeps projects and stitch progress locally, with export and import for backup.", "تحفظ المشاريع وتقدم الغرز محليًا، مع التصدير والاستيراد للنسخ الاحتياطي.", "שומרת פרויקטים והתקדמות במכשיר, עם ייצוא וייבוא לגיבוי.") },
+    ],
+    nextStep: tx(
+      "Test the APK on physical phones and stitch sample patterns with beginners before a store release.",
+      "اختبار ملف APK على هواتف حقيقية وتطريز نماذج مع مبتدئين قبل نشره في المتجر.",
+      "לבדוק את ה-APK בטלפונים אמיתיים ולרקום דוגמאות עם מתחילים לפני פרסום בחנות.",
+    ),
+    media: [
+      { src: "/work/little-keepsakes-arabic-desktop.jpg", alt: tx("Little Keepsakes Arabic gallery showing embroidery templates on desktop", "معرض Little Keepsakes بالعربية يعرض قوالب التطريز على سطح المكتب", "גלריית Little Keepsakes בערבית עם דגמי רקמה במסך מחשב"), caption: tx("Arabic-first design gallery", "معرض التصاميم بالعربية افتراضيًا", "גלריית דגמים בערבית כברירת מחדל"), fit: "contain" },
+      { src: "/work/little-keepsakes-arabic-mobile.jpg", alt: tx("Little Keepsakes Arabic design gallery on a phone-sized screen", "معرض تصاميم Little Keepsakes بالعربية على شاشة بحجم هاتف", "גלריית הדגמים של Little Keepsakes בערבית במסך בגודל טלפון"), caption: tx("Choose from nine motifs on a phone", "اختر من تسعة تصاميم على الهاتف", "בחירה מבין תשעה דגמים בטלפון"), fit: "contain" },
+      { src: "/work/little-keepsakes-editor.jpg", alt: tx("Little Keepsakes mobile editor with an embroidery name and personalization controls", "محرر Little Keepsakes للموبايل مع اسم مطرز وأدوات التخصيص", "עורך Little Keepsakes בנייד עם שם לרקמה וכלי התאמה"), caption: tx("Personalize lettering, colours, and details", "تخصيص الكتابة والألوان والتفاصيل", "התאמה של כיתוב, צבעים ופרטים"), fit: "contain" },
+      { src: "/work/little-keepsakes-library.jpg", alt: tx("Little Keepsakes saved project library showing stitch progress", "مكتبة المشاريع المحفوظة في Little Keepsakes مع تقدم التطريز", "ספריית הפרויקטים השמורים של Little Keepsakes עם התקדמות הרקמה"), caption: tx("Saved projects and stitch progress", "المشاريع المحفوظة وتقدم الغرز", "פרויקטים שמורים והתקדמות הרקמה"), fit: "contain" },
+    ],
+    links: [apkLink(
+      "/downloads/Little-Keepsakes-0.1.1-preview.apk",
+      tx(
+        "Debug-signed Android preview, not a Play Store release. It has not yet been tested on a physical phone; review the chart before stitching.",
+        "معاينة لأندرويد موقعة بمفتاح تطوير وليست إصدارًا على Google Play. لم تُختبر بعد على هاتف حقيقي؛ راجع المخطط قبل التطريز.",
+        "תצוגה מקדימה לאנדרואיד בחתימת פיתוח, לא גרסה בחנות Play. טרם נבדקה בטלפון אמיתי; יש לבדוק את התרשים לפני הרקמה.",
+      ),
+      tx("Download Android preview (APK)", "تحميل معاينة أندرويد (APK)", "הורדת תצוגה מקדימה לאנדרואיד (APK)"),
+    )],
+    featured: true,
+    customerPath: "startup",
+  },
+  {
     slug: "solitaire",
     title: "SOLitaire",
     category: tx("Competitive mobile product", "منتج موبايل تنافسي", "מוצר מובייל תחרותי"),
