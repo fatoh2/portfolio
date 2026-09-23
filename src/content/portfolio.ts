@@ -489,9 +489,9 @@ export const projects: PortfolioProject[] = [
       "אפליקציית רקמה שמתחילה בערבית ועוזרת למתחילים להפוך שם וסיפור קטן למזכרת שאפשר לרקום.",
     ),
     problem: tx(
-      "Making a personal embroidered gift can mean juggling a design tool, a stitch chart, material estimates, and a separate progress tracker.",
-      "صنع هدية مطرزة شخصية قد يتطلب التنقل بين أداة تصميم ومخطط غرز وتقدير للمواد وطريقة منفصلة لمتابعة التقدم.",
-      "יצירת מתנה רקומה אישית דורשת לעיתים כלי עיצוב, תרשים תכים, הערכת חומרים ומעקב התקדמות נפרד.",
+      "Making a personal embroidered gift can mean juggling a design tool, a stitch chart, a shopping list, and a separate progress tracker.",
+      "صنع هدية مطرزة شخصية قد يتطلب التنقل بين أداة تصميم ومخطط غرز وقائمة مشتريات وطريقة منفصلة لمتابعة التقدم.",
+      "יצירת מתנה רקומה אישית דורשת לעיתים כלי עיצוב, תרשים תכים, רשימת קניות ומעקב התקדמות נפרד.",
     ),
     audience: tx("Beginner stitchers and makers of personal gifts", "المبتدئين في التطريز وصنّاع الهدايا الشخصية", "רוקמים מתחילים ויוצרי מתנות אישיות"),
     role: tx("Product design, pattern engine, localization, and Android packaging", "تصميم المنتج ومحرك الأنماط والتعريب وتجهيز أندرويد", "עיצוב מוצר, מנוע דוגמאות, לוקליזציה ואריזה לאנדרואיד"),
@@ -503,12 +503,13 @@ export const projects: PortfolioProject[] = [
     ),
     capabilities: [
       tx("Nine starting motifs, with editable lettering, colours, layout, and small decorations.", "تسعة تصاميم أساسية مع تعديل الكتابة والألوان والتخطيط والزخارف الصغيرة.", "תשעה דגמי פתיחה עם עריכת כיתוב, צבעים, פריסה וקישוטים קטנים."),
-      tx("A stitch chart with counts, size and material estimates, and progress marks saved across up to 30 projects.", "مخطط غرز مع العدد والحجم وتقدير المواد، وتتبع تقدم محفوظ لما يصل إلى 30 مشروعًا.", "תרשים תכים עם ספירות, מידות והערכת חומרים, ומעקב התקדמות עד 30 פרויקטים."),
+      tx("A supply checklist, fabric size, thread colours and recorded shop codes, plus a shareable shopping list.", "قائمة تجهيز للأدوات ومقاس القماش وألوان الخيوط ورموزها المسجلة من المتجر، مع قائمة مشتريات قابلة للمشاركة.", "רשימת ציוד, מידות בד, צבעי חוטים וקודים שנרשמו מהחנות, עם רשימת קניות לשיתוף."),
+      tx("Guided stitch marking that moves to the next unfinished square, with exact progress saved across up to 30 projects.", "تحديد الغرز خطوة بخطوة والانتقال إلى المربع التالي غير المكتمل، مع حفظ التقدم الدقيق لما يصل إلى 30 مشروعًا.", "סימון תכים מודרך שמתקדם למשבצת הבאה שלא הושלמה, עם שמירת התקדמות מדויקת בעד 30 פרויקטים."),
       tx("Arabic by default, right-to-left interface for mixed Arabic and English text, plus English and Hebrew options, offline saving, export, share, and Android printing.", "العربية افتراضيًا وواجهة من اليمين إلى اليسار حتى مع نص عربي وإنجليزي مختلط، مع الإنجليزية والعبرية والحفظ دون إنترنت والتصدير والمشاركة والطباعة على أندرويد.", "ערבית כברירת מחדל וממשק מימין לשמאל גם בטקסט מעורב בערבית ובאנגלית, לצד אנגלית ועברית, שמירה ללא רשת, ייצוא, שיתוף והדפסה באנדרואיד."),
     ],
     evidence: [
-      tx("Android preview APK v0.1.1", "ملف معاينة APK لأندرويد، الإصدار 0.1.1", "קובץ APK לתצוגה מקדימה באנדרואיד, גרסה 0.1.1"),
-      tx("Real editor and gallery captures", "صور فعلية للمحرر ومعرض التصاميم", "צילומי מסך אמיתיים של העורך וגלריית הדגמים"),
+      tx("Android preview APK v0.2.0", "ملف معاينة APK لأندرويد، الإصدار 0.2.0", "קובץ APK לתצוגה מקדימה באנדרואיד, גרסה 0.2.0"),
+      tx("Real gallery, supply and stitching captures", "صور فعلية لمعرض التصاميم وتجهيز الأدوات والتطريز", "צילומי מסך אמיתיים של הגלריה, הציוד והרקמה"),
       tx("Automated pattern, controller, and storage checks", "فحوصات آلية للأنماط والمحرر والتخزين", "בדיקות אוטומטיות לדוגמאות, לעורך ולאחסון"),
     ],
     stack: ["JavaScript", "Capacitor 8", "Android", "SVG", "Canvas", "Local storage"],
@@ -526,10 +527,12 @@ export const projects: PortfolioProject[] = [
       { src: "/work/little-keepsakes-arabic-desktop.jpg", alt: tx("Little Keepsakes Arabic gallery showing embroidery templates on desktop", "معرض Little Keepsakes بالعربية يعرض قوالب التطريز على سطح المكتب", "גלריית Little Keepsakes בערבית עם דגמי רקמה במסך מחשב"), caption: tx("Arabic-first design gallery", "معرض التصاميم بالعربية افتراضيًا", "גלריית דגמים בערבית כברירת מחדל"), fit: "contain" },
       { src: "/work/little-keepsakes-arabic-mobile.jpg", alt: tx("Little Keepsakes Arabic design gallery on a phone-sized screen", "معرض تصاميم Little Keepsakes بالعربية على شاشة بحجم هاتف", "גלריית הדגמים של Little Keepsakes בערבית במסך בגודל טלפון"), caption: tx("Choose from nine motifs on a phone", "اختر من تسعة تصاميم على الهاتف", "בחירה מבין תשעה דגמים בטלפון"), fit: "contain" },
       { src: "/work/little-keepsakes-editor.jpg", alt: tx("Little Keepsakes mobile editor with an embroidery name and personalization controls", "محرر Little Keepsakes للموبايل مع اسم مطرز وأدوات التخصيص", "עורך Little Keepsakes בנייד עם שם לרקמה וכלי התאמה"), caption: tx("Personalize lettering, colours, and details", "تخصيص الكتابة والألوان والتفاصيل", "התאמה של כיתוב, צבעים ופרטים"), fit: "contain" },
+      { src: "/work/little-keepsakes-preparation.jpg", alt: tx("Arabic preparation checklist showing fabric and thread readiness with a recorded thread code", "قائمة تجهيز بالعربية تعرض القماش والخيوط مع رمز خيط مسجل", "רשימת הכנה בערבית עם בד וחוטים וקוד חוט שנרשם"), caption: tx("Gather fabric and threads, and save the codes you buy", "جهّز القماش والخيوط واحفظ رموزها من المتجر", "מכינים בד וחוטים ושומרים את הקודים שנקנו"), fit: "contain" },
+      { src: "/work/little-keepsakes-stitching.jpg", alt: tx("Arabic guided stitch chart with a visible mark-and-next control", "مخطط تطريز بالعربية مع زر واضح لتحديد الغرزة والانتقال للتالية", "תרשים רקמה בערבית עם כפתור גלוי לסימון ומעבר לתך הבא"), caption: tx("Mark a stitch and move to the next unfinished square", "علّم غرزة وانتقل إلى المربع التالي غير المكتمل", "מסמנים תך ומתקדמים למשבצת הבאה שלא הושלמה"), fit: "contain" },
       { src: "/work/little-keepsakes-library.jpg", alt: tx("Little Keepsakes saved project library showing stitch progress", "مكتبة المشاريع المحفوظة في Little Keepsakes مع تقدم التطريز", "ספריית הפרויקטים השמורים של Little Keepsakes עם התקדמות הרקמה"), caption: tx("Saved projects and stitch progress", "المشاريع المحفوظة وتقدم الغرز", "פרויקטים שמורים והתקדמות הרקמה"), fit: "contain" },
     ],
     links: [apkLink(
-      "/downloads/Little-Keepsakes-0.1.1-preview.apk",
+      "/downloads/Little-Keepsakes-0.2.0-preview.apk",
       tx(
         "Debug-signed Android preview, not a Play Store release. It has not yet been tested on a physical phone; review the chart before stitching.",
         "معاينة لأندرويد موقعة بمفتاح تطوير وليست إصدارًا على Google Play. لم تُختبر بعد على هاتف حقيقي؛ راجع المخطط قبل التطريز.",
