@@ -616,9 +616,12 @@ export const projects: PortfolioProject[] = [
       { label: tx("AI drafting", "صياغة AI", "כתיבה עם AI"), detail: tx("Draft assistance remains behind human review and publishing control.", "المساعدة في الصياغة تبقى خلف مراجعة ونشر بشريين.", "סיוע בכתיבה נשאר תחת ביקורת ושליטת פרסום אנושית.") },
     ],
     nextStep: tx("Keep editorial workflows and structured SEO aligned as the catalog expands.", "الحفاظ على توافق التحرير وSEO المنظم مع توسع الكتالوج.", "לשמור על התאמה בין תהליכי העריכה ל-SEO מובנה ככל שהקטלוג גדל."),
-    media: [{ src: "/work/elsewhereco-home.png", alt: tx("ElsewhereCo Arabic expedition homepage", "الصفحة العربية لرحلات ElsewhereCo", "דף מסעות בערבית של ElsewhereCo"), caption: tx("Public Arabic production homepage", "الصفحة العربية العامة", "דף הבית הציבורי בערבית") }],
+    media: [
+      { src: "/work/elsewhereco/desktop.jpg", alt: tx("ElsewhereCo Arabic expedition homepage on desktop", "الصفحة العربية لرحلات ElsewhereCo على الحاسوب", "דף המסעות בערבית של ElsewhereCo במחשב"), caption: tx("Desktop production experience", "تجربة الموقع على الحاسوب", "חוויית האתר במחשב") },
+      { src: "/work/elsewhereco/mobile.jpg", alt: tx("ElsewhereCo Arabic expedition homepage on mobile", "الصفحة العربية لرحلات ElsewhereCo على الهاتف", "דף המסעות בערבית של ElsewhereCo בנייד"), caption: tx("Mobile production experience", "تجربة الموقع على الهاتف", "חוויית האתר בנייד") },
+    ],
     links: [liveLink("https://elsewhereco.vercel.app/")],
-    featured: false,
+    featured: true,
     customerPath: "business",
   },
   {
@@ -642,7 +645,7 @@ export const projects: PortfolioProject[] = [
     nextStep: tx("Keep booking and content operations measurable as new programs are introduced.", "جعل الحجز وتشغيل المحتوى قابلين للقياس مع إضافة برامج جديدة.", "לשמור על מדידות של הזמנות ותפעול תוכן עם הוספת תכניות."),
     media: [{ src: "/work/go-to-nature-home.png", alt: tx("Go To Nature Arabic community homepage", "الصفحة العربية لمجتمع Go To Nature", "דף הקהילה בערבית של Go To Nature"), caption: tx("Public Arabic production homepage", "الصفحة العربية العامة", "דף הבית הציבורי בערבית") }],
     links: [liveLink("https://go-to-nature.vercel.app/")],
-    featured: true,
+    featured: false,
     customerPath: "business",
   },
   {

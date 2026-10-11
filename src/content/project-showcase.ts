@@ -80,4 +80,10 @@ export const projectShowcases: Record<string, ProjectShowcase> = {
       },
     ],
   },
+  elsewhereco: {
+    desktopRatio: "1440 / 900",
+    mobileIndex: 1,
+    mobileRatio: "780 / 1688",
+    details: [],
+  },
 };

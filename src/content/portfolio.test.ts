@@ -92,8 +92,9 @@ describe("customer-first portfolio content", () => {
     );
   });
 
-  it("leads the commercial work with Go To Nature", () => {
-    expect(getProject("go-to-nature")?.featured).toBe(true);
+  it("leads the commercial work with ElsewhereCo", () => {
+    expect(getProject("elsewhereco")?.featured).toBe(true);
+    expect(getProject("go-to-nature")?.featured).toBe(false);
     expect(getProject("camp-and-hike")?.featured).toBe(false);
   });
 

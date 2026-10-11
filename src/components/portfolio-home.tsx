@@ -19,12 +19,14 @@ import { BrandMonogram } from "./brand-monogram";
 import { BrandPortal } from "./brand-portal";
 import { ContactForm } from "./contact-form";
 import { InterfaceDetails, ProductPortrait, ProjectDeck } from "./project-deck";
+import { PortalSwitcher } from "./portal-switcher";
+import type { PortalVariant } from "./portal-variant";
 import { SiteHeader } from "./site-header";
 import { TrackedAnchor, TrackedLink } from "./tracked-link";
 import "./homepage.css";
 
 const featuredOrder = [
-  "go-to-nature",
+  "elsewhereco",
   "seeker-radar",
   "whatsapp-ai-sales-agent",
   "argus-ai",
@@ -32,9 +34,16 @@ const featuredOrder = [
   "little-keepsakes",
 ];
 
-export function PortfolioHome({ locale }: { locale: Locale }) {
+export function PortfolioHome({
+  locale,
+  portalVariant,
+}: {
+  locale: Locale;
+  portalVariant?: PortalVariant;
+}) {
   const dictionary = getDictionary(locale);
   const copy = dictionary.home;
+  const activePortalVariant = portalVariant ?? "constellation";
   const featured = projects
     .filter((project) => project.featured)
     .sort(
@@ -50,14 +59,14 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
   return (
     <div id="top" className="site-shell home-page">
       <SiteHeader locale={locale} />
+      {portalVariant || process.env.NODE_ENV === "development" ? (
+        <PortalSwitcher locale={locale} active={activePortalVariant} />
+      ) : null}
       <main>
-        <BrandPortal locale={locale} />
+        <BrandPortal locale={locale} variant={activePortalVariant} />
 
         <ProjectDeck
-          projects={[
-            ...featured.filter((project) => project.slug !== "go-to-nature"),
-            ...featured.filter((project) => project.slug === "go-to-nature"),
-          ]}
+          projects={featured}
           locale={locale}
         />
 

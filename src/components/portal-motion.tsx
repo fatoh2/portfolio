@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { isPortalBannerVariant } from "./portal-variant";
 
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 const ease = (value: number) => {
@@ -9,8 +10,16 @@ const ease = (value: number) => {
 };
 
 /** Progressive enhancement: the server HTML is a complete, unpinned page. */
-export function PortalMotion({ children }: { children: ReactNode }) {
+export function PortalMotion({
+  children,
+  variant,
+}: {
+  children: ReactNode;
+  /** Local experiment switch; undefined keeps the shipped behaviour. */
+  variant?: string;
+}) {
   const rootRef = useRef<HTMLDivElement>(null);
+  const fullScene = variant === "still" || isPortalBannerVariant(variant);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -23,12 +32,19 @@ export function PortalMotion({ children }: { children: ReactNode }) {
     const actions = root.querySelector<HTMLElement>("[data-portal-actions]")!;
     const photo = root.querySelector<HTMLImageElement>("[data-portal-photo]")!;
     const caption = root.querySelector<HTMLElement>("[data-portal-caption]")!;
+    // Experiment layers; absent in the shipped markup.
+    const media = root.querySelector<HTMLElement>("[data-portal-media]") ?? photo;
+    const front = root.querySelector<HTMLElement>('[data-portal-layer="front"]');
+    const pan = root.querySelector<HTMLElement>("[data-portal-pan]");
+    const panFrame = pan?.closest<HTMLElement>(".portal-photo-frame") ?? null;
     const header = document.querySelector<HTMLElement>(".site-header");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
     let disposed = false;
     let enabled = false;
     let travel = 1;
+    let openTravel = 1;
+    let panTravel = 0;
     let headerHeight = 0;
     let width = 0;
     let height = 0;
@@ -46,16 +62,20 @@ export function PortalMotion({ children }: { children: ReactNode }) {
       copy.style.removeProperty("transform");
       copy.style.removeProperty("pointer-events");
       photo.style.removeProperty("transform");
+      media.style.removeProperty("transform");
+      front?.style.removeProperty("transform");
+      pan?.style.removeProperty("transform");
       caption.style.removeProperty("opacity");
     }
 
     function draw() {
       if (!enabled || disposed || document.hidden) return;
-      const p = clamp(
-        (headerHeight - root!.getBoundingClientRect().top) / travel,
-      );
-      if (p === lastProgress) return;
-      lastProgress = p;
+      const scrolled = headerHeight - root!.getBoundingClientRect().top;
+      const p = clamp(scrolled / openTravel);
+      // Once the reveal finishes, the image moves with continued scrolling.
+      const q = panTravel > 0 ? clamp((scrolled - openTravel) / panTravel) : 0;
+      if (p + q === lastProgress) return;
+      lastProgress = p + q;
       // Exponential scaling keeps the aperture's growth perceptually even.
       // The final scale places the viewport within the counter's safe interior.
       const zoom = ease(p / 0.92);
@@ -69,8 +89,29 @@ export function PortalMotion({ children }: { children: ReactNode }) {
       copy.style.opacity = String(1 - ease(p / 0.22));
       copy.style.transform = `translate3d(0,${-24 * ease(p / 0.3)}px,0)`;
       copy.style.pointerEvents = p > 0.22 ? "none" : "auto";
-      photo.style.transform = `scale(${1.16 - 0.16 * ease(p)})`;
-      caption.style.opacity = String(ease((p - 0.76) / 0.2));
+      const mediaScale = 1.16 - 0.16 * ease(p);
+      if (fullScene) {
+        const frameHeight = media.parentElement?.clientHeight ?? height;
+        const panProgress = 1 - (1 - q) ** 2;
+        media.style.transform = `translate3d(0,${-frameHeight * panProgress}px,0) scale(${mediaScale})`;
+      } else {
+        media.style.transform = `scale(${mediaScale})`;
+      }
+      if (front) {
+        // The interface sits nearer than the photograph, so it settles faster.
+        front.style.transform = `translate3d(0,${28 * (1 - ease(p))}px,0) scale(${1.18 - 0.18 * ease(p)})`;
+      }
+      if (pan && panFrame) {
+        const frameHeight = panFrame.clientHeight;
+        const range = Math.min(
+          Math.max(0, pan.offsetHeight - frameHeight),
+          frameHeight * 2.2,
+        );
+        pan.style.transform = `translate3d(0,${-range * ease(q)}px,0)`;
+      }
+      caption.style.opacity = String(
+        fullScene ? ease(q / 0.25) : ease((p - 0.76) / 0.2),
+      );
     }
 
     function schedule() {
@@ -114,6 +155,14 @@ export function PortalMotion({ children }: { children: ReactNode }) {
       centerX = logo.left - box.left + (733 - 120) * initialScale;
       centerY = logo.top - box.top + (396 - 190) * initialScale;
       travel = Math.max(1, root!.offsetHeight - stage.offsetHeight);
+      // The stylesheet states how many viewports the opening takes; anything
+      // beyond that is the pan act. Without a pan, the opening is the whole travel.
+      const open =
+        parseFloat(getComputedStyle(root!).getPropertyValue("--portal-open")) ||
+        1.08;
+      openTravel = Math.min(travel, Math.max(1, Math.round(stage.offsetHeight * open)));
+      panTravel = travel - openTravel > 2 ? travel - openTravel : 0;
+      if (!panTravel) openTravel = travel;
       if (anchor && anchorTop !== null && anchorTop >= 0 && anchorTop < window.innerHeight) {
         anchor.scrollIntoView({ block: "start", behavior: "instant" });
       }
@@ -153,7 +202,7 @@ export function PortalMotion({ children }: { children: ReactNode }) {
             root!.getBoundingClientRect().top +
             window.scrollY -
             headerHeight +
-            travel,
+            openTravel + (fullScene ? panTravel : 0),
           behavior: "instant",
         });
         draw();
@@ -192,10 +241,16 @@ export function PortalMotion({ children }: { children: ReactNode }) {
       caption.removeEventListener("focusin", focusProject);
       reset();
     };
-  }, []);
+  }, [variant, fullScene]);
 
   return (
-    <div ref={rootRef} className="brand-portal">
+    <div
+      ref={rootRef}
+      className="brand-portal"
+      data-portal-variant={variant}
+      data-portal-full-scene={fullScene ? "" : undefined}
+      data-portal-banner={isPortalBannerVariant(variant) ? "" : undefined}
+    >
       {children}
     </div>
   );
