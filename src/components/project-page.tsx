@@ -155,6 +155,7 @@ export function ProjectPage({
           </section>
         ) : null}
 
+        {primaryMedia ? (
         <section className="section section-ink architecture-section">
           <div className="section-intro">
             <p className="eyebrow">{dictionary.case.architecture}</p>
@@ -171,10 +172,15 @@ export function ProjectPage({
               </li>
             ))}
           </ol>
-          {project.status === "private-build" ? (
+          {project.status !== "public-build" && project.status !== "live-product" ? (
             <p className="private-note">{dictionary.case.privateNote}</p>
           ) : null}
         </section>
+        ) : project.status !== "public-build" ? (
+          <section className="section section-ink architecture-section architecture-note">
+            <p className="private-note">{dictionary.case.privateNote}</p>
+          </section>
+        ) : null}
 
         <section className="section section-signal project-proof">
           <div>

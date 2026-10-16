@@ -9,6 +9,8 @@ type Detail = {
   description: LocalizedText;
 };
 type ProjectShowcase = {
+  /** Silent loops at /work/<slug>/loop-desktop.* and loop-mobile.* */
+  loops?: boolean;
   desktopRatio: string;
   mobileIndex?: number;
   mobileRatio?: string;
@@ -16,6 +18,9 @@ type ProjectShowcase = {
 };
 
 export const projectShowcases: Record<string, ProjectShowcase> = {
+  "whatsapp-ai-sales-agent": { desktopRatio: "1440 / 1000", mobileIndex: 1, mobileRatio: "390 / 844", details: [] },
+  bab: { loops: true, desktopRatio: "1440 / 900", mobileIndex: 1, mobileRatio: "390 / 844", details: [] },
+  darbak: { desktopRatio: "1440 / 900", mobileIndex: 1, mobileRatio: "390 / 844", details: [] },
   "little-keepsakes": {
     desktopRatio: "1365 / 900", mobileIndex: 1, mobileRatio: "390 / 844",
     details: [],
@@ -66,24 +71,11 @@ export const projectShowcases: Record<string, ProjectShowcase> = {
     ],
   },
   "go-to-nature": {
-    desktopRatio: "1440 / 900",
-    details: [
-      {
-        mediaIndex: 0, sourceSize: [1440, 900], crop: [359, 535, 722, 226],
-        title: tx("A community identity", "هوية مجتمع", "זהות קהילתית"),
-        description: tx("An Arabic-first welcome built around the people and the outdoors.", "ترحيب يبدأ بالعربية، حول الناس والطبيعة.", "קבלת פנים בערבית, סביב האנשים והטבע."),
-      },
-      {
-        mediaIndex: 0, sourceSize: [1440, 900], crop: [546, 778, 346, 93],
-        title: tx("The next adventure", "المغامرة التالية", "ההרפתקה הבאה"),
-        description: tx("Clear paths from discovering the community to choosing an adventure.", "مسارات واضحة من اكتشاف المجتمع إلى اختيار المغامرة.", "דרך ברורה מהיכרות עם הקהילה לבחירת הרפתקה."),
-      },
-    ],
+    desktopRatio: "1440 / 900", mobileIndex: 1, mobileRatio: "390 / 844",
+    details: [],
   },
   elsewhereco: {
-    desktopRatio: "1440 / 900",
-    mobileIndex: 1,
-    mobileRatio: "780 / 1688",
+    loops: true, desktopRatio: "1440 / 900", mobileIndex: 1, mobileRatio: "390 / 844",
     details: [],
   },
 };

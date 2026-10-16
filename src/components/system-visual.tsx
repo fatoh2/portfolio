@@ -1,18 +1,18 @@
 import { Fragment } from "react";
 import {
-  Activity,
   ArrowLeft,
   ArrowRight,
-  BellRing,
   Bot,
+  CalendarDays,
   Cloud,
   Database,
-  GitBranch,
+  FileText,
   Globe2,
   MessageCircle,
-  Search,
+  Plane,
   Server,
   ShieldCheck,
+  Smartphone,
   UserCheck,
   Workflow,
   type LucideIcon,
@@ -23,9 +23,9 @@ import { getDictionary } from "@/content/ui";
 
 const projectIcons: Record<string, LucideIcon[]> = {
   "whatsapp-ai-sales-agent": [MessageCircle, Bot, UserCheck],
-  "argus-ai": [Search, Database, ShieldCheck],
-  "argus-infra": [Cloud, GitBranch, Activity],
-  "argus-monitor": [Server, Database, BellRing],
+  bab: [FileText, Workflow, UserCheck],
+  "nedaa-lifestyle": [Smartphone, CalendarDays, Database],
+  darbak: [Plane, Smartphone, Cloud],
 };
 
 const fallbackIcons: LucideIcon[] = [Globe2, Workflow, Server];
@@ -49,9 +49,9 @@ export function SystemVisual({
         <span>{project.title}</span>
         <span className="system-status">
           <ShieldCheck aria-hidden="true" size={14} />
-          {project.status === "private-build"
-            ? dictionary.case.privateVisual
-            : dictionary.hero.public}
+          {project.status === "public-build"
+            ? dictionary.hero.public
+            : dictionary.case.privateVisual}
         </span>
       </div>
 

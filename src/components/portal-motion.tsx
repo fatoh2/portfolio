@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
-import { isPortalBannerVariant } from "./portal-variant";
 
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 const ease = (value: number) => {
@@ -9,17 +8,15 @@ const ease = (value: number) => {
   return p * p * (3 - 2 * p);
 };
 
-/** Progressive enhancement: the server HTML is a complete, unpinned page. */
-export function PortalMotion({
-  children,
-  variant,
-}: {
-  children: ReactNode;
-  /** Local experiment switch; undefined keeps the shipped behaviour. */
-  variant?: string;
-}) {
+/**
+ * Progressive enhancement: the server HTML is a complete, unpinned page.
+ * Two acts while the stage is pinned: the counter opens onto the scene
+ * (`--portal-open` viewports of scroll), then the scene travels up and the
+ * caption arrives (`--portal-pan` viewports). Elements carrying
+ * `data-portal-depth` move at their own rate in both acts, nearer ones more.
+ */
+export function PortalMotion({ children }: { children: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null);
-  const fullScene = variant === "still" || isPortalBannerVariant(variant);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -32,11 +29,11 @@ export function PortalMotion({
     const actions = root.querySelector<HTMLElement>("[data-portal-actions]")!;
     const photo = root.querySelector<HTMLImageElement>("[data-portal-photo]")!;
     const caption = root.querySelector<HTMLElement>("[data-portal-caption]")!;
-    // Experiment layers; absent in the shipped markup.
     const media = root.querySelector<HTMLElement>("[data-portal-media]") ?? photo;
-    const front = root.querySelector<HTMLElement>('[data-portal-layer="front"]');
-    const pan = root.querySelector<HTMLElement>("[data-portal-pan]");
-    const panFrame = pan?.closest<HTMLElement>(".portal-photo-frame") ?? null;
+    const layers = [...root.querySelectorAll<HTMLElement>("[data-portal-depth]")].map((element) => ({
+      element,
+      depth: parseFloat(element.dataset.portalDepth ?? "1") || 0,
+    }));
     const header = document.querySelector<HTMLElement>(".site-header");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
@@ -63,8 +60,7 @@ export function PortalMotion({
       copy.style.removeProperty("pointer-events");
       photo.style.removeProperty("transform");
       media.style.removeProperty("transform");
-      front?.style.removeProperty("transform");
-      pan?.style.removeProperty("transform");
+      for (const layer of layers) layer.element.style.removeProperty("transform");
       caption.style.removeProperty("opacity");
     }
 
@@ -72,8 +68,8 @@ export function PortalMotion({
       if (!enabled || disposed || document.hidden) return;
       const scrolled = headerHeight - root!.getBoundingClientRect().top;
       const p = clamp(scrolled / openTravel);
-      // Once the reveal finishes, the image moves with continued scrolling.
-      const q = panTravel > 0 ? clamp((scrolled - openTravel) / panTravel) : 0;
+      // Once the reveal finishes, the scene moves with continued scrolling.
+      const q = panTravel > 0 ? clamp((scrolled - openTravel) / panTravel) : 1;
       if (p + q === lastProgress) return;
       lastProgress = p + q;
       // Exponential scaling keeps the aperture's growth perceptually even.
@@ -89,29 +85,25 @@ export function PortalMotion({
       copy.style.opacity = String(1 - ease(p / 0.22));
       copy.style.transform = `translate3d(0,${-24 * ease(p / 0.3)}px,0)`;
       copy.style.pointerEvents = p > 0.22 ? "none" : "auto";
-      const mediaScale = 1.16 - 0.16 * ease(p);
-      if (fullScene) {
-        const frameHeight = media.parentElement?.clientHeight ?? height;
-        const panProgress = 1 - (1 - q) ** 2;
-        media.style.transform = `translate3d(0,${-frameHeight * panProgress}px,0) scale(${mediaScale})`;
+      const settle = 1 - ease(p);
+      const frameHeight = media.parentElement?.clientHeight ?? height;
+      const panProgress = panTravel > 0 ? 1 - (1 - q) ** 2 : 0;
+      if (layers.length) {
+        // The whole scene settles from a slight zoom; each layer also drifts by its depth,
+        // so nearer screens arrive later and leave faster than the backdrop.
+        media.style.transform = `scale(${1 + 0.06 * settle})`;
+        for (const { element, depth } of layers) {
+          const arrive = 40 * depth * settle;
+          // A portrait frame already holds the scene high, so it leaves less far.
+          const portrait = Math.min(1, (media.parentElement?.clientWidth ?? width) / frameHeight);
+          const leave = frameHeight * portrait * (0.3 + 0.12 * depth) * panProgress;
+          element.style.transform = `translate3d(0,${arrive - leave}px,0)`;
+        }
       } else {
-        media.style.transform = `scale(${mediaScale})`;
+        const mediaScale = 1.16 - 0.16 * ease(p);
+        media.style.transform = `translate3d(0,${-frameHeight * 0.6 * panProgress}px,0) scale(${mediaScale})`;
       }
-      if (front) {
-        // The interface sits nearer than the photograph, so it settles faster.
-        front.style.transform = `translate3d(0,${28 * (1 - ease(p))}px,0) scale(${1.18 - 0.18 * ease(p)})`;
-      }
-      if (pan && panFrame) {
-        const frameHeight = panFrame.clientHeight;
-        const range = Math.min(
-          Math.max(0, pan.offsetHeight - frameHeight),
-          frameHeight * 2.2,
-        );
-        pan.style.transform = `translate3d(0,${-range * ease(q)}px,0)`;
-      }
-      caption.style.opacity = String(
-        fullScene ? ease(q / 0.25) : ease((p - 0.76) / 0.2),
-      );
+      caption.style.opacity = String(panTravel > 0 ? ease(q / 0.25) : ease((p - 0.76) / 0.2));
     }
 
     function schedule() {
@@ -156,7 +148,7 @@ export function PortalMotion({
       centerY = logo.top - box.top + (396 - 190) * initialScale;
       travel = Math.max(1, root!.offsetHeight - stage.offsetHeight);
       // The stylesheet states how many viewports the opening takes; anything
-      // beyond that is the pan act. Without a pan, the opening is the whole travel.
+      // beyond that is the second act.
       const open =
         parseFloat(getComputedStyle(root!).getPropertyValue("--portal-open")) ||
         1.08;
@@ -202,7 +194,7 @@ export function PortalMotion({
             root!.getBoundingClientRect().top +
             window.scrollY -
             headerHeight +
-            openTravel + (fullScene ? panTravel : 0),
+            travel,
           behavior: "instant",
         });
         draw();
@@ -241,16 +233,10 @@ export function PortalMotion({
       caption.removeEventListener("focusin", focusProject);
       reset();
     };
-  }, [variant, fullScene]);
+  }, []);
 
   return (
-    <div
-      ref={rootRef}
-      className="brand-portal"
-      data-portal-variant={variant}
-      data-portal-full-scene={fullScene ? "" : undefined}
-      data-portal-banner={isPortalBannerVariant(variant) ? "" : undefined}
-    >
+    <div ref={rootRef} className="brand-portal" data-portal-banner="">
       {children}
     </div>
   );

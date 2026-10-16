@@ -544,3 +544,58 @@ html[dir="rtl"] .home-page .deck-detail h4 {
     transition: none !important;
   }
 }
+
+/* Loops: a silent capture over the still, only once it is really playing. */
+.home-page .deck-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+.home-page .deck-video[data-playing] {
+  opacity: 1;
+}
+
+/* Phones: the selector is a row of numbered buttons; the panel carries the name. */
+@media (max-width: 599px) {
+  .home-page .project-deck {
+    grid-template-columns: repeat(var(--deck-count), minmax(0, 1fr));
+    gap: 0 8px;
+  }
+  .home-page .deck-choice, .home-page .deck-selector {
+    grid-row: 1;
+    grid-column: var(--deck-column);
+  }
+  .home-page .deck-selector {
+    justify-content: center;
+    min-height: 44px;
+    padding: 0;
+    border: 1px solid #3c3c37;
+    border-radius: 999px;
+    border-top-color: #3c3c37;
+  }
+  .home-page .deck-selector-number {
+    font-size: 13px;
+  }
+  .home-page .deck-selector-title,
+  .home-page .deck-selector-dot {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .home-page .deck-choice:checked + .deck-selector {
+    background: var(--acid);
+    border-color: var(--acid);
+    color: var(--ink);
+  }
+  .home-page .deck-panel {
+    grid-row: 2;
+    padding-top: 24px;
+  }
+}

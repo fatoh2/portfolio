@@ -1,29 +1,16 @@
-import { localizedPath, projects, t, type Locale } from "@/content/portfolio";
+import { localizedPath, type Locale } from "@/content/portfolio";
 import { getDictionary } from "@/content/ui";
 import { monogramCounter, monogramPath } from "@/lib/monogram";
 import { BrandMonogram } from "./brand-monogram";
-import { HomeProjectSummary } from "./home-project-summary";
-import { PortalExperimentMedia } from "./portal-media";
+import { PortalScene } from "./portal-scene";
 import { PortalMotion } from "./portal-motion";
-import { isPortalBannerVariant, type PortalVariant } from "./portal-variant";
 import { TrackedAnchor } from "./tracked-link";
 
-export function BrandPortal({
-  locale,
-  variant,
-}: {
-  locale: Locale;
-  /** Local comparison: choose a project treatment or portfolio banner. */
-  variant?: PortalVariant;
-}) {
+export function BrandPortal({ locale }: { locale: Locale }) {
   const copy = getDictionary(locale).home;
-  const activeVariant = variant ?? "constellation";
-  const banner = isPortalBannerVariant(activeVariant);
-  const project = projects.find((project) => project.slug === "elsewhereco")!;
-  const media = project.media[0];
 
   return (
-    <PortalMotion variant={activeVariant}>
+    <PortalMotion>
       <div className="portal-stage" data-portal-stage>
         <section className="portal-opening" aria-labelledby="home-title">
           <div className="portal-copy" data-portal-copy>
@@ -63,36 +50,21 @@ export function BrandPortal({
         <div className="portal-scene">
           <h2 className="sr-only">{copy.selectedWork}</h2>
           <div className="portal-photo-frame">
-            <PortalExperimentMedia
-              variant={activeVariant}
-              alt={t(media.alt, locale)}
-            />
+            <PortalScene />
           </div>
-          <article
-            className={banner
-              ? "portal-caption portal-banner-caption"
-              : "feature-row home-feature home-feature-first portal-caption"}
-            data-project={banner ? undefined : project.slug}
-            data-portal-caption
-          >
-            {banner ? (
-              <>
-                <h3>{copy.selectedWork}</h3>
-                <div>
-                  <p>{copy.deckIntro}</p>
-                  <TrackedAnchor
-                    href={localizedPath(locale, "/#work")}
-                    className="home-project-link"
-                    eventName="cta_click"
-                    eventData={{ placement: "portal-banner", target: "work", locale }}
-                  >
-                    {copy.workAction}
-                  </TrackedAnchor>
-                </div>
-              </>
-            ) : (
-              <HomeProjectSummary project={project} locale={locale} />
-            )}
+          <article className="portal-caption portal-banner-caption" data-portal-caption>
+            <h3>{copy.workTitle}</h3>
+            <div>
+              <p>{copy.deckIntro}</p>
+              <TrackedAnchor
+                href={localizedPath(locale, "/#work")}
+                className="home-project-link"
+                eventName="cta_click"
+                eventData={{ placement: "portal-banner", target: "work", locale }}
+              >
+                {copy.workAction}
+              </TrackedAnchor>
+            </div>
           </article>
         </div>
         <svg

@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "nedaa-lifestyle",
+    "updated": "2026-10-16",
+    "phase": "Running the studio from the app — plugin 0.3.1 live (approvals, attendance, payments, schedule, reports,…"
+  },
+  {
+    "slug": "elsewhereco",
+    "updated": "2026-10-16",
+    "phase": "Per-trip destination patches"
+  },
+  {
+    "slug": "bab",
+    "updated": "2026-10-15",
+    "phase": "Building"
+  },
+  {
+    "slug": "solitaire",
+    "updated": "2026-10-14",
+    "phase": "Court Table redesign on staging"
+  },
+  {
+    "slug": "go-to-nature",
+    "updated": "2026-10-14",
+    "phase": "Live"
+  },
+  {
+    "slug": "nuqta",
+    "updated": "2026-10-13",
+    "phase": "Pilot implementation and review"
+  },
+  {
+    "slug": "camp-and-hike",
+    "updated": "2026-09-22",
+    "phase": "Site feature-complete"
+  },
+  {
+    "slug": "seeker-radar",
+    "updated": "2026-09-03",
+    "phase": "Live at seeker-radar.app"
+  }
+]

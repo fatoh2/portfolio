@@ -3,8 +3,10 @@ import Image from "next/image";
 import { Fragment, type CSSProperties } from "react";
 import { localizedPath, t, type Locale, type PortfolioProject } from "@/content/portfolio";
 import { projectShowcases } from "@/content/project-showcase";
+import { projectTags } from "@/lib/project-tags";
 import { getDictionary, statusLabels } from "@/content/ui";
 import { BrandMonogram } from "./brand-monogram";
+import { DeckVideo } from "./deck-video";
 import { TrackedAnchor, TrackedLink } from "./tracked-link";
 import "./project-deck.css";
 
@@ -19,10 +21,12 @@ export function ProductPortrait({ project, locale }: { project: ShowcaseProject;
     <div className={`deck-portrait${mobile ? " deck-portrait-pair" : ""}`} dir="ltr">
       <div className="deck-desktop" style={{ aspectRatio: showcase?.desktopRatio ?? "16 / 10" }}>
         <Image src={desktop.src} alt={t(desktop.alt, locale)} fill sizes="(min-width: 960px) 57vw, 76vw" className="deck-image contain" />
+        {showcase?.loops ? <DeckVideo mp4={`/work/${project.slug}/loop-desktop.mp4`} webm={`/work/${project.slug}/loop-desktop.webm`} /> : null}
       </div>
       {mobile ? (
         <div className="deck-mobile" style={{ aspectRatio: showcase.mobileRatio }}>
           <Image src={mobile.src} alt={t(mobile.alt, locale)} fill sizes="(min-width: 960px) 18vw, 25vw" className="deck-image contain" />
+          {showcase?.loops ? <DeckVideo mp4={`/work/${project.slug}/loop-mobile.mp4`} webm={`/work/${project.slug}/loop-mobile.webm`} /> : null}
         </div>
       ) : null}
     </div>
@@ -75,7 +79,7 @@ export function ProjectDeck({ projects, locale }: { projects: PortfolioProject[]
           return (
             <Fragment key={project.slug}>
               <input className="deck-choice" type="radio" name={`project-deck-${locale}`} id={id} value={project.slug} defaultChecked={index === 0} aria-controls={`${id}-panel`} style={position} />
-              <label className="deck-selector" htmlFor={id} style={position}>
+              <label className="deck-selector" htmlFor={id} style={position} data-tags={projectTags(project).join(" ")}>
                 <span className="deck-selector-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                 <span className="deck-selector-title" dir="ltr">{project.slug === "whatsapp-ai-sales-agent" ? "WhatsApp AI" : project.title}</span>
                 <span className="deck-selector-dot" aria-hidden="true" />

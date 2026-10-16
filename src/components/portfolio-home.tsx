@@ -2,9 +2,12 @@ import {
   ArrowUp,
   ArrowUpRight,
   Download,
+  Camera,
   Mail,
   MessageCircle,
+  Send,
 } from "lucide-react";
+import Image from "next/image";
 import {
   focusQuest,
   localizedPath,
@@ -19,9 +22,11 @@ import { BrandMonogram } from "./brand-monogram";
 import { BrandPortal } from "./brand-portal";
 import { ContactForm } from "./contact-form";
 import { InterfaceDetails, ProductPortrait, ProjectDeck } from "./project-deck";
-import { PortalSwitcher } from "./portal-switcher";
-import type { PortalVariant } from "./portal-variant";
 import { SiteHeader } from "./site-header";
+import now from "@/content/now.json";
+import { projectTags } from "@/lib/project-tags";
+import { AgentDemo } from "./agent-demo";
+import { WorkFilters } from "./work-filters";
 import { TrackedAnchor, TrackedLink } from "./tracked-link";
 import "./homepage.css";
 
@@ -29,21 +34,14 @@ const featuredOrder = [
   "elsewhereco",
   "seeker-radar",
   "whatsapp-ai-sales-agent",
-  "argus-ai",
+  "bab",
   "solitaire",
   "little-keepsakes",
 ];
 
-export function PortfolioHome({
-  locale,
-  portalVariant,
-}: {
-  locale: Locale;
-  portalVariant?: PortalVariant;
-}) {
+export function PortfolioHome({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
   const copy = dictionary.home;
-  const activePortalVariant = portalVariant ?? "constellation";
   const featured = projects
     .filter((project) => project.featured)
     .sort(
@@ -59,11 +57,8 @@ export function PortfolioHome({
   return (
     <div id="top" className="site-shell home-page">
       <SiteHeader locale={locale} />
-      {portalVariant || process.env.NODE_ENV === "development" ? (
-        <PortalSwitcher locale={locale} active={activePortalVariant} />
-      ) : null}
       <main>
-        <BrandPortal locale={locale} variant={activePortalVariant} />
+        <BrandPortal locale={locale} />
 
         <ProjectDeck
           projects={featured}
@@ -75,6 +70,7 @@ export function PortfolioHome({
             <h2 id="more-work-title">{copy.moreWork}</h2>
             <p>{copy.workIntro}</p>
           </div>
+          <WorkFilters labels={copy.filters} all={copy.filters.all} legend={copy.filters.legend} empty={copy.filters.empty} />
           <div className="home-project-index">
             {additional.map((project) => (
               <TrackedLink
@@ -83,14 +79,22 @@ export function PortfolioHome({
                 className="home-index-link"
                 eventName="case_study_open"
                 eventData={{ slug: project.slug, locale }}
+                data-tags={projectTags(project).join(" ")}
               >
+                <span className="home-index-thumb" aria-hidden="true">
+                  {project.media[0] ? (
+                    <Image src={project.media[0].src} alt="" fill sizes="96px" />
+                  ) : (
+                    <BrandMonogram />
+                  )}
+                </span>
                 <span className="home-index-name" dir="auto">
                   {project.title}
                 </span>
                 <span className="home-index-category">
                   {t(project.category, locale)}
                 </span>
-                <span className="home-index-status">
+                <span className="home-index-status" data-status={project.status}>
                   {statusLabels[project.status][locale]}
                 </span>
                 <ArrowUpRight aria-hidden="true" size={22} />
@@ -137,6 +141,64 @@ export function PortfolioHome({
               <InterfaceDetails project={focusQuest} locale={locale} />
             </div>
           </article>
+          <div className="home-now" aria-labelledby="now-title">
+            <div className="home-now-heading">
+              <h3 id="now-title">{copy.nowTitle}</h3>
+            </div>
+            <ol className="home-now-list">
+              {now.slice(0, 5).map((entry) => {
+                const project = [...projects, focusQuest].find((candidate) => candidate.slug === entry.slug);
+                if (!project) return null;
+                return (
+                  <li key={entry.slug}>
+                    <span className="home-now-name" dir="auto">{project.title}</span>
+                    <span className="home-now-phase" dir="ltr" lang="en">{entry.phase}</span>
+                    <time className="home-now-date" dateTime={entry.updated}>{copy.nowUpdated} {entry.updated}</time>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+          <div className="home-install" aria-labelledby="install-title">
+            <div className="home-install-heading">
+              <h3 id="install-title">{copy.installTitle}</h3>
+              <p>{copy.installIntro}</p>
+            </div>
+            <ul className="home-install-list">
+              {[
+                ...projects.flatMap((project) =>
+                  project.links
+                    .filter((link) => link.kind === "download")
+                    .slice(0, 1)
+                    .map((link) => ({
+                      href: link.href,
+                      slug: project.slug,
+                      title: project.title,
+                      label: t(link.label, locale),
+                    })),
+                ),
+                ...focusQuest.builds.map((build) => ({
+                  href: build.apkUrl,
+                  slug: focusQuest.slug,
+                  title: focusQuest.title,
+                  label: t(build.label, locale),
+                })),
+              ].map((item) => (
+                <li key={item.href}>
+                  <TrackedAnchor
+                    href={item.href}
+                    download
+                    eventName="apk_download"
+                    eventData={{ slug: item.slug, locale, surface: "install-strip" }}
+                  >
+                    <span className="home-install-name" dir="auto">{item.title}</span>
+                    <span className="home-install-label">{item.label}</span>
+                    <Download aria-hidden="true" size={18} />
+                  </TrackedAnchor>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
         <section
@@ -163,10 +225,41 @@ export function PortfolioHome({
                       <li key={signal}>{signal}</li>
                     ))}
                   </ul>
+                  {service.id === "automation" ? (
+                    <div className="home-agent-system">
+                      <ul className="home-agent-channels" aria-label="Channels">
+                        <li><MessageCircle aria-hidden="true" size={14} /> WhatsApp</li>
+                        <li><Camera aria-hidden="true" size={14} /> Instagram</li>
+                        <li><Send aria-hidden="true" size={14} /> Telegram</li>
+                      </ul>
+                      <ol className="home-agent-flow">
+                        {copy.agentFlow.map((step) => (
+                          <li key={step}>{step}</li>
+                        ))}
+                      </ol>
+                    </div>
+                  ) : null}
                 </div>
               </article>
             ))}
           </div>
+        </section>
+
+        <section
+          id="agent"
+          className="home-agent"
+          aria-labelledby="agent-title"
+        >
+          <div className="home-agent-copy">
+            <h2 id="agent-title">{copy.agentDemo.title}</h2>
+            <p>{copy.agentDemo.intro}</p>
+            <ol className="home-agent-flow">
+              {copy.agentFlow.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+          </div>
+          <AgentDemo locale={locale} copy={copy.agentDemo} />
         </section>
 
         <section

@@ -30,9 +30,9 @@ describe("customer-first portfolio content", () => {
     expect(locales).toEqual(["en", "ar", "he"]);
     expect(isLocale("ar")).toBe(true);
     expect(isLocale("de")).toBe(false);
-    expect(localizedPath("en", "/work/argus-ai")).toBe("/work/argus-ai");
-    expect(localizedPath("ar", "/work/argus-ai")).toBe(
-      "/ar/work/argus-ai",
+    expect(localizedPath("en", "/work/bab")).toBe("/work/bab");
+    expect(localizedPath("ar", "/work/bab")).toBe(
+      "/ar/work/bab",
     );
     expect(localizedPath("he")).toBe("/he");
     expect(t(profile.summary, "ar").length).toBeGreaterThan(20);
@@ -84,12 +84,11 @@ describe("customer-first portfolio content", () => {
           project.nextStep.en.length > 10,
       ),
     ).toBe(true);
-    expect(getProject("argus-ai")?.summary.en).toContain(
-      "working Kubernetes connector",
-    );
-    expect(getProject("argus-ai")?.summary.en).not.toContain(
-      "GitHub Actions",
-    );
+    expect(getProject("bab")?.summary.en).toContain("WhatsApp");
+    expect(getProject("bab")?.links).toHaveLength(0);
+    expect(getProject("argus-ai")).toBeUndefined();
+    expect(getProject("argus-infra")).toBeUndefined();
+    expect(getProject("argus-monitor")).toBeUndefined();
   });
 
   it("leads the commercial work with ElsewhereCo", () => {
@@ -178,10 +177,12 @@ describe("customer-first portfolio content", () => {
   });
 
   it("exposes three customer-outcome service paths", () => {
+    // The AI row leads: agents on the channels people already use.
     expect(services.map((service) => service.id)).toEqual([
-      "product",
       "automation",
+      "product",
       "reliability",
     ]);
+    expect(services.map((service) => service.number)).toEqual(["01", "02", "03"]);
   });
 });
