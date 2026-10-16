@@ -8,12 +8,14 @@
 
 ## Waiting on the user
 
-- **Review, then say commit**: everything is on the branch `portal-elsewhereco-directions`, uncommitted and undeployed. Bab stays featured as in development; Nedaa's site is not linked; Bab's tester URL is not shown.
+- A client sentence from Nedaa, once she consents.
 - **Before each deploy** run `node scripts/build-now.mjs` so the "Now building" strip reflects the sibling task files; the deploy cannot read them.
 - Blocked on you: a client sentence from Nedaa (her consent).
 - Decided by the owner on 2026-10-16: no public Instagram proof. The Instagram work is private and is never mentioned or shown on the site; the services copy names the channel as a capability and nothing more.
 
 ## Done
+
+- 2026-10-16 (deployed) — Commit cc38236 on `portal-elsewhereco-directions`, main fast-forwarded to it. Deployed from a clean archive of that commit with `vercel deploy --prod --skip-domain --yes --archive=tgz` (build 30 s), then `vercel promote dpl_8BFzp75pyKQs3djQCkSZTF4GxKX5`. fhaj.dev now serves the layered hero, the agent demo, the filters, the now-building strip and the new case studies; the Argus pages are gone. Vercel's security checkpoint answers 403 to curl and headless browsers, so verification was done in a real browser.
 
 - 2026-10-16 (late) — The last of the review. **Layered hero**: the constellation render is replaced by a scene built from real captures in drawn device frames (ElsewhereCo laptop, Seeker Radar tablet, Nuqta and SOLitaire phones, the mark, an orbit), each on its own depth; the controller settles them from a slight zoom and lets them leave at different rates, scaled for portrait frames; swapping a product is replacing one image. **Deck loops**: silent captures of ElsewhereCo and Bab play inside the deck frames once visible, poster underneath, never under reduced motion (six products were recorded; only the two featured ones are installed, 5 MB). **Phone deck selector**: six numbered pills, the panel carries the name. **Nuqta** demoted to an index-weight card. The portal caption no longer repeats "Selected work". Lint, types, 84 tests and the production build pass.
 
