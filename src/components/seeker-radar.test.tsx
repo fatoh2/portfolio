@@ -9,16 +9,16 @@ import { ProjectPage } from "./project-page";
 vi.mock("./contact-form", () => ({ ContactForm: () => null }));
 
 describe("Seeker Radar portfolio presentation", () => {
-  it.each(locales)("keeps ElsewhereCo first and Seeker Radar second in %s", (locale) => {
+  it.each(locales)("keeps ElsewhereCo first and Seeker Radar last in %s", (locale) => {
     const document = new DOMParser().parseFromString(
       renderToStaticMarkup(<PortfolioHome locale={locale} />),
       "text/html",
     );
     const featured = [...document.querySelectorAll(".feature-row")];
-    expect(featured.slice(0, 2).map((row) => row.querySelector("h3")?.textContent)).toEqual([
+    expect([featured[0], featured.at(-1)].map((row) => row?.querySelector("h3")?.textContent)).toEqual([
       "ElsewhereCo", "Seeker Radar",
     ]);
-    expect(featured[1].querySelector(`a[href="${localizedPath(locale, "/work/seeker-radar")}"]`)).not.toBeNull();
+    expect(featured.at(-1)?.querySelector(`a[href="${localizedPath(locale, "/work/seeker-radar")}"]`)).not.toBeNull();
   });
 
   it.each(locales)("renders the complete uncropped case study in %s", (locale) => {

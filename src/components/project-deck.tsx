@@ -34,10 +34,11 @@ export function ProductPortrait({ project, locale }: { project: ShowcaseProject;
 }
 
 export function InterfaceDetails({ project, locale }: { project: ShowcaseProject; locale: Locale }) {
-  const details = projectShowcases[project.slug]?.details;
+  const showcase = projectShowcases[project.slug];
+  const details = showcase?.details;
   if (!details?.length) return null;
   return (
-    <div className="deck-details">
+    <div className={`deck-details${showcase.detailPresentation === "edge-to-edge" ? " deck-details-edge-to-edge" : ""}`}>
       {details.map((detail, index) => {
         const [x, y, width, height] = detail.crop;
         const [sourceWidth, sourceHeight] = detail.sourceSize;
