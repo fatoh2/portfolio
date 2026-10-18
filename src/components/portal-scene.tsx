@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { BrandMonogram } from "./brand-monogram";
 
 /**
  * The scene the mark opens onto: real captures in drawn device frames, each on
@@ -65,9 +64,6 @@ export function PortalScene() {
             priority
           />
         </div>
-      </div>
-      <div className="scene-mark" aria-hidden="true" data-portal-depth="1.4">
-        <BrandMonogram />
       </div>
     </div>
   );

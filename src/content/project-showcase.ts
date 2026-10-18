@@ -14,6 +14,7 @@ type ProjectShowcase = {
   desktopRatio: string;
   mobileIndex?: number;
   mobileRatio?: string;
+  detailPresentation?: "edge-to-edge";
   details: Detail[];
 };
 
@@ -27,9 +28,10 @@ export const projectShowcases: Record<string, ProjectShowcase> = {
   },
   "seeker-radar": {
     desktopRatio: "1265 / 712", mobileIndex: 1, mobileRatio: "375 / 812",
+    detailPresentation: "edge-to-edge",
     details: [
       {
-        mediaIndex: 0, sourceSize: [1265, 712], crop: [243, 217, 567, 83],
+        mediaIndex: 0, sourceSize: [1265, 712], crop: [242, 218, 976, 390],
         title: tx("Curated picks", "اختيارات منتقاة", "בחירות נבחרות"),
         description: tx("Highlighted apps, with their category and Radar score in view.", "تطبيقات مختارة مع تصنيفها ودرجة Radar في مكان واحد.", "אפליקציות נבחרות, עם הקטגוריה וציון Radar במקום אחד."),
       },
@@ -42,14 +44,15 @@ export const projectShowcases: Record<string, ProjectShowcase> = {
   },
   solitaire: {
     desktopRatio: "1600 / 1000", mobileIndex: 2, mobileRatio: "1179 / 2622",
+    detailPresentation: "edge-to-edge",
     details: [
       {
-        mediaIndex: 0, sourceSize: [1600, 1000], crop: [536, 224, 528, 102],
+        mediaIndex: 0, sourceSize: [1600, 1000], crop: [525, 215, 550, 412],
         title: tx("Choose your game", "اختر لعبتك", "בחרו את המשחק"),
         description: tx("Classic play or a timed score run, starting from the same lobby.", "لعب كلاسيكي أو جولة نقاط محددة بوقت، من الردهة نفسها.", "משחק קלאסי או סבב ניקוד על זמן, מאותו לובי."),
       },
       {
-        mediaIndex: 2, sourceSize: [1179, 2622], crop: [679, 926, 485, 420],
+        mediaIndex: 2, sourceSize: [1179, 2622], crop: [574, 902, 590, 443],
         title: tx("Meet the court", "تعرّف على أوراق البلاط", "הכירו את קלפי החצר"),
         description: tx("Original court characters and crisp card faces, seen in a game in progress.", "شخصيات أصلية لأوراق البلاط ووجوه بطاقات واضحة، من جولة قيد اللعب.", "דמויות חצר מקוריות וקלפים חדים, מתוך משחק בעיצומו."),
       },

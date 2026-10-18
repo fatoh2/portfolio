@@ -91,15 +91,16 @@ export function ProjectPage({
                 </p>
               ))}
           </div>
-          <div className="project-hero-media">
+          <div className={`project-hero-media${primaryMedia ? " project-hero-screenshot" : ""}${primaryMedia && primaryMedia.height > primaryMedia.width ? " project-hero-phone" : ""}`}>
             {primaryMedia ? (
               <Image
                 src={primaryMedia.src}
                 alt={t(primaryMedia.alt, locale)}
-                fill
-                priority
+                width={primaryMedia.width}
+                height={primaryMedia.height}
+                preload
                 sizes="(min-width: 920px) 50vw, 100vw"
-                className={primaryMedia.fit === "contain" ? "project-hero-image contain" : "project-hero-image"}
+                className="project-hero-image contain"
               />
             ) : (
               <SystemVisual project={project} locale={locale} />
@@ -141,13 +142,14 @@ export function ProjectPage({
         {project.media.length > 1 ? (
           <section className="project-gallery">
             {project.media.slice(1).map((media) => (
-              <figure key={media.src}>
+              <figure key={media.src} className={media.height > media.width ? "project-gallery-phone" : "project-gallery-desktop"}>
                 <Image
                   src={media.src}
                   alt={t(media.alt, locale)}
-                  fill
-                  sizes="(min-width: 920px) 42vw, 90vw"
-                  className={media.fit === "contain" ? "contain" : ""}
+                  width={media.width}
+                  height={media.height}
+                  sizes={media.height > media.width ? "(min-width: 620px) 360px, 90vw" : "(min-width: 920px) 60vw, 90vw"}
+                  className="contain"
                 />
                 <figcaption>{t(media.caption, locale)}</figcaption>
               </figure>

@@ -240,6 +240,15 @@
   height: auto;
   max-width: none;
 }
+.home-page .deck-details.deck-details-edge-to-edge .deck-detail-image {
+  height: auto;
+  padding: 0;
+  container-type: normal;
+}
+.home-page .deck-details-edge-to-edge .deck-detail-crop {
+  width: 100%;
+  border-radius: 0;
+}
 .home-page .deck-detail figcaption {
   display: flex;
   align-items: start;

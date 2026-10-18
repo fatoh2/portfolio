@@ -32,11 +32,11 @@ import "./homepage.css";
 
 const featuredOrder = [
   "elsewhereco",
-  "seeker-radar",
   "whatsapp-ai-sales-agent",
   "bab",
   "solitaire",
   "little-keepsakes",
+  "seeker-radar",
 ];
 
 export function PortfolioHome({ locale }: { locale: Locale }) {

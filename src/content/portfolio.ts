@@ -35,6 +35,8 @@ export type ServicePath = {
 
 export type ProjectMedia = {
   src: string;
+  width: number;
+  height: number;
   alt: LocalizedText;
   caption: LocalizedText;
   fit?: "cover" | "contain";
@@ -205,7 +207,7 @@ const commonLive = tx(
 
 export const solitaireMedia = {
   lobby: {
-    src: "/labs/solitaire/solitaire-court-lobby-desktop-2026.jpg",
+    src: "/labs/solitaire/solitaire-court-lobby-desktop-2026.jpg", width: 1600, height: 1000,
     alt: tx(
       "SOLitaire desktop home on emerald baize with the gold wordmark and the Play, Compete and Daily hubs",
       "الصفحة الرئيسية لـ SOLitaire على سطح المكتب بقماش أخضر زمردي وشعار ذهبي وأقسام اللعب والمنافسة واليومي",
@@ -215,7 +217,7 @@ export const solitaireMedia = {
     fit: "contain",
   },
   mobileLobby: {
-    src: "/labs/solitaire/solitaire-court-lobby-mobile-2026.png",
+    src: "/labs/solitaire/solitaire-court-lobby-mobile-2026.png", width: 1179, height: 2622,
     alt: tx(
       "SOLitaire phone home with the Play, Compete and Daily hubs, daily rewards chip and bottom navigation",
       "الصفحة الرئيسية لـ SOLitaire على الهاتف مع أقسام اللعب والمنافسة واليومي وشارة المكافآت اليومية وشريط التنقل السفلي",
@@ -225,7 +227,7 @@ export const solitaireMedia = {
     fit: "contain",
   },
   gameplay: {
-    src: "/labs/solitaire/solitaire-court-table-mobile-2026.png",
+    src: "/labs/solitaire/solitaire-court-table-mobile-2026.png", width: 1179, height: 2622,
     alt: tx(
       "SOLitaire Klondike table on a phone with seven columns, original court card art, stock pile, move counter and timer",
       "طاولة Klondike في SOLitaire على الهاتف مع سبعة أعمدة ورسومات أصلية لأوراق الملوك وكومة السحب وعداد الحركات والمؤقت",
@@ -297,8 +299,8 @@ export const projects: PortfolioProject[] = [
     ],
     nextStep: tx("Continue validating live purchase and booking journeys as operations grow.", "مواصلة اختبار مسارات الشراء والحجز مع توسع التشغيل.", "להמשיך לאמת מסלולי רכישה והזמנה עם צמיחת התפעול."),
     media: [
-      { src: "/work/camp-and-hike/desktop.webp", alt: tx("Camp & Hike Arabic homepage over a mountain landscape on desktop", "الصفحة العربية لكامب أند هايك فوق منظر جبلي على الحاسوب", "דף הבית בערבית של Camp & Hike על רקע הרים במחשב"), caption: tx("Public Arabic homepage, desktop", "الصفحة العربية العامة على الحاسوب", "דף הבית הציבורי בערבית, מחשב") },
-      { src: "/work/camp-and-hike/mobile.webp", alt: tx("Camp & Hike Arabic homepage over a mountain landscape on a phone", "الصفحة العربية لكامب أند هايك فوق منظر جبلي على الهاتف", "דף הבית בערבית של Camp & Hike על רקע הרים בטלפון"), caption: tx("Public Arabic homepage, phone", "الصفحة العربية العامة على الهاتف", "דף הבית הציבורי בערבית, טלפון"), fit: "contain" },
+      { src: "/work/camp-and-hike/desktop.webp", width: 2880, height: 1800, alt: tx("Camp & Hike Arabic homepage over a mountain landscape on desktop", "الصفحة العربية لكامب أند هايك فوق منظر جبلي على الحاسوب", "דף הבית בערבית של Camp & Hike על רקע הרים במחשב"), caption: tx("Public Arabic homepage, desktop", "الصفحة العربية العامة على الحاسوب", "דף הבית הציבורי בערבית, מחשב") },
+      { src: "/work/camp-and-hike/mobile.webp", width: 780, height: 1688, alt: tx("Camp & Hike Arabic homepage over a mountain landscape on a phone", "الصفحة العربية لكامب أند هايك فوق منظر جبلي على الهاتف", "דף הבית בערבית של Camp & Hike על רקע הרים בטלפון"), caption: tx("Public Arabic homepage, phone", "الصفحة العربية العامة على الهاتف", "דף הבית הציבורי בערבית, טלפון"), fit: "contain" },
     ],
     links: [liveLink("https://camp-and-hike.vercel.app/")],
     featured: false,
@@ -332,9 +334,9 @@ export const projects: PortfolioProject[] = [
     ],
     nextStep: tx("Connect a verified production number and approved catalog after final policy review.", "ربط رقم إنتاج موثّق وكتالوج معتمد بعد مراجعة السياسات.", "לחבר מספר ייצור מאומת וקטלוג מאושר לאחר בדיקת מדיניות."),
     media: [
-      { src: "/work/whatsapp-ai-sales-agent/simulator-desktop.webp", alt: tx("The agent's simulator on desktop: an Arabic conversation where prices come from the approved catalog and a request for the owner is handed to a human, with the inspector explaining each reply", "محاكي الوكيل على الحاسوب: محادثة عربية تأتي أسعارها من الكتالوج المعتمد، وطلب التحدث مع صاحب المحل يُحوَّل إلى إنسان، مع لوحة تشرح كل رد", "סימולטור הסוכן במחשב: שיחה בערבית שבה המחירים מגיעים מהקטלוג המאושר ובקשה לדבר עם הבעלים מועברת לאדם, עם חלונית שמסבירה כל תשובה"), caption: tx("Simulator with a demo catalog; no real customers, no external sends", "المحاكي مع كتالوج تجريبي؛ لا عملاء حقيقيين ولا إرسال خارجي", "הסימולטור עם קטלוג לדוגמה; בלי לקוחות אמיתיים ובלי שליחה החוצה") },
-      { src: "/work/whatsapp-ai-sales-agent/simulator-mobile.webp", alt: tx("The same simulated conversation on a phone", "المحادثة المحاكاة نفسها على الهاتف", "אותה שיחה מדומה בטלפון"), caption: tx("Operator view on a phone", "عرض المشغّل على الهاتف", "תצוגת המפעיל בטלפון"), fit: "contain" },
-      { src: "/work/whatsapp-ai-sales-agent/dashboard-desktop.webp", alt: tx("The operator's day view: setup progress, new conversations, replies by the agent, confirmed orders and revenue for a demo tenant", "صفحة اليوم للمشغّل: تقدّم الإعداد والمحادثات الجديدة وردود الوكيل والطلبات المؤكدة والإيراد لمستأجر تجريبي", "תצוגת היום של המפעיל: התקדמות ההגדרה, שיחות חדשות, תשובות הסוכן, הזמנות מאושרות והכנסה לדייר לדוגמה"), caption: tx("Operator dashboard, demo tenant", "لوحة المشغّل، مستأجر تجريبي", "לוח המפעיל, דייר לדוגמה") },
+      { src: "/work/whatsapp-ai-sales-agent/simulator-desktop.webp", width: 2880, height: 2000, alt: tx("The agent's simulator on desktop: an Arabic conversation where prices come from the approved catalog and a request for the owner is handed to a human, with the inspector explaining each reply", "محاكي الوكيل على الحاسوب: محادثة عربية تأتي أسعارها من الكتالوج المعتمد، وطلب التحدث مع صاحب المحل يُحوَّل إلى إنسان، مع لوحة تشرح كل رد", "סימולטור הסוכן במחשב: שיחה בערבית שבה המחירים מגיעים מהקטלוג המאושר ובקשה לדבר עם הבעלים מועברת לאדם, עם חלונית שמסבירה כל תשובה"), caption: tx("Simulator with a demo catalog; no real customers, no external sends", "المحاكي مع كتالوج تجريبي؛ لا عملاء حقيقيين ولا إرسال خارجي", "הסימולטור עם קטלוג לדוגמה; בלי לקוחות אמיתיים ובלי שליחה החוצה") },
+      { src: "/work/whatsapp-ai-sales-agent/simulator-mobile.webp", width: 780, height: 1688, alt: tx("The same simulated conversation on a phone", "المحادثة المحاكاة نفسها على الهاتف", "אותה שיחה מדומה בטלפון"), caption: tx("Operator view on a phone", "عرض المشغّل على الهاتف", "תצוגת המפעיל בטלפון"), fit: "contain" },
+      { src: "/work/whatsapp-ai-sales-agent/dashboard-desktop.webp", width: 2880, height: 2000, alt: tx("The operator's day view: setup progress, new conversations, replies by the agent, confirmed orders and revenue for a demo tenant", "صفحة اليوم للمشغّل: تقدّم الإعداد والمحادثات الجديدة وردود الوكيل والطلبات المؤكدة والإيراد لمستأجر تجريبي", "תצוגת היום של המפעיל: התקדמות ההגדרה, שיחות חדשות, תשובות הסוכן, הזמנות מאושרות והכנסה לדייר לדוגמה"), caption: tx("Operator dashboard, demo tenant", "لوحة المشغّل، مستأجر تجريبي", "לוח המפעיל, דייר לדוגמה") },
     ],
     links: [],
     featured: true,
@@ -376,8 +378,8 @@ export const projects: PortfolioProject[] = [
     ],
     nextStep: tx("The first real form submission and the first verified hire; a legal entity and a lawyer before public launch.", "أول تقديم حقيقي وأول توظيف موثّق؛ كيان قانوني ومحامٍ قبل الإطلاق العام.", "ההגשה האמיתית הראשונה והגיוס המאומת הראשון; ישות משפטית ועורך דין לפני השקה ציבורית."),
     media: [
-      { src: "/work/bab/desktop.webp", fit: "contain", alt: tx("Bab's Arabic front door on desktop: a door to your first hi-tech job, with a demo role card and a referral request", "واجهة باب العربية على الحاسوب: باب إلى عملك الأول في الهايتك، مع بطاقة وظيفة تجريبية وطلب إحالة", "דף הכניסה של באב בערבית במחשב: דלת לעבודה הראשונה בהייטק, עם כרטיס משרה לדוגמה ובקשת המלצה"), caption: tx("Front door, tester deployment, demo content", "الواجهة الأمامية، نسخة المختبرين، محتوى تجريبي", "דלת הכניסה, פריסת בודקים, תוכן לדוגמה") },
-      { src: "/work/bab/mobile.webp", alt: tx("Bab's Arabic front door on a phone", "واجهة باب العربية على الهاتف", "דף הכניסה של באב בערבית בטלפון"), caption: tx("Front door on a phone", "الواجهة على الهاتف", "דלת הכניסה בטלפון"), fit: "contain" },
+      { src: "/work/bab/desktop.webp", width: 2880, height: 1800, fit: "contain", alt: tx("Bab's Arabic front door on desktop: a door to your first hi-tech job, with a demo role card and a referral request", "واجهة باب العربية على الحاسوب: باب إلى عملك الأول في الهايتك، مع بطاقة وظيفة تجريبية وطلب إحالة", "דף הכניסה של באב בערבית במחשב: דלת לעבודה הראשונה בהייטק, עם כרטיס משרה לדוגמה ובקשת המלצה"), caption: tx("Front door, tester deployment, demo content", "الواجهة الأمامية، نسخة المختبرين، محتوى تجريبي", "דלת הכניסה, פריסת בודקים, תוכן לדוגמה") },
+      { src: "/work/bab/mobile.webp", width: 780, height: 1688, alt: tx("Bab's Arabic front door on a phone", "واجهة باب العربية على الهاتف", "דף הכניסה של באב בערבית בטלפון"), caption: tx("Front door on a phone", "الواجهة على الهاتف", "דלת הכניסה בטלפון"), fit: "contain" },
     ],
     links: [],
     featured: true,
@@ -419,10 +421,10 @@ export const projects: PortfolioProject[] = [
     ],
     nextStep: tx("Walk the admin screens on a phone, test a real refund, then ship the iOS and Android builds.", "تجربة شاشات الإدارة على الهاتف، واختبار استرداد حقيقي، ثم إصدار نسختي iOS وأندرويد.", "לעבור על מסכי הניהול בטלפון, לבדוק החזר אמיתי, ואז לשחרר את גרסאות iOS ואנדרואיד."),
     media: [
-      { src: "/work/nedaa-lifestyle/member-home.webp", alt: tx("Member home on a phone: the studio photo, the next class, sessions left as dots and open classes this week", "الصفحة الرئيسية للعضوة على الهاتف: صورة الاستوديو والحصة القادمة والجلسات المتبقية كنقاط والحصص المتاحة هذا الأسبوع", "מסך הבית של המתאמנת בטלפון: תמונת הסטודיו, השיעור הבא, מפגשים שנותרו כנקודות ושיעורים פתוחים השבוע"), caption: tx("Member home, rendered with demo data", "الصفحة الرئيسية للعضوة، ببيانات تجريبية", "מסך הבית של המתאמנת, עם נתוני דוגמה"), fit: "contain" },
-      { src: "/work/nedaa-lifestyle/admin-dashboard.webp", alt: tx("The trainer's dashboard: today's classes, bookings and free places", "لوحة المدرّبة: حصص اليوم والحجوزات والأماكن المتاحة", "לוח המאמנת: שיעורי היום, הזמנות ומקומות פנויים"), caption: tx("Trainer dashboard, demo data", "لوحة المدرّبة، بيانات تجريبية", "לוח המאמנת, נתוני דוגמה"), fit: "contain" },
-      { src: "/work/nedaa-lifestyle/admin-reports.webp", alt: tx("Studio reports: revenue by channel after refunds, classes, fill rate and new members", "تقارير الاستوديو: الإيراد حسب القناة بعد الاستردادات والحصص ونسبة الإشغال والعضوات الجدد", "דוחות הסטודיו: הכנסה לפי ערוץ אחרי החזרים, שיעורים, תפוסה ומתאמנות חדשות"), caption: tx("Reports, demo data", "التقارير، بيانات تجريبية", "דוחות, נתוני דוגמה"), fit: "contain" },
-      { src: "/work/nedaa-lifestyle/admin-classes.webp", alt: tx("Today's roster for the trainer with attendees and a booking waiting for approval", "قائمة حصص اليوم للمدرّبة مع الحاضرات وحجز بانتظار الموافقة", "רשימת השיעורים של היום למאמנת עם המשתתפות והזמנה שממתינה לאישור"), caption: tx("Roster, demo data", "قائمة الحصص، بيانات تجريبية", "רשימת שיעורים, נתוני דוגמה"), fit: "contain" },
+      { src: "/work/nedaa-lifestyle/member-home.webp", width: 780, height: 1688, alt: tx("Member home on a phone: the studio photo, the next class, sessions left as dots and open classes this week", "الصفحة الرئيسية للعضوة على الهاتف: صورة الاستوديو والحصة القادمة والجلسات المتبقية كنقاط والحصص المتاحة هذا الأسبوع", "מסך הבית של המתאמנת בטלפון: תמונת הסטודיו, השיעור הבא, מפגשים שנותרו כנקודות ושיעורים פתוחים השבוע"), caption: tx("Member home, rendered with demo data", "الصفحة الرئيسية للعضوة، ببيانات تجريبية", "מסך הבית של המתאמנת, עם נתוני דוגמה"), fit: "contain" },
+      { src: "/work/nedaa-lifestyle/admin-dashboard.webp", width: 780, height: 1688, alt: tx("The trainer's dashboard: today's classes, bookings and free places", "لوحة المدرّبة: حصص اليوم والحجوزات والأماكن المتاحة", "לוח המאמנת: שיעורי היום, הזמנות ומקומות פנויים"), caption: tx("Trainer dashboard, demo data", "لوحة المدرّبة، بيانات تجريبية", "לוח המאמנת, נתוני דוגמה"), fit: "contain" },
+      { src: "/work/nedaa-lifestyle/admin-reports.webp", width: 780, height: 1688, alt: tx("Studio reports: revenue by channel after refunds, classes, fill rate and new members", "تقارير الاستوديو: الإيراد حسب القناة بعد الاستردادات والحصص ونسبة الإشغال والعضوات الجدد", "דוחות הסטודיו: הכנסה לפי ערוץ אחרי החזרים, שיעורים, תפוסה ומתאמנות חדשות"), caption: tx("Reports, demo data", "التقارير، بيانات تجريبية", "דוחות, נתוני דוגמה"), fit: "contain" },
+      { src: "/work/nedaa-lifestyle/admin-classes.webp", width: 780, height: 1688, alt: tx("Today's roster for the trainer with attendees and a booking waiting for approval", "قائمة حصص اليوم للمدرّبة مع الحاضرات وحجز بانتظار الموافقة", "רשימת השיעורים של היום למאמנת עם המשתתפות והזמנה שממתינה לאישור"), caption: tx("Roster, demo data", "قائمة الحصص، بيانات تجريبية", "רשימת שיעורים, נתוני דוגמה"), fit: "contain" },
     ],
     links: [],
     featured: false,
@@ -464,8 +466,8 @@ export const projects: PortfolioProject[] = [
     ],
     nextStep: tx("Fill the Tanzania destination, wire the application form to a real inbox, and publish a preview.", "إكمال وجهة تنزانيا، وربط نموذج التقديم بصندوق بريد حقيقي، ونشر معاينة.", "להשלים את יעד טנזניה, לחבר את טופס ההרשמה לתיבה אמיתית ולפרסם תצוגה מקדימה."),
     media: [
-      { src: "/work/darbak/desktop.webp", alt: tx("Darbak Arabic home on desktop: a dotted globe with the routes from Arab cities to Arusha and the volunteering destinations", "الصفحة العربية لدربك على الحاسوب: كرة أرضية منقّطة بمسارات من المدن العربية إلى أروشا ووجهات التطوع", "דף הבית של דרבכ בערבית במחשב: גלובוס נקודות עם המסלולים מערים ערביות לארושה ויעדי ההתנדבות"), caption: tx("Web preview, desktop", "معاينة الويب على الحاسوب", "תצוגת ווב, מחשב") },
-      { src: "/work/darbak/mobile.webp", alt: tx("Darbak Arabic home on a phone with the departure board and tab bar", "الصفحة العربية لدربك على الهاتف مع لوحة المغادرة وشريط التبويب", "דף הבית של דרבכ בערבית בטלפון עם לוח היציאות וסרגל הטאבים"), caption: tx("Web preview, phone", "معاينة الويب على الهاتف", "תצוגת ווב, טלפון"), fit: "contain" },
+      { src: "/work/darbak/desktop.webp", width: 2880, height: 1800, alt: tx("Darbak Arabic home on desktop: a dotted globe with the routes from Arab cities to Arusha and the volunteering destinations", "الصفحة العربية لدربك على الحاسوب: كرة أرضية منقّطة بمسارات من المدن العربية إلى أروشا ووجهات التطوع", "דף הבית של דרבכ בערבית במחשב: גלובוס נקודות עם המסלולים מערים ערביות לארושה ויעדי ההתנדבות"), caption: tx("Web preview, desktop", "معاينة الويب على الحاسوب", "תצוגת ווב, מחשב") },
+      { src: "/work/darbak/mobile.webp", width: 780, height: 1688, alt: tx("Darbak Arabic home on a phone with the departure board and tab bar", "الصفحة العربية لدربك على الهاتف مع لوحة المغادرة وشريط التبويب", "דף הבית של דרבכ בערבית בטלפון עם לוח היציאות וסרגל הטאבים"), caption: tx("Web preview, phone", "معاينة الويب على الهاتف", "תצוגת ווב, טלפון"), fit: "contain" },
     ],
     links: [{ label: tx("Open the web preview", "افتح معاينة الويب", "לפתוח את תצוגת הווב"), href: "https://darbak-inky.vercel.app/", kind: "live" }],
     featured: false,
@@ -522,19 +524,19 @@ export const projects: PortfolioProject[] = [
     ),
     media: [
       {
-        src: "/work/seeker-radar/discovery-desktop.jpg",
+        src: "/work/seeker-radar/discovery-desktop.jpg", width: 1265, height: 712,
         alt: tx("Seeker Radar desktop app catalog with discovery navigation, filters, app listings, and evidence scores", "كتالوج Seeker Radar على سطح المكتب مع تنقل الاكتشاف والتصفية وقوائم التطبيقات ودرجات الأدلة", "קטלוג האפליקציות של Seeker Radar במחשב עם ניווט, מסננים, רשומות וציונים מבוססי ראיות"),
         caption: tx("Live discovery catalog and filters", "كتالوج الاكتشاف المباشر وأدوات التصفية", "קטלוג גילוי חי ומסננים"),
         fit: "contain",
       },
       {
-        src: "/work/seeker-radar/app-brief-mobile.jpg",
+        src: "/work/seeker-radar/app-brief-mobile.jpg", width: 375, height: 812,
         alt: tx("Seeker Radar mobile TokenRun app brief with Store artwork, rating, evidence summary, and app actions", "ملف TokenRun على Seeker Radar للموبايل مع صور المتجر والتقييم وملخص الأدلة وإجراءات التطبيق", "סקירת TokenRun במובייל של Seeker Radar עם תמונות מהחנות, דירוג, סיכום ראיות ופעולות"),
         caption: tx("Mobile app brief with listing evidence", "ملف تطبيق على الموبايل مع أدلة من المتجر", "סקירת אפליקציה במובייל עם ראיות מהרשומה"),
         fit: "contain",
       },
       {
-        src: "/work/seeker-radar/updates-mobile.jpg",
+        src: "/work/seeker-radar/updates-mobile.jpg", width: 375, height: 812,
         alt: tx("Seeker Radar mobile daily update feed showing snapshot totals and apps with meaningful changes", "سجل Seeker Radar اليومي على الموبايل مع ملخص اللقطة والتطبيقات ذات التغييرات المهمة", "יומן העדכונים היומי של Seeker Radar במובייל עם סיכומי תמונת מצב ואפליקציות שהשתנו"),
         caption: tx("Daily change feed on mobile", "سجل التغييرات اليومي على الموبايل", "יומן שינויים יומי במובייל"),
         fit: "contain",
@@ -590,13 +592,13 @@ export const projects: PortfolioProject[] = [
       "לבדוק את ה-APK בטלפונים אמיתיים ולרקום דוגמאות עם מתחילים לפני פרסום בחנות.",
     ),
     media: [
-      { src: "/work/little-keepsakes-arabic-desktop.jpg", alt: tx("Little Keepsakes Arabic gallery showing embroidery templates on desktop", "معرض Little Keepsakes بالعربية يعرض قوالب التطريز على سطح المكتب", "גלריית Little Keepsakes בערבית עם דגמי רקמה במסך מחשב"), caption: tx("Arabic-first design gallery", "معرض التصاميم بالعربية افتراضيًا", "גלריית דגמים בערבית כברירת מחדל"), fit: "contain" },
-      { src: "/work/little-keepsakes-arabic-mobile.jpg", alt: tx("Little Keepsakes Arabic design gallery on a phone-sized screen", "معرض تصاميم Little Keepsakes بالعربية على شاشة بحجم هاتف", "גלריית הדגמים של Little Keepsakes בערבית במסך בגודל טלפון"), caption: tx("Choose from twelve motifs on a phone", "اختر من اثني عشر تصميمًا على الهاتف", "בחירה מבין שנים עשר דגמים בטלפון"), fit: "contain" },
-      { src: "/work/little-keepsakes-editor.jpg", alt: tx("Arabic mobile editor with a compact live embroidery preview and a bottom Continue action", "المحرر العربي على الهاتف مع معاينة تطريز مدمجة وزر متابعة في أسفل الشاشة", "עורך בערבית בנייד עם תצוגת רקמה קומפקטית וכפתור המשך בתחתית"), caption: tx("Edit with the pattern in view and Continue within reach", "عدّل مع بقاء التصميم أمامك وزر متابعة في متناول يدك", "עורכים כשהדגם גלוי וכפתור ההמשך בהישג יד"), fit: "contain" },
-      { src: "/work/little-keepsakes-customization.jpg", alt: tx("Arabic mobile editor showing the new butterfly motif and decoration controls", "المحرر العربي على الهاتف مع تصميم الفراشات الجديد وأدوات الزخرفة", "העורך בערבית בנייד עם דגם הפרפרים החדש ואפשרויות הקישוט"), caption: tx("Adjust decoration and layout while the stitch chart updates", "عدّل الزخارف والتنسيق مع تحديث مخطط الغرز مباشرة", "שינוי הקישוט והפריסה עם עדכון מידי של תרשים הרקמה"), fit: "contain" },
-      { src: "/work/little-keepsakes-preparation.jpg", alt: tx("Arabic preparation checklist showing fabric and thread readiness with a recorded thread code", "قائمة تجهيز بالعربية تعرض القماش والخيوط مع رمز خيط مسجل", "רשימת הכנה בערבית עם בד וחוטים וקוד חוט שנרשם"), caption: tx("Gather fabric and threads, and save the codes you buy", "جهّز القماش والخيوط واحفظ رموزها من المتجر", "מכינים בד וחוטים ושומרים את הקודים שנקנו"), fit: "contain" },
-      { src: "/work/little-keepsakes-stitching.jpg", alt: tx("Arabic guided stitch chart with the mark-and-next control at the bottom of a phone screen", "مخطط تطريز بالعربية مع زر تحديد الغرزة والانتقال للتالية أسفل شاشة الهاتف", "תרשים רקמה בערבית עם כפתור סימון ומעבר בתחתית מסך הטלפון"), caption: tx("Mark & next stays near your thumb while the chart remains visible", "زر «علّم ثم التالي» قريب من يدك والمخطط ظاهر", "כפתור הסימון והמעבר נשאר נגיש והתרשים גלוי"), fit: "contain" },
-      { src: "/work/little-keepsakes-library.jpg", alt: tx("Little Keepsakes saved project library showing stitch progress", "مكتبة المشاريع المحفوظة في Little Keepsakes مع تقدم التطريز", "ספריית הפרויקטים השמורים של Little Keepsakes עם התקדמות הרקמה"), caption: tx("Saved projects and stitch progress", "المشاريع المحفوظة وتقدم الغرز", "פרויקטים שמורים והתקדמות הרקמה"), fit: "contain" },
+      { src: "/work/little-keepsakes-arabic-desktop.jpg", width: 1350, height: 890, alt: tx("Little Keepsakes Arabic gallery showing embroidery templates on desktop", "معرض Little Keepsakes بالعربية يعرض قوالب التطريز على سطح المكتب", "גלריית Little Keepsakes בערבית עם דגמי רקמה במסך מחשב"), caption: tx("Arabic-first design gallery", "معرض التصاميم بالعربية افتراضيًا", "גלריית דגמים בערבית כברירת מחדל"), fit: "contain" },
+      { src: "/work/little-keepsakes-arabic-mobile.jpg", width: 375, height: 812, alt: tx("Little Keepsakes Arabic design gallery on a phone-sized screen", "معرض تصاميم Little Keepsakes بالعربية على شاشة بحجم هاتف", "גלריית הדגמים של Little Keepsakes בערבית במסך בגודל טלפון"), caption: tx("Choose from twelve motifs on a phone", "اختر من اثني عشر تصميمًا على الهاتف", "בחירה מבין שנים עשר דגמים בטלפון"), fit: "contain" },
+      { src: "/work/little-keepsakes-editor.jpg", width: 375, height: 812, alt: tx("Arabic mobile editor with a compact live embroidery preview and a bottom Continue action", "المحرر العربي على الهاتف مع معاينة تطريز مدمجة وزر متابعة في أسفل الشاشة", "עורך בערבית בנייד עם תצוגת רקמה קומפקטית וכפתור המשך בתחתית"), caption: tx("Edit with the pattern in view and Continue within reach", "عدّل مع بقاء التصميم أمامك وزر متابعة في متناول يدك", "עורכים כשהדגם גלוי וכפתור ההמשך בהישג יד"), fit: "contain" },
+      { src: "/work/little-keepsakes-customization.jpg", width: 375, height: 812, alt: tx("Arabic mobile editor showing the new butterfly motif and decoration controls", "المحرر العربي على الهاتف مع تصميم الفراشات الجديد وأدوات الزخرفة", "העורך בערבית בנייד עם דגם הפרפרים החדש ואפשרויות הקישוט"), caption: tx("Adjust decoration and layout while the stitch chart updates", "عدّل الزخارف والتنسيق مع تحديث مخطط الغرز مباشرة", "שינוי הקישוט והפריסה עם עדכון מידי של תרשים הרקמה"), fit: "contain" },
+      { src: "/work/little-keepsakes-preparation.jpg", width: 375, height: 812, alt: tx("Arabic preparation checklist showing fabric and thread readiness with a recorded thread code", "قائمة تجهيز بالعربية تعرض القماش والخيوط مع رمز خيط مسجل", "רשימת הכנה בערבית עם בד וחוטים וקוד חוט שנרשם"), caption: tx("Gather fabric and threads, and save the codes you buy", "جهّز القماش والخيوط واحفظ رموزها من المتجر", "מכינים בד וחוטים ושומרים את הקודים שנקנו"), fit: "contain" },
+      { src: "/work/little-keepsakes-stitching.jpg", width: 375, height: 812, alt: tx("Arabic guided stitch chart with the mark-and-next control at the bottom of a phone screen", "مخطط تطريز بالعربية مع زر تحديد الغرزة والانتقال للتالية أسفل شاشة الهاتف", "תרשים רקמה בערבית עם כפתור סימון ומעבר בתחתית מסך הטלפון"), caption: tx("Mark & next stays near your thumb while the chart remains visible", "زر «علّم ثم التالي» قريب من يدك والمخطط ظاهر", "כפתור הסימון והמעבר נשאר נגיש והתרשים גלוי"), fit: "contain" },
+      { src: "/work/little-keepsakes-library.jpg", width: 375, height: 812, alt: tx("Little Keepsakes saved project library showing stitch progress", "مكتبة المشاريع المحفوظة في Little Keepsakes مع تقدم التطريز", "ספריית הפרויקטים השמורים של Little Keepsakes עם התקדמות הרקמה"), caption: tx("Saved projects and stitch progress", "المشاريع المحفوظة وتقدم الغرز", "פרויקטים שמורים והתקדמות הרקמה"), fit: "contain" },
     ],
     links: [apkLink(
       "/downloads/Little-Keepsakes-0.3.1-preview.apk",
@@ -682,8 +684,8 @@ export const projects: PortfolioProject[] = [
     ],
     nextStep: tx("Keep editorial workflows and structured SEO aligned as the catalog expands.", "الحفاظ على توافق التحرير وSEO المنظم مع توسع الكتالوج.", "לשמור על התאמה בין תהליכי העריכה ל-SEO מובנה ככל שהקטלוג גדל."),
     media: [
-      { src: "/work/elsewhereco/desktop.webp", alt: tx("ElsewhereCo Arabic expedition homepage on desktop", "الصفحة العربية لرحلات ElsewhereCo على الحاسوب", "דף המסעות בערבית של ElsewhereCo במחשב"), caption: tx("Public Arabic homepage, desktop", "الصفحة العربية العامة على الحاسوب", "דף הבית הציבורי בערבית, מחשב") },
-      { src: "/work/elsewhereco/mobile.webp", alt: tx("ElsewhereCo Arabic expedition homepage on a phone", "الصفحة العربية لرحلات ElsewhereCo على الهاتف", "דף המסעות בערבית של ElsewhereCo בטלפון"), caption: tx("Public Arabic homepage, phone", "الصفحة العربية العامة على الهاتف", "דף הבית הציבורי בערבית, טלפון"), fit: "contain" },
+      { src: "/work/elsewhereco/desktop.webp", width: 2880, height: 1800, alt: tx("ElsewhereCo Arabic expedition homepage on desktop", "الصفحة العربية لرحلات ElsewhereCo على الحاسوب", "דף המסעות בערבית של ElsewhereCo במחשב"), caption: tx("Public Arabic homepage, desktop", "الصفحة العربية العامة على الحاسوب", "דף הבית הציבורי בערבית, מחשב") },
+      { src: "/work/elsewhereco/mobile.webp", width: 780, height: 1688, alt: tx("ElsewhereCo Arabic expedition homepage on a phone", "الصفحة العربية لرحلات ElsewhereCo على الهاتف", "דף המסעות בערבית של ElsewhereCo בטלפון"), caption: tx("Public Arabic homepage, phone", "الصفحة العربية العامة على الهاتف", "דף הבית הציבורי בערבית, טלפון"), fit: "contain" },
     ],
     links: [liveLink("https://elsewhereco.vercel.app/")],
     featured: true,
@@ -709,8 +711,8 @@ export const projects: PortfolioProject[] = [
     ],
     nextStep: tx("Keep booking and content operations measurable as new programs are introduced.", "جعل الحجز وتشغيل المحتوى قابلين للقياس مع إضافة برامج جديدة.", "לשמור על מדידות של הזמנות ותפעול תוכן עם הוספת תכניות."),
     media: [
-      { src: "/work/go-to-nature/desktop.webp", alt: tx("Go To Nature Arabic community homepage on desktop", "الصفحة العربية لمجتمع Go To Nature على الحاسوب", "דף הקהילה בערבית של Go To Nature במחשב"), caption: tx("Public Arabic homepage, desktop", "الصفحة العربية العامة على الحاسوب", "דף הבית הציבורי בערבית, מחשב") },
-      { src: "/work/go-to-nature/mobile.webp", alt: tx("Go To Nature Arabic community homepage on a phone", "الصفحة العربية لمجتمع Go To Nature على الهاتف", "דף הקהילה בערבית של Go To Nature בטלפון"), caption: tx("Public Arabic homepage, phone", "الصفحة العربية العامة على الهاتف", "דף הבית הציבורי בערבית, טלפון"), fit: "contain" },
+      { src: "/work/go-to-nature/desktop.webp", width: 2880, height: 1800, alt: tx("Go To Nature Arabic community homepage on desktop", "الصفحة العربية لمجتمع Go To Nature على الحاسوب", "דף הקהילה בערבית של Go To Nature במחשב"), caption: tx("Public Arabic homepage, desktop", "الصفحة العربية العامة على الحاسوب", "דף הבית הציבורי בערבית, מחשב") },
+      { src: "/work/go-to-nature/mobile.webp", width: 780, height: 1688, alt: tx("Go To Nature Arabic community homepage on a phone", "الصفحة العربية لمجتمع Go To Nature على الهاتف", "דף הקהילה בערבית של Go To Nature בטלפון"), caption: tx("Public Arabic homepage, phone", "الصفحة العربية العامة على الهاتف", "דף הבית הציבורי בערבית, טלפון"), fit: "contain" },
     ],
     links: [liveLink("https://go-to-nature.vercel.app/")],
     featured: false,
@@ -736,8 +738,8 @@ export const projects: PortfolioProject[] = [
     ],
     nextStep: tx("Continue hardening inventory and order operations as the catalog evolves.", "مواصلة تقوية المخزون والطلبات مع تطور الكتالوج.", "להמשיך לחזק את ניהול המלאי וההזמנות עם התפתחות הקטלוג."),
     media: [
-      { src: "/work/lulu-tokki/desktop.webp", alt: tx("Lulu Tokki Arabic Korean snacks storefront on desktop", "متجر Lulu Tokki العربي للسناكات الكورية على الحاسوب", "חנות החטיפים הקוריאניים בערבית של Lulu Tokki במחשב"), caption: tx("Public Arabic homepage, desktop", "الصفحة العربية العامة على الحاسوب", "דף הבית הציבורי בערבית, מחשב") },
-      { src: "/work/lulu-tokki/mobile.webp", alt: tx("Lulu Tokki Arabic Korean snacks storefront on a phone", "متجر Lulu Tokki العربي للسناكات الكورية على الهاتف", "חנות החטיפים הקוריאניים בערבית של Lulu Tokki בטלפון"), caption: tx("Public Arabic homepage, phone", "الصفحة العربية العامة على الهاتف", "דף הבית הציבורי בערבית, טלפון"), fit: "contain" },
+      { src: "/work/lulu-tokki/desktop.webp", width: 2880, height: 1800, alt: tx("Lulu Tokki Arabic Korean snacks storefront on desktop", "متجر Lulu Tokki العربي للسناكات الكورية على الحاسوب", "חנות החטיפים הקוריאניים בערבית של Lulu Tokki במחשב"), caption: tx("Public Arabic homepage, desktop", "الصفحة العربية العامة على الحاسوب", "דף הבית הציבורי בערבית, מחשב") },
+      { src: "/work/lulu-tokki/mobile.webp", width: 780, height: 1688, alt: tx("Lulu Tokki Arabic Korean snacks storefront on a phone", "متجر Lulu Tokki العربي للسناكات الكورية على الهاتف", "חנות החטיפים הקוריאניים בערבית של Lulu Tokki בטלפון"), caption: tx("Public Arabic homepage, phone", "الصفحة العربية العامة على الهاتف", "דף הבית הציבורי בערבית, טלפון"), fit: "contain" },
     ],
     links: [liveLink("https://lulu-tokki.vercel.app/"), repoLink("https://github.com/fatoh2/lulu-tokki")],
     featured: false,
@@ -752,19 +754,19 @@ export const focusQuest = {
   websiteLabel: tx("Explore Nuqta", "اكتشف نقطة", "גלו את נוקטה"),
   media: [
     {
-      src: "/labs/nuqta/nuqta-landing-desktop.jpg",
+      src: "/labs/nuqta/nuqta-landing-desktop.jpg", width: 1430, height: 755,
       alt: tx("Nuqta’s Arabic landing page featuring Saqr the falcon and its invitation for families", "صفحة نقطة بالعربية، مع صقر ودعوة العائلات إلى التجربة", "דף הנחיתה של נוקטה בערבית, עם הבז סקר והזמנה למשפחות"),
       caption: tx("Arabic landing page", "صفحة التعريف بالعربية", "דף נחיתה בערבית"),
       fit: "contain",
     },
     {
-      src: "/labs/nuqta/nuqta-journey-ar.png",
+      src: "/labs/nuqta/nuqta-journey-ar.png", width: 1170, height: 2532,
       alt: tx("Nuqta’s Arabic learning journey with a maths unit, progress path and Saqr", "رحلة التعلّم في نقطة بالعربية، مع وحدة رياضيات ومسار التقدّم وصقر", "מסע הלמידה של נוקטה בערבית, עם יחידת מתמטיקה, מסלול התקדמות וסקר"),
       caption: tx("Learning journey, Android", "رحلة التعلّم على أندرويد", "מסע למידה באנדרואיד"),
       fit: "contain",
     },
     {
-      src: "/labs/nuqta/nuqta-quest-ar.png",
+      src: "/labs/nuqta/nuqta-quest-ar.png", width: 1170, height: 2532,
       alt: tx("An Arabic maths quest in Nuqta with a fraction diagram and four answer choices", "مهمة رياضيات بالعربية في نقطة، مع رسم يوضّح الكسور وأربعة خيارات للإجابة", "משימת מתמטיקה בערבית בנוקטה, עם תרשים שברים וארבע תשובות לבחירה"),
       caption: tx("A visual maths quest", "مهمة رياضيات مصوّرة", "משימת מתמטיקה חזותית"),
       fit: "contain",

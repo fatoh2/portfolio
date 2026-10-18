@@ -1441,7 +1441,29 @@ html[dir="rtl"] .project-hero-copy {
 
 .project-hero-image.contain {
   object-fit: contain;
-  background: #0b2418;
+}
+
+.project-hero-media.project-hero-screenshot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  min-height: 0;
+  padding: clamp(18px, 3vw, 48px);
+  aspect-ratio: auto;
+  background: transparent;
+}
+
+.project-hero-screenshot .project-hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #3c3c37;
+  border-radius: 8px;
+}
+
+.project-hero-phone .project-hero-image {
+  max-width: 320px;
 }
 
 .project-facts {
@@ -1514,42 +1536,41 @@ html[dir="rtl"] .project-hero-copy {
 }
 
 .project-gallery {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px 32px;
   padding: 0 var(--page-gutter) 108px;
   background: var(--paper);
 }
 
 .project-gallery figure {
-  position: relative;
-  min-height: 620px;
-  overflow: hidden;
+  flex: 0 1 360px;
+  min-width: 0;
+  max-width: 100%;
   margin: 0;
-  background: #d8d4cb;
 }
 
-.project-gallery img {
-  object-fit: cover;
+.project-gallery .project-gallery-desktop {
+  flex: 1 1 540px;
+  max-width: 840px;
 }
 
 .project-gallery img.contain {
+  display: block;
+  width: 100%;
+  height: auto;
   object-fit: contain;
-  padding: 38px;
-  background: #0b2418;
+  border: 1px solid var(--line-light);
+  border-radius: 8px;
 }
 
 .project-gallery figcaption {
-  position: absolute;
-  inset-inline-start: 14px;
-  bottom: 14px;
-  padding: 7px 9px;
-  border-radius: 3px;
-  background: var(--ink);
-  color: var(--paper);
-  font-size: 9px;
-  font-weight: 800;
-  text-transform: uppercase;
+  margin-top: 14px;
+  color: var(--muted-light);
+  font-size: 12px;
+  line-height: 1.6;
 }
 
 .architecture-section {
@@ -1875,11 +1896,6 @@ html[dir="rtl"] .project-hero-copy {
     min-height: 500px;
   }
 
-  .project-hero-media:has(.project-hero-image.contain) {
-    min-height: 0;
-    aspect-ratio: 16 / 10;
-  }
-
   .project-facts {
     grid-template-columns: 1fr;
   }
@@ -1893,10 +1909,6 @@ html[dir="rtl"] .project-hero-copy {
 
   .project-facts article:last-child {
     border-bottom: 0;
-  }
-
-  .project-gallery {
-    grid-template-columns: 1fr;
   }
 
   .private-note {
@@ -2140,10 +2152,6 @@ html[dir="rtl"] .project-hero-copy {
 
   .project-hero-media {
     min-height: 360px;
-  }
-
-  .project-gallery figure {
-    min-height: 480px;
   }
 
   .system-visual {
