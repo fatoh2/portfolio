@@ -44,8 +44,8 @@ export function PortalScene() {
       <div className="scene-device scene-phone scene-phone-a" data-portal-depth="1.7">
         <div className="scene-screen">
           <Image
-            src="/labs/nuqta/nuqta-journey-ar.png"
-            alt="Nuqta's learning journey on a phone"
+            src="/labs/saqroon/saqroon-journey-ar.png"
+            alt="Saqroon's learning journey on a phone"
             width={1170}
             height={2532}
             sizes="(min-width: 760px) 14vw, 36vw"

@@ -10,7 +10,7 @@ const workstation = resolve(root, "..");
 const folders = {
   bab: "job-finder",
   "nedaa-lifestyle": "nedaa-lifestyle",
-  nuqta: "focusquest",
+  saqroon: "focusquest",
   solitaire: "solitaire-dapp",
   "seeker-radar": "seeker-launch-radar",
   elsewhereco: "elsewhereco",
