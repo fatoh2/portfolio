@@ -15,6 +15,12 @@
 
 ## Done
 
+- 2026-10-18 — **SOLitaire production APK 1.1.8 / 17 live.** `4d3a314` on `main` (APK only; the now-building
+  strip was current). Before promoting, checked that fhaj.dev's `dpl_2UTJXw…` was `969d310` (Saqroon): committed
+  16:51:21, deployed 16:52:03, live Saqroon and SOLitaire hashes matched the commit. Clean archive deployed
+  (`dpl_ATZfUa8MQ4xZTjPRVDCGpoVa5SYy`) and promoted; live download 44,024,471 bytes, SHA-256 `f8111677…83a0115f`;
+  Saqroon unchanged. Rollback `dpl_2UTJXw…`.
+
 - 2026-10-18 — **SOLitaire production APK 1.1.7 / 16 live.** `22e525e` on `main` (cherry-pick of `568b94e`):
   `public/downloads/SOLitaire.apk`, 44,020,023 bytes, SHA-256 `fdc2d167…0d146801`, built from solitaire-dapp
   `ace1162`. Deployed from a clean archive of `22e525e` (`dpl_3u2j2TtKeSqnYX2Cd5uHxGeJn4G9`), promoted over
