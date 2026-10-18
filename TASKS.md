@@ -15,6 +15,14 @@
 
 ## Done
 
+- 2026-10-18 — **SOLitaire production APK 1.1.7 / 16 live.** `22e525e` on `main` (cherry-pick of `568b94e`):
+  `public/downloads/SOLitaire.apk`, 44,020,023 bytes, SHA-256 `fdc2d167…0d146801`, built from solitaire-dapp
+  `ace1162`. Deployed from a clean archive of `22e525e` (`dpl_3u2j2TtKeSqnYX2Cd5uHxGeJn4G9`), promoted over
+  Codex's `dpl_4BWFAZ…` (its 217eeea screenshot fixes) after checking that was still current; live download
+  hash matches and the page still shows those fixes. Earlier the same day I promoted a committed-only build
+  over Codex's then-uncommitted deploy for ~3 minutes and rolled it back: **check what fhaj.dev serves, and
+  that the tree is committed, before promoting.**
+
 - 2026-10-16 (deployed) — Commit cc38236 on `portal-elsewhereco-directions`, main fast-forwarded to it. Deployed from a clean archive of that commit with `vercel deploy --prod --skip-domain --yes --archive=tgz` (build 30 s), then `vercel promote dpl_8BFzp75pyKQs3djQCkSZTF4GxKX5`. fhaj.dev now serves the layered hero, the agent demo, the filters, the now-building strip and the new case studies; the Argus pages are gone. Vercel's security checkpoint answers 403 to curl and headless browsers, so verification was done in a real browser.
 
 - 2026-10-16 (late) — The last of the review. **Layered hero**: the constellation render is replaced by a scene built from real captures in drawn device frames (ElsewhereCo laptop, Seeker Radar tablet, Nuqta and SOLitaire phones, the mark, an orbit), each on its own depth; the controller settles them from a slight zoom and lets them leave at different rates, scaled for portrait frames; swapping a product is replacing one image. **Deck loops**: silent captures of ElsewhereCo and Bab play inside the deck frames once visible, poster underneath, never under reduced motion (six products were recorded; only the two featured ones are installed, 5 MB). **Phone deck selector**: six numbered pills, the panel carries the name. **Nuqta** demoted to an index-weight card. The portal caption no longer repeats "Selected work". Lint, types, 84 tests and the production build pass.
