@@ -56,7 +56,7 @@ export function PortalScene() {
       <div className="scene-device scene-phone scene-phone-b" data-portal-depth="2.1">
         <div className="scene-screen">
           <Image
-            src="/labs/solitaire/solitaire-court-table-mobile-2026.png"
+            src="/labs/solitaire/solitaire-suit-table-mobile.jpg"
             alt="SOLitaire's Klondike table on a phone"
             width={1179}
             height={2622}

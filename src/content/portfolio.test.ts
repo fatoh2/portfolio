@@ -97,13 +97,22 @@ describe("customer-first portfolio content", () => {
     expect(getProject("camp-and-hike")?.featured).toBe(false);
   });
 
-  it("leads SOLitaire with the redesigned app and keeps gameplay captures current", () => {
+  it("leads SOLitaire with the live suit hero and keeps the redesign captures current", () => {
     const project = getProject("solitaire");
     expect(project?.media).toEqual([
-      solitaireMedia.lobby,
-      solitaireMedia.mobileLobby,
+      solitaireMedia.hero,
+      solitaireMedia.mobileHero,
       solitaireMedia.gameplay,
+      solitaireMedia.lobby,
     ]);
+    expect(project?.media.slice(0, 2).map((media) => media.embed?.src)).toEqual([
+      "https://sol-solitaire.com/embed/hero",
+      "https://sol-solitaire.com/embed/hero",
+    ]);
+    for (const media of project?.media ?? []) {
+      expect(existsSync(join(process.cwd(), "public", media.src))).toBe(true);
+      if (media.embed) expect(media.embed.width / media.embed.height).toBeCloseTo(media.width / media.height, 2);
+    }
     expect(project?.media.every((media) => media.fit === "contain")).toBe(true);
     expect(project?.media.some((media) => media.src.includes("banner"))).toBe(false);
     expect(project?.links.map(({ href, kind }) => ({ href, kind }))).toEqual([

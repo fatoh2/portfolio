@@ -47,14 +47,14 @@ export const projectShowcases: Record<string, ProjectShowcase> = {
     detailPresentation: "edge-to-edge",
     details: [
       {
-        mediaIndex: 0, sourceSize: [1600, 1000], crop: [525, 215, 550, 412],
+        mediaIndex: 3, sourceSize: [2560, 1600], crop: [260, 270, 2040, 790],
         title: tx("Choose your game", "اختر لعبتك", "בחרו את המשחק"),
-        description: tx("Classic play or a timed score run, starting from the same lobby.", "لعب كلاسيكي أو جولة نقاط محددة بوقت، من الردهة نفسها.", "משחק קלאסי או סבב ניקוד על זמן, מאותו לובי."),
+        description: tx("Play, Compete or Daily, each hub in its own suit colour.", "اللعب أو المنافسة أو اليومي، كل قسم بلون رمزه.", "Play, Compete או Daily, כל מרכז בצבע הצורה שלו."),
       },
       {
-        mediaIndex: 2, sourceSize: [1179, 2622], crop: [574, 902, 590, 443],
-        title: tx("Meet the court", "تعرّف على أوراق البلاط", "הכירו את קלפי החצר"),
-        description: tx("Original court characters and crisp card faces, seen in a game in progress.", "شخصيات أصلية لأوراق البلاط ووجوه بطاقات واضحة، من جولة قيد اللعب.", "דמויות חצר מקוריות וקלפים חדים, מתוך משחק בעיצומו."),
+        mediaIndex: 2, sourceSize: [1179, 2622], crop: [0, 330, 1179, 945],
+        title: tx("Suits on the table", "الرموز على الطاولة", "הצורות על השולחן"),
+        description: tx("Foundations in their suit colours and original court art, from a fresh deal.", "أساسات بألوان رموزها ورسومات أصلية لأوراق البلاط، من توزيعة جديدة.", "יסודות בצבעי הצורות ואיורי חצר מקוריים, מחלוקה חדשה."),
       },
     ],
   },

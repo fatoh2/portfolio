@@ -2229,3 +2229,75 @@ html[dir="rtl"] .project-hero-copy {
     transition: none !important;
   }
 }
+
+/* A live page over its still (components/live-embed.tsx). The frame keeps its captured size and is
+   scaled from the corner; it fades in only once the page reports ready, so the still is the fallback. */
+.live-embed-host {
+  position: relative;
+  display: block;
+}
+.live-embed {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.live-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+  transform-origin: 0 0;
+  opacity: 0;
+  transition: opacity 400ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.live-embed[data-ready] {
+  pointer-events: auto;
+}
+.live-embed[data-ready] iframe {
+  opacity: 1;
+}
+.live-embed-label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgb(10 12 10 / 0.62);
+  color: #f6f1e4;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 400ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.live-embed-label:empty {
+  display: none;
+}
+.live-embed-label::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6fd08c;
+}
+.live-embed[data-ready] .live-embed-label {
+  opacity: 1;
+}
+.project-hero-media .live-embed-host {
+  width: 100%;
+  border-radius: 8px;
+}
+.project-hero-phone .live-embed-host {
+  max-width: 320px;
+}
+.project-gallery .live-embed-host {
+  border-radius: 8px;
+}

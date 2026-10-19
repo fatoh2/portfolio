@@ -14,11 +14,26 @@ import {
   t,
   type Locale,
   type PortfolioProject,
+  type ProjectMedia,
 } from "@/content/portfolio";
+import type { ReactNode } from "react";
 import { getDictionary, statusLabels } from "@/content/ui";
+import { LiveEmbed } from "./live-embed";
 import { SiteHeader } from "./site-header";
 import { SystemVisual } from "./system-visual";
 import { TrackedAnchor, TrackedLink } from "./tracked-link";
+
+/** A still with its live page layered over it, when the media has one. */
+function MediaWithEmbed({ media, locale, children }: { media: ProjectMedia; locale: Locale; children: ReactNode }) {
+  if (!media.embed) return children;
+  const { src, width, height, label } = media.embed;
+  return (
+    <span className="live-embed-host">
+      {children}
+      <LiveEmbed src={src} title={t(media.alt, locale)} label={label && t(label, locale)} width={width} height={height} />
+    </span>
+  );
+}
 
 export function ProjectPage({
   project,
@@ -93,15 +108,17 @@ export function ProjectPage({
           </div>
           <div className={`project-hero-media${primaryMedia ? " project-hero-screenshot" : ""}${primaryMedia && primaryMedia.height > primaryMedia.width ? " project-hero-phone" : ""}`}>
             {primaryMedia ? (
-              <Image
-                src={primaryMedia.src}
-                alt={t(primaryMedia.alt, locale)}
-                width={primaryMedia.width}
-                height={primaryMedia.height}
-                preload
-                sizes="(min-width: 920px) 50vw, 100vw"
-                className="project-hero-image contain"
-              />
+              <MediaWithEmbed media={primaryMedia} locale={locale}>
+                <Image
+                  src={primaryMedia.src}
+                  alt={t(primaryMedia.alt, locale)}
+                  width={primaryMedia.width}
+                  height={primaryMedia.height}
+                  preload
+                  sizes="(min-width: 920px) 50vw, 100vw"
+                  className="project-hero-image contain"
+                />
+              </MediaWithEmbed>
             ) : (
               <SystemVisual project={project} locale={locale} />
             )}
@@ -143,14 +160,16 @@ export function ProjectPage({
           <section className="project-gallery">
             {project.media.slice(1).map((media) => (
               <figure key={media.src} className={media.height > media.width ? "project-gallery-phone" : "project-gallery-desktop"}>
-                <Image
-                  src={media.src}
-                  alt={t(media.alt, locale)}
-                  width={media.width}
-                  height={media.height}
-                  sizes={media.height > media.width ? "(min-width: 620px) 360px, 90vw" : "(min-width: 920px) 60vw, 90vw"}
-                  className="contain"
-                />
+                <MediaWithEmbed media={media} locale={locale}>
+                  <Image
+                    src={media.src}
+                    alt={t(media.alt, locale)}
+                    width={media.width}
+                    height={media.height}
+                    sizes={media.height > media.width ? "(min-width: 620px) 360px, 90vw" : "(min-width: 920px) 60vw, 90vw"}
+                    className="contain"
+                  />
+                </MediaWithEmbed>
                 <figcaption>{t(media.caption, locale)}</figcaption>
               </figure>
             ))}

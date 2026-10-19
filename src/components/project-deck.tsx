@@ -7,6 +7,7 @@ import { projectTags } from "@/lib/project-tags";
 import { getDictionary, statusLabels } from "@/content/ui";
 import { BrandMonogram } from "./brand-monogram";
 import { DeckVideo } from "./deck-video";
+import { LiveEmbed } from "./live-embed";
 import { TrackedAnchor, TrackedLink } from "./tracked-link";
 import "./project-deck.css";
 
@@ -22,6 +23,7 @@ export function ProductPortrait({ project, locale }: { project: ShowcaseProject;
       <div className="deck-desktop" style={{ aspectRatio: showcase?.desktopRatio ?? "16 / 10" }}>
         <Image src={desktop.src} alt={t(desktop.alt, locale)} fill sizes="(min-width: 960px) 57vw, 76vw" className="deck-image contain" />
         {showcase?.loops ? <DeckVideo mp4={`/work/${project.slug}/loop-desktop.mp4`} webm={`/work/${project.slug}/loop-desktop.webm`} /> : null}
+        {desktop.embed ? <LiveEmbed src={desktop.embed.src} title={t(desktop.alt, locale)} label={desktop.embed.label && t(desktop.embed.label, locale)} width={desktop.embed.width} height={desktop.embed.height} /> : null}
       </div>
       {mobile ? (
         <div className="deck-mobile" style={{ aspectRatio: showcase.mobileRatio }}>

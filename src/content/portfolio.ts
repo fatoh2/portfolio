@@ -40,6 +40,8 @@ export type ProjectMedia = {
   alt: LocalizedText;
   caption: LocalizedText;
   fit?: "cover" | "contain";
+  /** A live page shown over the still once it loads; width and height are the size the still was captured at. */
+  embed?: { src: string; width: number; height: number; label?: LocalizedText };
 };
 
 export type ProofLink = {
@@ -205,35 +207,52 @@ const commonLive = tx(
   "מוצר חי; קוד פרטי",
 );
 
+// Where the live SOLitaire hero is served. Production by default; NEXT_PUBLIC_SOLITAIRE_ORIGIN points a local or
+// preview build at another SOLitaire server (its /embed/ pages allow fhaj.dev and localhost to frame them).
+const solitaireOrigin = process.env.NEXT_PUBLIC_SOLITAIRE_ORIGIN ?? "https://sol-solitaire.com";
+const heroLabel = tx("Live · pick a suit", "مباشر · اختر رمزًا", "חי · בחרו צורה");
+
 export const solitaireMedia = {
-  lobby: {
-    src: "/labs/solitaire/solitaire-court-lobby-desktop-2026.jpg", width: 1600, height: 1000,
+  hero: {
+    src: "/labs/solitaire/solitaire-suit-hero-desktop.jpg", width: 2560, height: 1600,
     alt: tx(
-      "SOLitaire desktop home on emerald baize with the gold wordmark and the Play, Compete and Daily hubs",
-      "الصفحة الرئيسية لـ SOLitaire على سطح المكتب بقماش أخضر زمردي وشعار ذهبي وأقسام اللعب والمنافسة واليومي",
-      "מסך הבית של SOLitaire במחשב על שולחן ירוק אזמרגד עם לוגו זהוב ומרכזי Play, Compete ו-Daily",
+      "SOLitaire website hero in sapphire spades: the headline Same deck, a fanned court of spades, four suit buttons and two tables racing on the same seven cards",
+      "واجهة موقع SOLitaire باللون الياقوتي للبستوني: عنوان Same deck ومروحة أوراق البلاط البستوني وأربعة أزرار للرموز وطاولتان تتسابقان على البطاقات السبع نفسها",
+      "ראש אתר SOLitaire בכחול ספיר של עלה: הכותרת Same deck, מניפת קלפי חצר בעלה, ארבעה כפתורי צורה ושני שולחנות שמתחרים על אותם שבעה קלפים",
     ),
-    caption: tx("Court Table home, desktop", "الصفحة الرئيسية بتصميم Court Table على سطح المكتب", "מסך הבית בעיצוב Court Table במחשב"),
+    caption: tx("Website hero, live: pick a suit and the page takes its colour", "واجهة الموقع مباشرة: اختر رمزًا لتأخذ الصفحة لونه", "ראש האתר, חי: בחרו צורה והעמוד מקבל את צבעה"),
     fit: "contain",
+    embed: { src: `${solitaireOrigin}/embed/hero`, width: 1280, height: 800, label: heroLabel },
   },
-  mobileLobby: {
-    src: "/labs/solitaire/solitaire-court-lobby-mobile-2026.png", width: 1179, height: 2622,
+  mobileHero: {
+    src: "/labs/solitaire/solitaire-suit-hero-mobile.jpg", width: 1170, height: 2601,
     alt: tx(
-      "SOLitaire phone home with the Play, Compete and Daily hubs, daily rewards chip and bottom navigation",
-      "الصفحة الرئيسية لـ SOLitaire على الهاتف مع أقسام اللعب والمنافسة واليومي وشارة المكافآت اليومية وشريط التنقل السفلي",
-      "מסך הבית של SOLitaire בטלפון עם מרכזי Play, Compete ו-Daily, תג תגמולים יומיים וניווט תחתון",
+      "SOLitaire website hero on a phone in sapphire spades, with the Play button, the court fan, the suit buttons and the shared deal",
+      "واجهة موقع SOLitaire على الهاتف باللون الياقوتي مع زر اللعب ومروحة أوراق البلاط وأزرار الرموز والتوزيعة المشتركة",
+      "ראש אתר SOLitaire בטלפון בכחול ספיר, עם כפתור המשחק, מניפת קלפי החצר, כפתורי הצורות והחלוקה המשותפת",
     ),
-    caption: tx("Court Table home, phone", "الصفحة الرئيسية على الهاتف", "מסך הבית בטלפון"),
+    caption: tx("Website hero on a phone, live", "واجهة الموقع على الهاتف، مباشرة", "ראש האתר בטלפון, חי"),
     fit: "contain",
+    embed: { src: `${solitaireOrigin}/embed/hero`, width: 390, height: 867 },
   },
   gameplay: {
-    src: "/labs/solitaire/solitaire-court-table-mobile-2026.png", width: 1179, height: 2622,
+    src: "/labs/solitaire/solitaire-suit-table-mobile.jpg", width: 1179, height: 2622,
     alt: tx(
-      "SOLitaire Klondike table on a phone with seven columns, original court card art, stock pile, move counter and timer",
-      "طاولة Klondike في SOLitaire على الهاتف مع سبعة أعمدة ورسومات أصلية لأوراق الملوك وكومة السحب وعداد الحركات والمؤقت",
-      "שולחן Klondike של SOLitaire בטלפון עם שבע עמודות, איורי קלפי חצר מקוריים, ערימת משיכה, מונה מהלכים וטיימר",
+      "SOLitaire Klondike table on a phone with the four foundations in their suit colours, seven columns, the draw pile, move counter and clock",
+      "طاولة Klondike في SOLitaire على الهاتف مع الأساسات الأربعة بألوان رموزها وسبعة أعمدة وكومة السحب وعداد الحركات والساعة",
+      "שולחן Klondike של SOLitaire בטלפון עם ארבעת היסודות בצבעי הצורות, שבע עמודות, ערימת משיכה, מונה מהלכים ושעון",
     ),
     caption: tx("Classic Klondike table, phone", "طاولة Klondike الكلاسيكية على الهاتف", "שולחן Klondike קלאסי בטלפון"),
+    fit: "contain",
+  },
+  lobby: {
+    src: "/labs/solitaire/solitaire-suit-home-desktop.jpg", width: 2560, height: 1600,
+    alt: tx(
+      "SOLitaire game home on desktop with the Play, Compete and Daily hubs in sapphire, ruby and gold",
+      "الصفحة الرئيسية للعبة SOLitaire على سطح المكتب مع أقسام اللعب والمنافسة واليومي بالياقوتي والأحمر والذهبي",
+      "מסך הבית של המשחק SOLitaire במחשב עם מרכזי Play, Compete ו-Daily בכחול ספיר, אודם וזהב",
+    ),
+    caption: tx("Game home, desktop", "الصفحة الرئيسية للعبة على سطح المكتب", "מסך הבית של המשחק במחשב"),
     fit: "contain",
   },
 } satisfies Record<string, ProjectMedia>;
@@ -631,7 +650,7 @@ export const projects: PortfolioProject[] = [
       { label: tx("Chain boundary", "حد السلسلة", "גבול השרשרת"), detail: tx("Wallet authentication and escrow-oriented transaction flows.", "دخول بالمحفظة وتدفقات معاملات موجهة للضمان.", "אימות ארנק ותהליכי עסקה מבוססי escrow.") },
     ],
     nextStep: tx("Continue hardening transaction recovery and gameplay telemetry.", "مواصلة تقوية استعادة المعاملات وقياس اللعب.", "להמשיך לחזק התאוששות מעסקאות וטלמטריית משחק."),
-    media: [solitaireMedia.lobby, solitaireMedia.mobileLobby, solitaireMedia.gameplay],
+    media: [solitaireMedia.hero, solitaireMedia.mobileHero, solitaireMedia.gameplay, solitaireMedia.lobby],
     links: [
       liveLink("https://sol-solitaire.com"),
       apkLink(

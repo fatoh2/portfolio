@@ -1,5 +1,31 @@
 # SOLitaire App Screenshots
 
+## Suit redesign, 2026-10-19
+
+The case study and homepage deck lead with the **live website hero**: `solitaireMedia.hero` and
+`mobileHero` carry an `embed` that `components/live-embed.tsx` layers over the still. The frame
+loads `https://sol-solitaire.com/embed/hero` (the hero alone, from solitaire-dapp
+`app/embed/hero.tsx`) when it nears the viewport, lays it out at the capture size and scales it to
+the panel, and fades in only after the page posts `solitaire:hero-ready`. Until then, or if the
+SOLitaire site is down, the still stays. Only `/embed/` pages on sol-solitaire.com allow framing,
+and only by fhaj.dev, www.fhaj.dev and localhost (solitaire-dapp `vercel.json`). Set
+`NEXT_PUBLIC_SOLITAIRE_ORIGIN` to point a local build at another SOLitaire server.
+
+Captured with headless Chromium (playwright-core 1.56.1, Playwright Chromium 1243), guest state:
+
+| Public asset | Screen | Source | Viewport | Pixels |
+| --- | --- | --- | --- | --- |
+| `solitaire-suit-hero-desktop.jpg` | Website hero, first round (spades) | local `/embed/hero` on solitaire-dapp 79032ad | 1280 x 800 @2x | 2560 x 1600 |
+| `solitaire-suit-hero-mobile.jpg` | Website hero, phone | same | 390 x 867 @3x | 1170 x 2601 |
+| `solitaire-suit-home-desktop.jpg` | Game home (Play / Compete / Daily) | https://app.sol-solitaire.com, tutorial skipped | 1280 x 800 @2x | 2560 x 1600 |
+| `solitaire-suit-table-mobile.jpg` | Classic Klondike table | same, Play > Classic | 393 x 874 @3x | 1179 x 2622 |
+
+Hero stills are taken 3.2 s after load, once the headline and cards have dealt and before the
+first round changes suit (5.5 s). The embed sizes (1280 x 800, 390 x 867) match the aspect ratios
+of the stills, and a test holds them to it. The `*-court-*` captures below are no longer referenced.
+
+## Court Table, 2026-09-16
+
 Captured on 2026-09-16 from the local Court Table build at `http://localhost:8094/game`
 (branch `codex/seed-court-nft-economy`, commit 04b0749) with html2canvas at 2x from the
 emulated viewport, posted to a local receiver and saved as JPEG (quality 0.92).
