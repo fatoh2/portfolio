@@ -15,6 +15,11 @@
 
 ## Done
 
+- 2026-10-20 — **SOLitaire's phone frame is a playable table (committed, not deployed).** `62792f9`: the
+  gameplay media embeds sol-solitaire.com `/embed/table` over a still of its first deal, in the deck's phone
+  frame and the case-study gallery; tap to play, draw, undo, deal again. 84 tests, tsc, eslint pass; played
+  through the local frame. Needs solitaire-dapp `ec0393a` on production first.
+
 - 2026-10-20 — **SOLitaire leads with the live suit hero (committed, not deployed).** `32ed2b8` on `main`:
   the deck panel and case study show the website hero running in a frame over its still (`LiveEmbed`,
   `ProjectMedia.embed`), so visitors can pick a suit and watch the page take its colour; the still stays until
