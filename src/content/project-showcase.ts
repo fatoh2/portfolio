@@ -52,9 +52,9 @@ export const projectShowcases: Record<string, ProjectShowcase> = {
         description: tx("Play, Compete or Daily, each hub in its own suit colour.", "اللعب أو المنافسة أو اليومي، كل قسم بلون رمزه.", "Play, Compete או Daily, כל מרכז בצבע הצורה שלו."),
       },
       {
-        mediaIndex: 2, sourceSize: [1179, 2622], crop: [0, 330, 1179, 945],
+        mediaIndex: 2, sourceSize: [1179, 2622], crop: [0, 140, 1179, 740],
         title: tx("Suits on the table", "الرموز على الطاولة", "הצורות על השולחן"),
-        description: tx("Foundations in their suit colours and original court art, from a fresh deal.", "أساسات بألوان رموزها ورسومات أصلية لأوراق البلاط، من توزيعة جديدة.", "יסודות בצבעי הצורות ואיורי חצר מקוריים, מחלוקה חדשה."),
+        description: tx("Foundations in their suit colours and the original court art, on a table you can play right here.", "أساسات بألوان رموزها ورسومات أصلية لأوراق البلاط، على طاولة يمكنك اللعب عليها هنا.", "יסודות בצבעי הצורות ואיורי החצר המקוריים, על שולחן שאפשר לשחק בו כאן."),
       },
     ],
   },

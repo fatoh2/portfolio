@@ -236,14 +236,15 @@ export const solitaireMedia = {
     embed: { src: `${solitaireOrigin}/embed/hero`, width: 390, height: 867 },
   },
   gameplay: {
-    src: "/labs/solitaire/solitaire-suit-table-mobile.jpg", width: 1179, height: 2622,
+    src: "/labs/solitaire/solitaire-suit-table-live-mobile.jpg", width: 1179, height: 2622,
     alt: tx(
-      "SOLitaire Klondike table on a phone with the four foundations in their suit colours, seven columns, the draw pile, move counter and clock",
-      "طاولة Klondike في SOLitaire على الهاتف مع الأساسات الأربعة بألوان رموزها وسبعة أعمدة وكومة السحب وعداد الحركات والساعة",
-      "שולחן Klondike של SOLitaire בטלפון עם ארבעת היסודות בצבעי הצורות, שבע עמודות, ערימת משיכה, מונה מהלכים ושעון",
+      "Playable SOLitaire Klondike table on a phone: four foundations in their suit colours, seven columns, the draw pile, moves and score",
+      "طاولة Klondike قابلة للعب من SOLitaire على الهاتف: أربعة أساسات بألوان رموزها وسبعة أعمدة وكومة السحب والحركات والنقاط",
+      "שולחן Klondike של SOLitaire שאפשר לשחק בו בטלפון: ארבעה יסודות בצבעי הצורות, שבע עמודות, ערימת משיכה, מהלכים וניקוד",
     ),
-    caption: tx("Classic Klondike table, phone", "طاولة Klondike الكلاسيكية على الهاتف", "שולחן Klondike קלאסי בטלפון"),
+    caption: tx("Classic table, playable: tap a card to play it", "الطاولة الكلاسيكية قابلة للعب: انقر على ورقة لتلعبها", "השולחן הקלאסי, אפשר לשחק: הקישו על קלף כדי לשחק בו"),
     fit: "contain",
+    embed: { src: `${solitaireOrigin}/embed/table`, width: 393, height: 874 },
   },
   lobby: {
     src: "/labs/solitaire/solitaire-suit-home-desktop.jpg", width: 2560, height: 1600,

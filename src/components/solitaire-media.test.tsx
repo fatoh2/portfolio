@@ -16,6 +16,7 @@ describe("SOLitaire screenshot presentation", () => {
     expect(image?.getAttribute("src")).toContain(encodeURIComponent(solitaireMedia.hero.src));
     expect(image?.getAttribute("alt")).toBe(t(solitaireMedia.hero.alt, locale));
     expect(document.querySelector('[data-project="solitaire"] .deck-desktop .live-embed')).not.toBeNull();
+    expect(document.querySelector('[data-project="solitaire"] .deck-mobile .live-embed')).not.toBeNull();
     expect(image?.classList.contains("contain")).toBe(true);
     const downloads = [...document.querySelectorAll('[data-project="solitaire"] a[download]')].map((a) => a.getAttribute("href"));
     expect(downloads).toEqual(["/downloads/SOLitaire.apk", "/downloads/SOLitaire-staging.apk", "/downloads/SOLitaire-admin-staging.apk"]);
@@ -30,7 +31,7 @@ describe("SOLitaire screenshot presentation", () => {
     );
     const primary = document.querySelector(".project-hero-image");
     expect(primary?.getAttribute("src")).toContain(encodeURIComponent(solitaireMedia.hero.src));
-    expect(document.querySelectorAll(".live-embed-host .live-embed")).toHaveLength(2);
+    expect(document.querySelectorAll(".live-embed-host .live-embed")).toHaveLength(3);
     expect(primary?.classList.contains("contain")).toBe(true);
     const gallery = [...document.querySelectorAll(".project-gallery img")];
     expect(gallery.map((image) => image.getAttribute("alt"))).toEqual([

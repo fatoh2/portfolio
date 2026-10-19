@@ -105,9 +105,11 @@ describe("customer-first portfolio content", () => {
       solitaireMedia.gameplay,
       solitaireMedia.lobby,
     ]);
-    expect(project?.media.slice(0, 2).map((media) => media.embed?.src)).toEqual([
+    expect(project?.media.map((media) => media.embed?.src)).toEqual([
       "https://sol-solitaire.com/embed/hero",
       "https://sol-solitaire.com/embed/hero",
+      "https://sol-solitaire.com/embed/table",
+      undefined,
     ]);
     for (const media of project?.media ?? []) {
       expect(existsSync(join(process.cwd(), "public", media.src))).toBe(true);

@@ -20,6 +20,13 @@ Captured with headless Chromium (playwright-core 1.56.1, Playwright Chromium 124
 | `solitaire-suit-home-desktop.jpg` | Game home (Play / Compete / Daily) | https://app.sol-solitaire.com, tutorial skipped | 1280 x 800 @2x | 2560 x 1600 |
 | `solitaire-suit-table-mobile.jpg` | Classic Klondike table | same, Play > Classic | 393 x 874 @3x | 1179 x 2622 |
 
+| `solitaire-suit-table-live-mobile.jpg` | Playable table, first deal (seed 4050) | local `/embed/table` | 393 x 874 @3x | 1179 x 2622 |
+
+`gameplay` carries a second embed, `/embed/table`: a tap-to-play Classic table (draw one, undo,
+new deal from the solvable seeds) on the real engine and card faces, shown live in the deck's phone
+frame and the case-study gallery. Its first deal is fixed so the still matches what loads. The
+app's own table capture (`solitaire-suit-table-mobile.jpg`) stays in the homepage portal scene.
+
 Hero stills are taken 3.2 s after load, once the headline and cards have dealt and before the
 first round changes suit (5.5 s). The embed sizes (1280 x 800, 390 x 867) match the aspect ratios
 of the stills, and a test holds them to it. The `*-court-*` captures below are no longer referenced.

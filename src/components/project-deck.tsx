@@ -29,6 +29,7 @@ export function ProductPortrait({ project, locale }: { project: ShowcaseProject;
         <div className="deck-mobile" style={{ aspectRatio: showcase.mobileRatio }}>
           <Image src={mobile.src} alt={t(mobile.alt, locale)} fill sizes="(min-width: 960px) 18vw, 25vw" className="deck-image contain" />
           {showcase?.loops ? <DeckVideo mp4={`/work/${project.slug}/loop-mobile.mp4`} webm={`/work/${project.slug}/loop-mobile.webm`} /> : null}
+          {mobile.embed ? <LiveEmbed src={mobile.embed.src} title={t(mobile.alt, locale)} label={mobile.embed.label && t(mobile.embed.label, locale)} width={mobile.embed.width} height={mobile.embed.height} /> : null}
         </div>
       ) : null}
     </div>

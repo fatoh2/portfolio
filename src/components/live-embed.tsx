@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
  * was designed for at any panel width. It loads only when it comes near the viewport and fades in
  * once the page says it is ready; until then, or if it never does, the still underneath stays.
  */
-export const EMBED_READY_MESSAGE = "solitaire:hero-ready";
+export const EMBED_READY_MESSAGE = "solitaire:embed-ready";
 
 export function LiveEmbed({ src, title, label, width, height }: { src: string; title: string; label?: string; width: number; height: number }) {
   const host = useRef<HTMLSpanElement>(null);
