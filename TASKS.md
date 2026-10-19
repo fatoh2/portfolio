@@ -15,6 +15,15 @@
 
 ## Done
 
+- 2026-10-20 — **SOLitaire leads with the live suit hero (committed, not deployed).** `32ed2b8` on `main`:
+  the deck panel and case study show the website hero running in a frame over its still (`LiveEmbed`,
+  `ProjectMedia.embed`), so visitors can pick a suit and watch the page take its colour; the still stays until
+  the page reports ready. All SOLitaire media recaptured from the suit redesign (hero desktop/phone, Classic
+  table, game home); crops, captions and the portal scene's phone follow. 84 tests, tsc, eslint pass; checked
+  against the local SOLitaire server. **Order to ship:** deploy solitaire-dapp `8c97e2e` (serves `/embed/hero`,
+  framable only by fhaj.dev) to production first, then this; until then the stills show. Method:
+  [design/solitaire/capture-notes.md](design/solitaire/capture-notes.md).
+
 - 2026-10-18 — **SOLitaire production APK 1.1.8 / 17 live.** `4d3a314` on `main` (APK only; the now-building
   strip was current). Before promoting, checked that fhaj.dev's `dpl_2UTJXw…` was `969d310` (Saqroon): committed
   16:51:21, deployed 16:52:03, live Saqroon and SOLitaire hashes matched the commit. Clean archive deployed
