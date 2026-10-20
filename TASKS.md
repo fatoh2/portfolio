@@ -15,6 +15,11 @@
 
 ## Done
 
+- 2026-10-20 — **Pushed `main` to GitHub (owner's go).** The project is git-linked with `main` as its production
+  branch, so the push rebuilt fhaj.dev from git: `dpl_AhkKkDZCbfEAS32JJaznJRGZerTF` (same site as the promoted
+  `dpl_yGPXKGBX…`, which is now the rollback). Re-checked live: both SOLitaire embeds play, APK downloads.
+  **Every push to `main` redeploys fhaj.dev**, so only push a `main` that is ready to be live.
+
 - 2026-10-20 — **Live SOLitaire hero and playable table on fhaj.dev.** Checked first that fhaj.dev's
   `dpl_2T4rew8f…` matched `main` at `630f6db` (live SOLitaire APK hash = committed, old screenshots), refreshed the
   now-building strip (`4820a4f`), deployed a clean archive of `4820a4f` with `--skip-domain --archive=tgz` and
