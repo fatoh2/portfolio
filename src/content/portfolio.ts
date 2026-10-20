@@ -774,21 +774,21 @@ export const focusQuest = {
   websiteLabel: tx("Explore Saqroon", "اكتشف صقرون", "גלו את סקרון"),
   media: [
     {
-      src: "/labs/saqroon/saqroon-landing-desktop.jpg", width: 1430, height: 755,
+      src: "/labs/saqroon/saqroon-landing-desktop-20261020.jpg", width: 1430, height: 755,
       alt: tx("Saqroon’s Arabic landing page featuring Saqr the falcon and its invitation for families", "صفحة صقرون بالعربية، مع صقر ودعوة العائلات إلى التجربة", "דף הנחיתה של סקרון בערבית, עם הבז סקר והזמנה למשפחות"),
       caption: tx("Arabic landing page", "صفحة التعريف بالعربية", "דף נחיתה בערבית"),
       fit: "contain",
     },
     {
-      src: "/labs/saqroon/saqroon-journey-ar.png", width: 1170, height: 2532,
+      src: "/labs/saqroon/saqroon-journey-ar-20261020.png", width: 1170, height: 2532,
       alt: tx("Saqroon’s Arabic learning journey with a maths unit, progress path and Saqr", "رحلة التعلّم في صقرون بالعربية، مع وحدة رياضيات ومسار التقدّم وصقر", "מסע הלמידה של סקרון בערבית, עם יחידת מתמטיקה, מסלול התקדמות וסקר"),
-      caption: tx("Learning journey, Android", "رحلة التعلّم على أندرويد", "מסע למידה באנדרואיד"),
+      caption: tx("Learning journey · development preview", "رحلة التعلّم · معاينة تطوير", "מסע למידה · תצוגת פיתוח"),
       fit: "contain",
     },
     {
-      src: "/labs/saqroon/saqroon-quest-ar.png", width: 1170, height: 2532,
+      src: "/labs/saqroon/saqroon-quest-ar-20261020.png", width: 1170, height: 2532,
       alt: tx("An Arabic maths quest in Saqroon with a fraction diagram and four answer choices", "مهمة رياضيات بالعربية في صقرون، مع رسم يوضّح الكسور وأربعة خيارات للإجابة", "משימת מתמטיקה בערבית בסקרון, עם תרשים שברים וארבע תשובות לבחירה"),
-      caption: tx("A visual maths quest", "مهمة رياضيات مصوّرة", "משימת מתמטיקה חזותית"),
+      caption: tx("Visual maths · development preview", "رياضيات مصوّرة · معاينة تطوير", "מתמטיקה חזותית · תצוגת פיתוח"),
       fit: "contain",
     },
   ] satisfies ProjectMedia[],
@@ -798,9 +798,9 @@ export const focusQuest = {
     "מוצר למידה בפיתוח",
   ),
   summary: tx(
-    "An Arabic-first Flutter app for children aged 5–12: short learning quests with Saqr the falcon, screen-time pauses that ask one question before more video or games, and controls that stay with the parents. Android beta for families in and around Nazareth.",
-    "تطبيق Flutter بالعربية أولًا للأطفال من 5 إلى 12 عامًا: مهمات تعلّم قصيرة مع صقر، ووقفات أثناء وقت الشاشة تطرح سؤالًا واحدًا قبل متابعة الفيديو أو الألعاب، وقرار يبقى بيد الأهل. نسخة أندرويد تجريبية لعائلات الناصرة والبلدات القريبة.",
-    "אפליקציית Flutter בערבית קודם כול לילדים בגילאי 5–12: משימות למידה קצרות עם הבז סקר, עצירות בזמן מסך ששואלות שאלה אחת לפני עוד וידאו או משחקים, ושליטה שנשארת בידי ההורים. גרסת בטא לאנדרואיד למשפחות בנצרת והסביבה.",
+    "An Arabic-first Flutter app for children aged 5–12: short learning quests with Saqr the falcon, learning checkpoints during screen time, and controls that stay with the parents. An Android family pilot in development, starting in Nazareth and nearby towns.",
+    "تطبيق Flutter بالعربية أولًا للأطفال من 5 إلى 12 عامًا: مهمات تعلّم قصيرة مع صقر، ووقفات تعلّم أثناء وقت الشاشة، وقرار يبقى بيد الأهل. تجربة عائلية على أندرويد قيد التطوير، تبدأ من الناصرة والبلدات القريبة.",
+    "אפליקציית Flutter בערבית קודם כול לילדים בגילאי 5–12: משימות למידה קצרות עם הבז סקר, נקודות למידה בזמן השימוש במסך, ושליטה שנשארת בידי ההורים. פיילוט משפחתי לאנדרואיד בפיתוח, שמתחיל בנצרת והסביבה.",
   ),
   status: "in-development" as ProjectStatus,
   stack: ["Flutter", "Firebase", "Android", "RevenueCat", "Accessibility"],
@@ -816,9 +816,9 @@ export const focusQuest = {
     },
   ],
   downloadNote: tx(
-    "Direct install build — Android will ask you to allow installs from your browser.",
-    "نسخة تثبيت مباشر — سيطلب أندرويد السماح بالتثبيت من المتصفح.",
-    "גרסת התקנה ישירה — אנדרואיד יבקש לאשר התקנה מהדפדפן.",
+    "Android pilot APK. Images show current development previews. Android will ask you to allow installs from your browser.",
+    "نسخة أندرويد للتجربة. الصور من معاينات التطوير الحالية. سيطلب أندرويد السماح بالتثبيت من المتصفح.",
+    "APK לפיילוט באנדרואיד. התמונות מציגות תצוגות פיתוח עדכניות. אנדרואיד יבקש לאשר התקנה מהדפדפן.",
   ),
 };
 

@@ -62,7 +62,7 @@ export const projectShowcases: Record<string, ProjectShowcase> = {
     desktopRatio: "1430 / 755", mobileIndex: 1, mobileRatio: "1170 / 2532",
     details: [
       {
-        mediaIndex: 1, sourceSize: [1170, 2532], crop: [73, 740, 1025, 525],
+        mediaIndex: 1, sourceSize: [1170, 2532], crop: [73, 1300, 1025, 525],
         title: tx("A path to follow", "مسار للتعلّم", "מסלול ללמידה"),
         description: tx("Maths units and visible progress give each short quest a place in the journey.", "وحدات رياضيات وتقدّم واضح يمنحان كل مهمة قصيرة مكانًا في الرحلة.", "יחידות מתמטיקה והתקדמות גלויה נותנות לכל משימה קצרה מקום במסע."),
       },
