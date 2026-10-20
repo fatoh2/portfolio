@@ -1,5 +1,10 @@
 [
   {
+    "slug": "saqroon",
+    "updated": "2026-10-19",
+    "phase": "Pilot implementation and review"
+  },
+  {
     "slug": "solitaire",
     "updated": "2026-10-18",
     "phase": "Court Table redesign on staging"
@@ -23,11 +28,6 @@
     "slug": "go-to-nature",
     "updated": "2026-10-14",
     "phase": "Live"
-  },
-  {
-    "slug": "saqroon",
-    "updated": "2026-10-13",
-    "phase": "Pilot implementation and review"
   },
   {
     "slug": "camp-and-hike",
