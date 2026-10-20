@@ -17,10 +17,9 @@ Captured with headless Chromium (playwright-core 1.56.1, Playwright Chromium 124
 | --- | --- | --- | --- | --- |
 | `solitaire-suit-hero-desktop.jpg` | Website hero, first round (spades) | local `/embed/hero` on solitaire-dapp 79032ad | 1280 x 800 @2x | 2560 x 1600 |
 | `solitaire-suit-hero-mobile.jpg` | Website hero, phone | same | 390 x 867 @3x | 1170 x 2601 |
-| `solitaire-suit-home-desktop.jpg` | Game home (Play / Compete / Daily) | https://app.sol-solitaire.com, tutorial skipped | 1280 x 800 @2x | 2560 x 1600 |
-| `solitaire-suit-table-mobile.jpg` | Classic Klondike table | same, Play > Classic | 393 x 874 @3x | 1179 x 2622 |
-
-| `solitaire-suit-table-live-mobile.jpg` | Playable table, first deal (seed 4050) | local `/embed/table` | 393 x 874 @3x | 1179 x 2622 |
+| `solitaire-suit-home-desktop.jpg` | Game home (Play / Compete / Daily), game redesign | https://app.sol-solitaire.com on 2026-10-20 (solitaire-dapp 6ef5dd5), tutorial skipped | 1280 x 800 @2x | 2560 x 1600 |
+| `solitaire-suit-table-mobile.jpg` | Classic Klondike table, game redesign | same, Play > Classic | 393 x 874 @3x | 1179 x 2622 |
+| `solitaire-suit-table-live-mobile.jpg` | Playable table, first deal (seed 4050) | https://sol-solitaire.com/embed/table on 2026-10-20 | 393 x 874 @3x | 1179 x 2622 |
 
 `gameplay` carries a second embed, `/embed/table`: a tap-to-play Classic table (draw one, undo,
 new deal from the solvable seeds) on the real engine and card faces, shown live in the deck's phone

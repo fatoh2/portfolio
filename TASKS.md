@@ -15,6 +15,13 @@
 
 ## Done
 
+- 2026-10-20 — **SOLitaire screens retaken after the game redesign.** Once the owner signed off and the redesign was
+  live (solitaire-dapp `6ef5dd5` on production, `dpl_DuwJ5VgP…`), recaptured from production: the game home
+  (desktop gallery shot and its "Choose your game" crop), the app's Classic table in the portal scene, and the
+  playable table still (the embed now uses the game's score bar and square buttons). Same filenames, so no code
+  change; 84 tests pass. Pushed on top of Codex's `f8c9143`, which was what fhaj.dev served; Codex's uncommitted
+  `ui.ts` lab rename (FocusQuest → Saqroon) was left out.
+
 - 2026-10-20 — **Pushed `main` to GitHub (owner's go).** The project is git-linked with `main` as its production
   branch, so the push rebuilt fhaj.dev from git: `dpl_AhkKkDZCbfEAS32JJaznJRGZerTF` (same site as the promoted
   `dpl_yGPXKGBX…`, which is now the rollback). Re-checked live: both SOLitaire embeds play, APK downloads.
