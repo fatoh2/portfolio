@@ -15,7 +15,15 @@
 
 ## Done
 
-- 2026-10-20 — **SOLitaire's phone frame is a playable table (committed, not deployed).** `62792f9`: the
+- 2026-10-20 — **Live SOLitaire hero and playable table on fhaj.dev.** Checked first that fhaj.dev's
+  `dpl_2T4rew8f…` matched `main` at `630f6db` (live SOLitaire APK hash = committed, old screenshots), refreshed the
+  now-building strip (`4820a4f`), deployed a clean archive of `4820a4f` with `--skip-domain --archive=tgz` and
+  promoted `dpl_yGPXKGBXXMihPNffbNEbnfBoNDYE`; rollback `dpl_2T4rew8fH7WU3ifbkT6K9KLYyQFF`. Verified on fhaj.dev
+  with real mouse clicks (Playwright): all three frames ready from sol-solitaire.com within 4 s, Hearts repaints
+  the hero ruby and holds it, a tap on the 5♠ plays it and turns up the 2♣. Note: element boxes inside a scaled
+  frame ignore the scale, so automated clicks must map coordinates by hand; the desktop pane's click tool refuses
+  scaled cross-origin frames outright.
+- 2026-10-20 — **SOLitaire's phone frame is a playable table.** `62792f9`: the
   gameplay media embeds sol-solitaire.com `/embed/table` over a still of its first deal, in the deck's phone
   frame and the case-study gallery; tap to play, draw, undo, deal again. 84 tests, tsc, eslint pass; played
   through the local frame. Needs solitaire-dapp `ec0393a` on production first.
