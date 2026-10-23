@@ -422,7 +422,7 @@ export const projects: PortfolioProject[] = [
     audience: tx("A boutique fitness studio, its members and its trainer", "استوديو لياقة صغير، وعضواته، ومدرّبته", "סטודיו כושר בוטיק, המתאמנות שלו והמאמנת"),
     role: tx("Product design, mobile engineering and the WordPress integration", "تصميم المنتج وتطوير الموبايل والتكامل مع WordPress", "עיצוב מוצר, פיתוח מובייל והאינטגרציה עם WordPress"),
     status: "in-development",
-    statusNote: tx("Private client build; iOS on TestFlight, plugin live on the studio's site", "بناء خاص لعميل؛ iOS على TestFlight والإضافة تعمل على موقع الاستوديو", "בנייה פרטית ללקוח; iOS ב-TestFlight, התוסף פעיל באתר הסטודיו"),
+    statusNote: tx("Client app; iOS in App Store review, Android build below, plugin live on the studio's site", "تطبيق لعميل؛ iOS قيد مراجعة App Store، ونسخة أندرويد أدناه، والإضافة تعمل على موقع الاستوديو", "אפליקציה ללקוח; iOS בבדיקת App Store, גרסת אנדרואיד למטה, התוסף פעיל באתר הסטודיו"),
     capabilities: [
       tx("Members: weekly schedule, booking and cancelling, packages and sessions left, Arabic-first with English.", "العضوات: جدول أسبوعي، وحجز وإلغاء، وباقات وحصص متبقية، بالعربية أولاً مع الإنجليزية.", "מתאמנות: לוח שבועי, הזמנה וביטול, חבילות ומפגשים שנותרו, ערבית תחילה עם אנגלית."),
       tx("Back office in the app: approvals, attendance, payments and refunds, schedule, reports, admins and account deletion.", "إدارة من داخل التطبيق: موافقات، وحضور، ومدفوعات واستردادات، وجدول، وتقارير، ومديرون، وحذف الحساب.", "משרד אחורי באפליקציה: אישורים, נוכחות, תשלומים והחזרים, לוח, דוחות, מנהלים ומחיקת חשבון."),
@@ -446,7 +446,17 @@ export const projects: PortfolioProject[] = [
       { src: "/work/nedaa-lifestyle/admin-reports.webp", width: 780, height: 1688, alt: tx("Studio reports: revenue by channel after refunds, classes, fill rate and new members", "تقارير الاستوديو: الإيراد حسب القناة بعد الاستردادات والحصص ونسبة الإشغال والعضوات الجدد", "דוחות הסטודיו: הכנסה לפי ערוץ אחרי החזרים, שיעורים, תפוסה ומתאמנות חדשות"), caption: tx("Reports, demo data", "التقارير، بيانات تجريبية", "דוחות, נתוני דוגמה"), fit: "contain" },
       { src: "/work/nedaa-lifestyle/admin-classes.webp", width: 780, height: 1688, alt: tx("Today's roster for the trainer with attendees and a booking waiting for approval", "قائمة حصص اليوم للمدرّبة مع الحاضرات وحجز بانتظار الموافقة", "רשימת השיעורים של היום למאמנת עם המשתתפות והזמנה שממתינה לאישור"), caption: tx("Roster, demo data", "قائمة الحصص، بيانات تجريبية", "רשימת שיעורים, נתוני דוגמה"), fit: "contain" },
     ],
-    links: [],
+    links: [
+      apkLink(
+        "/downloads/Nedaa-Lifestyle.apk",
+        tx(
+          "The studio's real Android app, connected to the live studio: members sign in with their nedaalifestyle.com account, and signing up creates a real account. Android will ask you to allow installs from your browser.",
+          "تطبيق الاستوديو الفعلي لأندرويد، متصل بالاستوديو الحقيقي: العضوات يدخلن بحساب nedaalifestyle.com، وإنشاء حساب ينشئ حساباً حقيقياً. سيطلب أندرويد السماح بالتثبيت من المتصفح.",
+          "אפליקציית האנדרואיד האמיתית של הסטודיו, מחוברת לסטודיו החי: מתאמנות נכנסות עם חשבון nedaalifestyle.com, והרשמה יוצרת חשבון אמיתי. אנדרואיד יבקש לאשר התקנה מהדפדפן.",
+        ),
+        tx("Download Android (APK)", "تحميل نسخة أندرويد (APK)", "הורדת גרסת אנדרואיד (APK)"),
+      ),
+    ],
     featured: false,
     customerPath: "business",
   },
