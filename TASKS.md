@@ -35,9 +35,10 @@
   so not shown), **Bab** (the redesigned front door). **Seeker Radar** had been captured on 2026-08-28, before
   its September redesign: all three screens retaken (dark store-sweep home 1280×720, app brief and changelog
   390×844), sizes updated in the content, the portal tablet and the showcase crops re-aimed (the sweep card
-  with the featured app; the brief's rating and score). **Nedaa Lifestyle** member home is now the real app on
-  an iPhone (the App Store capture from nedaa-lifestyle `6492aea`, 780×1691) instead of the mock render; its
-  caption says so. Kept as they were after a pixel diff against fresh captures: SOLitaire (home, Classic
+  with the featured app; the brief's rating and score). **Nedaa Lifestyle** now leads with the real app on an
+  iPhone: the class schedule from the App Store set (nedaa-lifestyle `6492aea`, 780×1691) instead of the mock
+  member home. The owner asked for a screen without their name, so the home screen (the owner's own account)
+  is not used; the old mock stays at its URL, unreferenced. Kept as they were after a pixel diff against fresh captures: SOLitaire (home, Classic
   table, live table), Darbak, Camp & Hike, Lulu Tokki; and the WhatsApp agent, Saqroon and Little Keepsakes,
   whose repos have not changed since their captures. Now strip rebuilt. 84 tests, lint and types pass; the
   homepage deck, portal scene and Nedaa page checked headlessly at 1440 and 375.
