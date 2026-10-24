@@ -1874,25 +1874,29 @@ html[dir="rtl"]
 }
 @media (max-width: 759px) {
   /*
-   * Portrait stage: the laptop sits on top and both phones hang below its
-   * bottom edge, never over it. The phones are placed from the top (not the
-   * bottom) so their position follows the laptop's height, which depends on
-   * the stage width; container units make that cross-axis math possible.
-   * Their width is capped so they still fit above the stage floor on short
-   * screens. The owner wants them high: they start just over the laptop's
-   * bottom edge, and the pan lifts them a little further onto it.
+   * Portrait stage, held like a dealt hand of cards (SOLitaire's own object):
+   * the laptop is the back card, upright at the top; the two phones fan out in
+   * front of it, tilted away from each other and overlapping in the middle,
+   * their bottoms over the laptop's lower edge. The nearer, larger phone
+   * (SOLitaire) sits on the left, over the laptop's dark mountain silhouette,
+   * so ElsewhereCo's buttons on the right stay clear.
+   *
+   * Positions are set from the top so they follow the laptop's height, which
+   * depends on the stage width; container units make that cross-axis math
+   * possible. Widths are capped so the fan still clears the stage floor on
+   * short screens. The fan opens as the ف finishes opening (--portal-settle
+   * 1→0) and spreads a little further as the scene leaves (--portal-leave
+   * 0→1); both variables come from the controller, and without it the fan
+   * simply sits open. `rotate` is its own property, so the controller's
+   * translate on `transform` leaves it alone.
    */
   .home-page .portal-scene-stage {
     container-type: size;
-    --scene-laptop-top: 6cqh;
+    --scene-laptop-top: 5cqh;
     /* 92cqw wide at 16:10 → 57.5cqw tall (border-box, so borders are included). */
     --scene-laptop-bottom: calc(var(--scene-laptop-top) + 57.5cqw);
-    --scene-phone-top: calc(var(--scene-laptop-bottom) - 3cqh);
-    /* 9:19.5 → height is 2.1667 × width; keep the bottom 6cqh clear. */
-    --scene-phone-width: min(
-      38cqw,
-      calc((94cqh - var(--scene-phone-top)) / 2.1667)
-    );
+    --scene-fan-open: calc(1 - 0.6 * var(--portal-settle, 0));
+    --scene-fan-spread: var(--portal-leave, 0);
     background: radial-gradient(ellipse at 50% 40%, #171a14 0%, #0b0b0b 65%);
   }
   .home-page .scene-orbit {
@@ -1909,16 +1913,28 @@ html[dir="rtl"]
     display: none;
   }
   .home-page .scene-phone {
-    top: var(--scene-phone-top);
     bottom: auto;
-    width: var(--scene-phone-width);
     border-width: 4px;
     border-radius: 18px;
+    transform-origin: 50% 100%;
   }
+  /* Saqroon: the farther card, on the right, leaning right. 9:19.5 → height is 2.1667 × width. */
   .home-page .scene-phone-a {
-    left: 8%;
+    left: auto;
+    right: 14cqw;
+    top: calc(var(--scene-laptop-bottom) - 4cqh);
+    width: min(38cqw, calc((96cqh - var(--scene-laptop-bottom) + 4cqh) / 2.1667));
+    rotate: calc(4.5deg * var(--scene-fan-open) + 1.5deg * var(--scene-fan-spread));
+    /* Drift toward the middle as it leaves, so the tilted top stays on the stage. */
+    translate: calc(-6cqw * var(--scene-fan-spread)) 0;
   }
+  /* SOLitaire: the nearer card, on the left, higher and larger, leaning left. */
   .home-page .scene-phone-b {
-    right: 8%;
+    right: auto;
+    left: 12cqw;
+    top: calc(var(--scene-laptop-bottom) - 9cqh);
+    width: min(42cqw, calc((96cqh - var(--scene-laptop-bottom) + 9cqh) / 2.1667));
+    rotate: calc(-5deg * var(--scene-fan-open) - 1.5deg * var(--scene-fan-spread));
+    translate: calc(6cqw * var(--scene-fan-spread)) 0;
   }
 }

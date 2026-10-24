@@ -27,6 +27,19 @@
   is capped so they clear the stage floor on short screens. Checked at 375×812 and 360×640 at rest and at the
   end of the pan; lint passes.
 
+- 2026-10-24 (evening) — **The mobile portal scene is a dealt hand of cards.** Owner: "make this more
+  creative looking". Idea from the subject (SOLitaire's own object): under 760px the laptop is the back card,
+  upright at the top; the two phones fan out in front of it, tilted away from each other (SOLitaire −5°, on the
+  left and larger, over the laptop's dark silhouette; Saqroon +4.5°, on the right), overlapping in the middle
+  with their bottoms over the laptop's lower edge. The fan opens as the ف finishes opening and spreads 1.5°
+  more as the scene leaves, drifting toward the middle so no tilted corner leaves the stage. Mechanism: the
+  controller now publishes `--portal-settle` and `--portal-leave` on the root; the stylesheet drives the
+  `rotate` and `translate` properties from them, which the controller's `transform` translate leaves alone.
+  Desktop scene untouched. Checked headlessly at 375×812, 360×640 and 430×932 through the opening, rest, mid-pan
+  and the end: every frame stays inside the stage. 84 tests, lint, types pass. Skills used at the owner's
+  choice: design-taste-frontend (section rules, screenshot critique; the page-wide inspector was not run, the
+  rest of the page is out of scope), animate, webapp-testing.
+
 - 2026-10-24 (later) — **Portal phones higher, Saqroon rendered from today's app.** Owner: the phones should sit
   higher even if they touch the laptop, and the Saqroon and SOLitaire stills were old. The phones now start
   3cqh above the laptop's bottom edge (22px over it at rest on a 375 phone) and are a little wider. **Saqroon**:

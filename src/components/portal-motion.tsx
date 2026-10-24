@@ -61,6 +61,8 @@ export function PortalMotion({ children }: { children: ReactNode }) {
       photo.style.removeProperty("transform");
       media.style.removeProperty("transform");
       for (const layer of layers) layer.element.style.removeProperty("transform");
+      root!.style.removeProperty("--portal-settle");
+      root!.style.removeProperty("--portal-leave");
       caption.style.removeProperty("opacity");
     }
 
@@ -88,6 +90,9 @@ export function PortalMotion({ children }: { children: ReactNode }) {
       const settle = 1 - ease(p);
       const frameHeight = media.parentElement?.clientHeight ?? height;
       const panProgress = panTravel > 0 ? 1 - (1 - q) ** 2 : 0;
+      // The stylesheet reads both acts too (the phone fan on portrait stages).
+      root!.style.setProperty("--portal-settle", settle.toFixed(3));
+      root!.style.setProperty("--portal-leave", panProgress.toFixed(3));
       if (layers.length) {
         // The whole scene settles from a slight zoom; each layer also drifts by its depth,
         // so nearer screens arrive later and leave faster than the backdrop.
