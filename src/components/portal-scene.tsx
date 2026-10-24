@@ -34,8 +34,8 @@ export function PortalScene() {
           <Image
             src="/work/seeker-radar/discovery-desktop.jpg"
             alt="Seeker Radar's discovery feed on a tablet"
-            width={1265}
-            height={712}
+            width={1280}
+            height={720}
             sizes="(min-width: 760px) 34vw, 70vw"
             priority
           />

@@ -1,6 +1,10 @@
 # Portfolio tasks
 
-**Updated:** 2026-10-16 · **Phase:** public case studies and downloads
+**Codex — Saqroon remaining labels, 2026-10-20: published/verified; claim released.** Three translated lab titles corrected in isolated commit75cb4e5a33703105cfc1c0dae48e234719d1f285; Vercel READY dpl_8vMhWudheeXznTgRLSmC3F4LGJCt.84 tests, scoped ESLint and production build pass; live EN/AR/HE names/accessibility checked at390/1440px as part of22 public cases. Now strip rebuilt with no content delta. Preserved intervening SOLitaire0099d99, signed downloads and task edits. [Shared evidence](../focusquest/docs/43-brand-residue-audit.md). Task record uncommitted; shared journal pending.
+
+**Codex — Saqroon landing consistency, 2026-10-20: published/verified; claim released.** Current landing/Journey/question media and truthful development-preview copy in all3 languages; required Now strip rebuilt. Content commit `f8c91438898e2794d5fbd1b6632497e0f9536dfb` pushed main, Vercel READY `dpl_D3fcpKerevCCTraZAmyxNBX3VSYT`.84 tests, scoped lint, production build and9 local/9 live responsive cases pass. Existing signed Saqroon APK unchanged and range reachable99005689B; unrelated embeds not retested. [Shared FQ-11 evidence](../focusquest/docs/42-landing-consistency.md). Task record uncommitted; journal pending in shared outbox.
+
+**Updated:** 2026-10-24 · **Phase:** public case studies and downloads
 
 **Codex — Nuqta download7 refresh, 2026-10-13: published/verified; claim released.** [Download](https://fhaj.dev/downloads/Nuqta-arm64.apk) is signed Nuqta0.1.0(7) ARM64 with remaining-page and approved density refinements,70,478,957bytes; full staged/public SHA73d2e5ec1f8fd17ab6f958bcb2ecc02acf62471bccd17d4d812e3e94912143a7. APK-only018740c pushed; Vercel READY dpl_7TGE1ZcVHVVJcj48W3cMx3khE9nc promoted, Next.js build17s. Source/unrelated edits preserved, original checkout synchronized after isolated D: build/deploy for C: storage failure.294app tests pass; no new website source/unit-test changes, prior stale featured-project failures remain. Device acceptance pending. [Release record](../focusquest/docs/25-density-apk-publication.md). Task record uncommitted.
 
@@ -14,6 +18,29 @@
 - Decided by the owner on 2026-10-16: no public Instagram proof. The Instagram work is private and is never mentioned or shown on the site; the services copy names the channel as a capability and nothing more.
 
 ## Done
+
+- 2026-10-24 — **Portal scene on phones: the two phone frames no longer cover the ElsewhereCo laptop.** Owner
+  saw it on mobile: after the ف opens, Saqroon and SOLitaire sat over most of the laptop screen. Cause: the
+  phones were anchored with `bottom:` percentages and were tall enough to reach into the laptop, and the pan
+  lifts the nearer layers 30–50px further than the laptop. Fix in `homepage.css` (≤759px only): the stage is a
+  size container, the phones are placed from the top at the laptop's bottom edge plus a gap, and their width
+  is capped so they clear the stage floor on short screens. Checked at 375×812 and 360×640 at rest and at the
+  end of the pan; lint passes.
+
+- 2026-10-24 — **Captures refreshed where the products changed.** Owner's ask: most apps and sites had moved on
+  since their captures. Checked every sibling repo's commits since its capture date and each live site, then
+  retook only what changed, from production with headless Chromium (desktop 1440×900 @2x, phone 390×844 @2x,
+  cookie bars dismissed, WebP): **ElsewhereCo** (reviews link in the nav, phone spacing), **Go To Nature**
+  (the two-menu navbar and the field-page homepage that is live; the `tatreez-stitches` branch is not deployed,
+  so not shown), **Bab** (the redesigned front door). **Seeker Radar** had been captured on 2026-08-28, before
+  its September redesign: all three screens retaken (dark store-sweep home 1280×720, app brief and changelog
+  390×844), sizes updated in the content, the portal tablet and the showcase crops re-aimed (the sweep card
+  with the featured app; the brief's rating and score). **Nedaa Lifestyle** member home is now the real app on
+  an iPhone (the App Store capture from nedaa-lifestyle `6492aea`, 780×1691) instead of the mock render; its
+  caption says so. Kept as they were after a pixel diff against fresh captures: SOLitaire (home, Classic
+  table, live table), Darbak, Camp & Hike, Lulu Tokki; and the WhatsApp agent, Saqroon and Little Keepsakes,
+  whose repos have not changed since their captures. Now strip rebuilt. 84 tests, lint and types pass; the
+  homepage deck, portal scene and Nedaa page checked headlessly at 1440 and 375.
 
 - 2026-10-20 — **SOLitaire screens retaken after the game redesign.** Once the owner signed off and the redesign was
   live (solitaire-dapp `6ef5dd5` on production, `dpl_DuwJ5VgP…`), recaptured from production: the game home

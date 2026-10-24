@@ -1851,7 +1851,7 @@ html[dir="rtl"]
   left: 12%;
   bottom: 6%;
   width: 40%;
-  aspect-ratio: 1265 / 712;
+  aspect-ratio: 16 / 9;
   border: 6px solid #272925;
   border-radius: 12px;
   box-shadow: 0 0 0 1px #575952, 0 30px 50px -24px #000;
@@ -1873,7 +1873,26 @@ html[dir="rtl"]
   width: 16%;
 }
 @media (max-width: 759px) {
+  /*
+   * Portrait stage: the laptop sits on top and both phones hang below its
+   * bottom edge, never over it. The phones are placed from the top (not the
+   * bottom) so their position follows the laptop's height, which depends on
+   * the stage width; container units make that cross-axis math possible.
+   * Their width is capped so they still fit above the stage floor on short
+   * screens. The pan lifts the nearer phones ~50px more than the laptop, so
+   * the gap below the laptop is sized to absorb that.
+   */
   .home-page .portal-scene-stage {
+    container-type: size;
+    --scene-laptop-top: 6cqh;
+    /* 92cqw wide at 16:10 → 57.5cqw tall (border-box, so borders are included). */
+    --scene-laptop-bottom: calc(var(--scene-laptop-top) + 57.5cqw);
+    --scene-phone-top: calc(var(--scene-laptop-bottom) + 6cqh);
+    /* 9:19.5 → height is 2.1667 × width; keep the bottom 6cqh clear. */
+    --scene-phone-width: min(
+      36cqw,
+      calc((94cqh - var(--scene-phone-top)) / 2.1667)
+    );
     background: radial-gradient(ellipse at 50% 40%, #171a14 0%, #0b0b0b 65%);
   }
   .home-page .scene-orbit {
@@ -1881,7 +1900,7 @@ html[dir="rtl"]
   }
   .home-page .scene-laptop {
     left: 4%;
-    top: 4%;
+    top: var(--scene-laptop-top);
     width: 92%;
     border-width: 4px;
     border-radius: 10px;
@@ -1890,22 +1909,16 @@ html[dir="rtl"]
     display: none;
   }
   .home-page .scene-phone {
-    width: 40%;
+    top: var(--scene-phone-top);
+    bottom: auto;
+    width: var(--scene-phone-width);
     border-width: 4px;
     border-radius: 18px;
   }
   .home-page .scene-phone-a {
     left: 8%;
-    top: auto;
-    bottom: 36%;
   }
   .home-page .scene-phone-b {
     right: 8%;
-    top: auto;
-    bottom: 42%;
-    width: 42%;
-  }
-  .home-page .scene-laptop {
-    top: 6%;
   }
 }

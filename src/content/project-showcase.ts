@@ -27,16 +27,16 @@ export const projectShowcases: Record<string, ProjectShowcase> = {
     details: [],
   },
   "seeker-radar": {
-    desktopRatio: "1265 / 712", mobileIndex: 1, mobileRatio: "375 / 812",
+    desktopRatio: "16 / 9", mobileIndex: 1, mobileRatio: "390 / 844",
     detailPresentation: "edge-to-edge",
     details: [
       {
-        mediaIndex: 0, sourceSize: [1265, 712], crop: [242, 218, 976, 390],
-        title: tx("Curated picks", "اختيارات منتقاة", "בחירות נבחרות"),
-        description: tx("Highlighted apps, with their category and Radar score in view.", "تطبيقات مختارة مع تصنيفها ودرجة Radar في مكان واحد.", "אפליקציות נבחרות, עם הקטגוריה וציון Radar במקום אחד."),
+        mediaIndex: 0, sourceSize: [1280, 720], crop: [258, 128, 988, 378],
+        title: tx("The daily store sweep", "مسح المتجر اليومي", "סריקת החנות היומית"),
+        description: tx("What is new, updated or moved since yesterday, and the featured app with its Radar score.", "الجديد والمحدَّث والمتحرك منذ الأمس، والتطبيق المميز مع درجة Radar.", "מה חדש, עודכן או זז מאתמול, והאפליקציה המומלצת עם ציון Radar."),
       },
       {
-        mediaIndex: 1, sourceSize: [375, 812], crop: [15, 269, 335, 136],
+        mediaIndex: 1, sourceSize: [390, 844], crop: [15, 280, 360, 150],
         title: tx("App brief", "لمحة عن التطبيق", "סקירת אפליקציה"),
         description: tx("Store ratings and app signals, brought together for a closer look.", "تقييمات المتجر ومؤشرات التطبيق معاً لإلقاء نظرة أقرب.", "דירוגי החנות וסימני האפליקציה, יחד למבט מקרוב."),
       },

@@ -441,7 +441,7 @@ export const projects: PortfolioProject[] = [
     ],
     nextStep: tx("Walk the admin screens on a phone, test a real refund, then ship the iOS and Android builds.", "تجربة شاشات الإدارة على الهاتف، واختبار استرداد حقيقي، ثم إصدار نسختي iOS وأندرويد.", "לעבור על מסכי הניהול בטלפון, לבדוק החזר אמיתי, ואז לשחרר את גרסאות iOS ואנדרואיד."),
     media: [
-      { src: "/work/nedaa-lifestyle/member-home.webp", width: 780, height: 1688, alt: tx("Member home on a phone: the studio photo, the next class, sessions left as dots and open classes this week", "الصفحة الرئيسية للعضوة على الهاتف: صورة الاستوديو والحصة القادمة والجلسات المتبقية كنقاط والحصص المتاحة هذا الأسبوع", "מסך הבית של המתאמנת בטלפון: תמונת הסטודיו, השיעור הבא, מפגשים שנותרו כנקודות ושיעורים פתוחים השבוע"), caption: tx("Member home, rendered with demo data", "الصفحة الرئيسية للعضوة، ببيانات تجريبية", "מסך הבית של המתאמנת, עם נתוני דוגמה"), fit: "contain" },
+      { src: "/work/nedaa-lifestyle/member-home.webp", width: 780, height: 1691, alt: tx("Member home on a phone: the studio photo, the next booking, sessions left as dots and open classes this week", "الصفحة الرئيسية للعضوة على الهاتف: صورة الاستوديو والحجز القادم والجلسات المتبقية كنقاط والحصص المتاحة هذا الأسبوع", "מסך הבית של המתאמנת בטלפון: תמונת הסטודיו, ההזמנה הבאה, מפגשים שנותרו כנקודות ושיעורים פתוחים השבוע"), caption: tx("Member home, the live app on an iPhone", "الصفحة الرئيسية للعضوة، التطبيق الحي على آيفون", "מסך הבית של המתאמנת, האפליקציה החיה באייפון"), fit: "contain" },
       { src: "/work/nedaa-lifestyle/admin-dashboard.webp", width: 780, height: 1688, alt: tx("The trainer's dashboard: today's classes, bookings and free places", "لوحة المدرّبة: حصص اليوم والحجوزات والأماكن المتاحة", "לוח המאמנת: שיעורי היום, הזמנות ומקומות פנויים"), caption: tx("Trainer dashboard, demo data", "لوحة المدرّبة، بيانات تجريبية", "לוח המאמנת, נתוני דוגמה"), fit: "contain" },
       { src: "/work/nedaa-lifestyle/admin-reports.webp", width: 780, height: 1688, alt: tx("Studio reports: revenue by channel after refunds, classes, fill rate and new members", "تقارير الاستوديو: الإيراد حسب القناة بعد الاستردادات والحصص ونسبة الإشغال والعضوات الجدد", "דוחות הסטודיו: הכנסה לפי ערוץ אחרי החזרים, שיעורים, תפוסה ומתאמנות חדשות"), caption: tx("Reports, demo data", "التقارير، بيانات تجريبية", "דוחות, נתוני דוגמה"), fit: "contain" },
       { src: "/work/nedaa-lifestyle/admin-classes.webp", width: 780, height: 1688, alt: tx("Today's roster for the trainer with attendees and a booking waiting for approval", "قائمة حصص اليوم للمدرّبة مع الحاضرات وحجز بانتظار الموافقة", "רשימת השיעורים של היום למאמנת עם המשתתפות והזמנה שממתינה לאישור"), caption: tx("Roster, demo data", "قائمة الحصص، بيانات تجريبية", "רשימת שיעורים, נתוני דוגמה"), fit: "contain" },
@@ -554,19 +554,19 @@ export const projects: PortfolioProject[] = [
     ),
     media: [
       {
-        src: "/work/seeker-radar/discovery-desktop.jpg", width: 1265, height: 712,
+        src: "/work/seeker-radar/discovery-desktop.jpg", width: 1280, height: 720,
         alt: tx("Seeker Radar desktop app catalog with discovery navigation, filters, app listings, and evidence scores", "كتالوج Seeker Radar على سطح المكتب مع تنقل الاكتشاف والتصفية وقوائم التطبيقات ودرجات الأدلة", "קטלוג האפליקציות של Seeker Radar במחשב עם ניווט, מסננים, רשומות וציונים מבוססי ראיות"),
         caption: tx("Live discovery catalog and filters", "كتالوج الاكتشاف المباشر وأدوات التصفية", "קטלוג גילוי חי ומסננים"),
         fit: "contain",
       },
       {
-        src: "/work/seeker-radar/app-brief-mobile.jpg", width: 375, height: 812,
+        src: "/work/seeker-radar/app-brief-mobile.jpg", width: 390, height: 844,
         alt: tx("Seeker Radar mobile TokenRun app brief with Store artwork, rating, evidence summary, and app actions", "ملف TokenRun على Seeker Radar للموبايل مع صور المتجر والتقييم وملخص الأدلة وإجراءات التطبيق", "סקירת TokenRun במובייל של Seeker Radar עם תמונות מהחנות, דירוג, סיכום ראיות ופעולות"),
         caption: tx("Mobile app brief with listing evidence", "ملف تطبيق على الموبايل مع أدلة من المتجر", "סקירת אפליקציה במובייל עם ראיות מהרשומה"),
         fit: "contain",
       },
       {
-        src: "/work/seeker-radar/updates-mobile.jpg", width: 375, height: 812,
+        src: "/work/seeker-radar/updates-mobile.jpg", width: 390, height: 844,
         alt: tx("Seeker Radar mobile daily update feed showing snapshot totals and apps with meaningful changes", "سجل Seeker Radar اليومي على الموبايل مع ملخص اللقطة والتطبيقات ذات التغييرات المهمة", "יומן העדכונים היומי של Seeker Radar במובייל עם סיכומי תמונת מצב ואפליקציות שהשתנו"),
         caption: tx("Daily change feed on mobile", "سجل التغييرات اليومي على الموبايل", "יומן שינויים יומי במובייל"),
         fit: "contain",
