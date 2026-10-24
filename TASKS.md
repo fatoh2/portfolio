@@ -27,6 +27,18 @@
   is capped so they clear the stage floor on short screens. Checked at 375×812 and 360×640 at rest and at the
   end of the pan; lint passes.
 
+- 2026-10-24 (night) — **The hand is dealt, and the ring is back on phones.** Owner asked for more and for other
+  ideas with previews. Five compositions were built as switchable variants and screenshotted side by side at
+  375×812 (dealt hand, cascade, orbit, bleed, on the table); the owner picked the dealt hand. What it gained:
+  the phones now start stacked behind the laptop's centre while the ف is still closed and slide out into the
+  fan as it opens (translate from `--portal-settle`, 17–19cqw); the desktop orbit returns as a tall ring
+  tilted with the fan (a second SVG, `scene-orbit-portrait`, shown under 760px only) with its two acid dots;
+  the farther card is dimmed to 0.92. The losing variants were removed from the stylesheet. Checked at 375×812
+  through the opening (35%, 60%, 80%), rest, mid-pan and the end: every frame stays on the stage. 84 tests,
+  lint, types pass. Learned: the dev server's image optimizer hangs on requests that accept AVIF (a browser
+  never gets the image; curl without that header gets it at once), so headless checks against the dev server
+  route `/_next/image` to the raw file under `public/`; production (Vercel's optimizer) is unaffected.
+
 - 2026-10-24 (evening) — **The mobile portal scene is a dealt hand of cards.** Owner: "make this more
   creative looking". Idea from the subject (SOLitaire's own object): under 760px the laptop is the back card,
   upright at the top; the two phones fan out in front of it, tilted away from each other (SOLitaire −5°, on the

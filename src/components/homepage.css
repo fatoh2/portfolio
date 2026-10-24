@@ -1819,6 +1819,9 @@ html[dir="rtl"]
   height: 100%;
   opacity: 0.85;
 }
+.home-page .scene-orbit-portrait {
+  display: none;
+}
 .home-page .scene-device {
   position: absolute;
   overflow: hidden;
@@ -1895,12 +1898,19 @@ html[dir="rtl"]
     --scene-laptop-top: 5cqh;
     /* 92cqw wide at 16:10 → 57.5cqw tall (border-box, so borders are included). */
     --scene-laptop-bottom: calc(var(--scene-laptop-top) + 57.5cqw);
-    --scene-fan-open: calc(1 - 0.6 * var(--portal-settle, 0));
+    /* 1 while the ف is still closed (the phones are stacked), 0 once it has opened (dealt out). */
+    --scene-fan-stack: var(--portal-settle, 0);
+    --scene-fan-open: calc(1 - var(--scene-fan-stack));
     --scene-fan-spread: var(--portal-leave, 0);
     background: radial-gradient(ellipse at 50% 40%, #171a14 0%, #0b0b0b 65%);
   }
   .home-page .scene-orbit {
     display: none;
+  }
+  /* The ring is cropped to the stage so its arcs pass behind the laptop and out past the phones. */
+  .home-page .scene-orbit-portrait {
+    display: block;
+    opacity: 0.7;
   }
   .home-page .scene-laptop {
     left: 4%;
@@ -1925,8 +1935,14 @@ html[dir="rtl"]
     top: calc(var(--scene-laptop-bottom) - 4cqh);
     width: min(38cqw, calc((96cqh - var(--scene-laptop-bottom) + 4cqh) / 2.1667));
     rotate: calc(4.5deg * var(--scene-fan-open) + 1.5deg * var(--scene-fan-spread));
-    /* Drift toward the middle as it leaves, so the tilted top stays on the stage. */
-    translate: calc(-6cqw * var(--scene-fan-spread)) 0;
+    /*
+     * Dealt from the middle of the stage: stacked behind the other card while the
+     * mark is closed, slid out to the right as it opens; then a drift back toward
+     * the middle as the scene leaves, so the tilted top stays on the stage.
+     */
+    translate: calc(-19cqw * var(--scene-fan-stack) - 6cqw * var(--scene-fan-spread)) 0;
+    /* The farther card sits a step back in the light. */
+    filter: brightness(0.92);
   }
   /* SOLitaire: the nearer card, on the left, higher and larger, leaning left. */
   .home-page .scene-phone-b {
@@ -1935,6 +1951,6 @@ html[dir="rtl"]
     top: calc(var(--scene-laptop-bottom) - 9cqh);
     width: min(42cqw, calc((96cqh - var(--scene-laptop-bottom) + 9cqh) / 2.1667));
     rotate: calc(-5deg * var(--scene-fan-open) - 1.5deg * var(--scene-fan-spread));
-    translate: calc(6cqw * var(--scene-fan-spread)) 0;
+    translate: calc(17cqw * var(--scene-fan-stack) + 6cqw * var(--scene-fan-spread)) 0;
   }
 }

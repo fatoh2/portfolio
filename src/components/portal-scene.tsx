@@ -15,6 +15,14 @@ export function PortalScene() {
         <circle cx="1348" cy="300" r="6" fill="#c8ff34" />
         <circle cx="236" cy="612" r="6" fill="#c8ff34" />
       </svg>
+      {/* The same orbit for a portrait stage: tall, tilted with the fan of phones, shown under 760px. */}
+      <svg className="scene-orbit scene-orbit-portrait" viewBox="0 0 900 1600" aria-hidden="true" data-portal-depth="0.4">
+        <g transform="rotate(-24 450 760)">
+          <ellipse cx="450" cy="760" rx="620" ry="330" fill="none" stroke="#c8ff34" strokeWidth="3" />
+          <circle cx="1010" cy="620" r="9" fill="#c8ff34" />
+          <circle cx="-80" cy="920" r="9" fill="#c8ff34" />
+        </g>
+      </svg>
       <div className="scene-device scene-laptop" data-portal-depth="1">
         <div className="scene-screen">
           <Image
