@@ -27,6 +27,19 @@
   is capped so they clear the stage floor on short screens. Checked at 375×812 and 360×640 at rest and at the
   end of the pan; lint passes.
 
+- 2026-10-24 (later) — **Portal phones higher, Saqroon rendered from today's app.** Owner: the phones should sit
+  higher even if they touch the laptop, and the Saqroon and SOLitaire stills were old. The phones now start
+  3cqh above the laptop's bottom edge (22px over it at rest on a 375 phone) and are a little wider. **Saqroon**:
+  the journey and question screens were re-rendered with the app's own store-shot test from an isolated copy of
+  the working tree (the repo itself is mid-edit by Codex: Sunshine & Sky palette and the Nuqta Kids return), so
+  the portal phone and the lab now show the blue-and-yellow palette; new dated filenames
+  (`saqroon-*-ar-20261024.png`), the 20261020 files stay. Flutter SDK found at
+  `~/.cache/focusquest-tools/flutter`. **SOLitaire**: the Classic-table still was checked against production
+  (app.sol-solitaire.com, captured today, pixel diff 1.8 on a 200px thumbnail, the old court capture scores 22)
+  and against what fhaj.dev serves (same bytes, `Cache-Control: max-age=0, must-revalidate`, so no stale cache):
+  it is the current production table. staging.sol-solitaire.com serves the landing site, not the game, so no
+  newer public table exists to capture; left as is pending the owner saying what they compare it with.
+
 - 2026-10-24 — **Captures refreshed where the products changed.** Owner's ask: most apps and sites had moved on
   since their captures. Checked every sibling repo's commits since its capture date and each live site, then
   retook only what changed, from production with headless Chromium (desktop 1440×900 @2x, phone 390×844 @2x,

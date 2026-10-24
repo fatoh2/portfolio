@@ -1879,18 +1879,18 @@ html[dir="rtl"]
    * bottom) so their position follows the laptop's height, which depends on
    * the stage width; container units make that cross-axis math possible.
    * Their width is capped so they still fit above the stage floor on short
-   * screens. The pan lifts the nearer phones ~50px more than the laptop, so
-   * the gap below the laptop is sized to absorb that.
+   * screens. The owner wants them high: they start just over the laptop's
+   * bottom edge, and the pan lifts them a little further onto it.
    */
   .home-page .portal-scene-stage {
     container-type: size;
     --scene-laptop-top: 6cqh;
     /* 92cqw wide at 16:10 → 57.5cqw tall (border-box, so borders are included). */
     --scene-laptop-bottom: calc(var(--scene-laptop-top) + 57.5cqw);
-    --scene-phone-top: calc(var(--scene-laptop-bottom) + 6cqh);
+    --scene-phone-top: calc(var(--scene-laptop-bottom) - 3cqh);
     /* 9:19.5 → height is 2.1667 × width; keep the bottom 6cqh clear. */
     --scene-phone-width: min(
-      36cqw,
+      38cqw,
       calc((94cqh - var(--scene-phone-top)) / 2.1667)
     );
     background: radial-gradient(ellipse at 50% 40%, #171a14 0%, #0b0b0b 65%);

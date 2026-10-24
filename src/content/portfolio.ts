@@ -790,13 +790,13 @@ export const focusQuest = {
       fit: "contain",
     },
     {
-      src: "/labs/saqroon/saqroon-journey-ar-20261020.png", width: 1170, height: 2532,
+      src: "/labs/saqroon/saqroon-journey-ar-20261024.png", width: 1170, height: 2532,
       alt: tx("Saqroon’s Arabic learning journey with a maths unit, progress path and Saqr", "رحلة التعلّم في صقرون بالعربية، مع وحدة رياضيات ومسار التقدّم وصقر", "מסע הלמידה של סקרון בערבית, עם יחידת מתמטיקה, מסלול התקדמות וסקר"),
       caption: tx("Learning journey · development preview", "رحلة التعلّم · معاينة تطوير", "מסע למידה · תצוגת פיתוח"),
       fit: "contain",
     },
     {
-      src: "/labs/saqroon/saqroon-quest-ar-20261020.png", width: 1170, height: 2532,
+      src: "/labs/saqroon/saqroon-quest-ar-20261024.png", width: 1170, height: 2532,
       alt: tx("An Arabic maths quest in Saqroon with a fraction diagram and four answer choices", "مهمة رياضيات بالعربية في صقرون، مع رسم يوضّح الكسور وأربعة خيارات للإجابة", "משימת מתמטיקה בערבית בסקרון, עם תרשים שברים וארבע תשובות לבחירה"),
       caption: tx("Visual maths · development preview", "رياضيات مصوّرة · معاينة تطوير", "מתמטיקה חזותית · תצוגת פיתוח"),
       fit: "contain",

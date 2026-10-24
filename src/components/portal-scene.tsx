@@ -44,7 +44,7 @@ export function PortalScene() {
       <div className="scene-device scene-phone scene-phone-a" data-portal-depth="1.7">
         <div className="scene-screen">
           <Image
-            src="/labs/saqroon/saqroon-journey-ar-20261020.png"
+            src="/labs/saqroon/saqroon-journey-ar-20261024.png"
             alt="Saqroon's learning journey on a phone"
             width={1170}
             height={2532}
