@@ -84,7 +84,7 @@ export const demoAreas: DemoArea[] = [
   { id: "kufr-kanna", name: { ar: "كفر كنا", en: "Kafr Kanna", he: "כפר כנא" }, fee: 15, aliases: ["كفر كنا", "kafr kanna", "kufr kanna", "כפר כנא"] },
 ];
 
-const normalize = (text: string) =>
+export const normalize = (text: string) =>
   text
     .toLowerCase()
     .replace(/[ً-ْـ]/g, "")

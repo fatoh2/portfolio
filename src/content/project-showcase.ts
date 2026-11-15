@@ -19,6 +19,9 @@ type ProjectShowcase = {
 };
 
 export const projectShowcases: Record<string, ProjectShowcase> = {
+  "camp-and-hike": { desktopRatio: "1440 / 900", mobileIndex: 1, mobileRatio: "390 / 844", details: [] },
+  "nedaa-lifestyle": { desktopRatio: "390 / 844", mobileIndex: 0, mobileRatio: "390 / 844", details: [] },
+  "lulu-tokki": { desktopRatio: "1440 / 900", mobileIndex: 1, mobileRatio: "390 / 844", details: [] },
   "whatsapp-ai-sales-agent": { desktopRatio: "1440 / 1000", mobileIndex: 1, mobileRatio: "390 / 844", details: [] },
   bab: { loops: true, desktopRatio: "1440 / 900", mobileIndex: 1, mobileRatio: "390 / 844", details: [] },
   darbak: { desktopRatio: "1440 / 900", mobileIndex: 1, mobileRatio: "390 / 844", details: [] },
