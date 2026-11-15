@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>F · The table (PROTOTYPE)</title>
+<!-- PROTOTYPE, throwaway. Concept F: the card table from his own SOLitaire. The work is a hand dealt
+     face down; the visitor turns it over, one card or one suit at a time. -->
+<link rel="stylesheet" href="shared.css">
+<style>
+main{display:grid;grid-template-columns:1fr minmax(280px,380px);gap:32px 40px;padding:clamp(40px,7vh,80px) var(--gut) 96px}
+header{grid-column:1/-1}
+header .lead{margin:20px 0 24px;color:var(--soft-dark)}
+.calls{display:flex;flex-wrap:wrap;gap:8px}
+.calls .deal{background:var(--acid);color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(8px,1.4vw,18px);perspective:1400px;align-content:start}
+.cards li{rotate:var(--tilt);animation:deal .5s var(--ease) both;animation-delay:calc(var(--n)*40ms)}
+@keyframes deal{from{opacity:0;transform:translate(40%,-60%) rotate(14deg) scale(.9)}to{opacity:1;transform:none}}
+.cardb{display:block;width:100%;aspect-ratio:5/7;border:0;padding:0;background:none;cursor:pointer}
+.cardb .in{position:relative;display:block;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s var(--io)}
+.cardb[aria-pressed=true] .in{transform:rotateY(180deg)}
+.cardb:active .in{scale:.97}
+.back,.front{position:absolute;inset:0;border-radius:12px;overflow:hidden;backface-visibility:hidden}
+.back{display:grid;place-items:center;background:var(--acid);color:var(--ink)}
+.back [data-mark]{width:54%}
+.front{display:flex;flex-direction:column;background:var(--paper);color:var(--ink);transform:rotateY(180deg)}
+.front img{flex:1;min-height:0;width:100%;object-fit:cover;object-position:top}
+.front b{padding:6px 8px 8px;font-size:clamp(11px,1.1vw,14px);font-weight:600;line-height:1.2;text-align:start}
+.cardb.held .front{outline:4px solid var(--acid);outline-offset:-4px}
+
+.hand{position:sticky;top:24px;align-self:start;display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:24px;background:var(--ink-2)}
+.hand img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:14px;background:var(--ink-3)}
+.hand h2{font-size:clamp(26px,3vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1.05}
+.hand p{color:var(--soft-dark)}
+.hand .btn{align-self:flex-start}
+.hand.empty img,.hand.empty .btn{display:none}
+
+@media (max-width:900px){
+  main{grid-template-columns:1fr;padding-bottom:200px}
+  .cards{grid-template-columns:repeat(3,1fr)}
+  .hand{position:fixed;z-index:20;inset:auto 8px calc(var(--bar) + 8px);top:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 12px;padding:12px}
+  .hand img{width:72px;aspect-ratio:1;border-radius:10px}
+  .hand div{flex:1;min-width:0}
+  .hand h2{font-size:20px}.hand p{font-size:15px}
+  .hand .btn{min-height:44px;padding:0 18px}
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1 class="display">Play a hand.</h1>
+    <p class="lead">Twelve projects, dealt face down. Turn one over, or call a suit.</p>
+    <div class="calls">
+      <button class="chip" data-call="live">Live · 6</button>
+      <button class="chip" data-call="apk">Installable · 4</button>
+      <button class="chip" data-call="all">Turn all</button>
+      <button class="chip deal" id="deal">Deal again</button>
+    </div>
+  </header>
+  <ul class="cards" id="cards"></ul>
+  <aside class="hand empty" id="hand" aria-live="polite">
+    <img id="hi" src="../../../../public/work/elsewhereco/desktop.webp" alt="">
+    <div><h2 id="ht">Nothing turned yet</h2><p id="hp">Tap any card.</p></div>
+    <a class="btn" id="hl" target="_blank" rel="noopener">Open</a>
+  </aside>
+</main>
+<script src="shared.js"></script>
+<script>
+const $ = s => document.querySelector(s), cards = $('#cards'), hand = $('#hand');
+function hold(b) {
+  const p = PROJECTS[b.dataset.i];
+  cards.querySelector('.held')?.classList.remove('held'); b.classList.add('held');
+  hand.classList.remove('empty');
+  $('#hi').src = PUB + p.img; $('#ht').textContent = p.title;
+  $('#hp').textContent = [STATUS[p.status], p.apk && 'Android build', p.now && `Now: ${p.now}`].filter(Boolean).join('. ') + '.';
+  $('#hl').href = p.url ?? `https://fhaj.dev/en/work/${p.slug}`;
+  $('#hl').textContent = p.url ? 'Visit live product' : 'Read the case';
+}
+function turn(b, up = b.getAttribute('aria-pressed') !== 'true') {
+  b.setAttribute('aria-pressed', up);
+  b.setAttribute('aria-label', up ? PROJECTS[b.dataset.i].title : 'Face-down card');
+  if (up) hold(b);
+}
+function deal() {
+  const order = PROJECTS.map((_, i) => i).sort(() => Math.random() - .5);
+  cards.innerHTML = order.map((i, n) => `<li style="--n:${n};--tilt:${(Math.random() * 5 - 2.5).toFixed(1)}deg">
+    <button class="cardb" data-i="${i}" aria-pressed="false" aria-label="Face-down card"><span class="in">
+      <span class="back"><span data-mark>${markSvg()}</span></span>
+      <span class="front"><img src="${PUB + PROJECTS[i].img}" alt="" loading="lazy"><b>${PROJECTS[i].title}</b></span>
+    </span></button></li>`).join('');
+  hand.classList.add('empty'); $('#ht').textContent = 'Nothing turned yet'; $('#hp').textContent = 'Tap any card.';
+}
+cards.addEventListener('click', e => { const b = e.target.closest('.cardb'); if (b) turn(b); });
+$('#deal').addEventListener('click', deal);
+document.querySelectorAll('[data-call]').forEach(c => c.addEventListener('click', () => {
+  const want = { live: p => p.status === 'live', apk: p => p.apk, all: () => true }[c.dataset.call];
+  [...cards.querySelectorAll('.cardb')].filter(b => want(PROJECTS[b.dataset.i]))
+    .forEach((b, n) => setTimeout(() => turn(b, true), n * 60));
+}));
+deal();
+</script>
+</body>
+</html>

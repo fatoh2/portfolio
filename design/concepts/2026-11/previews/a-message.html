@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A · Follow one message (PROTOTYPE)</title>
+<!-- PROTOTYPE, throwaway. Concept A: one customer message is the route through the whole site.
+     Send a message, then scroll: every layer shows what the real rules layer did with it. -->
+<link rel="stylesheet" href="shared.css">
+<style>
+.s{position:relative;min-height:calc(100svh - var(--bar));padding:clamp(88px,12vh,128px) var(--gut) 72px;display:flex;flex-direction:column;justify-content:center;gap:28px}
+.step{padding-inline-start:calc(var(--gut) + 208px)}
+.step>*{opacity:0}
+.step.in>*{animation:rise .7s var(--ease) both}
+.step.in>:nth-child(2){animation-delay:.06s}.step.in>:nth-child(3){animation-delay:.12s}
+
+.hero{display:grid;grid-template-columns:1.25fr minmax(300px,360px);gap:48px;align-items:center}
+.hero>*{min-width:0}
+.hero h1{font-size:clamp(36px,5.8vw,84px)}
+.hero .lead{margin-top:28px;color:var(--soft-dark)}
+.phone{display:flex;flex-direction:column;gap:14px;min-height:380px;padding:24px;border-radius:36px;background:var(--ink-2)}
+.who{font-size:15px;color:var(--soft-dark)}
+.log{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:10px}
+.log small{align-self:flex-end;font-size:14px;color:var(--soft-dark)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.write{display:flex;gap:8px}
+.write input{flex:1;min-width:0;height:52px;padding:0 20px;border:0;border-radius:999px;background:var(--paper);color:var(--ink);font-weight:600}
+
+.channel{background:var(--ink-2)}
+.channel .lead,.cluster .lead,.reply .lead{color:var(--soft-dark)}
+.got{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.got .bub{align-self:auto;font-size:clamp(22px,3vw,34px);max-width:22ch}
+.got span{font-size:16px;color:var(--soft-dark)}
+.rules{background:var(--acid);color:var(--ink)}
+.trace{width:min(100%,560px);padding:10px 28px;border-radius:24px;background:var(--ink);color:var(--paper)}
+.trace div{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:14px 0}
+.trace dt{font-size:16px;color:var(--soft-dark)}
+.trace dd{font-size:19px;font-weight:600;text-align:end}
+.product{background:var(--paper);color:var(--ink)}
+.shots{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:8px}
+.shots figure{flex:none;width:min(76vw,420px);scroll-snap-align:start}
+.shots img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:18px;background:var(--paper-2)}
+.shots figcaption{margin-top:10px;font-weight:600}
+.pods{display:grid;gap:10px}
+.pods div{display:flex;align-items:center;gap:10px}
+.pods span{width:76px;font-weight:600;color:var(--soft-dark)}
+.pods i{width:clamp(36px,7vw,56px);aspect-ratio:1;border-radius:14px;background:var(--ink-3)}
+@keyframes lit{from{background:var(--ink-3)}to{background:var(--acid)}}
+.cluster.in .hot{animation:lit .4s var(--ease) both}
+.cluster.in div:nth-child(1) .hot{animation-delay:.5s}.cluster.in div:nth-child(2) .hot{animation-delay:.9s}.cluster.in div:nth-child(3) .hot{animation-delay:1.3s}
+.reply .bub{font-size:clamp(22px,3vw,34px);max-width:24ch;align-self:flex-start}
+.reply .row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* the rail: where the message is right now */
+.rail{position:fixed;z-index:10;inset:0 auto var(--bar) 0;width:200px;padding:clamp(88px,12vh,128px) 0 0 var(--gut);background:var(--ink);transform:translateX(-100%);transition:transform .5s var(--io)}
+.rail.on{transform:none}
+.rail ol{position:relative}
+.rail li{height:88px;padding-inline-start:38px;font-weight:600;color:var(--soft-dark)}
+.rail i{position:absolute;inset:1px auto auto 0;width:22px;height:22px;border-radius:50%;background:var(--acid);transform:translateY(calc(var(--i,0)*88px));transition:transform .5s var(--io)}
+
+@media (max-width:1100px){.hero{grid-template-columns:1fr}}
+@media (max-width:760px){
+  .hero{gap:32px;padding-top:56px}
+  .step{padding-inline-start:var(--gut)}
+  .rail{inset:0 0 auto 0;width:auto;height:52px;padding:0;transform:translateY(-100%)}
+  .rail ol{display:flex;height:100%}
+  .rail li{flex:1;height:auto;padding:0;display:grid;place-items:center;font-size:15px}
+  .rail i{inset:auto auto 0 0;width:25%;height:4px;border-radius:2px;transform:translateX(calc(var(--i,0)*100%))}
+}
+@media (prefers-reduced-motion:reduce){.step>*{opacity:1}}
+</style>
+</head>
+<body>
+<nav class="rail" aria-label="Where the message is">
+  <ol><li>Channel</li><li>Rules</li><li>Product</li><li>Cluster</li><i aria-hidden="true"></i></ol>
+</nav>
+<main>
+  <section class="s hero" id="top">
+    <div>
+      <h1 class="display">The whole system.<br>One engineer.</h1>
+      <p class="lead">Send one customer message and follow it through everything I build: the channel, the rules, the product, the servers.</p>
+    </div>
+    <form class="phone" id="composer">
+      <p class="who">A customer, on WhatsApp</p>
+      <div class="log" id="log" aria-live="polite"></div>
+      <div class="chips">
+        <button type="button" class="chip" data-msg="Do you deliver to Haifa?">Do you deliver to Haifa?</button>
+        <button type="button" class="chip" lang="he" data-msg="כמה עולה בקלאווה?">כמה עולה בקלאווה?</button>
+        <button type="button" class="chip" data-msg="I want a refund">I want a refund</button>
+      </div>
+      <div class="write">
+        <label class="vh" for="msg">Customer message</label>
+        <input id="msg" dir="auto" value="بكم الكنافة؟" autocomplete="off">
+        <button class="btn">Send</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="s step channel" data-step="0">
+    <h2 class="display">Channel</h2>
+    <p class="lead">It lands on WhatsApp or Telegram. One agent serves both, and it reads the language before anything else.</p>
+    <div class="got"><p class="bub cust" dir="auto" data-out="msg"></p><span data-out="lang"></span></div>
+  </section>
+
+  <section class="s step rules" data-step="1">
+    <h2 class="display">Rules</h2>
+    <p class="lead">Rules decide what may be said before any model phrases it. This preview runs the rules alone, on the message you sent.</p>
+    <dl class="trace">
+      <div><dt>Intent</dt><dd data-out="intent"></dd></div>
+      <div><dt>Looked up</dt><dd data-out="lookup"></dd></div>
+      <div><dt>Source</dt><dd data-out="source"></dd></div>
+      <div><dt>Human takeover</dt><dd data-out="takeover"></dd></div>
+    </dl>
+  </section>
+
+  <section class="s step product" data-step="2">
+    <h2 class="display">Product</h2>
+    <p class="lead">The same engineer builds what the customer opens next: the booking site, the app, the owner's dashboard.</p>
+    <div class="shots" id="shots" tabindex="0" aria-label="Product captures"></div>
+  </section>
+
+  <section class="s step cluster" data-step="3">
+    <h2 class="display">Cluster</h2>
+    <p class="lead">And runs it. Kubernetes, Terraform and ArgoCD are the other half of the CV.</p>
+    <div class="pods" aria-hidden="true">
+      <div><span>API</span><i></i><i class="hot"></i><i></i><i></i></div>
+      <div><span>Worker</span><i></i><i></i><i class="hot"></i><i></i></div>
+      <div><span>Web</span><i class="hot"></i><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <section class="s reply" id="reply">
+    <h2 class="display">Back on the phone.</h2>
+    <p class="bub agent" dir="auto" data-out="reply"></p>
+    <p class="lead" data-out="from"></p>
+    <div class="row"><a class="btn" href="#" id="wa">Now send me yours</a><a class="chip" href="#top" style="display:inline-flex;align-items:center;text-decoration:none">Send another</a></div>
+  </section>
+</main>
+<script src="shared.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const LANG = { ar: 'Read as Arabic, right to left', he: 'Read as Hebrew, right to left', en: 'Read as English, left to right' };
+$('#wa').href = WHATSAPP;
+$('#shots').innerHTML = ['elsewhereco', 'bab', 'nedaa-lifestyle'].map(s => PROJECTS.find(p => p.slug === s))
+  .map(p => `<figure><img src="${PUB + p.img}" alt="${p.title} screen capture" loading="lazy"><figcaption>${p.title} · ${STATUS[p.status]}</figcaption></figure>`).join('');
+
+function run(text, sent) {
+  const r = reply(text), set = (k, v) => document.querySelectorAll(`[data-out="${k}"]`).forEach(e => { e.textContent = v; });
+  set('msg', text); set('lang', LANG[r.language]); set('intent', r.intent);
+  set('lookup', r.source ? r.source.label.en : 'nothing');
+  set('source', r.source ? r.source.id : 'none approved');
+  set('takeover', r.handoff ? r.handoff.replaceAll('_', ' ') : 'not needed');
+  set('reply', r.text);
+  set('from', r.handoff ? 'Held for a person. The agent says it will check, and the owner gets the thread.'
+    : r.source ? `Answered from ${r.source.id}, the shop's own list.` : 'No lookup was needed for this one.');
+  if (!sent) return;
+  $('#log').innerHTML = `<p class="bub cust pop" dir="auto"></p><small>Sent. Scroll to follow it.</small>`;
+  $('#log p').textContent = text;
+  setTimeout(() => $('.channel').scrollIntoView({ behavior: 'smooth' }), 800);
+}
+$('#composer').addEventListener('submit', e => { e.preventDefault(); const t = $('#msg').value.trim(); if (t) run(t, true); });
+document.querySelectorAll('[data-msg]').forEach(b => b.addEventListener('click', () => { $('#msg').value = b.dataset.msg; run(b.dataset.msg, true); }));
+run($('#msg').value, false);
+
+// the rail follows whichever section crosses the middle of the screen
+const rail = $('.rail');
+const middle = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  const i = e.target.dataset.step;
+  rail.classList.toggle('on', i !== undefined);
+  if (i !== undefined) rail.style.setProperty('--i', i);
+}), { rootMargin: '-50% 0px -50% 0px' });
+document.querySelectorAll('.s').forEach(s => middle.observe(s));
+const seen = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: .3 });
+document.querySelectorAll('.step').forEach(s => seen.observe(s));
+</script>
+</body>
+</html>

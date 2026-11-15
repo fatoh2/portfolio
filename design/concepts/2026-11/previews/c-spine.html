@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C · The spine (PROTOTYPE)</title>
+<!-- PROTOTYPE, throwaway. Concept C: three scripts on one sheet folded on a spine.
+     English reads in from the left, Arabic and Hebrew from the right; changing language turns the sheet.
+     The Arabic and Hebrew headlines are drafts and need the owner's read. -->
+<link rel="stylesheet" href="shared.css">
+<style>
+body{background:var(--acid);color:var(--ink)}
+.meet{display:grid;grid-template-columns:1fr 72px 1fr;min-height:calc(100svh - var(--bar))}
+.leaf{display:flex;flex-direction:column;justify-content:center;gap:24px;padding:72px var(--gut)}
+.leaf.en{align-items:flex-start;animation:fromL .9s var(--ease) both}
+.leaf.rtl{animation:fromR .9s var(--ease) both}
+@keyframes fromL{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:none}}
+@keyframes fromR{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:none}}
+.leaf.en .display{font-size:clamp(34px,4.4vw,64px)}
+.leaf .ar{font-size:clamp(40px,5.4vw,80px);line-height:1.18}
+.leaf .he{font-size:clamp(28px,3.6vw,54px);line-height:1.1}
+.spine{display:flex;flex-direction:column;align-items:center;gap:20px;padding:24px 0;background:var(--ink);color:var(--acid)}
+.spine [data-mark]{width:52px}
+.spine p{writing-mode:vertical-rl;font-weight:600;color:var(--paper)}
+
+.turn{display:flex;flex-direction:column;gap:24px;padding:96px var(--gut) 112px;background:var(--paper)}
+.langs{display:flex;gap:8px}
+.langs button{min-height:48px;padding:0 20px;border:0;border-radius:999px;background:var(--paper-2);color:var(--ink);font-weight:600;cursor:pointer}
+.langs [aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.wrap{perspective:1600px}
+.sheet{display:flex;align-items:center;gap:clamp(20px,3vw,40px);padding:clamp(16px,2.4vw,28px);border-radius:28px;background:var(--ink);color:var(--paper)}
+.sheet img{flex:none;width:46%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:16px}
+.sheet h3{font-size:clamp(30px,4.4vw,56px);font-weight:800;letter-spacing:-.04em;line-height:1.05}
+.sheet .cat{margin:8px 0 14px;font-weight:600;color:var(--acid)}
+.sheet .sum{color:var(--soft-dark);max-width:32em}
+.sheet .btn{margin-top:22px}
+.note{font-size:15px;color:var(--soft-light)}
+
+@media (max-width:760px){
+  .meet{grid-template-columns:1fr;grid-template-rows:1fr 64px 1fr}
+  .leaf{padding:40px var(--gut)}
+  .spine{flex-direction:row;justify-content:center;padding:0 var(--gut)}
+  .spine [data-mark]{width:44px}
+  .spine p{writing-mode:horizontal-tb}
+  .sheet{flex-direction:column;align-items:stretch}
+  .sheet img{width:100%}
+}
+</style>
+</head>
+<body>
+<main>
+  <section class="meet">
+    <div class="leaf en">
+      <h1 class="display">The whole system.<br>One engineer.</h1>
+      <p class="lead">Agents, apps and the servers under them, built by one person and shipped in three languages.</p>
+      <a class="btn ink" id="wa" href="#">Message me on WhatsApp</a>
+    </div>
+    <div class="spine"><span data-mark></span><p>fhaj.dev</p></div>
+    <div class="leaf rtl" dir="rtl">
+      <p class="display ar" lang="ar">النظام كله. مهندس واحد.</p>
+      <p class="display he" lang="he">כל המערכת. מהנדס אחד.</p>
+    </div>
+  </section>
+
+  <section class="turn">
+    <h2 class="display">Turn the page.</h2>
+    <p class="lead">Every product here ships in both reading directions. Pick a language and the sheet turns on its spine and arrives mirrored.</p>
+    <div class="langs" role="group" aria-label="Language">
+      <button data-l="en" aria-pressed="true">English</button>
+      <button data-l="ar" lang="ar" aria-pressed="false">العربية</button>
+      <button data-l="he" lang="he" aria-pressed="false">עברית</button>
+    </div>
+    <div class="wrap">
+      <article class="sheet" id="sheet">
+        <img src="../../../../public/work/camp-and-hike/desktop.webp" alt="Camp &amp; Hike Arabic homepage over a mountain landscape">
+        <div>
+          <h3>Camp &amp; Hike</h3>
+          <p class="cat" data-t="cat"></p>
+          <p class="sum" data-t="sum"></p>
+          <a class="btn" data-t="cta" href="https://camp-and-hike.vercel.app/" target="_blank" rel="noopener"></a>
+        </div>
+      </article>
+    </div>
+    <p class="note">The words on the sheet are the live site's own copy for this project, in each language.</p>
+  </section>
+</main>
+<script src="shared.js"></script>
+<script>
+const $ = s => document.querySelector(s), sheet = $('#sheet');
+$('#wa').href = WHATSAPP;
+const T = { // from src/content/portfolio.ts
+  en: { cat: 'Multilingual commerce & booking', cta: 'Visit live product', sum: 'An Arabic-first adventure platform combining trips, commerce, content, payments, and complete administration across three languages.' },
+  ar: { cat: 'تجارة وحجوزات متعددة اللغات', cta: 'زيارة المنتج', sum: 'منصة مغامرات تبدأ بالعربية وتجمع الرحلات والتجارة والمحتوى والدفع والإدارة الكاملة بثلاث لغات.' },
+  he: { cat: 'מסחר והזמנות רב-לשוניים', cta: 'למוצר החי', sum: 'פלטפורמת הרפתקאות שמתחילה בערבית ומשלבת טיולים, מסחר, תוכן, תשלומים וניהול מלא בשלוש שפות.' },
+};
+function show(l) {
+  sheet.lang = l; sheet.dir = l === 'en' ? 'ltr' : 'rtl';
+  sheet.querySelectorAll('[data-t]').forEach(e => { e.textContent = T[l][e.dataset.t]; });
+  document.querySelectorAll('.langs button').forEach(b => b.setAttribute('aria-pressed', b.dataset.l === l));
+}
+let busy = false;
+async function turn(l) {
+  if (busy || sheet.lang === l) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return show(l);
+  busy = true;
+  const d = l === 'en' ? -90 : 90; // right-to-left pages turn the other way
+  await sheet.animate({ transform: ['rotateY(0)', `rotateY(${d}deg)`] }, { duration: 260, easing: 'cubic-bezier(.77,0,.175,1)' }).finished;
+  show(l);
+  await sheet.animate({ transform: [`rotateY(${-d}deg)`, 'rotateY(0)'] }, { duration: 340, easing: 'cubic-bezier(.23,1,.32,1)' }).finished;
+  busy = false;
+}
+document.querySelectorAll('.langs button').forEach(b => b.addEventListener('click', () => turn(b.dataset.l)));
+show('en');
+</script>
+</body>
+</html>

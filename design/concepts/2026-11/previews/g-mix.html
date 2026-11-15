@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>G · The mix (PROTOTYPE)</title>
+<!-- PROTOTYPE, throwaway. The mix the owner asked for on 2026-11-10, each idea with one job:
+     C is the frame (a folded sheet, lying on F's card table since the owner asked for more than one colour), B is how you ask, D is how things open (through the eye
+     of the ف, with no title), A is the story down the scroll, F is the work.
+     The catalog is his own twelve projects. The sweets shop appears only inside the WhatsApp agent's
+     card, because it is that product's demo. Rules only, no model.
+     Headline chosen by the owner on 2026-11-10 from three candidates (see REVIEW-2026-11.md, section 10).
+     Its Arabic and Hebrew versions are drafts and need the owner's read. -->
+<link rel="stylesheet" href="shared.css">
+<style>
+/* 1. first screen: the spine (C), the question (B), and the opening in the mark (D) */
+.open{position:relative;height:300svh}
+.stage{position:sticky;top:0;height:calc(100svh - var(--bar));overflow:hidden}
+.stage>img,.stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.stage>img{object-fit:cover;object-position:top}
+.stage canvas{z-index:1}
+/* the table (F) with a folded sheet on it (C): a paper leaf read from the left, an acid leaf read from the right */
+.meet{position:relative;z-index:2;display:grid;place-items:center;height:100%;padding:0 var(--gut)}
+.felt{position:absolute;inset:0;perspective:1400px}
+.felt li{position:absolute;left:var(--x);top:var(--y);width:clamp(96px,10vw,150px);rotate:var(--r);animation:deal .6s var(--ease) both;animation-delay:calc(var(--n)*70ms + .3s)}
+.fold{position:relative;z-index:1;display:grid;grid-template-columns:1fr 96px 1fr;width:min(1180px,100%);perspective:1800px}
+.leaf{display:flex;flex-direction:column;justify-content:center;gap:18px;min-width:0;padding:clamp(24px,3vw,40px);color:var(--ink)}
+.leaf.en{border-radius:28px 6px 6px 28px;background:var(--paper);transform-origin:right center;transform:rotateY(4deg);animation:unL .9s var(--ease) both}
+.leaf.rtl{border-radius:6px 28px 28px 6px;background:var(--acid);transform-origin:left center;transform:rotateY(-4deg);animation:unR .9s var(--ease) both}
+@keyframes unL{from{opacity:0;transform:rotateY(70deg)}}
+@keyframes unR{from{opacity:0;transform:rotateY(-70deg)}}
+.leaf.en .display{font-size:clamp(30px,3.6vw,52px)}
+.leaf .ar{font-size:clamp(36px,4.4vw,64px);line-height:1.18}
+.leaf .he{font-size:clamp(26px,3vw,44px);line-height:1.1}
+.leaf .lead{font-size:clamp(16px,1.5vw,19px)}
+.spine{display:grid;place-items:center;color:var(--acid)}
+#seat{width:72px}
+.moving .spine{visibility:hidden} /* the canvas draws the mark in the fold, so its eye can open */
+.ask{display:flex;flex-direction:column;gap:10px;min-width:0}
+.log{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.log .bub{padding:10px 16px;font-size:17px}
+.log .bub.cust{background:var(--acid)}
+.log .bub.agent{background:var(--ink);color:var(--acid)}.log small{font-size:15px;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.write{display:flex;gap:6px;padding:6px;border-radius:999px;background:var(--ink)}
+.write input{flex:1;min-width:0;height:48px;padding:0 16px;border:0;border-radius:999px;background:none;color:var(--paper);font-weight:600}
+.write input::placeholder{color:var(--soft-dark)}
+.write .btn{min-height:48px}
+.cap{position:absolute;z-index:3;inset:auto var(--gut) 24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;color:var(--paper);opacity:0}
+.cap b{padding:12px 20px;border-radius:999px;background:var(--ink);font-weight:600}
+
+/* 2. the message travels (A) */
+.s{position:relative;min-height:calc(100svh - var(--bar));padding:clamp(88px,12vh,128px) var(--gut) 72px;display:flex;flex-direction:column;justify-content:center;gap:28px}
+.step{padding-inline-start:calc(var(--gut) + 208px)}
+.step>*{opacity:0}
+.step.in>*{animation:rise .7s var(--ease) both}
+.step.in>:nth-child(2){animation-delay:.06s}.step.in>:nth-child(3){animation-delay:.12s}
+.channel{background:var(--ink-2)}
+.channel .lead,.cluster .lead,.reply .lead,.table .lead{color:var(--soft-dark)}
+.got{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.got .bub{align-self:auto;font-size:clamp(22px,3vw,34px);max-width:22ch}
+.got span{font-size:16px;color:var(--soft-dark)}
+.rules{background:var(--acid);color:var(--ink)}
+.trace{width:min(100%,560px);padding:10px 28px;border-radius:24px;background:var(--ink);color:var(--paper)}
+.trace div{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:14px 0}
+.trace dt{font-size:16px;color:var(--soft-dark)}
+.trace dd{font-size:19px;font-weight:600;text-align:end}
+.product{background:var(--paper);color:var(--ink)}
+.shots{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:8px}
+.shot{flex:none;width:min(76vw,420px);border:0;padding:0;background:none;color:inherit;text-align:start;cursor:pointer;scroll-snap-align:start}
+.shot img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:18px;background:var(--paper-2)}
+.shot b{display:block;margin-top:10px;font-weight:600}
+.pods{display:grid;gap:10px}
+.pods div{display:flex;align-items:center;gap:10px}
+.pods span{width:76px;font-weight:600;color:var(--soft-dark)}
+.pods i{width:clamp(36px,7vw,56px);aspect-ratio:1;border-radius:14px;background:var(--ink-3)}
+@keyframes lit{from{background:var(--ink-3)}to{background:var(--acid)}}
+.cluster.in .hot{animation:lit .4s var(--ease) both}
+.cluster.in div:nth-child(1) .hot{animation-delay:.5s}.cluster.in div:nth-child(2) .hot{animation-delay:.9s}.cluster.in div:nth-child(3) .hot{animation-delay:1.3s}
+.rail{position:fixed;z-index:10;inset:0 auto var(--bar) 0;width:200px;padding:clamp(88px,12vh,128px) 0 0 var(--gut);background:var(--ink);transform:translateX(-100%);transition:transform .5s var(--io)}
+.rail.on{transform:none}
+.rail ol{position:relative}
+.rail li{height:88px;padding-inline-start:38px;font-weight:600;color:var(--soft-dark)}
+.rail i{position:absolute;inset:1px auto auto 0;width:22px;height:22px;border-radius:50%;background:var(--acid);transform:translateY(calc(var(--i,0)*88px));transition:transform .5s var(--io)}
+
+/* 3. the work (F): one tap turns a card and opens it */
+.table{justify-content:flex-start;gap:20px}
+.calls{display:flex;flex-wrap:wrap;gap:8px}
+.calls .deal{background:var(--acid);color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(8px,1.4vw,18px);perspective:1400px;max-width:1100px}
+.cards li{rotate:var(--tilt);opacity:0}
+.table.in .cards li{animation:deal .5s var(--ease) both;animation-delay:calc(var(--n)*40ms)}
+@keyframes deal{from{opacity:0;transform:translate(40%,-60%) rotate(14deg) scale(.9)}to{opacity:1;transform:none}}
+.cardb{display:block;width:100%;aspect-ratio:5/7;border:0;padding:0;background:none;cursor:pointer}
+.cardb .in{position:relative;display:block;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s var(--io)}
+.cardb[aria-pressed=true] .in{transform:rotateY(180deg)}
+.cardb:active .in{scale:.97}
+.back,.front{position:absolute;inset:0;border-radius:12px;overflow:hidden;backface-visibility:hidden}
+.back{display:grid;place-items:center;background:var(--acid);color:var(--ink)}
+.back [data-mark]{width:54%}
+.front{display:flex;flex-direction:column;gap:6px;padding:6px;background:var(--paper);color:var(--ink);transform:rotateY(180deg)}
+/* the eye of the ف again: three round corners and one square */
+.front img{flex:1;min-height:0;width:100%;object-fit:cover;object-position:top;border-radius:34% 36% 0 22%/30% 32% 0 20%}
+.front b{font-size:clamp(11px,1.1vw,14px);font-weight:600;line-height:1.2;text-align:start}
+
+/* a card opens from where it was touched (D), onto a sheet that turns on its spine (C) */
+dialog{width:100vw;max-width:none;height:100svh;max-height:none;margin:0;border:0;padding:0 var(--gut) 40px;background:var(--paper);color:var(--ink);overflow-y:auto}
+dialog::backdrop{background:none}
+.bar{position:sticky;z-index:1;top:0;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:16px 0;background:var(--paper)}
+.langs{display:flex;gap:6px}
+.langs button{min-height:48px;padding:0 16px;border:0;border-radius:999px;background:var(--paper-2);color:var(--ink);font-weight:600;cursor:pointer}
+.langs [aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.wrap{display:grid;align-items:center;min-height:calc(100svh - 136px);perspective:1600px}
+.sheet{display:flex;align-items:center;gap:clamp(20px,3vw,40px);padding:clamp(16px,2.4vw,28px);border-radius:28px;background:var(--ink);color:var(--paper)}
+.sheet>img{flex:none;width:50%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:16px}
+.sheet h3{font-size:clamp(30px,4.4vw,56px);font-weight:800;letter-spacing:-.04em;line-height:1.05}
+.sheet .cat{margin:8px 0 14px;font-weight:600;color:var(--acid)}
+.sheet .sum{color:var(--soft-dark);max-width:34em}
+.sheet .btn{margin-top:22px;max-width:100%;padding-block:12px;border-radius:26px;white-space:normal;overflow-wrap:anywhere}
+.demo{display:grid;justify-items:start;gap:8px;margin-top:20px}
+.demo[hidden]{display:none}
+.demo .bub{font-size:17px;padding:10px 16px}
+.demo small{font-size:14px;color:var(--soft-dark)}
+
+/* 5. the end */
+.reply .bub{font-size:clamp(22px,3vw,34px);max-width:24ch;align-self:flex-start}
+.reply .row{display:flex;flex-wrap:wrap;gap:12px}
+.reply .chip{display:inline-flex;align-items:center;text-decoration:none}
+
+.still .open{height:auto}.still .stage{position:relative;height:auto}.still canvas{display:none}
+.still .meet{height:auto;min-height:calc(100svh - var(--bar))}.still .ask.sent .chips{display:flex}
+.still .stage>img{position:static;height:60svh}.still .cap{position:static;opacity:1;padding:16px var(--gut)}
+.still .step>*,.still .cards li{opacity:1}
+
+@media (max-width:760px){
+  .meet{padding:0 12px}
+  .felt li{left:var(--mx);top:var(--my)}
+  .fold{grid-template-columns:1fr;grid-template-rows:auto 56px auto}
+  .leaf{gap:14px;padding:20px;overflow:hidden}
+  .leaf.en{border-radius:24px 24px 6px 6px;transform:none;animation-name:rise}
+  .leaf.rtl{border-radius:6px 6px 24px 24px;transform:none;animation-name:rise}
+  #seat{width:56px}
+  .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-20px;padding-inline:20px}
+  .ask.sent .chips{display:none}
+  .step{padding-inline-start:var(--gut)}
+  .rail{inset:0 0 auto 0;width:auto;height:52px;padding:0;transform:translateY(-100%)}
+  .rail ol{display:flex;height:100%}
+  .rail li{flex:1;height:auto;padding:0;display:grid;place-items:center;font-size:15px}
+  .rail i{inset:auto auto 0 0;width:25%;height:4px;border-radius:2px;transform:translateX(calc(var(--i,0)*100%))}
+  .cards{grid-template-columns:repeat(3,1fr)}
+  .sheet{flex-direction:column;align-items:stretch}
+  .sheet>img{width:100%}
+  .langs button{padding:0 14px}
+}
+@media (max-width:760px) and (max-height:760px){.leaf.en .lead{display:none}}
+</style>
+</head>
+<body>
+<nav class="rail" aria-label="Where your message is">
+  <ol><li>Channel</li><li>Rules</li><li>Product</li><li>Cluster</li><i aria-hidden="true"></i></ol>
+</nav>
+<main>
+  <section class="open" id="open">
+    <div class="stage">
+      <div class="meet" id="meet">
+        <ul class="felt" id="felt" aria-label="Some of the work"></ul>
+        <div class="fold">
+          <div class="leaf en">
+            <h1 class="display">I build what answers<br>your customers.</h1>
+            <p class="lead">I'm Fathallah Haj. I build agents, apps and sites, and run the servers under them, in Arabic, Hebrew and English.</p>
+            <form class="ask" id="ask">
+              <div class="log" id="log" aria-live="polite"></div>
+              <div class="chips" id="chips"></div>
+              <div class="write">
+                <label class="vh" for="q">Your question</label>
+                <input id="q" dir="auto" autocomplete="off" placeholder="Ask what I build">
+                <button class="btn">Send</button>
+              </div>
+            </form>
+          </div>
+          <div class="spine"><span id="seat" data-mark></span></div>
+          <div class="leaf rtl" dir="rtl">
+            <p class="display ar" lang="ar">أبني ما يردّ على زبائنك.</p>
+            <p class="display he" lang="he">אני בונה את מה שעונה ללקוחות שלכם.</p>
+          </div>
+        </div>
+      </div>
+      <img id="through" src="../../../../public/work/elsewhereco/desktop.webp" alt="ElsewhereCo, seen through the opening in the monogram">
+      <canvas aria-hidden="true"></canvas>
+      <p class="cap" id="cap"><b id="capt">ElsewhereCo · Live</b><a class="btn" id="capl" href="https://elsewhereco.vercel.app/" target="_blank" rel="noopener">Visit it</a></p>
+    </div>
+  </section>
+
+  <section class="s step channel" data-step="0">
+    <h2 class="display">Channel</h2>
+    <p class="lead">Your message lands the way a customer's does, on WhatsApp, Telegram or the web. The agent reads the language before anything else.</p>
+    <div class="got"><p class="bub cust" dir="auto" data-out="msg"></p><span data-out="lang"></span></div>
+  </section>
+
+  <section class="s step rules" data-step="1">
+    <h2 class="display">Rules</h2>
+    <p class="lead">Rules decide what may be said before any model phrases it. Here they run on your message, against my own list of work.</p>
+    <dl class="trace">
+      <div><dt>Intent</dt><dd data-out="intent"></dd></div>
+      <div><dt>Looked up</dt><dd data-out="lookup"></dd></div>
+      <div><dt>Source</dt><dd data-out="source"></dd></div>
+      <div><dt>Human takeover</dt><dd data-out="takeover"></dd></div>
+    </dl>
+  </section>
+
+  <section class="s step product" data-step="2">
+    <h2 class="display">Product</h2>
+    <p class="lead" data-out="found"></p>
+    <div class="shots" id="shots"></div>
+  </section>
+
+  <section class="s step cluster" data-step="3">
+    <h2 class="display">Cluster</h2>
+    <p class="lead">And runs it. Kubernetes, Terraform and ArgoCD are the other half of the CV.</p>
+    <div class="pods" aria-hidden="true">
+      <div><span>API</span><i></i><i class="hot"></i><i></i><i></i></div>
+      <div><span>Worker</span><i></i><i></i><i class="hot"></i><i></i></div>
+      <div><span>Web</span><i class="hot"></i><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <section class="s table" id="work">
+    <h2 class="display">Turn one over.</h2>
+    <p class="lead">Twelve projects, dealt face down. Tap a card to open it, or call a suit.</p>
+    <div class="calls">
+      <button class="chip" data-call="live"></button>
+      <button class="chip" data-call="apk"></button>
+      <button class="chip" data-call="all">Turn all</button>
+      <button class="chip deal" id="deal">Deal again</button>
+    </div>
+    <ul class="cards" id="cards"></ul>
+  </section>
+
+  <section class="s reply" id="reply">
+    <h2 class="display">Back on the phone.</h2>
+    <p class="bub agent" dir="auto" data-out="reply"></p>
+    <p class="lead" data-out="from"></p>
+    <div class="row"><a class="btn" href="#" id="wa">Now send me yours</a><a class="chip" href="#open">Ask another</a></div>
+  </section>
+</main>
+
+<dialog id="dlg" aria-labelledby="dt">
+  <div class="bar">
+    <div class="langs" role="group" aria-label="Language">
+      <button data-l="en" aria-pressed="true">English</button>
+      <button data-l="ar" lang="ar" aria-pressed="false">العربية</button>
+      <button data-l="he" lang="he" aria-pressed="false">עברית</button>
+    </div>
+    <button class="btn ink" id="dx">Close</button>
+  </div>
+  <div class="wrap">
+    <article class="sheet" id="sheet">
+      <img id="di" src="../../../../public/work/elsewhereco/desktop.webp" alt="">
+      <div>
+        <h3 id="dt"></h3>
+        <p class="cat" id="dc"></p>
+        <p class="sum" id="ds"></p>
+        <div class="demo" id="demo" dir="ltr" hidden></div>
+        <a class="btn" id="dl" dir="ltr" target="_blank" rel="noopener"></a>
+      </div>
+    </article>
+  </div>
+</dialog>
+<script src="shared.js"></script>
+<script src="mix-copy.js"></script>
+<script>
+const $ = s => document.querySelector(s), $$ = s => document.querySelectorAll(s);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.body.classList.add(reduce ? 'still' : 'moving');
+const bySlug = s => PROJECTS.find(p => p.slug === s);
+const live = PROJECTS.filter(p => p.status === 'live'), apks = PROJECTS.filter(p => p.apk);
+// Saqroon has no case page; it lives on the homepage
+const link = (p, l = 'en') => p.url ?? `https://fhaj.dev/${l}${p.slug === 'saqroon' ? '' : '/work/' + p.slug}`;
+const DEFAULTS = ['elsewhereco', 'bab', 'nedaa-lifestyle'].map(bySlug);
+$('#wa').href = WHATSAPP;
+
+/* ---- the rules, pointed at his own catalog. Same order as the agent: handoffs before answers ---- */
+const KEYS = PROJECTS.map(p => p.slug.split('-').filter(w => !['ai', 'to', 'and', 'go', 'sales', 'agent'].includes(w)));
+function route(text) {
+  const t = text.toLowerCase(), has = re => re.test(t);
+  const base = { language: detectLanguage(text), items: [], source: null, handoff: null };
+  const named = PROJECTS.find((p, i) => KEYS[i].some(k => has(new RegExp(`\\b${k}\\b`))));
+  if (has(/\b(fathallah|hire|talk|call|meet|human|person)\b/)) return { ...base, intent: 'human', handoff: 'human requested', text: "That is one for Fathallah. I've passed it on." };
+  if (has(/\b(price|cost|how much|rate|budget|available|availability)\b/)) return { ...base, intent: 'price', handoff: 'no approved source', text: "Prices and dates aren't on this page, so I won't guess one. I've passed it to Fathallah." };
+  if (named) return { ...base, intent: 'project', items: [named], source: `${named.now ? 'now.json' : 'portfolio.ts'} · ${named.slug}`, text: `${named.title}. ${STATUS[named.status]}.${named.now ? ` Now: ${named.now}.` : ''}` };
+  if (has(/\b(live|shipped|public|launched)\b/)) return { ...base, intent: 'live', items: live, source: 'portfolio.ts · status live', text: `${live.length} products are live. Each one opens.` };
+  if (has(/\b(install|apk|android|download)\b/)) return { ...base, intent: 'install', items: apks, source: `public/downloads · ${APKS.length} builds`, text: `${apks.length} Android builds you can install.` };
+  if (has(/\b(build|services|offer)\b/)) return { ...base, intent: 'services', items: ['whatsapp-ai-sales-agent', 'camp-and-hike', 'bab'].map(bySlug), source: `portfolio.ts · ${PROJECTS.length} projects`, text: 'Agents that answer customers, sites and apps that take bookings in three languages, and the servers under both.' };
+  if (has(/^\s*(hi|hello|hey|مرحبا|اهلا|שלום|היי)/)) return { ...base, intent: 'greeting', text: 'Hello. Ask what is live, what you can install, or name a project.' };
+  return { ...base, intent: 'other', handoff: 'no approved source', text: "I don't have an approved answer for that, so I won't make one up." };
+}
+console.assert(route("What's live?").items.length === live.length && route('Show me Bab').items[0].slug === 'bab'
+  && route('What does a project cost?').handoff && route('What can I install?').items.length === APKS.length, 'catalog rules are off');
+
+const LANG = { ar: 'Read as Arabic, right to left', he: 'Read as Hebrew, right to left', en: 'Read as English, left to right' };
+function run(text) {
+  const r = route(text), n = r.items.length, first = r.items[0] ?? DEFAULTS[0];
+  const set = (k, v) => $$(`[data-out="${k}"]`).forEach(e => { e.textContent = v; });
+  set('msg', text); set('lang', LANG[r.language]); set('intent', r.intent);
+  set('lookup', !n ? 'nothing' : n === 1 ? first.title : `${n} projects`);
+  set('source', r.source ?? 'none approved'); set('takeover', r.handoff ?? 'not needed');
+  set('reply', r.text);
+  set('from', r.handoff ? 'Held for a person. The agent says so, and Fathallah gets the thread.' : r.source ? `Answered from ${r.source}.` : 'No lookup was needed for this one.');
+  set('found', n ? 'What the rules found. The same engineer builds what the customer opens next. Open any of them.' : 'Nothing was looked up for this message. This is some of what a customer would open next.');
+  $('#through').src = PUB + first.img; $('#through').alt = `${first.title}, seen through the opening in the monogram`;
+  $('#capt').textContent = `${first.title} · ${STATUS[first.status]}`;
+  $('#capl').href = link(first); $('#capl').textContent = first.url ? 'Visit it' : 'Read the case';
+  $('#shots').innerHTML = (n ? r.items : DEFAULTS).map(p => `<button class="shot" data-slug="${p.slug}"><img src="${PUB + p.img}" alt="" loading="lazy"><b>${p.title} · ${STATUS[p.status]}</b></button>`).join('');
+  return r;
+}
+
+/* ---- asking (B): the answer comes back in the thread, then the page opens onto it ---- */
+const sec = $('#open'), stage = $('.stage');
+let gliding = 0;
+function glide(to, ms = 1800) {
+  const from = scrollY, t0 = performance.now(), id = ++gliding;
+  const step = t => {
+    if (id !== gliding) return;
+    const k = Math.min(1, (t - t0) / ms), e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+    scrollTo({ top: from + (to - from) * e, behavior: 'instant' });
+    if (k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+['wheel', 'touchstart', 'keydown'].forEach(ev => addEventListener(ev, () => { gliding++; }, { passive: true })); // the visitor's own scroll wins
+function send(text) {
+  const r = run(text), log = $('#log');
+  $('#ask').classList.add('sent');
+  log.innerHTML = '<p class="bub cust pop" dir="auto"></p>'; log.firstChild.textContent = text;
+  if (!reduce) size(); // the sheet grew, so the mark in its fold moved
+  setTimeout(() => {
+    log.insertAdjacentHTML('beforeend', '<p class="bub agent pop" dir="auto"></p>' + (r.handoff ? `<a class="btn ink" href="${WHATSAPP}" target="_blank" rel="noopener">Continue on WhatsApp</a>` : r.items.length ? '<small>Opening it. Scroll on to follow your message.</small>' : ''));
+    log.querySelector('.agent').textContent = r.text;
+    if (!reduce) size();
+    if (r.handoff || !r.items.length) return;
+    setTimeout(() => reduce ? $('#through').scrollIntoView() : glide(sec.offsetTop + sec.offsetHeight - stage.offsetHeight), 900);
+  }, 450);
+}
+$('#chips').innerHTML = ["What's live?", 'What can I install?', 'Show me Bab', 'What does a project cost?'].map(q => `<button type="button" class="chip">${q}</button>`).join('');
+$('#chips').addEventListener('click', e => { if (e.target.matches('.chip')) send(e.target.textContent); });
+$('#ask').addEventListener('submit', e => { e.preventDefault(); const t = $('#q').value.trim(); if (t) { $('#q').value = ''; send(t); } });
+run("What's live?");
+
+/* ---- the opening (D): the table and the mark in the fold are a canvas, so the ف's eye can be cut through ---- */
+const c = $('canvas'), x = c.getContext('2d'), meet = $('#meet'), cap = $('#cap');
+const G = new Path2D(MARK_D), EYE = new Path2D(EYE_D);
+let w, h, dpr, base, ex0, ey0, away = false;
+function draw() {
+  const r = sec.getBoundingClientRect(), p = Math.min(1, Math.max(0, -r.top / (r.height - h)));
+  const end = Math.max(w / 52, h / 40);        // scale at which the eye covers the screen
+  const s = base * Math.pow(end / base, p);    // exponential, so the zoom feels even
+  x.setTransform(dpr, 0, 0, dpr, 0, 0);
+  x.globalCompositeOperation = 'source-over';
+  x.fillStyle = '#0b0b0b'; x.fillRect(0, 0, w, h);
+  x.translate(ex0 + (w / 2 - ex0) * p, ey0 + (h / 2 - ey0) * p); x.scale(s, s); x.translate(-732, -393);
+  x.fillStyle = '#c8ff34'; x.fill(G, 'evenodd'); x.beginPath(); x.arc(739, 246, 33, 0, 7); x.fill();
+  x.globalCompositeOperation = 'destination-out'; x.fill(EYE);
+  meet.style.opacity = Math.max(0, 1 - p * 5); meet.style.pointerEvents = p > .12 ? 'none' : '';
+  cap.style.opacity = Math.max(0, (p - .85) / .15); cap.style.pointerEvents = p > .9 ? '' : 'none';
+  // coming back to the top after following a message clears the thread for the next question
+  if (p > .5) away = true;
+  else if (away && p === 0) { away = false; $('#log').innerHTML = ''; $('#ask').classList.remove('sent'); requestAnimationFrame(size); }
+}
+function size() {
+  dpr = Math.min(devicePixelRatio || 1, 2); w = stage.clientWidth; h = stage.clientHeight; c.width = w * dpr; c.height = h * dpr;
+  const s0 = stage.getBoundingClientRect(), se = $('#seat').getBoundingClientRect();
+  base = se.width / 750;                         // px per monogram unit at rest; the mark's viewBox starts at (120,190)
+  ex0 = se.left - s0.left + (732 - 120) * base; ey0 = se.top - s0.top + (393 - 190) * base;
+  draw();
+}
+if (!reduce) {
+  let queued = false;
+  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; draw(); }); } }, { passive: true });
+  addEventListener('resize', size); size(); document.fonts.ready.then(size);
+}
+/* ---- the rail (A) follows whichever section crosses the middle of the screen ---- */
+const rail = $('.rail');
+const middle = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  const i = e.target.dataset.step;
+  rail.classList.toggle('on', i !== undefined);
+  if (i !== undefined) rail.style.setProperty('--i', i);
+}), { rootMargin: '-50% 0px -50% 0px' });
+$$('main>section').forEach(s => middle.observe(s));
+const seen = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }), { threshold: .2 });
+$$('.step,.table').forEach(s => seen.observe(s));
+
+/* ---- the table (F) ---- */
+const cards = $('#cards');
+$('[data-call=live]').textContent = `Live · ${live.length}`; $('[data-call=apk]').textContent = `Installable · ${apks.length}`;
+function turn(b, up) {
+  b.setAttribute('aria-pressed', up);
+  b.setAttribute('aria-label', up ? `Open ${PROJECTS[b.dataset.i].title}` : 'Face-down card');
+}
+function deal() {
+  const order = PROJECTS.map((_, i) => i).sort(() => Math.random() - .5);
+  cards.innerHTML = order.map((i, n) => `<li style="--n:${n};--tilt:${(Math.random() * 5 - 2.5).toFixed(1)}deg">${cardHtml(i, false)}</li>`).join('');
+}
+// a few of the same cards lie around the sheet on the first screen: [slug, face up, x, y, tilt, phone x, phone y]
+const cardHtml = (i, up) => `<button class="cardb" data-i="${i}" aria-pressed="${!!up}" aria-label="${up ? 'Open ' + PROJECTS[i].title : 'Face-down card'}"><span class="in">
+  <span class="back"><span data-mark>${markSvg()}</span></span>
+  <span class="front"><img src="${PUB + PROJECTS[i].img}" alt=""><b>${PROJECTS[i].title}</b></span>
+</span></button>`;
+$('#felt').innerHTML = [
+  ['elsewhereco', 1, '3%', '-7%', -9, '-5%', '-4%'], ['bab', 0, '19%', '1%', 6, '22%', '3%'],
+  ['camp-and-hike', 1, '70%', '-10%', -5, '50%', '-6%'], ['saqroon', 0, '88%', '-9%', 11, '78%', '-7%'],
+  // face up where a card tucks under the acid leaf (the bottom row on a phone): a face-down card there is acid on acid
+  ['nedaa-lifestyle', 1, '5%', '77%', 8, '-4%', '87%'], ['solitaire', 1, '27%', '86%', -6, '23%', '82%'],
+  ['seeker-radar', 1, '63%', '75%', 5, '51%', '83%'], ['go-to-nature', 1, '85%', '84%', -10, '79%', '86%'],
+].map(([slug, up, x, y, r, mx, my], n) => `<li style="--n:${n};--x:${x};--y:${y};--r:${r}deg;--mx:${mx};--my:${my}">${cardHtml(PROJECTS.findIndex(p => p.slug === slug), up)}</li>`).join('');
+document.addEventListener('click', e => {
+  const b = e.target.closest('.cardb'); if (!b) return;
+  const down = b.getAttribute('aria-pressed') !== 'true';
+  turn(b, true);
+  setTimeout(() => openSheet(PROJECTS[b.dataset.i], b), down && !reduce ? 420 : 0); // let the card finish turning first
+});
+$('#deal').addEventListener('click', deal);
+$$('[data-call]').forEach(k => k.addEventListener('click', () => {
+  const want = { live: p => p.status === 'live', apk: p => p.apk, all: () => true }[k.dataset.call];
+  [...cards.querySelectorAll('.cardb')].filter(b => want(PROJECTS[b.dataset.i])).forEach((b, n) => setTimeout(() => turn(b, true), n * 60));
+}));
+deal();
+$('#shots').addEventListener('click', e => { const b = e.target.closest('.shot'); if (b) openSheet(bySlug(b.dataset.slug), b); });
+
+/* ---- the sheet: opens from the touch point (D), turns on its spine between languages (C) ---- */
+const dlg = $('#dlg'), sheet = $('#sheet');
+const CTA = { en: 'Visit live product', ar: 'زيارة المنتج', he: 'למוצر החי' }; // from src/content/portfolio.ts
+{ // the sweets shop is the WhatsApp agent's own demo, so this is the only place it appears
+  const q = 'بكم الكنافة؟', r = reply(q);
+  $('#demo').innerHTML = `<span class="bub cust" dir="auto">${q}</span><span class="bub agent" dir="auto">${r.text}</span><small>Its demo sweets shop. Answered from ${r.source.id}, rules only.</small>`;
+}
+let cur, at = '50% 50%', busy = false;
+function show(l) {
+  const copy = COPY[cur.slug], a = $('#dl');
+  sheet.lang = l; sheet.dir = l === 'en' ? 'ltr' : 'rtl';
+  $('#dc').textContent = copy.cat[l]; $('#ds').textContent = copy.sum[l];
+  a.href = link(cur, l); a.textContent = cur.url ? CTA[l] : a.href.replace('https://', ''); a.dir = cur.url ? 'auto' : 'ltr';
+  $$('.langs button').forEach(b => b.setAttribute('aria-pressed', b.dataset.l === l));
+}
+async function turnSheet(l) {
+  if (busy || sheet.lang === l) return;
+  if (reduce) return show(l);
+  busy = true;
+  const d = l === 'en' ? -90 : 90; // right-to-left pages turn the other way
+  await sheet.animate({ transform: ['rotateY(0)', `rotateY(${d}deg)`] }, { duration: 260, easing: 'cubic-bezier(.77,0,.175,1)' }).finished;
+  show(l);
+  await sheet.animate({ transform: [`rotateY(${-d}deg)`, 'rotateY(0)'] }, { duration: 340, easing: 'cubic-bezier(.23,1,.32,1)' }).finished;
+  busy = false;
+}
+$$('.langs button').forEach(b => b.addEventListener('click', () => turnSheet(b.dataset.l)));
+const circle = r => `circle(${r} at ${at})`;
+function openSheet(p, from) {
+  const q = from.getBoundingClientRect();
+  at = `${q.left + q.width / 2}px ${q.top + q.height / 2}px`;
+  cur = p; $('#di').src = PUB + p.img; $('#dt').textContent = p.title;
+  $('#demo').hidden = p.slug !== 'whatsapp-ai-sales-agent';
+  show('en'); dlg.showModal(); dlg.scrollTop = 0;
+  if (!reduce) dlg.animate({ clipPath: [circle('0px'), circle('150%')] }, { duration: 480, easing: 'cubic-bezier(.23,1,.32,1)' });
+}
+async function shut() {
+  if (!reduce) await dlg.animate({ clipPath: [circle('150%'), circle('0px')] }, { duration: 260, easing: 'cubic-bezier(.77,0,.175,1)' }).finished;
+  dlg.close();
+}
+$('#dx').addEventListener('click', shut);
+dlg.addEventListener('cancel', e => { e.preventDefault(); shut(); });
+</script>
+</body>
+</html>

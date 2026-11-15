@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E · Receipts (PROTOTYPE)</title>
+<!-- PROTOTYPE, throwaway. Concept E: the evidence rule is the page. Every claim is one line, and each
+     line opens to its proof. The file check hashes in the browser; nothing is uploaded. -->
+<link rel="stylesheet" href="shared.css">
+<style>
+body{background:var(--paper);color:var(--ink)}
+main{padding:clamp(56px,10vh,112px) var(--gut) 112px;max-width:1240px}
+.top .lead{margin:28px 0 56px}
+details{margin-bottom:8px}
+summary{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:12px 0;list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.claim{font-size:clamp(32px,6.2vw,76px);font-weight:800;letter-spacing:-.05em;line-height:1}
+.more{flex:none;display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;background:var(--paper-2);font-size:15px;font-weight:600;white-space:nowrap}
+details[open] .more{background:var(--ink);color:var(--paper)}
+.proof{margin:8px 0 28px;padding:24px clamp(20px,3vw,32px);border-radius:24px;background:var(--ink);color:var(--paper);animation:rise .4s var(--ease) both}
+.proof li{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 24px;padding:10px 0}
+.proof b{font-weight:600}
+.proof a{color:var(--acid);font-weight:600;overflow-wrap:anywhere}
+.proof code{flex:1 1 100%;font:inherit;font-size:15px;font-variant-numeric:tabular-nums;color:var(--soft-dark);overflow-wrap:anywhere}
+.proof p{color:var(--soft-dark);max-width:44em}
+.proof p+p,.proof ul+p{margin-top:14px}
+.check{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin-top:20px;padding:20px;border-radius:18px;background:var(--ink-3)}
+.check label{cursor:pointer}
+.check input:focus-visible+label{outline:3px solid var(--paper);outline-offset:3px}
+.check output{flex:1 1 240px;font-weight:600}
+.trace{display:grid;gap:4px;padding:12px 0}
+.trace .bub{font-size:17px}
+.trace small{font-size:15px;color:var(--soft-dark)}
+.none .claim{color:var(--soft-light)}
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <h1 class="display">Check everything.</h1>
+    <p class="lead">Each line opens to its proof: an address to visit, a file hash to test, a commit to read. Where I have no proof yet, the last line says so.</p>
+  </header>
+
+  <details open>
+    <summary><span class="claim">Six products live.</span><span class="more">6 addresses</span></summary>
+    <div class="proof"><ul id="live"></ul></div>
+  </details>
+
+  <details>
+    <summary><span class="claim">Four you can install.</span><span class="more">4 file hashes</span></summary>
+    <div class="proof">
+      <ul id="apks"></ul>
+      <div class="check">
+        <input class="vh" id="file" type="file" accept=".apk">
+        <label class="btn" for="file">Check a file you downloaded</label>
+        <output id="verdict" for="file">Your browser hashes it. The file never leaves your device.</output>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="claim">One you can play here.</span><span class="more">1 table</span></summary>
+    <div class="proof"><p>SOLitaire. On the built site the table deals inside this line. Until then it is at <a href="https://sol-solitaire.com" target="_blank" rel="noopener">sol-solitaire.com</a>.</p></div>
+  </details>
+
+  <details>
+    <summary><span class="claim">Three languages, two directions.</span><span class="more">3 addresses</span></summary>
+    <div class="proof"><ul>
+      <li><b>English, left to right</b><a href="https://fhaj.dev/en">fhaj.dev/en</a></li>
+      <li><b lang="ar">العربية، من اليمين</b><a href="https://fhaj.dev/ar">fhaj.dev/ar</a></li>
+      <li><b lang="he">עברית, מימין</b><a href="https://fhaj.dev/he">fhaj.dev/he</a></li>
+    </ul></div>
+  </details>
+
+  <details>
+    <summary><span class="claim">An agent that won't invent a price.</span><span class="more">2 traces</span></summary>
+    <div class="proof">
+      <div id="traces"></div>
+      <p>Both answers were computed just now by the rules layer of the demo sweets shop. No model ran.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="claim">84 tests behind this site.</span><span class="more">1 commit</span></summary>
+    <div class="proof"><ul>
+      <li><b>Test run, 10 November 2026</b><span>15 files, 84 passed</span></li>
+      <li><b>Last commit, 24 October 2026</b><span>c002f24</span><code>Mobile portal scene: deal the phones out of the middle, bring the ring back</code></li>
+    </ul></div>
+  </details>
+
+  <details class="none">
+    <summary><span class="claim">Not proven yet.</span><span class="more">2 gaps</span></summary>
+    <div class="proof">
+      <p>A client's own words. One quote is waiting for the client's consent, so none is printed.</p>
+      <p>What a project costs and when I'm free. Neither is on the page yet; <a id="wa" href="#">ask me</a>.</p>
+    </div>
+  </details>
+</main>
+<script src="shared.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+$('#wa').href = WHATSAPP;
+$('#live').innerHTML = PROJECTS.filter(p => p.status === 'live')
+  .map(p => `<li><b>${p.title}</b><a href="${p.url}" target="_blank" rel="noopener">${p.url.replace(/^https:\/\/|\/$/g, '')}</a></li>`).join('');
+$('#apks').innerHTML = APKS.map(a => `<li><b>${a.file}</b><span>${a.bytes.toLocaleString('en')} bytes</span><code>SHA-256 ${a.sha}</code></li>`).join('');
+$('#traces').innerHTML = ['بكم الكنافة؟', 'Any discount?'].map(q => {
+  const r = reply(q);
+  return `<div class="trace"><span class="bub cust" dir="auto" style="align-self:auto;justify-self:start">${q}</span><span class="bub agent" dir="auto" style="justify-self:start">${r.text}</span>
+    <small>intent ${r.intent} · ${r.source ? 'source ' + r.source.id : 'no approved source, held for a person (' + r.handoff.replaceAll('_', ' ') + ')'}</small></div>`;
+}).join('');
+
+// the live thing: hash a downloaded build and compare it with the four on this page
+$('#file').addEventListener('change', async e => {
+  const f = e.target.files[0], out = $('#verdict'); if (!f) return;
+  out.textContent = `Hashing ${f.name}…`;
+  const sum = [...new Uint8Array(await crypto.subtle.digest('SHA-256', await f.arrayBuffer()))].map(b => b.toString(16).padStart(2, '0')).join('');
+  const hit = APKS.find(a => a.sha === sum);
+  out.textContent = hit ? `Match. This is ${hit.file}, ${hit.bytes.toLocaleString('en')} bytes, byte for byte.`
+    : `No match. ${sum.slice(0, 16)}… is not one of the four builds listed here.`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B · The thread (PROTOTYPE)</title>
+<!-- PROTOTYPE, throwaway. Concept B: the page is the chat thread his agents work inside.
+     Projects are chats, status is delivery ticks, hiring is the human takeover. No model: rules only. -->
+<link rel="stylesheet" href="shared.css">
+<style>
+body{background:var(--paper);color:var(--ink)}
+.app{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:24px;height:calc(100svh - var(--bar));padding:24px var(--gut)}
+.chats{min-height:0;overflow-y:auto}
+.chats h2{font-size:32px;font-weight:800;letter-spacing:-.04em;padding:4px 12px 12px}
+.chat{display:flex;align-items:center;gap:14px;width:100%;min-height:76px;padding:8px 12px;border:0;border-radius:20px;background:none;color:inherit;text-align:start;cursor:pointer}
+@media (hover:hover) and (pointer:fine){.chat:hover{background:var(--paper-2)}}
+.chat:active{background:var(--paper-2)}
+.chat .av{flex:none;width:52px;height:52px;border-radius:14px;overflow:hidden;background:var(--paper-2)}
+.chat .av img{width:100%;height:100%;object-fit:cover;object-position:top}
+.chat .tx{flex:1;min-width:0}
+.chat b{display:block;font-size:18px;font-weight:600;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat .tx span{display:block;font-size:15px;color:var(--soft-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat .st{flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:13px;color:var(--soft-light)}
+.chat .st svg{color:var(--ink)}
+
+.talk{display:flex;flex-direction:column;min-height:0;border-radius:32px;background:var(--ink);color:var(--paper);overflow:hidden}
+.talk header{display:flex;align-items:center;gap:14px;padding:16px 24px;background:var(--ink-2)}
+.talk header .av{flex:none;width:44px;padding:8px 6px;border-radius:14px;background:var(--acid);color:var(--ink)}
+.talk header b{display:block;font-size:18px;font-weight:600}
+.talk header span{display:block;font-size:15px;color:var(--soft-dark)}
+.msgs{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding:24px}
+.m{max-width:min(46ch,88%);padding:12px 18px;border-radius:20px;font-size:17px;line-height:1.45}
+.m.bot{align-self:flex-start;background:var(--ink-3);border-end-start-radius:6px}
+.m.user{align-self:flex-end;background:var(--acid);color:var(--ink);font-weight:600;border-end-end-radius:6px}
+.m.sys{align-self:center;padding:6px 0;color:var(--acid);font-weight:600;font-size:15px;text-align:center}
+.m.big{max-width:15ch;padding:22px 26px;border-radius:28px;font-size:clamp(34px,5.2vw,64px);font-weight:800;letter-spacing:-.045em;line-height:.98}
+.m small{display:block;margin-top:6px;font-size:14px;color:var(--soft-dark)}
+.m ul{display:grid;gap:8px}
+.row{flex:none;align-self:stretch;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:6px}
+.card{flex:none;width:220px;border-radius:18px;overflow:hidden;background:var(--ink-3);color:inherit;text-decoration:none;scroll-snap-align:start}
+.card img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top}
+.card p{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 14px;font-size:16px;font-weight:600}
+.card p span{font-size:14px;font-weight:400;color:var(--soft-dark)}
+.card svg{color:var(--acid)}
+.quick{flex:none;display:flex;gap:8px;padding:0 24px 12px;overflow-x:auto;scrollbar-width:none}
+.talk form{flex:none;display:flex;gap:8px;padding:0 24px 20px}
+.talk input{flex:1;min-width:0;height:52px;padding:0 20px;border:0;border-radius:999px;background:var(--paper);color:var(--ink);font-weight:600}
+
+@media (max-width:760px){
+  .app{display:flex;flex-direction:column;gap:0;padding:0}
+  .chats{flex:none;overflow:auto hidden;scrollbar-width:none}
+  .chats h2{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  #list{display:flex;padding:8px 8px 10px}
+  .chat{flex-direction:column;gap:6px;width:84px;min-height:0;padding:6px 4px}
+  .chat .tx span,.chat .st{display:none}
+  .chat b{max-width:76px;font-size:12px;text-align:center}
+  .talk{flex:1;border-radius:28px 28px 0 0}
+  .msgs{padding:16px}.quick{padding:0 16px 10px}.talk form{padding:0 16px 14px}
+  .talk header{padding:12px 16px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="chats" aria-label="Work">
+    <h2>Work</h2>
+    <ul id="list"></ul>
+  </aside>
+  <main class="talk">
+    <header>
+      <span class="av" data-mark></span>
+      <div><b>Fathallah Haj</b><span>The agent answers. Rules only, no model.</span></div>
+    </header>
+    <div class="msgs" id="msgs" aria-live="polite">
+      <h1 class="m bot big">You're talking to what I build.</h1>
+      <p class="m bot">An agent for shops and studios, pointed at my own work. Tap a chat, tap a question, or price a knafeh in Arabic, Hebrew or English.</p>
+    </div>
+    <div class="quick" id="quick"></div>
+    <form id="f">
+      <label class="vh" for="q">Message</label>
+      <input id="q" dir="auto" autocomplete="off" placeholder="Ask about the work">
+      <button class="btn">Send</button>
+    </form>
+  </main>
+</div>
+<script src="shared.js"></script>
+<script>
+const $ = s => document.querySelector(s), msgs = $('#msgs');
+const live = PROJECTS.filter(p => p.status === 'live');
+const card = p => `<a class="card" href="${p.url ?? 'https://fhaj.dev/en/work/' + p.slug}" target="_blank" rel="noopener"><img src="${PUB + p.img}" alt="" loading="lazy"><p>${p.title}${ticks(p.status === 'live' ? 2 : 1)}</p></a>`;
+
+$('#list').innerHTML = PROJECTS.map((p, i) => `<li><button class="chat" data-i="${i}">
+  <span class="av"><img src="${PUB + p.img}" alt="" loading="lazy"></span>
+  <span class="tx"><b>${p.title}</b><span>${p.now ?? STATUS[p.status]}</span></span>
+  <span class="st">${p.updated ? day(p.updated) : ''}${ticks(p.status === 'live' ? 2 : 1)}</span></button></li>`).join('');
+const QUICK = ["What's live?", 'What do you build?', 'What can I install?', 'بكم الكنافة؟', 'Talk to Fathallah'];
+$('#quick').innerHTML = QUICK.map(q => `<button class="chip" dir="auto">${q}</button>`).join('');
+
+function add(html, cls = 'm bot') {
+  msgs.insertAdjacentHTML('beforeend', html.startsWith('<div') ? html : `<div class="${cls} pop" dir="auto">${html}</div>`);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+const takeover = () => { add('Passed to Fathallah', 'm sys'); add(`<a class="btn" href="${WHATSAPP}" target="_blank" rel="noopener">Continue on WhatsApp</a>`, ''); };
+
+function answer(text) {
+  if (/live|shipped|public|launched/i.test(text)) { add(`${live.length} products, all public. Open any of them.`); return add(`<div class="row pop">${live.map(card).join('')}</div>`); }
+  if (/install|apk|android|download/i.test(text)) {
+    return add(`<ul>${APKS.map(a => `<li><a href="https://fhaj.dev/downloads/${a.file}" style="color:var(--acid);font-weight:600">${a.file}</a><small>${a.bytes.toLocaleString('en')} bytes, Android</small></li>`).join('')}</ul>`);
+  }
+  if (/build|do you do|services|offer/i.test(text)) {
+    return add('<ul><li>Agents that answer customers on WhatsApp and Telegram, with rules underneath and a person on call.</li><li>Sites and apps that take bookings and payments in Arabic, Hebrew and English.</li><li>The servers under both.</li></ul>');
+  }
+  if (/fathallah|hire|talk|call|meet/i.test(text)) return takeover();
+  const r = reply(text);
+  if (r.handoff) { add(r.text); return takeover(); }
+  if (r.source) return add(`${r.text}<small dir="ltr">Demo sweets shop. Answered from ${r.source.id}.</small>`);
+  if (r.intent === 'greeting') return add(r.text);
+  add("I don't have an approved answer for that, so I won't make one up.");
+  takeover();
+}
+function ask(text) {
+  add(text, 'm user');
+  add('<span class="dots"><i></i><i></i><i></i></span>', 'm bot typing');
+  setTimeout(() => { msgs.querySelector('.typing')?.remove(); answer(text); }, 450);
+}
+$('#quick').addEventListener('click', e => { if (e.target.matches('.chip')) ask(e.target.textContent); });
+$('#f').addEventListener('submit', e => { e.preventDefault(); const t = $('#q').value.trim(); if (t) { $('#q').value = ''; ask(t); } });
+$('#list').addEventListener('click', e => {
+  const b = e.target.closest('.chat'); if (!b) return;
+  const p = PROJECTS[b.dataset.i];
+  add(`Show me ${p.title}`, 'm user');
+  add(`${p.title}. ${STATUS[p.status]}.${p.now ? `<small>Now: ${p.now}, updated ${day(p.updated)}.</small>` : ''}`);
+  add(`<div class="row pop">${card(p)}</div>`);
+});
+</script>
+</body>
+</html>

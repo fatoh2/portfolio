@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D · The opening (PROTOTYPE)</title>
+<!-- PROTOTYPE, throwaway. Concept D: the name. فتح (fath) means opening, and the eye of the ف in the
+     monogram is the opening. Scroll and the page passes through it; every project opens the same way. -->
+<link rel="stylesheet" href="shared.css">
+<style>
+.open{position:relative;height:320svh}
+.stage{position:sticky;top:0;height:calc(100svh - var(--bar));overflow:hidden}
+.stage>img,.stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.stage>img{object-fit:cover;object-position:top}
+.copy{position:absolute;inset:0 auto 0 0;width:min(100%,680px);display:flex;flex-direction:column;justify-content:center;gap:24px;padding:0 var(--gut)}
+.copy h1{font-size:clamp(44px,7vw,96px)}
+.copy .lead{color:var(--soft-dark)}
+.copy .ar{font-size:clamp(20px,2.4vw,26px);font-weight:600;color:var(--acid)}
+.cap{position:absolute;inset:auto var(--gut) 24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;opacity:0}
+.cap b{padding:12px 20px;border-radius:999px;background:var(--ink);font-weight:600}
+
+.doors{padding:96px var(--gut) 112px;background:var(--paper);color:var(--ink)}
+.doors .lead{margin:20px 0 40px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 20px}
+.door{display:block;width:100%;border:0;background:none;color:inherit;text-align:start;cursor:pointer}
+/* the eye of the ف: three round corners and one square */
+.door img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:34% 36% 0 22%/44% 46% 0 28%;background:var(--paper-2);transition:transform .2s var(--ease)}
+.door:active img{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){.door:hover img{transform:scale(1.02)}}
+.door b{display:block;margin-top:12px;font-size:20px;font-weight:800;letter-spacing:-.03em}
+.door span{color:var(--soft-light)}
+
+dialog{width:100vw;max-width:none;height:100svh;max-height:none;margin:0;border:0;padding:0;background:var(--ink);color:var(--paper)}
+dialog::backdrop{background:none}
+dialog img{width:100%;height:62%;object-fit:cover;object-position:top}
+dialog div{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding:28px var(--gut)}
+dialog h3{flex:1 1 100%;font-size:clamp(36px,6vw,72px);font-weight:800;letter-spacing:-.045em;line-height:1}
+dialog p{flex:1 1 100%;color:var(--soft-dark)}
+dialog .btn.ink{background:var(--ink-3)}
+
+.end{display:flex;flex-direction:column;align-items:flex-start;gap:20px;padding:112px var(--gut)}
+.end .ar{font-size:clamp(48px,9vw,112px);font-weight:800;line-height:1.15;color:var(--acid)}
+
+.still .open{height:auto}.still .stage{position:relative;height:auto}.still canvas{display:none}
+.still .stage>img{position:static;height:60svh}.still .copy{position:static;padding:72px var(--gut)}.still .cap{position:static;opacity:1;padding:16px var(--gut)}
+@media (max-width:760px){
+  .copy{inset:0 0 auto 0;justify-content:flex-start;padding-top:64px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  dialog img{height:46%}
+}
+</style>
+</head>
+<body>
+<main>
+  <section class="open" id="open">
+    <div class="stage">
+      <img src="../../../../public/work/elsewhereco/desktop.webp" alt="ElsewhereCo homepage, seen through the opening in the monogram">
+      <canvas aria-hidden="true"></canvas>
+      <div class="copy">
+        <h1 class="display">Fath means opening.</h1>
+        <p class="ar"><span lang="ar">فتح</span> · fath · opening</p>
+        <p class="lead">So that is the job. I open shops, studios and trip companies to their customers: an agent that answers, an app that books, a site in three languages. Scroll through the eye of the ف.</p>
+      </div>
+      <p class="cap"><b>ElsewhereCo · Live</b><a class="btn" href="https://elsewhereco.vercel.app/" target="_blank" rel="noopener">Visit it</a></p>
+    </div>
+  </section>
+
+  <section class="doors">
+    <h2 class="display">Open one.</h2>
+    <p class="lead">Six products are live. Each opens the way the page did.</p>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="end">
+    <p class="ar" lang="ar" dir="rtl">افتح محادثة</p>
+    <h2 class="display">Open a conversation.</h2>
+    <a class="btn" id="wa" href="#">Message me on WhatsApp</a>
+  </section>
+</main>
+<dialog id="dlg" aria-labelledby="dt">
+  <img id="di" src="../../../../public/work/elsewhereco/desktop.webp" alt="">
+  <div><h3 id="dt"></h3><p id="dp"></p><a class="btn" id="dl" target="_blank" rel="noopener">Visit live product</a><button class="btn ink" id="dx">Close</button></div>
+</dialog>
+<script src="shared.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+$('#wa').href = WHATSAPP;
+document.body.classList.toggle('still', reduce);
+
+/* the wall: ink with the mark on it, and the ف's eye cut through to the work behind */
+const stage = $('.stage'), sec = $('#open'), c = $('canvas'), x = c.getContext('2d');
+const G = new Path2D(MARK_D), EYE = new Path2D(EYE_D);
+let w, h, dpr;
+function draw() {
+  const r = sec.getBoundingClientRect(), p = Math.min(1, Math.max(0, -r.top / (r.height - h))), wide = w > 760;
+  const base = Math.min(w * (wide ? .36 : .62), 520) / 750;   // px per monogram unit at rest
+  const end = Math.max(w / 52, h / 40);                       // scale at which the eye covers the screen
+  const s = base * Math.pow(end / base, p);                   // exponential, so the zoom feels even
+  // the eye is at (732,393); the mark's centre is (495,465). At rest the mark sits right (desktop) or low (phone).
+  const ax0 = (wide ? w * .72 : w * .5) + 237 * base, ay0 = (wide ? h * .5 : h * .72) - 72 * base;
+  x.setTransform(dpr, 0, 0, dpr, 0, 0);
+  x.globalCompositeOperation = 'source-over';
+  x.fillStyle = '#0b0b0b'; x.fillRect(0, 0, w, h);
+  x.translate(ax0 + (w / 2 - ax0) * p, ay0 + (h / 2 - ay0) * p); x.scale(s, s); x.translate(-732, -393);
+  x.fillStyle = '#c8ff34'; x.fill(G, 'evenodd'); x.beginPath(); x.arc(739, 246, 33, 0, 7); x.fill();
+  x.globalCompositeOperation = 'destination-out'; x.fill(EYE);
+  $('.copy').style.opacity = Math.max(0, 1 - p * 5);
+  $('.cap').style.opacity = Math.max(0, (p - .85) / .15);
+}
+function size() { dpr = Math.min(devicePixelRatio || 1, 2); w = stage.clientWidth; h = stage.clientHeight; c.width = w * dpr; c.height = h * dpr; draw(); }
+if (!reduce) {
+  let queued = false;
+  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; draw(); }); } }, { passive: true });
+  addEventListener('resize', size); size();
+}
+
+/* each door opens from where it was touched */
+const live = PROJECTS.filter(p => p.status === 'live'), dlg = $('#dlg');
+$('#grid').innerHTML = live.map((p, i) => `<button class="door" data-i="${i}"><img src="${PUB + p.img}" alt="" loading="lazy"><b>${p.title}</b><span>${p.now ?? 'Live'}</span></button>`).join('');
+let at = '50% 50%';
+const circle = r => `circle(${r} at ${at})`;
+$('#grid').addEventListener('click', e => {
+  const b = e.target.closest('.door'); if (!b) return;
+  const p = live[b.dataset.i], q = b.querySelector('img').getBoundingClientRect();
+  at = `${q.left + q.width / 2}px ${q.top + q.height / 2}px`;
+  $('#di').src = PUB + p.img; $('#dt').textContent = p.title; $('#dl').href = p.url;
+  $('#dp').textContent = p.now ? `${p.now}. Updated ${day(p.updated)}.` : 'Live.';
+  dlg.showModal();
+  if (!reduce) dlg.animate({ clipPath: [circle('0px'), circle('150%')] }, { duration: 480, easing: 'cubic-bezier(.23,1,.32,1)' });
+});
+async function shut() {
+  if (!reduce) await dlg.animate({ clipPath: [circle('150%'), circle('0px')] }, { duration: 260, easing: 'cubic-bezier(.77,0,.175,1)' }).finished;
+  dlg.close();
+}
+$('#dx').addEventListener('click', shut);
+dlg.addEventListener('cancel', e => { e.preventDefault(); shut(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>H · Real scope (PROTOTYPE)</title>
+<!-- PROTOTYPE, throwaway. Preview G redrawn at the scope the build will have, after the six-reviewer
+     brainstorm of 2026-11-10 (concepts_brief.md). Open with ?l=en, ?l=ar or ?l=he.
+     What changed from G: the real header; résumé and WhatsApp in the first screen; answers in three languages
+     that never claim something was sent; the zoom only on a tap or the visitor's own scroll; one strip under
+     the answer instead of four screens; cards that land face up and open a sheet the Back button closes;
+     services, process and the contact form kept as visible text with the ids the header links to.
+     Copy, links and statuses come from scope-data.js, generated from src/content. The new lines in T below
+     are drafts: the Arabic and Hebrew need the owner's read.
+     Limit of a static preview: everything here is drawn by script. The build renders it on the server. -->
+<link rel="stylesheet" href="shared.css">
+<style>
+:root{--head:64px}
+html{scroll-padding-top:calc(var(--head) + 12px)}
+[lang=en]{font-family:"Schibsted Grotesk",system-ui,sans-serif}
+a{color:inherit}
+
+/* the site's header, as it is today: brand, four section links, language switch, one action */
+.head{position:sticky;z-index:30;top:0;display:flex;align-items:center;gap:20px;height:var(--head);padding:0 var(--gut);background:var(--ink)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.03em;text-decoration:none}
+.brand span{width:44px;color:var(--acid)}
+.head nav{display:flex;gap:4px;margin-inline-start:auto}
+.head nav a,.lng a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:999px;font-size:15px;font-weight:600;text-decoration:none;color:var(--soft-dark)}
+.lng{display:flex}
+.lng a[aria-current]{color:var(--paper);background:var(--ink-3)}
+.head .btn{min-height:44px;padding:0 20px;font-size:15px}
+.menu{display:none;width:44px;height:44px;border:0;border-radius:50%;background:var(--ink-3);color:var(--paper);cursor:pointer}
+.menu::before{content:"";display:block;width:18px;height:8px;margin:auto;border-block:2px solid currentColor}
+
+/* 1. first screen: the card table (F) with the folded sheet on it (C). Ordinary flow; it may be taller than the screen */
+.table0{position:relative;display:grid;place-items:center;min-height:calc(100svh - var(--head) - var(--bar));padding:clamp(104px,15vh,150px) var(--gut);overflow:hidden}
+.felt{position:absolute;inset:0;perspective:1400px}
+.felt li{position:absolute;left:var(--x);top:var(--y);width:clamp(96px,10vw,150px);aspect-ratio:5/7;rotate:var(--r);border-radius:12px;overflow:hidden;animation:deal .6s var(--ease) both;animation-delay:calc(var(--n)*70ms + .2s)}
+@keyframes deal{from{opacity:0;transform:translate(40%,-60%) rotate(14deg) scale(.9)}to{opacity:1;transform:none}}
+.fold{position:relative;z-index:1;display:grid;grid-template-columns:1fr 96px 1fr;width:min(1180px,100%);perspective:1800px}
+.leaf{display:flex;flex-direction:column;justify-content:center;gap:16px;min-width:0;padding:clamp(22px,3vw,40px);color:var(--ink);animation:rise .8s var(--ease) both}
+.leaf.main{border-radius:28px 6px 6px 28px;background:var(--paper);transform-origin:right center;transform:rotateY(4deg)}
+.leaf.other{border-radius:6px 28px 28px 6px;background:var(--acid);transform-origin:left center;transform:rotateY(-4deg)}
+[dir=rtl] .leaf.main{border-radius:6px 28px 28px 6px;transform-origin:left center;transform:rotateY(-4deg)}
+[dir=rtl] .leaf.other{border-radius:28px 6px 6px 28px;transform-origin:right center;transform:rotateY(4deg)}
+.spine{display:grid;place-items:center;color:var(--acid)}
+.spine span{width:72px}
+.who{font-size:15px;font-weight:600}
+.display[lang=en]{font-size:clamp(30px,3.6vw,52px)}
+.display[lang=ar]{font-size:clamp(34px,4.2vw,62px);line-height:1.18}
+.display[lang=he]{font-size:clamp(28px,3.3vw,48px);line-height:1.1}
+.leaf.other .display{font-size:clamp(26px,3vw,44px)}
+.leaf .lead{font-size:clamp(16px,1.5vw,19px)}
+.ask{display:flex;flex-direction:column;gap:10px;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.write{display:flex;gap:6px;padding:6px;border-radius:999px;background:var(--ink)}
+.write input{flex:1;min-width:0;height:48px;padding:0 16px;border:0;border-radius:999px;background:none;color:var(--paper);font-weight:600}
+.write input::placeholder{color:var(--soft-dark)}
+.write .btn{min-height:48px}
+.doors{display:flex;flex-wrap:wrap;gap:8px}
+.doors .btn{flex:1 1 150px;text-decoration:none}
+
+/* the answer, in place: the reply, what to do next, and the route the question took */
+.log{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.log:empty{display:none}
+.log .bub{padding:10px 16px;font-size:17px}
+.log .bub.cust{background:var(--acid)}
+.log .bub.agent{background:var(--ink);color:var(--paper);max-width:100%}
+.acts{display:flex;flex-wrap:wrap;gap:8px}
+.acts .btn{min-height:44px;padding:0 18px;font-size:15px;text-decoration:none}
+.acts .chip{background:var(--paper-2);color:var(--ink)}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;width:100%}
+.strip li{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:14px;background:var(--paper-2);animation:rise .5s var(--ease) both;animation-delay:calc(var(--n)*90ms)}
+.strip span{font-size:13px;color:var(--soft-light)}
+.strip b{font-size:15px;font-weight:600;line-height:1.25}
+
+/* 2. the opening (D): only this is pinned. The mark, large; scroll or tap "See it" and its eye opens */
+.open{position:relative;height:260svh}
+.stage{position:sticky;top:var(--head);height:calc(100svh - var(--head) - var(--bar));overflow:hidden}
+.stage>img,.stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.stage>img{object-fit:cover;object-position:top}
+.cap{position:absolute;inset:auto var(--gut) 24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;opacity:0}
+.cap b{padding:12px 20px;border-radius:999px;background:var(--ink);font-weight:600}
+
+/* 3. the work: dealt face down, landing face up */
+.work{display:flex;flex-direction:column;gap:20px;padding:96px var(--gut)}
+.work .lead{color:var(--soft-dark)}
+.calls{display:flex;flex-wrap:wrap;gap:8px}
+.calls [aria-pressed=true]{background:var(--paper);color:var(--ink)}
+.calls .dealb{background:var(--acid);color:var(--ink)}
+.cards{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(8px,1.4vw,18px);perspective:1400px;max-width:1100px}
+.cards li{rotate:var(--tilt);opacity:0}
+.work.in .cards li{animation:deal .5s var(--ease) both;animation-delay:calc(var(--n)*40ms)}
+.cardb{display:block;width:100%;aspect-ratio:5/7;border:0;padding:0;background:none;cursor:pointer}
+.cardb .in{position:relative;display:block;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s var(--io)}
+.cardb[aria-pressed=true] .in{transform:rotateY(180deg)}
+.cardb:active .in{scale:.97}
+.back,.front{position:absolute;inset:0;border-radius:12px;overflow:hidden;backface-visibility:hidden}
+.back,.felt .down{display:grid;place-items:center;background:var(--acid);color:var(--ink)}
+.back span,.felt .down span{width:54%}
+.front,.felt .up{display:flex;flex-direction:column;background:var(--ink-2);color:var(--paper)}
+.front{transform:rotateY(180deg)}
+.front img,.felt .up img{flex:1;min-height:0;width:100%;object-fit:cover;object-position:top}
+.tx{display:flex;flex-direction:column;gap:2px;padding:8px 10px 10px;text-align:start}
+.tx b{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:clamp(13px,1.1vw,15px);font-weight:600;line-height:1.2}
+.tx small{font-size:12px;line-height:1.2;color:var(--soft-dark)}
+.tx em{display:none;font-style:normal;font-size:12px;line-height:1.25}
+.felt li>div{width:100%;height:100%}
+/* the card look the owner chose on 2026-11-11: the phone capture fills most of the card, the name sits above it, large, on a colour */
+.c4 .cardb,.c4 .felt li{aspect-ratio:10/17}
+.c4 .back,.c4 .front,.c4 .felt li{border-radius:clamp(14px,1.6vw,22px)}
+.c4 img.wide{display:none}
+.c4 .tx{order:-1;flex:none;gap:4px;padding:clamp(9px,1vw,13px) clamp(9px,1vw,13px) 8px}
+.c4 .tx b{font-size:clamp(15px,1.4vw,20px);font-weight:800;letter-spacing:-.04em;line-height:1.02;-webkit-line-clamp:3}
+.c4 .tx small{order:-1;color:inherit;opacity:.7}
+/* the capture sits in the eye of the ف: three round corners and one square */
+.c4 img.tall{margin:0 6px 6px;width:auto;border-radius:clamp(10px,1.3vw,18px) clamp(10px,1.3vw,18px) 3px clamp(10px,1.3vw,18px)}
+[dir=rtl] .c4 img.tall{border-radius:clamp(10px,1.3vw,18px) clamp(10px,1.3vw,18px) clamp(10px,1.3vw,18px) 3px}
+.c4 .cards li:nth-child(3n+1) .front,.c4 .felt li:nth-child(odd) .up{background:var(--paper);color:var(--ink)}
+.c4 .cards li:nth-child(3n) .front{background:var(--acid);color:var(--ink)}
+
+/* a card opens from where it was touched, onto a sheet that turns on its spine between languages */
+dialog{width:100vw;max-width:none;height:100svh;max-height:none;margin:0;border:0;padding:0 var(--gut) 40px;background:var(--paper);color:var(--ink);overflow-y:auto}
+dialog::backdrop{background:none}
+.bar{position:sticky;z-index:1;top:0;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:16px 0;background:var(--paper)}
+.langs{display:flex;gap:6px}
+.langs button{min-height:48px;padding:0 16px;border:0;border-radius:999px;background:var(--paper-2);color:var(--ink);font-weight:600;cursor:pointer}
+.langs [aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.wrap{display:grid;grid-template-columns:minmax(0,1fr);align-items:center;min-height:calc(100svh - 136px);perspective:1600px}
+.sheet{display:flex;align-items:flex-start;gap:clamp(20px,3vw,40px);padding:clamp(16px,2.4vw,28px);border-radius:28px;background:var(--ink);color:var(--paper)}
+.sheet>.live{flex:none;width:46%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:16px}
+.sheet>div{min-width:0}
+.sheet h3{font-size:clamp(28px,4vw,52px);font-weight:800;letter-spacing:-.04em;line-height:1.05}
+.sheet .cat{margin:8px 0 4px;font-weight:600;color:var(--acid)}
+.sheet .st{font-size:15px;color:var(--soft-dark)}
+.sheet .sum{margin-top:14px;color:var(--soft-dark);max-width:34em}
+.sheet .acts{margin-top:20px}
+.sheet .acts .btn.ink{background:var(--ink-3)}
+.sheet .acts .btn{min-height:48px;padding-block:10px;border-radius:24px;white-space:normal;text-align:center}
+.sheet .note{margin-top:12px;font-size:14px;color:var(--soft-dark)}
+/* SOLitaire, live: the frame is laid out at its own size and scaled to fit, over the still, and shown only once
+   the page says it is ready, as src/components/live-embed.tsx does on the site */
+.live{position:relative;display:block;overflow:hidden;border-radius:16px;background:var(--ink-3)}
+.live img{width:100%;height:100%;object-fit:cover;object-position:top}
+.live iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;opacity:0;transition:opacity .3s var(--ease)}
+.live[data-ready] iframe{opacity:1}
+.live small{position:absolute;inset:auto auto 10px 10px;padding:4px 10px;border-radius:999px;background:var(--ink);color:var(--acid);font-size:13px;font-weight:600}
+.sheet>.live{flex:none;width:46%;aspect-ratio:1280/800}
+.play{display:grid;justify-items:start;gap:10px;margin-top:22px}
+.play[hidden]{display:none}
+.play b{font-size:20px;font-weight:800;letter-spacing:-.02em}
+.play .live{width:min(100%,300px);aspect-ratio:393/874}
+.demo{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin-top:22px;padding:16px;border-radius:20px;background:var(--ink-2)}
+.demo[hidden]{display:none}
+.demo .dlog{display:flex;flex-direction:column;gap:8px}
+.demo .bub{padding:10px 16px;font-size:16px}
+.demo small{font-size:14px;color:var(--soft-dark)}
+.demo .write{background:var(--ink-3)}
+
+/* 4. services and process stay on the page as plain text, laid out as a thread (B). The header links here */
+.thread{display:grid;gap:56px;padding:96px var(--gut);background:var(--paper);color:var(--ink)}
+.thread>div{display:flex;flex-direction:column;align-items:flex-start;gap:10px;max-width:880px}
+.thread h2.bub{font-size:clamp(26px,3.6vw,44px);font-weight:800;letter-spacing:-.04em;line-height:1.1;max-width:none;background:var(--ink);color:var(--paper);align-self:flex-end;padding:16px 24px}
+.thread .bub.agent{max-width:44ch;font-size:17px;font-weight:400}
+.thread .bub b{display:block;font-size:20px;font-weight:800;letter-spacing:-.02em}
+.thread .tags{font-size:14px;color:var(--soft-light);margin-top:4px;display:block}
+
+/* 5. the end: every way to reach him */
+.contact{display:grid;grid-template-columns:1fr minmax(0,460px);gap:40px;padding:96px var(--gut);background:var(--acid);color:var(--ink)}
+.contact .lead{margin-top:20px}
+.contact form{display:grid;gap:10px}
+.contact label{font-size:15px;font-weight:600}
+.contact input,.contact textarea{width:100%;min-height:52px;padding:14px 18px;border:0;border-radius:18px;background:var(--paper);color:var(--ink);font:inherit}
+.contact textarea{min-height:120px;resize:vertical}
+.contact .ways{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.contact .ways .btn{text-decoration:none}
+.foot{padding:28px var(--gut);color:var(--soft-dark);font-size:15px}
+
+.still .open{height:auto}.still .stage{position:relative;top:0;height:auto}.still canvas{display:none}
+.still .stage>img{position:static;height:60svh}.still .cap{position:static;opacity:1;padding:16px var(--gut)}
+.still .cards li{opacity:1}
+
+@media (max-width:900px){
+  .head nav{display:none;position:absolute;inset:var(--head) 0 auto;flex-direction:column;margin:0;padding:8px var(--gut) 16px;background:var(--ink)}
+  .head nav.on{display:flex}
+  .head .btn{display:none}
+  .brand b{display:none}
+  .lng{margin-inline-start:auto}
+  .menu{display:block}
+  .contact{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .table0{padding:88px 12px 104px}
+  .felt li{left:var(--mx);top:var(--my)}
+  .fold{grid-template-columns:1fr;grid-template-rows:auto 56px auto}
+  .leaf{gap:14px;padding:20px}
+  .leaf.main,[dir=rtl] .leaf.main{border-radius:24px 24px 6px 6px;transform:none}
+  .leaf.other,[dir=rtl] .leaf.other{border-radius:6px 6px 24px 24px;transform:none}
+  .spine span{width:56px}
+  .strip{grid-template-columns:repeat(2,1fr)}
+  .cards{grid-template-columns:repeat(3,1fr)}
+  .c4 .cards{grid-template-columns:repeat(2,1fr)}
+  .sheet{flex-direction:column;align-items:stretch}
+  .sheet>img,.sheet>.live{width:100%}
+  .langs button{padding:0 14px}
+}
+@media (max-width:380px){.langs{gap:4px}.langs button{padding:0 10px}.bar .btn{min-height:48px;padding:0 16px}}
+</style>
+</head>
+<body id="top" class="c4">
+<header class="head" id="head"></header>
+<main>
+  <section class="table0">
+    <ul class="felt" id="felt" aria-hidden="true"></ul>
+    <div class="fold">
+      <div class="leaf main" id="main"></div>
+      <div class="spine"><span data-mark></span></div>
+      <div class="leaf other" id="other"></div>
+    </div>
+  </section>
+
+  <section class="open" id="open">
+    <div class="stage">
+      <img id="through" src="../../../../public/work/elsewhereco/desktop.webp" alt="">
+      <canvas aria-hidden="true"></canvas>
+      <p class="cap" id="cap"><b id="capt"></b><button class="btn" id="capb"></button></p>
+    </div>
+  </section>
+
+  <section class="work" id="work">
+    <h2 class="display" id="wt"></h2>
+    <p class="lead" id="wl"></p>
+    <div class="calls" id="calls"></div>
+    <ul class="cards" id="cards"></ul>
+  </section>
+
+  <section class="thread" id="thread"></section>
+  <section class="contact" id="contact"></section>
+  <footer class="foot" id="foot"></footer>
+</main>
+
+<dialog id="dlg" aria-labelledby="dt">
+  <div class="bar">
+    <div class="langs" role="group" aria-label="Language">
+      <button data-l="en" lang="en">English</button>
+      <button data-l="ar" lang="ar">العربية</button>
+      <button data-l="he" lang="he">עברית</button>
+    </div>
+    <button class="btn ink" id="dx"></button>
+  </div>
+  <div class="wrap">
+    <article class="sheet" id="sheet">
+      <span class="live" id="shot"><img id="di" src="../../../../public/work/elsewhereco/desktop.webp" alt=""></span>
+      <div>
+        <h3 id="dt" dir="auto"></h3>
+        <p class="cat" id="dc"></p>
+        <p class="st" id="dst"></p>
+        <p class="sum" id="ds"></p>
+        <div class="acts" id="da"></div>
+        <p class="note" id="dn"></p>
+        <div class="play" id="play" hidden><b id="pt"></b><span class="live" id="table"><img src="../../../../public/labs/solitaire/solitaire-suit-table-live-mobile.jpg" alt=""></span></div>
+        <div class="demo" id="demo" hidden>
+          <p id="dmi"></p>
+          <div class="dlog" id="dlog" aria-live="polite"></div>
+          <div class="chips" id="dchips"></div>
+          <form class="write" id="dform"><label class="vh" for="dq">Customer message</label><input id="dq" dir="auto" autocomplete="off"><button class="btn" id="dsend"></button></form>
+          <small id="dmn"></small>
+        </div>
+      </div>
+    </article>
+  </div>
+</dialog>
+<script src="shared.js"></script>
+<script src="scope-data.js"></script>
+<script>
+const $ = s => document.querySelector(s), $$ = s => document.querySelectorAll(s);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.body.classList.add(reduce ? 'still' : 'moving');
+const LOCS = ['en', 'ar', 'he'], NAME = { en: 'English', ar: 'العربية', he: 'עברית' };
+const L = LOCS.find(l => l === new URLSearchParams(location.search).get('l')) ?? 'en';
+const D = SITE.ui[L], CARDS = SITE.cards, t = o => o[L];
+document.documentElement.lang = L; document.documentElement.dir = L === 'en' ? 'ltr' : 'rtl';
+const bySlug = s => CARDS.find(c => c.slug === s);
+const live = CARDS.filter(c => c.status === 'live-product'), apks = CARDS.filter(c => c.apks.length);
+const way = k => SITE.profile.contactLinks.find(c => c.kind === k);
+const local = href => href.startsWith('/') ? PUB + href : href; // files under public/ open from the repo in this preview
+const casePage = (c, l) => `https://fhaj.dev${l === 'en' ? '' : '/' + l}/work/${c.slug}`;
+// one face for the cards on the table and the cards in the work section; each look shows the capture that suits its shape
+const face = c => `<img class="tall" src="${PUB + c.tall}" alt=""><img class="wide" src="${PUB + (c.wide ?? c.tall)}" alt=""><span class="tx"><b><bdi>${c.title}</bdi></b><small>${t(SITE.status[c.status])}</small><em>${t(c.cat)}</em></span>`;
+const esc = s => s.replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+
+/* New copy written for this preview. Everything else comes from the site. Drafts: the Arabic and Hebrew need the owner's read. */
+const T = {
+  head: { en: 'I build what answers<br>your customers.', ar: 'أبني ما يردّ على زبائنك.', he: 'אני בונה את מה שעונה ללקוחות שלכם.' },
+  ask: { en: 'Ask about the work', ar: 'اسأل عن الأعمال', he: 'שאלו על העבודות' },
+  q: {
+    live: { en: "What's live?", ar: 'ما الذي يعمل الآن؟', he: 'מה באוויר?' },
+    install: { en: 'What can I install?', ar: 'ماذا يمكنني أن أثبّت؟', he: 'מה אפשר להתקין?' },
+    services: { en: 'What do you build?', ar: 'ماذا تبني؟', he: 'מה אתה בונה?' },
+    process: { en: 'How do you work?', ar: 'كيف تعمل؟', he: 'איך אתה עובד?' },
+    demo: { en: 'Try the shop agent', ar: 'جرّب وكيل المتجر', he: 'נסו את סוכן החנות' },
+    play: { en: 'Play SOLitaire', ar: 'العب SOLitaire', he: 'שחקו SOLitaire' },
+  },
+  live: n => ({ en: `${n} products are live. Tap one to open it.`, ar: `${n} منتجات تعمل الآن. اضغط على أيٍّ منها لفتحه.`, he: `${n} מוצרים באוויר. הקישו על אחד כדי לפתוח אותו.` }),
+  install: n => ({ en: `${n} Android builds you can install.`, ar: `${n} نسخ أندرويد يمكنك تثبيتها.`, he: `${n} גרסאות אנדרואיד שאפשר להתקין.` }),
+  resume: { en: 'Here it is.', ar: 'تفضّل.', he: 'בבקשה.' },
+  none: { en: "I don't have an approved answer for that. Send it to Fathallah on WhatsApp and he will answer himself.", ar: 'ليس لديّ جواب معتمد على هذا. أرسله إلى فتحلله على واتساب وسيجيبك بنفسه.', he: 'אין לי תשובה מאושרת לזה. שלחו את זה לפתאללה ב-WhatsApp והוא יענה בעצמו.' },
+  see: { en: 'See it', ar: 'شاهده', he: 'לצפייה' },
+  seeAll: { en: 'See them', ar: 'شاهدها', he: 'לצפייה בכולם' },
+  more: { en: 'Read more', ar: 'اقرأ المزيد', he: 'לקריאה נוספת' },
+  send: { en: 'Send it on WhatsApp', ar: 'أرسله على واتساب', he: 'שלחו ב-WhatsApp' },
+  hand: { en: 'Play a hand', ar: 'العب جولة', he: 'שחקו יד' },
+  deal: { en: 'Deal again', ar: 'وزّع من جديد', he: 'חלקו שוב' },
+  close: { en: 'Close', ar: 'إغلاق', he: 'סגירה' },
+  open: { en: 'Open it', ar: 'افتحه', he: 'לפתיחה' },
+  list: { en: 'Project list', ar: 'قائمة المشاريع', he: 'רשימת הפרויקטים' },
+  files: { en: 'Download files', ar: 'ملفات التنزيل', he: 'קובצי ההורדה' },
+  no: { en: 'Not needed', ar: 'غير مطلوب', he: 'לא נדרש' },
+  yours: { en: 'Your call, on WhatsApp', ar: 'القرار لك، عبر واتساب', he: 'ההחלטה שלכם, ב-WhatsApp' },
+};
+
+/* ---- header ---- */
+$('#head').innerHTML = `<a class="brand" href="#top" aria-label="${SITE.profile.name}"><span data-mark>${markSvg()}</span><b>${SITE.profile.name}</b></a>
+  <nav id="nav">${['services', 'work', 'process', 'contact'].map(k => `<a href="#${k}">${D.nav[k]}</a>`).join('')}</nav>
+  <div class="lng">${LOCS.map(l => `<a href="?l=${l}" lang="${l}"${l === L ? ' aria-current="true"' : ''}>${l === 'en' ? 'EN' : NAME[l]}</a>`).join('')}</div>
+  <a class="btn" href="#contact">${D.nav.start}</a>
+  <button class="menu" id="menu" aria-expanded="false" aria-controls="nav" aria-label="${D.nav.menu}"></button>`;
+$('#menu').addEventListener('click', e => e.currentTarget.setAttribute('aria-expanded', $('#nav').classList.toggle('on')));
+$('#nav').addEventListener('click', () => $('#nav').classList.remove('on'));
+
+/* ---- first screen: this locale's leaf holds the h1, the box and the two doors; the other leaf holds the other two languages ---- */
+$('#main').innerHTML = `<p class="who">${SITE.profile.name} · ${D.home.role}</p>
+  <h1 class="display" lang="${L}">${T.head[L]}</h1>
+  <p class="lead">${D.home.summary}</p>
+  <div class="doors"><a class="btn" href="${way('whatsapp').href}" target="_blank" rel="noopener">${t(way('whatsapp').label)}</a><a class="btn ink" href="${local(way('resume').href)}" target="_blank" rel="noopener">${t(way('resume').label)}</a></div>
+  <form class="ask" id="ask">
+    <div class="log" id="log" aria-live="polite"></div>
+    <div class="chips" id="chips">${['live', 'install', 'services', 'demo', 'play'].map(k => `<button type="button" class="chip" data-intent="${k}">${t(T.q[k])}</button>`).join('')}</div>
+    <div class="write"><label class="vh" for="q">${t(T.ask)}</label><input id="q" dir="auto" autocomplete="off" placeholder="${t(T.ask)}"><button class="btn">${D.home.agentDemo.send}</button></div>
+  </form>`;
+$('#other').innerHTML = LOCS.filter(l => l !== L).map(l => `<p class="display" lang="${l}" dir="${l === 'en' ? 'ltr' : 'rtl'}">${T.head[l]}</p>`).join('');
+// decoration only: [slug, face up, x, y, tilt, phone x, phone y]. Face up wherever a card tucks under the acid leaf
+$('#felt').innerHTML = [
+  ['elsewhereco', 1, '3%', '2%', -9, '-5%', '1%'], ['bab', 0, '19%', '5%', 6, '22%', '3%'],
+  ['camp-and-hike', 1, '70%', '1%', -5, '50%', '0%'], ['saqroon', 0, '88%', '3%', 11, '78%', '2%'],
+  ['nedaa-lifestyle', 1, '5%', '74%', 8, '-4%', '86%'], ['solitaire', 1, '27%', '80%', -6, '23%', '88%'],
+  ['seeker-radar', 1, '63%', '73%', 5, '51%', '87%'], ['go-to-nature', 1, '85%', '79%', -10, '79%', '86%'],
+].map(([slug, up, x, y, r, mx, my], n) => `<li style="--n:${n};--x:${x};--y:${y};--r:${r}deg;--mx:${mx};--my:${my}">${up
+  ? `<div class="up">${face(bySlug(slug))}</div>` : `<div class="down"><span data-mark>${markSvg()}</span></div>`}</li>`).join('');
+
+/* ---- the rules, over his own catalog, in three languages. Chips carry their intent; typed text is matched here.
+   Arabic and Hebrew are matched after normalising and without \b, which only knows Latin letters. ---- */
+const ALIAS = { 'camp-and-hike': ['camp & hike', 'camp and hike'], 'whatsapp-ai-sales-agent': ['sales agent', 'whatsapp agent'], bab: ['bab', 'باب'],
+  'nedaa-lifestyle': ['nedaa', 'نداء'], darbak: ['darbak', 'دربك'], 'seeker-radar': ['seeker radar'], 'little-keepsakes': ['little keepsakes', 'keepsakes'],
+  solitaire: ['solitaire'], elsewhereco: ['elsewhereco', 'elsewhere'], 'go-to-nature': ['go to nature'], 'lulu-tokki': ['lulu tokki', 'lulu'], saqroon: ['saqroon', 'صقرون', 'סקרון'] };
+const INTENTS = [ // order matters: what he must answer himself comes first
+  ['none', /\b(price|cost|how much|rate|budget|hire|hiring|salary)\b|سعر|تكلف|بكم|توظيف|מחיר|כמה עולה|עלות|לגייס/],
+  ['resume', /\b(resume|cv|experience|skills|stack)\b|سيره|خبره|קורות|ניסיון/],
+  ['install', /\b(install|apk|android|download)\b|تثبيت|اثبت|تنزيل|تحميل|اندرويد|להתקין|הורדה|אנדרואיד/],
+  ['live', /\b(live|shipped|launched|public)\b|يعمل|تعمل|مباشر|באוויר/],
+  ['process', /\b(process|how do you work|steps)\b|كيف تعمل|طريقه العمل|איך אתה עובד|תהליך/],
+  ['services', /\b(build|services|offer)\b|تبني|خدمات|בונה|שירותים/],
+];
+function match(text) {
+  const n = norm(text), words = ` ${n.split(/[^\p{L}\p{N}&]+/u).filter(Boolean).join(' ')} `;
+  const hit = INTENTS.find(i => i[1].test(n));
+  if (hit?.[0] === 'none') return { intent: 'none' };
+  const named = CARDS.find(c => ALIAS[c.slug].some(a => words.includes(` ${norm(a)} `))); // whole words, so باب is not found inside أسباب
+  return named ? { intent: 'project', item: named } : { intent: hit?.[0] ?? 'none' };
+}
+function answer({ intent, item }, text) {
+  const base = { intent, items: [], src: null, handoff: false, link: null };
+  if (intent === 'live') return { ...base, text: t(T.live(live.length)), items: live, src: t(T.list) };
+  if (intent === 'install') return { ...base, text: t(T.install(apks.length)), items: apks, src: t(T.files) };
+  if (intent === 'services') return { ...base, text: D.home.summary, link: '#services', src: D.nav.services };
+  if (intent === 'process') return { ...base, text: D.home.processTitle, link: '#process', src: D.nav.process };
+  if (intent === 'resume') return { ...base, text: t(T.resume), link: local(way('resume').href), src: t(way('resume').label) };
+  if (intent === 'project') return { ...base, text: `<bdi>${item.title}</bdi>. ${t(SITE.status[item.status])}. ${t(item.cat)}.`, items: [item], src: t(T.list) };
+  return { ...base, text: t(T.none), handoff: true };
+}
+console.assert(match("What's live?").intent === 'live' && match('ماذا يمكنني أن أثبّت؟').intent === 'install' && match('מה אתה בונה?').intent === 'services'
+  && match('Show me Bab').item?.slug === 'bab' && match('احكيلي عن باب').item?.slug === 'bab' && !match('ما هي الأسباب؟').item
+  && match('What does a project cost?').intent === 'none' && match('כמה עולה פרויקט?').intent === 'none' && match('Can I see your CV?').intent === 'resume', 'catalog rules are off');
+
+const ACT = { resume: t(way('resume').label), services: t(T.more), process: t(T.more) };
+function send(text, m = match(text)) {
+  const r = answer(m, text), log = $('#log'), one = r.items.length === 1;
+  const first = r.items[0];
+  if (first) { $('#through').src = PUB + first.img; $('#capt').textContent = `${first.title} · ${t(SITE.status[first.status])}`; $('#capb').dataset.slug = first.slug; }
+  log.innerHTML = `<p class="bub cust pop" dir="auto">${esc(text)}</p><p class="bub agent pop">${r.text}</p>
+    <div class="acts">${r.items.map(c => `<button type="button" class="chip" data-open="${c.slug}" dir="auto">${c.title}</button>`).join('')}
+      ${one ? `<button type="button" class="btn ink" data-see="one">${t(T.see)}</button>` : r.items.length ? `<button type="button" class="btn ink" data-see="${r.intent}">${t(T.seeAll)}</button>` : ''}
+      ${r.link ? `<a class="btn ink" href="${r.link}"${r.intent === 'resume' ? ' target="_blank" rel="noopener"' : ''}>${ACT[r.intent]}</a>` : ''}
+      ${r.handoff ? `<a class="btn ink" target="_blank" rel="noopener" href="https://wa.me/972545964855?text=${encodeURIComponent(text)}">${t(T.send)}</a>` : ''}</div>
+    <ol class="strip">${[[D.home.agentFlow[0], NAME[detectLanguage(text)]], [D.home.agentFlow[2], r.handoff ? D.home.agentDemo.intents.other : one && r.intent === 'project' ? first.title : ACT[r.intent] && r.intent === 'resume' ? ACT.resume : t(T.q[r.intent])],
+      [D.home.agentDemo.source, r.src ?? D.home.agentDemo.handoffs.missing_approved_sources], [D.home.agentFlow[4], r.handoff ? t(T.yours) : t(T.no)]]
+      .map(([k, v], n) => `<li style="--n:${n}"><span>${k}</span><b dir="auto">${v}</b></li>`).join('')}</ol>`;
+}
+const sec = $('#open'), stage = $('.stage');
+let gliding = 0;
+function glide(to, ms = 1800) { // only ever started by the visitor's own tap on "See it"
+  if (reduce) return scrollTo({ top: to, behavior: 'instant' });
+  const from = scrollY, t0 = performance.now(), id = ++gliding;
+  const step = now => {
+    if (id !== gliding) return;
+    const k = Math.min(1, (now - t0) / ms), e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+    scrollTo({ top: from + (to - from) * e, behavior: 'instant' });
+    if (k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+['wheel', 'touchstart', 'keydown'].forEach(ev => addEventListener(ev, () => { gliding++; }, { passive: true })); // the visitor's own scroll wins
+$('#chips').addEventListener('click', e => {
+  const k = e.target.dataset.intent; if (!k) return;
+  if (k === 'demo') return openSheet(bySlug('whatsapp-ai-sales-agent'), e.target);
+  if (k === 'play') return openSheet(bySlug('solitaire'), e.target);
+  send(e.target.textContent, { intent: k });
+});
+$('#ask').addEventListener('submit', e => { e.preventDefault(); const v = $('#q').value.trim(); if (v) { $('#q').value = ''; send(v); } });
+$('#log').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.open) return openSheet(bySlug(b.dataset.open), b);
+  if (b.dataset.see === 'one') return reduce ? $('#through').scrollIntoView() : glide(sec.offsetTop + sec.offsetHeight - stage.offsetHeight - $('#head').offsetHeight);
+  call(b.dataset.see === 'install' ? 'apk' : 'live'); $('#work').scrollIntoView();
+});
+
+/* ---- the opening (D): ink, the mark large, the ف's eye cut through to the work. Throwaway canvas: the site
+   already has this zoom in brand-portal.tsx and portal-motion.tsx, and the build reuses that. ---- */
+const cv = $('canvas'), x = cv.getContext('2d'), cap = $('#cap');
+const G = new Path2D(MARK_D), EYE = new Path2D(EYE_D);
+let w, h, dpr;
+function draw() {
+  const r = sec.getBoundingClientRect(), top = $('#head').offsetHeight, p = Math.min(1, Math.max(0, (top - r.top) / (r.height - h)));
+  const base = Math.min(w * (w > 760 ? .34 : .6), 500) / 750, end = Math.max(w / 52, h / 40), s = base * Math.pow(end / base, p);
+  const ax0 = w / 2 + 237 * base, ay0 = h / 2 - 72 * base; // the eye is at (732,393); the mark's centre is (495,465)
+  x.setTransform(dpr, 0, 0, dpr, 0, 0);
+  x.globalCompositeOperation = 'source-over';
+  x.fillStyle = '#0b0b0b'; x.fillRect(0, 0, w, h);
+  x.translate(ax0 + (w / 2 - ax0) * p, ay0 + (h / 2 - ay0) * p); x.scale(s, s); x.translate(-732, -393);
+  x.fillStyle = '#c8ff34'; x.fill(G, 'evenodd'); x.beginPath(); x.arc(739, 246, 33, 0, 7); x.fill();
+  x.globalCompositeOperation = 'destination-out'; x.fill(EYE);
+  cap.style.opacity = Math.max(0, (p - .85) / .15); cap.style.pointerEvents = p > .9 ? '' : 'none';
+}
+function size() { dpr = Math.min(devicePixelRatio || 1, 2); w = stage.clientWidth; h = stage.clientHeight; cv.width = w * dpr; cv.height = h * dpr; draw(); }
+if (!reduce) {
+  let queued = false;
+  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; draw(); }); } }, { passive: true });
+  addEventListener('resize', size); size();
+}
+$('#capt').textContent = `${bySlug('elsewhereco').title} · ${t(SITE.status['live-product'])}`;
+$('#capb').textContent = t(T.open); $('#capb').dataset.slug = 'elsewhereco';
+$('#capb').addEventListener('click', e => openSheet(bySlug(e.currentTarget.dataset.slug), e.currentTarget));
+
+/* ---- the work (F): dealt face down, each card turning face up as it lands ---- */
+const cards = $('#cards');
+$('#wt').textContent = D.home.workTitle; $('#wl').textContent = D.home.deckIntro;
+$('#calls').innerHTML = `<button class="chip" data-call="all" aria-pressed="true">${D.home.filters.all} · ${CARDS.length}</button>
+  <button class="chip" data-call="live" aria-pressed="false">${D.hero.live} · ${live.length}</button>
+  <button class="chip" data-call="apk" aria-pressed="false">${D.home.installTitle} · ${apks.length}</button>
+  <button class="chip dealb" id="deal">${t(T.deal)}</button>`;
+const WANT = { all: () => true, live: c => c.status === 'live-product', apk: c => c.apks.length };
+function turn(b, up) { b.setAttribute('aria-pressed', !!up); }
+function land() { if (!$('#work').classList.contains('in')) return; [...cards.querySelectorAll('.cardb')].forEach((b, n) => setTimeout(() => turn(b, true), reduce ? 0 : 420 + n * 70)); }
+function deal() {
+  const order = CARDS.map((_, i) => i).sort(() => Math.random() - .5);
+  cards.innerHTML = order.map((i, n) => `<li style="--n:${n};--tilt:${(Math.random() * 5 - 2.5).toFixed(1)}deg">
+    <button class="cardb" data-i="${i}" aria-pressed="${reduce}" aria-label="${esc(CARDS[i].title)}"><span class="in">
+      <span class="back"><span data-mark>${markSvg()}</span></span>
+      <span class="front">${face(CARDS[i])}</span>
+    </span></button></li>`).join('');
+  $$('#calls [data-call]').forEach(b => b.setAttribute('aria-pressed', b.dataset.call === 'all'));
+  land();
+}
+function call(k) { // a suit stays face up and the rest turn back down
+  $$('#calls [data-call]').forEach(b => b.setAttribute('aria-pressed', b.dataset.call === k));
+  [...cards.querySelectorAll('.cardb')].forEach((b, n) => setTimeout(() => turn(b, WANT[k](CARDS[b.dataset.i])), n * 40));
+}
+$('#calls').addEventListener('click', e => { if (e.target.id === 'deal') deal(); else if (e.target.dataset.call) call(e.target.dataset.call); });
+cards.addEventListener('click', e => {
+  const b = e.target.closest('.cardb'); if (!b) return;
+  const down = b.getAttribute('aria-pressed') !== 'true';
+  turn(b, true);
+  setTimeout(() => openSheet(CARDS[b.dataset.i], b), down && !reduce ? 420 : 0);
+});
+deal();
+new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { $('#work').classList.add('in'); land(); o.disconnect(); } }, { threshold: .15 }).observe($('#work'));
+
+/* ---- live frames for projects that have them (only SOLitaire today) ---- */
+function frame(host, embed, still, label) {
+  host.removeAttribute('data-ready'); host.querySelector('iframe')?.remove(); host.querySelector('small')?.remove();
+  host.querySelector('img').src = PUB + still;
+  if (!embed) return;
+  const f = Object.assign(document.createElement('iframe'), { src: embed.src, width: embed.width, height: embed.height, title: label, tabIndex: -1 });
+  f.setAttribute('aria-hidden', 'true');
+  host.append(f);
+  if (embed.label) host.insertAdjacentHTML('beforeend', `<small>${t(embed.label)}</small>`);
+  new ResizeObserver(() => { f.style.transform = `scale(${host.clientWidth / embed.width})`; }).observe(host);
+}
+addEventListener('message', e => {
+  if (e.data?.type !== 'solitaire:embed-ready') return;
+  $$('.live iframe').forEach(f => { if (f.contentWindow === e.source) { f.parentElement.dataset.ready = ''; f.tabIndex = 0; f.removeAttribute('aria-hidden'); } });
+});
+
+/* ---- the sheet: opens from the touch point, in this page's language; its buttons turn the copy only.
+   Opening adds a history entry, so the phone's Back button closes the sheet and stays on the site. ---- */
+const dlg = $('#dlg'), sheet = $('#sheet');
+let cur, at = '50% 50%', busy = false;
+$('#dx').textContent = t(T.close);
+function show(l) {
+  const U = SITE.ui[l], A = U.home.agentDemo;
+  sheet.lang = l; sheet.dir = l === 'en' ? 'ltr' : 'rtl';
+  $('#dc').textContent = cur.cat[l]; $('#ds').textContent = cur.sum[l];
+  $('#dst').innerHTML = SITE.status[cur.status][l] + (cur.now ? ` · ${U.home.nowTitle}: <span dir="ltr" lang="en">${esc(cur.now.phase)}</span>` : '');
+  $('#da').innerHTML = (cur.live ? `<a class="btn" href="${cur.live.href}" target="_blank" rel="noopener">${cur.live.label[l]}</a>` : '')
+    + (cur.page ? `<a class="btn ink" href="${casePage(cur, l)}" target="_blank" rel="noopener">${U.work.caseStudy}</a>` : '')
+    + cur.apks.map(a => `<a class="btn ink" href="${local(a.href)}" download>${a.label[l]}</a>`).join('');
+  $('#dn').textContent = cur.note?.[l] ?? '';
+  $('#dmi').textContent = A.intro; $('#dmn').textContent = A.note; $('#dq').placeholder = A.placeholder; $('#dsend').textContent = A.send;
+  $('#dchips').innerHTML = A.prompts.map(q => `<button type="button" class="chip" dir="auto">${q}</button>`).join('');
+  $$('.langs button').forEach(b => b.setAttribute('aria-pressed', b.dataset.l === l));
+}
+async function turnSheet(l) {
+  if (busy || sheet.lang === l) return;
+  if (reduce) return show(l);
+  busy = true;
+  const d = l === 'en' ? -90 : 90; // right-to-left pages turn the other way
+  await sheet.animate({ transform: ['rotateY(0)', `rotateY(${d}deg)`] }, { duration: 260, easing: 'cubic-bezier(.77,0,.175,1)' }).finished;
+  show(l);
+  await sheet.animate({ transform: [`rotateY(${-d}deg)`, 'rotateY(0)'] }, { duration: 340, easing: 'cubic-bezier(.23,1,.32,1)' }).finished;
+  busy = false;
+}
+$$('.langs button').forEach(b => b.addEventListener('click', () => turnSheet(b.dataset.l)));
+const circle = r => `circle(${r} at ${at})`;
+function openSheet(c, from) {
+  const q = from.getBoundingClientRect();
+  at = `${q.left + q.width / 2}px ${q.top + q.height / 2}px`;
+  cur = c; $('#dt').textContent = c.title; $('#dlog').innerHTML = '';
+  const hero = c.embeds?.find(e => e.src.endsWith('/hero') && e.width > e.height), table = c.embeds?.find(e => e.src.endsWith('/table'));
+  frame($('#shot'), hero, c.wide ?? c.img, c.title);
+  $('#play').hidden = !table; $('#pt').textContent = t(T.hand);
+  frame($('#table'), table, c.tall, `${c.title} · ${t(T.hand)}`);
+  $('#demo').hidden = c.slug !== 'whatsapp-ai-sales-agent';
+  show(L); dlg.showModal(); dlg.scrollTop = 0; history.pushState({ sheet: c.slug }, '');
+  if (!reduce) dlg.animate({ clipPath: [circle('0px'), circle('150%')] }, { duration: 480, easing: 'cubic-bezier(.23,1,.32,1)' });
+}
+addEventListener('popstate', async () => {
+  if (!dlg.open) return;
+  if (!reduce) await dlg.animate({ clipPath: [circle('150%'), circle('0px')] }, { duration: 260, easing: 'cubic-bezier(.77,0,.175,1)' }).finished;
+  dlg.close();
+  frame($('#shot'), null, cur.wide ?? cur.img); frame($('#table'), null, cur.tall);
+});
+$('#dx').addEventListener('click', () => history.back());
+dlg.addEventListener('cancel', e => { e.preventDefault(); history.back(); });
+// the sweets shop is the WhatsApp agent's own demo: it lives in that card only, and it still answers
+function shop(text) {
+  const r = reply(text), A = SITE.ui[sheet.lang].home.agentDemo;
+  const why = r.source ? `${A.source}: ${r.source.label[sheet.lang]}` : r.handoff ? `${A.handoff}: ${A.handoffs[r.handoff]}` : '';
+  $('#dlog').insertAdjacentHTML('beforeend', `<p class="bub cust pop" dir="auto">${esc(text)}</p><p class="bub agent pop" dir="auto">${r.text}</p><small>${A.why}: ${A.intents[r.intent]}${why ? ' · ' + why : ''}</small>`);
+}
+$('#dchips').addEventListener('click', e => { if (e.target.matches('.chip')) shop(e.target.textContent); });
+$('#dform').addEventListener('submit', e => { e.preventDefault(); const v = $('#dq').value.trim(); if (v) { $('#dq').value = ''; shop(v); } });
+
+/* ---- services and process: the same answers the box gives, written out where anyone can read and link to them ---- */
+$('#thread').innerHTML = `<div id="services"><h2 class="bub cust">${t(T.q.services)}</h2>
+    ${SITE.services.map(s => `<p class="bub agent"><b>${t(s.title)}</b>${t(s.summary)}<span class="tags" dir="ltr" lang="en">${s.signals.join(' · ')}</span></p>`).join('')}</div>
+  <div id="process"><h2 class="bub cust">${t(T.q.process)}</h2>
+    ${D.process.steps.map(s => `<p class="bub agent"><b>${s.title}</b>${s.text}</p>`).join('')}</div>`;
+
+/* ---- the end: the form and every direct way, as the site has them today ---- */
+$('#contact').innerHTML = `<div><h2 class="display">${D.home.contactTitle.replace('\n', '<br>')}</h2><p class="lead">${D.home.contactSummary}</p>
+    <div class="ways">${SITE.profile.contactLinks.map(c => `<a class="btn ink" href="${local(c.href)}" target="_blank" rel="noopener">${t(c.label)}</a>`).join('')}</div></div>
+  <form id="brief"><label for="fn">${D.form.name}</label><input id="fn" autocomplete="name">
+    <label for="fr">${D.form.reply}</label><input id="fr">
+    <label for="fm">${D.form.message}</label><textarea id="fm" placeholder="${D.form.placeholder}"></textarea>
+    <button class="btn ink">${D.form.submit}</button><output id="fo">${D.contact.privacy}</output></form>`;
+$('#brief').addEventListener('submit', e => { e.preventDefault(); $('#fo').textContent = 'Preview only: nothing was sent.'; });
+$('#foot').textContent = `${D.home.signature} ${D.footer.line}`;
+</script>
+</body>
+</html>
