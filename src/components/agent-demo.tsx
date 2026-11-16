@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "@vercel/analytics";
 import { RotateCcw, SendHorizontal } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { Locale } from "@/content/portfolio";
@@ -41,6 +42,7 @@ export function AgentDemo({ locale, copy }: { locale: Locale; copy: AgentDemoCop
   function send(text: string) {
     const value = text.trim();
     if (!value || thinking) return;
+    track("demo_send", { locale });
     const id = ++counter.current;
     setMessages((current) => [...current, { id, role: "customer", text: value }]);
     setDraft("");

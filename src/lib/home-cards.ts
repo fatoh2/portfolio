@@ -16,7 +16,14 @@ import {
 } from "@/content/portfolio";
 import { projectShowcases } from "@/content/project-showcase";
 
-export type Embed = { src: string; title: LocalizedText };
+/** A live page and the still it is layered over, each at its captured size. */
+export type Embed = {
+  src: string;
+  title: LocalizedText;
+  width: number;
+  height: number;
+  still: { src: string; width: number; height: number };
+};
 
 export type HomeCard = {
   slug: string;
@@ -40,7 +47,8 @@ export type HomeCard = {
   phase: { text: string; updated: string } | null;
 };
 
-export type HomeCardRef = { slug: string; title: string; status: ProjectStatus; hasDownload: boolean };
+/** `href` is the case page, or `#saqroon` for the one card without one. */
+export type HomeCardRef = { slug: string; title: string; status: ProjectStatus; hasDownload: boolean; href: string };
 
 type Source = {
   slug: string;
@@ -98,7 +106,15 @@ function sources(locale: Locale): Source[] {
 
 const embedOf = (media: ProjectMedia[], path: string): Embed | undefined => {
   const item = media.find((entry) => entry.embed?.src.endsWith(path));
-  return item?.embed ? { src: item.embed.src, title: item.alt } : undefined;
+  return item?.embed
+    ? {
+        src: item.embed.src,
+        title: item.alt,
+        width: item.embed.width,
+        height: item.embed.height,
+        still: { src: item.src, width: item.width, height: item.height },
+      }
+    : undefined;
 };
 
 function toCard(source: Source, locale: Locale): HomeCard {
@@ -149,4 +165,8 @@ export const toRef = (card: HomeCard): HomeCardRef => ({
   title: card.title,
   status: card.status,
   hasDownload: card.downloads.length > 0,
+  href: card.casePath ?? `#${card.slug}`,
 });
+
+/** Card tilt in degrees, fixed by position so the server and the browser agree. */
+export const cardTilt = (index: number) => ((index % 5) - 2) * 1.5;

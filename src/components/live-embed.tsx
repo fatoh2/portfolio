@@ -10,11 +10,27 @@ import { useEffect, useRef, useState } from "react";
  */
 export const EMBED_READY_MESSAGE = "solitaire:embed-ready";
 
-export function LiveEmbed({ src, title, label, width, height }: { src: string; title: string; label?: string; width: number; height: number }) {
+export function LiveEmbed({
+  src,
+  title,
+  label,
+  width,
+  height,
+  onReady,
+}: {
+  src: string;
+  title: string;
+  label?: string;
+  width: number;
+  height: number;
+  /** Called once, when the page reports ready. */
+  onReady?: () => void;
+}) {
   const host = useRef<HTMLSpanElement>(null);
   const frame = useRef<HTMLIFrameElement>(null);
   const [near, setNear] = useState(false);
   const [ready, setReady] = useState(false);
+  const fired = useRef(false);
 
   useEffect(() => {
     const element = host.current;
@@ -47,11 +63,17 @@ export function LiveEmbed({ src, title, label, width, height }: { src: string; t
 
   useEffect(() => {
     function onMessage(event: MessageEvent) {
-      if (event.source === frame.current?.contentWindow && event.data?.type === EMBED_READY_MESSAGE) setReady(true);
+      if (event.source === frame.current?.contentWindow && event.data?.type === EMBED_READY_MESSAGE) {
+        setReady(true);
+        if (!fired.current) {
+          fired.current = true;
+          onReady?.();
+        }
+      }
     }
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
-  }, []);
+  }, [onReady]);
 
   return (
     <span ref={host} className="live-embed" data-ready={ready ? "" : undefined}>

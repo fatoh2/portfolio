@@ -269,6 +269,22 @@ export const rules: HomeRule[] = [
   },
 ];
 
+/** What a question was understood as: each answer's heading and its "Understood as" field. */
+export const intentLabels: Record<AnswerIntent | "unknown", LocalizedText> = {
+  live: tx("Live work", "أعمال تعمل الآن", "עבודות באוויר"),
+  install: tx("Apps to install", "تطبيقات للتثبيت", "אפליקציות להתקנה"),
+  services: tx("What I build", "ما أبنيه", "מה אני בונה"),
+  process: tx("How I work", "طريقة عملي", "איך אני עובד"),
+  resume: tx("Résumé", "السيرة الذاتية", "קורות חיים"),
+  stack: tx("Tools", "الأدوات", "כלים"),
+  location: tx("Where I work from", "مكان العمل", "מאיפה אני עובד"),
+  contact: tx("Contact", "التواصل", "יצירת קשר"),
+  price: tx("Price", "السعر", "מחיר"),
+  play: tx("Play SOLitaire", "العب SOLitaire", "לשחק SOLitaire"),
+  demo: tx("The agent demo", "تجربة الوكيل", "הדגמת הסוכן"),
+  unknown: tx("Something else", "شيء آخر", "משהו אחר"),
+};
+
 export const unknownAnswer: LocalizedText = tx(
   "I don't have an approved answer for that. Send it to me on WhatsApp and I'll answer myself.",
   "ليس لديّ جواب معتمد على هذا. أرسله لي على واتساب وسأجيبك بنفسي.",
@@ -318,8 +334,12 @@ export const labels = {
     install: tx("Install a preview", "ثبّت نسخة تجريبية", "התקינו גרסת ניסיון"),
     again: tx("Deal again", "وزّع من جديد", "חלקו שוב"),
   },
+  work: tx("The work", "الأعمال", "העבודות"),
+  thread: tx("Questions and answers", "أسئلة وأجوبة", "שאלות ותשובות"),
+  channels: tx("Channels the agents answer on", "القنوات التي يرد عليها الوكلاء", "הערוצים שהסוכנים עונים בהם"),
   sheet: {
     close: tx("Close", "إغلاق", "סגירה"),
+    languages: tx("Read in", "اقرأ بـ", "לקריאה ב"),
     playHand: tx("Play a hand", "العب جولة", "שחקו יד"),
     readCase: tx("Read the case study", "اقرأ دراسة الحالة", "לקריאת התיאור המלא"),
   },

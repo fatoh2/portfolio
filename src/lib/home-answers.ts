@@ -2,8 +2,8 @@
  * Every answer the question box can give, built on the server in the page's language (design step 1.4),
  * and the matcher the box receives as props. Server only: it reads the content files.
  */
-import { aliases, glossary, rules, type AnswerIntent, type HomeRule } from "@/content/home";
-import { locales, profile, services, type Locale } from "@/content/portfolio";
+import { aliases, glossary, intentLabels, labels, rules, unknownAnswer, type AnswerIntent, type HomeRule } from "@/content/home";
+import { locales, profile, services, type Locale, type ProjectStatus } from "@/content/portfolio";
 import { statusLabels } from "@/content/ui";
 import { patternSource, type Matcher } from "./home-ask";
 import { buildCards, toRef, type HomeCard, type HomeCardRef } from "./home-cards";
@@ -13,6 +13,8 @@ export type Answer = {
   id: string;
   /** A rule intent, or a project slug. */
   intent: string;
+  /** What the question was understood as; also the "Understood as" field. */
+  heading: string;
   text: string;
   items: HomeCardRef[];
   /** An in-page hash or the résumé address. */
@@ -61,6 +63,7 @@ export function answersFor(locale: Locale): Answer[] {
   const fromRules = rules.map((rule): Answer => ({
     id: `q-${rule.intent}`,
     intent: rule.intent,
+    heading: intentLabels[rule.intent][locale],
     text: textFor(rule, locale),
     items: itemsFor(rule, cards),
     link: rule.link
@@ -75,6 +78,7 @@ export function answersFor(locale: Locale): Answer[] {
   const fromProjects = cards.map((card): Answer => ({
     id: `q-${card.slug}`,
     intent: card.slug,
+    heading: card.title,
     text: `${card.title}. ${statusLabels[card.status][locale]}. ${card.category[locale]}.`,
     items: [toRef(card)],
     link: null,
@@ -83,4 +87,38 @@ export function answersFor(locale: Locale): Answer[] {
     whatsappHref: null,
   }));
   return [...fromRules, ...fromProjects];
+}
+
+/** The answer the box builds in the browser; its WhatsApp link is added there, from the visitor's text. */
+export const unknownAnswerFor = (locale: Locale): Answer => ({
+  id: "q-unknown",
+  intent: "unknown",
+  heading: intentLabels.unknown[locale],
+  text: unknownAnswer[locale],
+  items: [],
+  link: null,
+  handoff: true,
+  sourceLabel: glossary.sources.none[locale],
+  whatsappHref: null,
+});
+
+/** Everything AnswerView prints besides the answer, in the page's language. */
+export type AnswerLabels = {
+  fields: { language: string; understood: string; source: string; takeover: string };
+  takeover: { no: string; yes: string };
+  languages: Record<Locale, string>;
+  statuses: Record<ProjectStatus, string>;
+  sendOnWhatsApp: string;
+};
+
+export function answerLabelsFor(locale: Locale): AnswerLabels {
+  const pick = <K extends string>(record: Record<K, Record<Locale, string>>) =>
+    Object.fromEntries(Object.entries(record).map(([key, value]) => [key, (value as Record<Locale, string>)[locale]])) as Record<K, string>;
+  return {
+    fields: pick(glossary.fields),
+    takeover: pick(glossary.takeover),
+    languages: pick(glossary.languages),
+    statuses: pick(statusLabels),
+    sendOnWhatsApp: labels.sendOnWhatsApp[locale],
+  };
 }

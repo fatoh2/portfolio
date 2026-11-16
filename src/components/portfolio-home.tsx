@@ -1,5 +1,4 @@
 import {
-  ArrowUp,
   ArrowUpRight,
   Download,
   Camera,
@@ -22,6 +21,7 @@ import { BrandMonogram } from "./brand-monogram";
 import { BrandPortal } from "./brand-portal";
 import { ContactForm } from "./contact-form";
 import { InterfaceDetails, ProductPortrait, ProjectDeck } from "./project-deck";
+import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 import now from "@/content/now.json";
 import { projectTags } from "@/lib/project-tags";
@@ -323,31 +323,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
         </section>
       </main>
 
-      <footer className="site-footer">
-        <div>
-          <strong>Fathallah Haj</strong>
-          <span>{copy.signature}</span>
-        </div>
-        <div className="footer-links">
-          {profile.contactLinks.slice(2).map((link) => (
-            <TrackedAnchor
-              key={link.href}
-              href={link.href}
-              target={link.kind === "social" ? "_blank" : undefined}
-              rel={link.kind === "social" ? "noreferrer" : undefined}
-              eventName={
-                link.kind === "resume" ? "resume_download" : "social_click"
-              }
-              eventData={{ target: link.kind, locale }}
-            >
-              {t(link.label, locale)}
-            </TrackedAnchor>
-          ))}
-          <a href="#top" className="to-top" title={dictionary.footer.top}>
-            <ArrowUp aria-hidden="true" size={18} />
-          </a>
-        </div>
-      </footer>
+      <SiteFooter locale={locale} />
     </div>
   );
 }

@@ -4,7 +4,7 @@
 
 **Codex — Saqroon landing consistency, 2026-10-20: published/verified; claim released.** Current landing/Journey/question media and truthful development-preview copy in all3 languages; required Now strip rebuilt. Content commit `f8c91438898e2794d5fbd1b6632497e0f9536dfb` pushed main, Vercel READY `dpl_D3fcpKerevCCTraZAmyxNBX3VSYT`.84 tests, scoped lint, production build and9 local/9 live responsive cases pass. Existing signed Saqroon APK unchanged and range reachable99005689B; unrelated embeds not retested. [Shared FQ-11 evidence](../focusquest/docs/42-landing-consistency.md). Task record uncommitted; journal pending in shared outbox.
 
-**Updated:** 2026-10-24 · **Phase:** public case studies and downloads
+**Updated:** 2026-11-16 · **Phase:** public case studies and downloads; homepage rebuild built (steps 1–2), not yet live
 
 **Codex — Nuqta download7 refresh, 2026-10-13: published/verified; claim released.** [Download](https://fhaj.dev/downloads/Nuqta-arm64.apk) is signed Nuqta0.1.0(7) ARM64 with remaining-page and approved density refinements,70,478,957bytes; full staged/public SHA73d2e5ec1f8fd17ab6f958bcb2ecc02acf62471bccd17d4d812e3e94912143a7. APK-only018740c pushed; Vercel READY dpl_7TGE1ZcVHVVJcj48W3cMx3khE9nc promoted, Next.js build17s. Source/unrelated edits preserved, original checkout synchronized after isolated D: build/deploy for C: storage failure.294app tests pass; no new website source/unit-test changes, prior stale featured-project failures remain. Device acceptance pending. [Release record](../focusquest/docs/25-density-apk-publication.md). Task record uncommitted.
 
@@ -12,12 +12,153 @@
 
 ## Waiting on the user
 
+- **Homepage rebuild: steps 1 and 2 done, step 3 (the cut-over) next.** Plan approved 2026-11-15; work is on
+  branch `homepage-sheet` (local, not pushed). Every component is built and tested but not rendered at `/`;
+  the cut-over swaps `page.tsx` and the font in one commit. The new visitor copy in all three languages is
+  drafted in [src/content/home.ts](src/content/home.ts): headline, chips, answers, answer headings and project
+  names in Arabic and Hebrew script. It is part of your Arabic and Hebrew read before launch. **You: enable Web Analytics** for the `portfolio` project in Vercel →
+  portfolio → Analytics (decided 2026-11-15; it was never on, so no events have ever been recorded; Pro bills
+  $0.03 per 1,000 events). Tell me when it's on and I'll confirm `enabledAt` through the API. Launch gates:
+  the Arabic and Hebrew read and the swap test.
+- **Pick a homepage concept** from [the November review](design/homepage/REVIEW-2026-11.md): A "Follow one
+  message", B "The thread", C "The spine", D "The opening", E "Receipts", F "The table". Try all six by hand
+  in [the previews](design/concepts/2026-11/previews/index.html) (start `concept-previews` from
+  `.claude/launch.json`, then `http://localhost:3130/design/concepts/2026-11/previews/`). Recommended after
+  building them: D as the family, with E's proof lines, A's message demo and C's language sheet inside it.
+  After the pick: EGM plan, device prototypes, then a branch. Also needed for the buyer block: availability,
+  a starting price, the client sentence. The Arabic and Hebrew headlines in C and D need your read.
+  **Owner's steer, 2026-11-10:** likes A, B, C, D without its title, and F; not E; A must answer from the
+  portfolio's own catalog, not the sweets shop. [Preview G, the mix](design/concepts/2026-11/previews/g-mix.html)
+  is built to that steer. Second pass the same day: the first screen is now the folded sheet on the card table
+  instead of one flat colour, and the headline has three candidates to choose from (buttons 1, 2, 3 in the
+  preview bar). **Owner chose headline 3 on 2026-11-10: "I build what answers your customers."** The picker is
+  removed. Waiting for: whether the first screen is right, and your read of the Arabic and Hebrew headline.
 - A client sentence from Nedaa, once she consents.
 - **Before each deploy** run `node scripts/build-now.mjs` so the "Now building" strip reflects the sibling task files; the deploy cannot read them.
 - Blocked on you: a client sentence from Nedaa (her consent).
 - Decided by the owner on 2026-10-16: no public Instagram proof. The Instagram work is private and is never mentioned or shown on the site; the services copy names the channel as a capability and nothing more.
 
 ## Done
+
+- 2026-11-16 — **Homepage rebuild step 2 (branch `homepage-sheet`, not pushed).** Built the components under
+  `src/components/home/`:
+  - the fold with the question box;
+  - the zoom through the ف, driven by the unchanged `PortalMotion`;
+  - twelve cards with the deal and calls;
+  - the project sheet: a native dialog with the case-page address, and a three-language turn;
+  - the thread;
+  - `SiteFooter`, shared with the old page.
+
+  Added `onReady` to `LiveEmbed` and `demo_send` to the agent demo. 152 tests pass (45 new, including the
+  "nothing lost" test against the old page); type check and lint pass. Checked on a temporary route in
+  Chromium at 1440 and 390 wide, in English and Arabic: no errors, no overflow, buttons inside the first
+  screen, answers, unknown to WhatsApp, sheet open, turn and Back. Two fixes came from looking: card names
+  overlapped their pictures, and on phones the deal never fired. Departures are recorded in the design doc,
+  section 2.16. Not checked: a real phone, Safari, Firefox, `npm run build`.
+
+- 2026-11-15 — **Homepage rebuild step 1 (commit `278ca2e` on `homepage-sheet`, not pushed).** Added
+  `home.ts` (all new copy, in three languages), `home-cards.ts` (the twelve cards from the content files),
+  and `home-ask.ts` with `home-answers.ts` (the question rules). Matching uses whole words and handles Arabic
+  and Hebrew prefixes; answers are always in the page's language. The ask module was split so that no content
+  reaches the browser bundle, and the matcher now covers all three languages. `form.failed` drops "below".
+  Type check, 107 tests and lint pass. Nothing renders the new code yet.
+- 2026-11-15 — **Homepage rebuild step 0 (branch `homepage-sheet`, not pushed).** Reference material
+  committed (`c62051c`). The spike passed 51 of 51 checks on `/`, `/ar` and `/he` (branch
+  `spike/sheet-history`, never merged): `pushState` to the case-page address keeps the homepage rendered,
+  Back, Forward, Escape and refresh behave, and the case-page language switch is not intercepted. Learned:
+  a sheet opening counts as a case-page pageview, and printing `usePathname` breaks hydration on English
+  pages (the proxy serves `/` as `/en`). Vercel: Pro plan, 2 fields per event, and **Web Analytics never
+  enabled**, so no events have been recorded. Speed baseline from `scripts/lab-speed.py`, median LCP: `/`
+  2624 ms, `/ar` 2908 ms, `/he` 2876 ms. Details:
+  [REVIEW-2026-11.md §12](design/homepage/REVIEW-2026-11.md).
+- 2026-11-15 — **Owner answered the review's three questions.** The "Now" phase lines stay, one under each
+  card's title. A download row on each card replaces the install strip, which is a signed removal. `#agent` is
+  dropped because nothing outside the site links to it. The "nothing lost" test now checks the phase lines and
+  leaves out `#agent`.
+- 2026-11-15 — **Review fixes applied to the homepage design (auto accept; nothing in `src/` changed,
+  nothing committed).** All 16 fixes are in [DESIGN-2026-11.md](design/homepage/DESIGN-2026-11.md). Choice A4
+  replaces A3: Next's patched `pushState` keeps the homepage rendered while the address shows `/work/<slug>`
+  (read in `app-router.js`, not run), so the route group, slot and intercept page are gone. Also: islands
+  only enhance server markup, every answer is rendered on the server in the page's language, cards are
+  `<article>`s with visible download rows, "See it" is a link to `#portal`, `PortalMotion` is left untouched,
+  and there is a Risks table and a glossary. Three contests stood. [Resolution](design/homepage/egm-review/goldfish_review_report.md).
+- 2026-11-15 — **EGM review of the homepage design: not ready to build (nothing in `src/` changed, nothing
+  committed).** Five stages, nine reviewers, reports in [egm-review/](design/homepage/egm-review/). 3
+  Blockers: cards with links inside links, a "nothing lost" test that demands ~30 ids nobody uses, and
+  interception that also fires from case pages (read in Next's rewrite source, not run). Biggest lever:
+  re-decide choice A (A1 for all cards). Contested: the conversion baseline (owner already ruled traffic too
+  small).
+- 2026-11-11 — **Homepage design written with EGM (nothing in `src/` changed, nothing committed).**
+  [DESIGN-2026-11.md](design/homepage/DESIGN-2026-11.md): seven user journeys, the technical plan, 12
+  alternatives beside the seven rejected earlier, every file to touch in build order, and a verification plan. Owner choices: a card click shows
+  the sheet over the homepage with the case-page address (an intercepted route in a `(home)` group);
+  `/ar` and `/he` mirror the fold; Instagram stays named as a channel; Schibsted Grotesk sitewide; one
+  cut-over commit; the agent and SOLitaire chips open their sheets; an answer replaces the chips. Two
+  non-goals narrowed for those. Open: a throwaway test of whether English `/work/<slug>` clicks are caught.
+  Earlier the same day: launch check is the "nothing lost" test, swap test covers every visitor sentence,
+  seven new tracking events.
+
+- 2026-11-11 — **Homepage removals decided; SOLitaire stays live on the homepage.** Work filters dropped,
+  evidence lists stay on case pages only, the Bab and ElsewhereCo video loops move into their sheets. The owner
+  kept the interactive SOLitaire website and the playable table on the homepage: in preview H both now run live
+  inside SOLitaire's sheet (hero in place of the still, "Play a hand" below), with a "Play SOLitaire" chip in
+  the first screen. Checked over the preview server in English at 1280 and Arabic at 390: both frames load,
+  scale and are dropped on Back. Recorded in [concepts_brief.md](concepts_brief.md).
+- 2026-11-10 — **Preview H: G redrawn at the real scope, after the review (nothing in `src/` changed, nothing
+  committed).** The owner agreed to tame three devices: the ف zoom plays on a tap or the visitor's own scroll,
+  the route is one strip under the answer, cards deal face down and land face up. Built
+  [h-scope.html](design/concepts/2026-11/previews/h-scope.html) with `?l=en|ar|he`: the site's header, résumé
+  and WhatsApp in the first screen, answers in three languages that never claim something was sent (unknown
+  questions offer WhatsApp with the visitor's own text), services and process kept as a visible thread with
+  the ids the header links to, the contact form and all five contact links, every download and case link,
+  Saqroon as a card with its own links, the sweets demo interactive inside the WhatsApp agent's sheet, and
+  Back closing the sheet. Copy, links and statuses are generated from `src/content` by `build-data.mjs`.
+  Headless Chromium, three locales at 1280×800, 390×844, 375×667 and 360×640: no errors, no sideways scroll,
+  both first-screen buttons visible at every size. Not tried on a real phone. Decisions are in
+  [concepts_brief.md](concepts_brief.md).
+- 2026-11-10 — **EGM brainstorm on the homepage rebuild: six reviewers say it is not ready to plan.** The owner
+  approved preview G's direction and asked for a plan. Audience set as three readers (owners, hirers, project
+  clients); résumé and WhatsApp go in the first screen. Six independent reviewers read the preview and the
+  production code: 7 blockers, 12 major, 12 minor, all in [concepts_brief.md](concepts_brief.md). Main ones:
+  the preview drops actions the live page has (résumé, email, form, APK downloads, case links, Saqroon's links),
+  the header's Services and Process links would go dead, the question box says a question was "passed on" when
+  nothing is sent, and the page in scope has never been drawn. The ف zoom already exists in production
+  (`brand-portal.tsx`, `portal-motion.tsx`) and should be reused. Nothing run by reviewers; no code changed.
+- 2026-11-10 — **Preview G, the mix (nothing in `src/` changed, nothing committed).** The owner liked A, B,
+  C, D without its title and F, and said A should use his own catalog. Built
+  [g-mix.html](design/concepts/2026-11/previews/g-mix.html), each idea with one job: C's spine is the first
+  screen, B's question box sits in it, the page opens through the eye of the ف (D, wordless) onto the project
+  asked about, A's rail follows the message through rules that read the twelve projects, F's cards are the
+  work, and a card opens onto C's turning sheet with each project's own category and summary in three
+  languages (`mix-copy.js`, generated from `portfolio.ts`). The sweets shop appears only inside the WhatsApp
+  agent's card. Headless Chromium at 1280×800 and 390×844: no console errors, no sideways scroll. Not tried
+  on a real phone. Record: [review §10](design/homepage/REVIEW-2026-11.md).
+  Second pass after the owner's read: new first screen (sheet on the card table, two leaf colours, real
+  captures on the cards), three headline candidates, and a fix for the sweets demo showing in every project.
+- 2026-11-10 — **Six clickable concept previews and three more families (nothing in `src/` changed, nothing
+  committed).** Owner asked to try the ideas by hand and for more of them. Built
+  [design/concepts/2026-11/previews](design/concepts/2026-11/previews/index.html): throwaway HTML for A, B, C
+  and three new families (D the opening, from فتح and the eye of the ف; E receipts, every claim opens to its
+  proof, with an in-browser SHA-256 check of a downloaded build; F the card table). Real captures, addresses
+  and APK hashes (read from `public/downloads` today), and a port of the demo rules. Checked in headless
+  Chromium at 1280 and 390: no console errors, no sideways scroll; not on a real phone. Added a
+  `concept-previews` static server to `.claude/launch.json` because the previews share a script and the
+  browser pane snapshots `file://` pages. Wrote section 9 of the review; the recommendation moved from A+C to
+  D as the family. Learned: the name itself is the least copyable device, and a whole-page pipeline walk
+  ends on a layer a shop owner does not care about. Two design-hook contrast findings on `e-receipts.html`
+  were static false positives and are ignored for that file in `.impeccable/config.json`.
+- 2026-11-10 — **Review and three concept directions (nothing in `src/` changed, nothing committed).** Owner
+  asked for a review, ideas that make the site unmistakable, and a video. Wrote
+  [REVIEW-2026-11.md](design/homepage/REVIEW-2026-11.md): inspector measurements of the homepage (the `h1` is
+  the bare name, the one headline a competitor could not use sits 4,900 px down, 20 font sizes with 14 px
+  body, 9 screens), an inventory, three device families with their competitor tests, and library and template
+  findings from a web check. Built a throwaway concept film from the repo's real captures and the agent
+  demo's own catalog values: [concept-film.html](design/concepts/2026-11/concept-film.html) (CSS on one
+  timeline, scrubbable) and a 50 s MP4 captured frame by frame with Playwright and ffmpeg. Learned: "ask my
+  AI" chat portfolios are now a template, and no award-level trilingual portfolio turned up, so the three
+  scripts are the least copyable asset. `.taste-skill/` (the design skill's working folder) is untracked.
+  Skills used at the owner's choice: redesign-existing-projects, signature-theme, design-taste-frontend,
+  prototype, animate, copywriting.
 
 - 2026-10-24 — **Portal scene on phones: the two phone frames no longer cover the ElsewhereCo laptop.** Owner
   saw it on mobile: after the ف opens, Saqroon and SOLitaire sat over most of the laptop screen. Cause: the

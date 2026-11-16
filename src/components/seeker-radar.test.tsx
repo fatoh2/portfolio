@@ -3,12 +3,22 @@ import { join } from "node:path";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 import { getProject, locales, localizedPath, t } from "@/content/portfolio";
+import { cardOrder } from "@/content/home";
+import { HomeSheetPage } from "./home/home-sheet-page";
 import { PortfolioHome } from "./portfolio-home";
 import { ProjectPage } from "./project-page";
 
 vi.mock("./contact-form", () => ({ ContactForm: () => null }));
 
 describe("Seeker Radar portfolio presentation", () => {
+  it.each(locales)("deals the rebuilt homepage's cards in order, with Seeker Radar linking to its case page, in %s", (locale) => {
+    const document = new DOMParser().parseFromString(renderToStaticMarkup(<HomeSheetPage locale={locale} />), "text/html");
+    expect([...document.querySelectorAll("article[data-slug]")].map((card) => card.getAttribute("data-slug"))).toEqual(cardOrder);
+    expect(
+      document.querySelector(`[data-slug="seeker-radar"] .home-card-title a[href="${localizedPath(locale, "/work/seeker-radar")}"]`),
+    ).not.toBeNull();
+  });
+
   it.each(locales)("keeps ElsewhereCo first and Seeker Radar last in %s", (locale) => {
     const document = new DOMParser().parseFromString(
       renderToStaticMarkup(<PortfolioHome locale={locale} />),
