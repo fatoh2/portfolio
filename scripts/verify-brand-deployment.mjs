@@ -13,6 +13,26 @@ const expectedAssets = new Map([
 const assets = new Set(["/favicon.ico", "/brand/fh-monogram-acid.svg"]);
 const routes = ["/", "/ar", "/he", "/work/go-to-nature", "/ar/work/go-to-nature", "/he/work/go-to-nature"];
 const pages = [];
+// Hard-coded on purpose, so a change to the headline in home.ts shows up here too.
+const headlines = {
+  en: "I build what answers your customers.",
+  ar: "أبني ما يردّ على زبائنك.",
+  he: "אני בונה את מה שעונה ללקוחות שלכם.",
+};
+
+// The homepage's content must be in the server HTML, whatever the scripts do afterwards.
+function checkHome(document, route, language) {
+  assert.ok(document.querySelector('a[href*="wa.me"]'), `Missing WhatsApp link: ${route}`);
+  assert.ok(document.querySelector('a[href*="Fathallah_Haj_DevOps_CV_2026.pdf"]'), `Missing résumé link: ${route}`);
+  for (const id of ["work", "contact", "services", "process", "saqroon"]) {
+    assert.ok(document.getElementById(id), `Missing #${id}: ${route}`);
+  }
+  assert.ok(document.querySelector("form.brief-form"), `Missing contact form: ${route}`);
+  assert.equal(document.querySelectorAll("article[data-slug]").length, 12, `Expected twelve cards: ${route}`);
+  const headings = document.querySelectorAll("h1");
+  assert.equal(headings.length, 1, `Expected one h1: ${route}`);
+  assert.equal(headings[0].textContent.trim(), headlines[language], `Wrong h1: ${route}`);
+}
 
 for (const route of routes) {
   const response = await fetch(new URL(route, origin));
@@ -20,7 +40,9 @@ for (const route of routes) {
   const dom = new JSDOM(await response.text());
   const document = dom.window.document;
   const image = document.querySelector(".brand-link img.brand-mark");
-  assert.equal(image?.getAttribute("src"), "/brand/fh-monogram-acid.svg", `Missing logo: ${route}`);
+  // Vercel appends ?dpl=<deployment> to asset URLs, so compare the path only.
+  const logo = image && new URL(image.getAttribute("src"), origin).pathname;
+  assert.equal(logo, "/brand/fh-monogram-acid.svg", `Missing logo: ${route}`);
   const links = [...document.querySelectorAll('link[rel="icon"], link[rel="apple-touch-icon"]')];
   const paths = links.map((link) => new URL(link.getAttribute("href"), origin).pathname);
   for (const path of ["/favicon.ico", "/icon.svg", "/apple-icon.png"]) {
@@ -30,6 +52,7 @@ for (const route of routes) {
   const language = route.startsWith("/ar") ? "ar" : route.startsWith("/he") ? "he" : "en";
   assert.equal(document.documentElement.lang, language);
   assert.equal(document.documentElement.dir, language === "en" ? "ltr" : "rtl");
+  if (!route.includes("/work/")) checkHome(document, route, language);
   pages.push({ route, language, iconLinks: links.map((link) => link.getAttribute("href")) });
   dom.window.close();
 }

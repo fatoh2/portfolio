@@ -4,7 +4,7 @@
 
 **Codex — Saqroon landing consistency, 2026-10-20: published/verified; claim released.** Current landing/Journey/question media and truthful development-preview copy in all3 languages; required Now strip rebuilt. Content commit `f8c91438898e2794d5fbd1b6632497e0f9536dfb` pushed main, Vercel READY `dpl_D3fcpKerevCCTraZAmyxNBX3VSYT`.84 tests, scoped lint, production build and9 local/9 live responsive cases pass. Existing signed Saqroon APK unchanged and range reachable99005689B; unrelated embeds not retested. [Shared FQ-11 evidence](../focusquest/docs/42-landing-consistency.md). Task record uncommitted; journal pending in shared outbox.
 
-**Updated:** 2026-11-17 · **Phase:** public case studies and downloads; homepage rebuild cut over on its branch (steps 1–3), not yet live
+**Updated:** 2026-11-17 · **Phase:** public case studies and downloads; homepage rebuild cut over on its branch (steps 1–4), not yet live
 
 **Codex — Nuqta download7 refresh, 2026-10-13: published/verified; claim released.** [Download](https://fhaj.dev/downloads/Nuqta-arm64.apk) is signed Nuqta0.1.0(7) ARM64 with remaining-page and approved density refinements,70,478,957bytes; full staged/public SHA73d2e5ec1f8fd17ab6f958bcb2ecc02acf62471bccd17d4d812e3e94912143a7. APK-only018740c pushed; Vercel READY dpl_7TGE1ZcVHVVJcj48W3cMx3khE9nc promoted, Next.js build17s. Source/unrelated edits preserved, original checkout synchronized after isolated D: build/deploy for C: storage failure.294app tests pass; no new website source/unit-test changes, prior stale featured-project failures remain. Device acceptance pending. [Release record](../focusquest/docs/25-density-apk-publication.md). Task record uncommitted.
 
@@ -12,7 +12,7 @@
 
 ## Waiting on the user
 
-- **Homepage rebuild: steps 1–3 done, step 4 (the deployment check) next.** Plan approved 2026-11-15; work is
+- **Homepage rebuild: steps 1–4 done; next is a push to the branch for a Vercel preview, on your yes.** Plan approved 2026-11-15; work is
   on branch `homepage-sheet` (local, not pushed). On the branch, `/`, `/ar` and `/he` now render the new page in
   Schibsted Grotesk; fhaj.dev is unchanged until you approve a push and merge. The new visitor copy in all three languages is
   drafted in [src/content/home.ts](src/content/home.ts): headline, chips, answers, answer headings and project
@@ -39,6 +39,14 @@
 - Decided by the owner on 2026-10-16: no public Instagram proof. The Instagram work is private and is never mentioned or shown on the site; the services copy names the channel as a capability and nothing more.
 
 ## Done
+
+- 2026-11-17 — **Homepage rebuild step 4, the deployment check (branch `homepage-sheet`, not pushed).**
+  `scripts/verify-brand-deployment.mjs` now also asserts in the server HTML of `/`, `/ar` and `/he`: a
+  `wa.me` link, the résumé link, `#work`, `#contact`, `#services`, `#process`, `#saqroon`, the contact form,
+  twelve cards and one `h1` matching the headline. Found and fixed while running it: the logo check compared
+  the full image address, and Vercel appends `?dpl=…`, so the script failed on every Vercel deployment; it
+  now compares the path. Passes on the local production build; fails on today's fhaj.dev at "Expected twelve
+  cards", as it should. Not yet run on a Vercel preview.
 
 - 2026-11-17 — **Homepage rebuild step 3, the cut-over (branch `homepage-sheet`, not pushed).** `page.tsx`
   renders `HomeSheetPage` with the same JSON-LD; `layout.tsx` loads Schibsted Grotesk under `--font-latin`
