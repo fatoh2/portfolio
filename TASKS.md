@@ -4,7 +4,7 @@
 
 **Codex — Saqroon landing consistency, 2026-10-20: published/verified; claim released.** Current landing/Journey/question media and truthful development-preview copy in all3 languages; required Now strip rebuilt. Content commit `f8c91438898e2794d5fbd1b6632497e0f9536dfb` pushed main, Vercel READY `dpl_D3fcpKerevCCTraZAmyxNBX3VSYT`.84 tests, scoped lint, production build and9 local/9 live responsive cases pass. Existing signed Saqroon APK unchanged and range reachable99005689B; unrelated embeds not retested. [Shared FQ-11 evidence](../focusquest/docs/42-landing-consistency.md). Task record uncommitted; journal pending in shared outbox.
 
-**Updated:** 2026-11-16 · **Phase:** public case studies and downloads; homepage rebuild built (steps 1–2), not yet live
+**Updated:** 2026-11-17 · **Phase:** public case studies and downloads; homepage rebuild cut over on its branch (steps 1–3), not yet live
 
 **Codex — Nuqta download7 refresh, 2026-10-13: published/verified; claim released.** [Download](https://fhaj.dev/downloads/Nuqta-arm64.apk) is signed Nuqta0.1.0(7) ARM64 with remaining-page and approved density refinements,70,478,957bytes; full staged/public SHA73d2e5ec1f8fd17ab6f958bcb2ecc02acf62471bccd17d4d812e3e94912143a7. APK-only018740c pushed; Vercel READY dpl_7TGE1ZcVHVVJcj48W3cMx3khE9nc promoted, Next.js build17s. Source/unrelated edits preserved, original checkout synchronized after isolated D: build/deploy for C: storage failure.294app tests pass; no new website source/unit-test changes, prior stale featured-project failures remain. Device acceptance pending. [Release record](../focusquest/docs/25-density-apk-publication.md). Task record uncommitted.
 
@@ -12,9 +12,9 @@
 
 ## Waiting on the user
 
-- **Homepage rebuild: steps 1 and 2 done, step 3 (the cut-over) next.** Plan approved 2026-11-15; work is on
-  branch `homepage-sheet` (local, not pushed). Every component is built and tested but not rendered at `/`;
-  the cut-over swaps `page.tsx` and the font in one commit. The new visitor copy in all three languages is
+- **Homepage rebuild: steps 1–3 done, step 4 (the deployment check) next.** Plan approved 2026-11-15; work is
+  on branch `homepage-sheet` (local, not pushed). On the branch, `/`, `/ar` and `/he` now render the new page in
+  Schibsted Grotesk; fhaj.dev is unchanged until you approve a push and merge. The new visitor copy in all three languages is
   drafted in [src/content/home.ts](src/content/home.ts): headline, chips, answers, answer headings and project
   names in Arabic and Hebrew script. It is part of your Arabic and Hebrew read before launch. **You: enable Web Analytics** for the `portfolio` project in Vercel →
   portfolio → Analytics (decided 2026-11-15; it was never on, so no events have ever been recorded; Pro bills
@@ -39,6 +39,14 @@
 - Decided by the owner on 2026-10-16: no public Instagram proof. The Instagram work is private and is never mentioned or shown on the site; the services copy names the channel as a capability and nothing more.
 
 ## Done
+
+- 2026-11-17 — **Homepage rebuild step 3, the cut-over (branch `homepage-sheet`, not pushed).** `page.tsx`
+  renders `HomeSheetPage` with the same JSON-LD; `layout.tsx` loads Schibsted Grotesk under `--font-latin`
+  in place of Space Grotesk. `npm run build` passes with every route static; type check, 152 tests and lint
+  pass. On `npm run start` in Chromium, desktop and phone, `/`, `/ar` and `/he`: the history checks (same
+  document, case address, turn, Back, direct load is the case page), answers, the font, no overflow, and
+  the résumé and WhatsApp buttons fully inside 360×640. The only console errors are Vercel's two analytics
+  scripts, which 404 off Vercel. Not checked: a real phone, Safari, Firefox, a Vercel preview.
 
 - 2026-11-16 — **Homepage rebuild step 2 (branch `homepage-sheet`, not pushed).** Built the components under
   `src/components/home/`:

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { PortfolioHome } from "@/components/portfolio-home";
+import { HomeSheetPage } from "@/components/home/home-sheet-page";
 import { isLocale, profile, t } from "@/content/portfolio";
 import { siteUrl } from "@/lib/seo";
 
@@ -43,7 +43,7 @@ export default async function HomePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <PortfolioHome locale={locale} />
+      <HomeSheetPage locale={locale} />
     </>
   );
 }

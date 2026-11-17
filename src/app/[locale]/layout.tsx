@@ -4,7 +4,7 @@ import type { Metadata, Viewport } from "next";
 import {
   Noto_Sans_Arabic,
   Noto_Sans_Hebrew,
-  Space_Grotesk,
+  Schibsted_Grotesk,
 } from "next/font/google";
 import { notFound } from "next/navigation";
 import {
@@ -15,7 +15,7 @@ import {
 import { homeMetadata } from "@/lib/seo";
 import "../globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const schibstedGrotesk = Schibsted_Grotesk({
   variable: "--font-latin",
   subsets: ["latin"],
   display: "swap",
@@ -67,7 +67,7 @@ export default async function LocaleLayout({
   const direction = locale === "en" ? "ltr" : "rtl";
 
   return (
-    <html lang={locale} dir={direction} className={`${spaceGrotesk.variable} ${notoArabic.variable} ${notoHebrew.variable}`}>
+    <html lang={locale} dir={direction} className={`${schibstedGrotesk.variable} ${notoArabic.variable} ${notoHebrew.variable}`}>
       <body>
         {children}
         <Analytics />
