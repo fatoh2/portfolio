@@ -65,7 +65,9 @@ for (const asset of assets) {
   const response = await fetch(url);
   assert.equal(response.status, 200, `Asset failed: ${asset}`);
   const actual = Buffer.from(await response.arrayBuffer());
-  const expected = await readFile(new URL(source, import.meta.url));
+  let expected = await readFile(new URL(source, import.meta.url));
+  // A Windows checkout (core.autocrlf) adds \r to the SVG's lines; the deployment has git's LF bytes.
+  if (source.endsWith(".svg")) expected = Buffer.from(expected.toString("utf8").replaceAll("\r\n", "\n"));
   assert.ok(actual.equals(expected), `Deployed bytes differ: ${asset}`);
   const type = response.headers.get("content-type") || "";
   assert.match(type, /image\//, `Wrong content type: ${asset}`);

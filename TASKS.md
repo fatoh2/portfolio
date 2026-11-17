@@ -12,7 +12,7 @@
 
 ## Waiting on the user
 
-- **Homepage rebuild: steps 1–4 done; next is a push to the branch for a Vercel preview, on your yes.** Plan approved 2026-11-15; work is
+- **Homepage rebuild: steps 1–4 done and checked on the Vercel preview** ([branch preview](https://portfolio-git-homepage-sheet-fatohhaj-2690s-projects.vercel.app)). Next, on your yes: merge to `main`, which puts it on fhaj.dev. Plan approved 2026-11-15; work is
   on branch `homepage-sheet` (local, not pushed). On the branch, `/`, `/ar` and `/he` now render the new page in
   Schibsted Grotesk; fhaj.dev is unchanged until you approve a push and merge. The new visitor copy in all three languages is
   drafted in [src/content/home.ts](src/content/home.ts): headline, chips, answers, answer headings and project
@@ -39,6 +39,13 @@
 - Decided by the owner on 2026-10-16: no public Instagram proof. The Instagram work is private and is never mentioned or shown on the site; the services copy names the channel as a capability and nothing more.
 
 ## Done
+
+- 2026-11-17 — **Homepage rebuild: branch `homepage-sheet` pushed; Vercel preview checked.** Preview
+  `dpl_BZgG3e8WVpLq1P6FmT2poScvtSFU` (target preview, only the branch alias; fhaj.dev unchanged). On it, all
+  66 Playwright checks pass on `/`, `/ar` and `/he` at desktop, phone and 360×640, with no console errors,
+  and `verify-brand-deployment.mjs` passes on all six routes and four icon files. One script fix: it
+  compared the SVG against this Windows checkout, whose lines git converts to CRLF (808 bytes against the
+  deployed 803); it now ignores `` for SVGs. Not checked: a real phone, Safari, Firefox.
 
 - 2026-11-17 — **Homepage rebuild step 4, the deployment check (branch `homepage-sheet`, not pushed).**
   `scripts/verify-brand-deployment.mjs` now also asserts in the server HTML of `/`, `/ar` and `/he`: a
