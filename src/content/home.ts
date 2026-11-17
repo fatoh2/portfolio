@@ -50,7 +50,7 @@ export const whatsappPrefill: LocalizedText = tx(
   "היי פתאללה, אשמח לדבר על פרויקט.",
 );
 
-/** Display order of the twelve cards: today's featured order, then the rest in portfolio.ts order, Saqroon last. */
+/** Display order of the twelve cards: today's featured order, then the rest in portfolio.ts order, Nuqta Kids last. */
 export const cardOrder = [
   "elsewhereco",
   "whatsapp-ai-sales-agent",
@@ -63,7 +63,7 @@ export const cardOrder = [
   "darbak",
   "go-to-nature",
   "lulu-tokki",
-  "saqroon",
+  "nuqta-kids",
 ];
 
 /** Each project's names in Latin, Arabic and Hebrew script. Bare channel names (WhatsApp, Telegram) are never aliases. */
@@ -83,7 +83,8 @@ export const aliases: Record<string, Record<Locale, string[]>> = {
   elsewhereco: { en: ["elsewhereco", "elsewhere"], ar: ["إلسويركو", "إلسوير"], he: ["אלסוור"] },
   "go-to-nature": { en: ["go to nature"], ar: ["غو تو نيتشر", "جو تو نيتشر"], he: ["גו טו נייצ'ר"] },
   "lulu-tokki": { en: ["lulu tokki", "lulu"], ar: ["لولو توكي", "لولو"], he: ["לולו טוקי", "לולו"] },
-  saqroon: { en: ["saqroon", "saqr"], ar: ["صقرون"], he: ["סקרון"] },
+  // The app was called Saqroon until 2026-11; the old name still finds it.
+  "nuqta-kids": { en: ["nuqta kids", "nuqta", "saqroon", "saqr"], ar: ["نقطة للأطفال", "صقرون"], he: ["nuqta kids", "nuqta", "נוקטה", "סקרון"] },
 };
 
 export const chips: HomeChip[] = [

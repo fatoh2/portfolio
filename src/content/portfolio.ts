@@ -778,26 +778,27 @@ export const projects: PortfolioProject[] = [
 ];
 
 export const focusQuest = {
-  slug: "saqroon",
-  title: "Saqroon · صقرون",
+  slug: "nuqta-kids",
+  // A no-break space keeps the Arabic name on one line when the title wraps.
+  title: "Nuqta Kids · نقطة\u00a0للأطفال",
   website: "https://www.nuqtakids.com",
-  websiteLabel: tx("Explore Saqroon", "اكتشف صقرون", "גלו את סקרון"),
+  websiteLabel: tx("Explore Nuqta Kids", "اكتشف نقطة للأطفال", "גלו את Nuqta Kids"),
   media: [
     {
       src: "/labs/saqroon/saqroon-landing-desktop-20261020.jpg", width: 1430, height: 755,
-      alt: tx("Saqroon’s Arabic landing page featuring Saqr the falcon and its invitation for families", "صفحة صقرون بالعربية، مع صقر ودعوة العائلات إلى التجربة", "דף הנחיתה של סקרון בערבית, עם הבז סקר והזמנה למשפחות"),
+      alt: tx("Nuqta Kids’ Arabic landing page featuring Saqr the falcon and its invitation for families", "صفحة نقطة للأطفال بالعربية، مع صقر ودعوة العائلات إلى التجربة", "דף הנחיתה של Nuqta Kids בערבית, עם הבז סקר והזמנה למשפחות"),
       caption: tx("Arabic landing page", "صفحة التعريف بالعربية", "דף נחיתה בערבית"),
       fit: "contain",
     },
     {
       src: "/labs/saqroon/saqroon-journey-ar-20261024.png", width: 1170, height: 2532,
-      alt: tx("Saqroon’s Arabic learning journey with a maths unit, progress path and Saqr", "رحلة التعلّم في صقرون بالعربية، مع وحدة رياضيات ومسار التقدّم وصقر", "מסע הלמידה של סקרון בערבית, עם יחידת מתמטיקה, מסלול התקדמות וסקר"),
+      alt: tx("Nuqta Kids’ Arabic learning journey with a maths unit, progress path and Saqr", "رحلة التعلّم في نقطة للأطفال بالعربية، مع وحدة رياضيات ومسار التقدّم وصقر", "מסע הלמידה של Nuqta Kids בערבית, עם יחידת מתמטיקה, מסלול התקדמות וסקר"),
       caption: tx("Learning journey · development preview", "رحلة التعلّم · معاينة تطوير", "מסע למידה · תצוגת פיתוח"),
       fit: "contain",
     },
     {
       src: "/labs/saqroon/saqroon-quest-ar-20261024.png", width: 1170, height: 2532,
-      alt: tx("An Arabic maths quest in Saqroon with a fraction diagram and four answer choices", "مهمة رياضيات بالعربية في صقرون، مع رسم يوضّح الكسور وأربعة خيارات للإجابة", "משימת מתמטיקה בערבית בסקרון, עם תרשים שברים וארבע תשובות לבחירה"),
+      alt: tx("An Arabic maths quest in Nuqta Kids with a fraction diagram and four answer choices", "مهمة رياضيات بالعربية في نقطة للأطفال، مع رسم يوضّح الكسور وأربعة خيارات للإجابة", "משימת מתמטיקה בערבית ב-Nuqta Kids, עם תרשים שברים וארבע תשובות לבחירה"),
       caption: tx("Visual maths · development preview", "رياضيات مصوّرة · معاينة تطوير", "מתמטיקה חזותית · תצוגת פיתוח"),
       fit: "contain",
     },
@@ -816,7 +817,7 @@ export const focusQuest = {
   stack: ["Flutter", "Firebase", "Android", "RevenueCat", "Accessibility"],
   builds: [
     {
-      id: "saqroon",
+      id: "nuqta-kids",
       apkUrl: "/downloads/Saqroon-arm64.apk",
       label: tx(
         "Download Android beta (APK)",

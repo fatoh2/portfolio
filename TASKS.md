@@ -40,12 +40,24 @@
 
 ## Done
 
+- 2026-11-17 — **Owner's review of the preview: two fixes (branch `homepage-sheet`).**
+  - **The zoom through the ف** opened onto one flat ElsewhereCo screenshot. It opens onto the old scene
+    again (laptop, tablet, two phones, the orbit); "See it" now swaps the laptop screen. Design doc 2.17.
+  - **Saqroon is now Nuqta Kids · نقطة للأطفال** everywhere on the portfolio, Latin "Nuqta Kids" inside
+    Hebrew (owner's choice), slug and anchor `nuqta-kids`. Saqroon, صقرون and סקרון stay as question-box
+    aliases. Still Saqroon until the app side ships: the APK (`Saqroon-arm64.apk`), the screenshots under
+    `public/labs/saqroon/`, and nuqtakids.com itself. The FocusQuest session ("UI/UX production readiness
+    review") was told on 2026-11-17.
+  - The deployment check now ignores SVG line endings on both sides, so it also passes on a local server.
+  153 tests, type check, lint and build pass; checked in Chromium on desktop and phone in en/ar/he.
+
 - 2026-11-17 — **Homepage rebuild: branch `homepage-sheet` pushed; Vercel preview checked.** Preview
   `dpl_BZgG3e8WVpLq1P6FmT2poScvtSFU` (target preview, only the branch alias; fhaj.dev unchanged). On it, all
   66 Playwright checks pass on `/`, `/ar` and `/he` at desktop, phone and 360×640, with no console errors,
   and `verify-brand-deployment.mjs` passes on all six routes and four icon files. One script fix: it
   compared the SVG against this Windows checkout, whose lines git converts to CRLF (808 bytes against the
-  deployed 803); it now ignores `` for SVGs. Not checked: a real phone, Safari, Firefox.
+  deployed 803); it now ignores `
+` for SVGs. Not checked: a real phone, Safari, Firefox.
 
 - 2026-11-17 — **Homepage rebuild step 4, the deployment check (branch `homepage-sheet`, not pushed).**
   `scripts/verify-brand-deployment.mjs` now also asserts in the server HTML of `/`, `/ar` and `/he`: a

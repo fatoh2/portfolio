@@ -8,15 +8,15 @@ import { TrackedAnchor } from "../tracked-link";
 const tones = ["paper", "ink", "lime"] as const;
 
 /**
- * One card on the table. The title link covers the card and opens the case page (Saqroon's website);
+ * One card on the table. The title link covers the card and opens the case page (Nuqta Kids' website);
  * the download and live links sit above it as siblings, so every link stays clickable.
  */
 export function HomeCard({ card, index, locale }: { card: Card; index: number; locale: Locale }) {
-  const saqroon = card.casePath === null;
+  const noCasePage = card.casePath === null;
   return (
     <article
       className="home-card"
-      id={saqroon ? card.slug : undefined}
+      id={noCasePage ? card.slug : undefined}
       data-slug={card.slug}
       data-status={card.status}
       data-has-download={card.downloads.length > 0 ? "true" : "false"}
@@ -41,7 +41,7 @@ export function HomeCard({ card, index, locale }: { card: Card; index: number; l
         <a
           href={card.casePath ?? card.live!.href}
           data-sheet={card.slug}
-          {...(saqroon ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          {...(noCasePage ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         >
           <bdi>{card.title}</bdi>
         </a>
@@ -73,8 +73,8 @@ export function HomeCard({ card, index, locale }: { card: Card; index: number; l
               key={download.href}
               href={download.href}
               download
-              eventName={saqroon ? "focusquest_apk_download" : "apk_download"}
-              eventData={saqroon ? { surface: "card", build: download.href.split("/").pop()! } : { slug: card.slug, surface: "card" }}
+              eventName={noCasePage ? "focusquest_apk_download" : "apk_download"}
+              eventData={noCasePage ? { surface: "card", build: download.href.split("/").pop()! } : { slug: card.slug, surface: "card" }}
             >
               <Download aria-hidden="true" size={15} />
               {download.label[locale]}

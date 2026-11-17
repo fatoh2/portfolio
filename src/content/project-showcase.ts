@@ -61,7 +61,7 @@ export const projectShowcases: Record<string, ProjectShowcase> = {
       },
     ],
   },
-  saqroon: {
+  "nuqta-kids": {
     desktopRatio: "1430 / 755", mobileIndex: 1, mobileRatio: "1170 / 2532",
     details: [
       {

@@ -101,12 +101,12 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
               </TrackedLink>
             ))}
           </div>
-          <article id="saqroon" className="home-lab" aria-labelledby="saqroon-title">
+          <article id={focusQuest.slug} className="home-lab" aria-labelledby="nuqta-kids-title">
             <div className="home-lab-copy">
               <p className="home-lab-label">
                 {copy.lab} / {dictionary.lab.eyebrow}
               </p>
-              <h3 id="saqroon-title" dir="auto">{focusQuest.title}</h3>
+              <h3 id="nuqta-kids-title" dir="auto">{focusQuest.title}</h3>
               <p>{t(focusQuest.summary, locale)}</p>
               <div className="home-lab-download">
                 <TrackedAnchor

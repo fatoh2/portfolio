@@ -50,7 +50,7 @@ describe("the rebuilt homepage loses nothing the old one had", () => {
 
   it.each(locales)("keeps the linked ids, and every hash link in the header and case pages resolves, in %s", (locale) => {
     const after = page(locale);
-    for (const id of ["top", "work", "services", "process", "contact", "saqroon"]) expect(after.getElementById(id), id).not.toBeNull();
+    for (const id of ["top", "work", "services", "process", "contact", "nuqta-kids"]) expect(after.getElementById(id), id).not.toBeNull();
     const project = getProject("bab")!;
     const hashes = [SiteHeader({ locale }), ProjectPage({ project, locale })]
       .flatMap((element) => [...parse(renderToStaticMarkup(element)).querySelectorAll("a[href*='#']")])

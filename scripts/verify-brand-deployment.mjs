@@ -24,7 +24,7 @@ const headlines = {
 function checkHome(document, route, language) {
   assert.ok(document.querySelector('a[href*="wa.me"]'), `Missing WhatsApp link: ${route}`);
   assert.ok(document.querySelector('a[href*="Fathallah_Haj_DevOps_CV_2026.pdf"]'), `Missing résumé link: ${route}`);
-  for (const id of ["work", "contact", "services", "process", "saqroon"]) {
+  for (const id of ["work", "contact", "services", "process", "nuqta-kids"]) {
     assert.ok(document.getElementById(id), `Missing #${id}: ${route}`);
   }
   assert.ok(document.querySelector("form.brief-form"), `Missing contact form: ${route}`);
@@ -64,10 +64,11 @@ for (const asset of assets) {
   assert.ok(source, `Unexpected icon path: ${url.pathname}`);
   const response = await fetch(url);
   assert.equal(response.status, 200, `Asset failed: ${asset}`);
-  const actual = Buffer.from(await response.arrayBuffer());
-  let expected = await readFile(new URL(source, import.meta.url));
-  // A Windows checkout (core.autocrlf) adds \r to the SVG's lines; the deployment has git's LF bytes.
-  if (source.endsWith(".svg")) expected = Buffer.from(expected.toString("utf8").replaceAll("\r\n", "\n"));
+  // A Windows checkout (core.autocrlf) adds \r to the SVG's lines: Vercel serves git's LF bytes and a
+  // local server serves the checkout's, so line endings are ignored on both sides.
+  const lf = (bytes) => (source.endsWith(".svg") ? Buffer.from(bytes.toString("utf8").replaceAll("\r\n", "\n")) : bytes);
+  const actual = lf(Buffer.from(await response.arrayBuffer()));
+  const expected = lf(await readFile(new URL(source, import.meta.url)));
   assert.ok(actual.equals(expected), `Deployed bytes differ: ${asset}`);
   const type = response.headers.get("content-type") || "";
   assert.match(type, /image\//, `Wrong content type: ${asset}`);

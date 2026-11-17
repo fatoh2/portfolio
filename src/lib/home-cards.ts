@@ -1,6 +1,6 @@
 /**
  * The twelve homepage cards, built on the server from the content files (design step 1.3).
- * One shape for the eleven projects and Saqroon (`focusQuest`), which has no case page and carries builds
+ * One shape for the eleven projects and Nuqta Kids (`focusQuest`), which has no case page and carries builds
  * and a website instead of links.
  */
 import { cardOrder } from "@/content/home";
@@ -40,14 +40,14 @@ export type HomeCard = {
   embeds: { hero?: Embed; table?: Embed };
   live: { href: string; label: LocalizedText } | null;
   downloads: { href: string; label: LocalizedText }[];
-  /** Localised case-page address; null for Saqroon. */
+  /** Localised case-page address; null for Nuqta Kids. */
   casePath: string | null;
-  /** Saqroon's install note. */
+  /** Nuqta Kids' install note. */
   note: LocalizedText | null;
   phase: { text: string; updated: string } | null;
 };
 
-/** `href` is the case page, or `#saqroon` for the one card without one. */
+/** `href` is the case page, or `#nuqta-kids` for the one card without one. */
 export type HomeCardRef = { slug: string; title: string; status: ProjectStatus; hasDownload: boolean; href: string };
 
 type Source = {

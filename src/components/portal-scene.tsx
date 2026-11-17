@@ -55,7 +55,7 @@ export function PortalScene({ laptop }: { laptop?: ReactNode } = {}) {
         <div className="scene-screen">
           <Image
             src="/labs/saqroon/saqroon-journey-ar-20261024.png"
-            alt="Saqroon's learning journey on a phone"
+            alt="Nuqta Kids' learning journey on a phone"
             width={1170}
             height={2532}
             sizes="(min-width: 760px) 14vw, 36vw"

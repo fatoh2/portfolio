@@ -128,12 +128,12 @@ describe("the work table", () => {
     expect(track).toHaveBeenCalledWith("sheet_open", { slug: "bab", from: "card" });
   });
 
-  it("pushes #saqroon for the card without a case page", () => {
+  it("pushes #nuqta-kids for the card without a case page", () => {
     render(<Table />);
     const push = vi.spyOn(window.history, "pushState");
     act(() => {
-      fireEvent.click(document.querySelector('[data-slug="saqroon"] .home-card-title a')!);
+      fireEvent.click(document.querySelector('[data-slug="nuqta-kids"] .home-card-title a')!);
     });
-    expect(push).toHaveBeenCalledWith({ sheet: "saqroon" }, "", "#saqroon");
+    expect(push).toHaveBeenCalledWith({ sheet: "nuqta-kids" }, "", "#nuqta-kids");
   });
 });
