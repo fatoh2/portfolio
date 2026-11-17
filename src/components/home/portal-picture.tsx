@@ -17,7 +17,7 @@ export type PortalShot = {
 };
 
 const imageProps = (shot: PortalShot) =>
-  getImageProps({ src: shot.src, width: shot.width, height: shot.height, alt: shot.alt, sizes: "100vw" }).props;
+  getImageProps({ src: shot.src, width: shot.width, height: shot.height, alt: shot.alt, sizes: "(min-width: 760px) 60vw, 100vw" }).props;
 
 /**
  * The picture seen through the ف's opening. "See it" sends `home:see` with a slug; the new picture is
@@ -76,6 +76,8 @@ export function PortalPicture({ shots }: { shots: PortalShot[] }) {
       if (next.sizes) image.sizes = next.sizes;
       image.src = next.src;
       image.alt = shot.alt;
+      // A phone screenshot sits whole on the laptop screen instead of being cropped to its top.
+      image.style.objectFit = shot.height > shot.width ? "contain" : "";
       const title = stage!.querySelector("[data-portal-title]");
       const caption = stage!.querySelector("[data-portal-caption-text]");
       const link = stage!.querySelector<HTMLAnchorElement>("[data-portal-case]");

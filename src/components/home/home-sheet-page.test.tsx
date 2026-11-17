@@ -96,3 +96,14 @@ describe("the rebuilt homepage loses nothing the old one had", () => {
     for (const answer of answersFor(locale)) expect(after.getElementById(answer.id), answer.id).not.toBeNull();
   });
 });
+
+describe("the zoom through the ف", () => {
+  it("opens onto the old page's scene of devices, with the one swappable picture on the laptop", () => {
+    const portal = page("en").getElementById("portal")!;
+    const photos = portal.querySelectorAll("[data-portal-photo]");
+    expect(photos).toHaveLength(1);
+    expect(photos[0].closest(".scene-laptop")).not.toBeNull();
+    expect(photos[0].getAttribute("src")).toContain(encodeURIComponent("/work/elsewhereco/desktop.webp"));
+    expect(portal.querySelectorAll("[data-portal-media] .scene-device")).toHaveLength(4);
+  });
+});

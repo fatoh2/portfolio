@@ -1596,3 +1596,171 @@ html:has(.sheet-home) {
     transition: none;
   }
 }
+
+/* Copied from homepage.css: the scene the ف opens onto (restored 2026-11-17). */
+/* The scene behind the mark: real screens in drawn frames, each on its own depth. */
+.sheet-home .portal-scene-stage {
+  background: radial-gradient(ellipse at 50% 60%, #171a14 0%, #0b0b0b 62%);
+}
+.sheet-home .brand-portal[data-portal-banner] .portal-scene-stage .portal-photo {
+  position: static;
+  width: 100%;
+  height: auto;
+  object-fit: fill;
+  transform: none;
+}
+.sheet-home .scene-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(42% 40% at 50% 52%, rgba(200, 255, 52, 0.1), transparent 70%),
+    linear-gradient(180deg, transparent 55%, #0b0b0b 100%);
+}
+.sheet-home .scene-orbit {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.85;
+}
+.sheet-home .scene-orbit-portrait {
+  display: none;
+}
+.sheet-home .scene-device {
+  position: absolute;
+  overflow: hidden;
+  background: #151713;
+  will-change: transform;
+}
+.sheet-home .scene-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.sheet-home .scene-screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.sheet-home .scene-laptop {
+  left: 6%;
+  top: 9%;
+  width: 56%;
+  aspect-ratio: 16 / 10;
+  border: 6px solid #272925;
+  border-radius: 14px;
+  box-shadow: 0 0 0 1px #575952, 0 40px 60px -30px #000;
+}
+.sheet-home .scene-tablet {
+  left: 12%;
+  bottom: 6%;
+  width: 40%;
+  aspect-ratio: 16 / 9;
+  border: 6px solid #272925;
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px #575952, 0 30px 50px -24px #000;
+}
+.sheet-home .scene-phone {
+  width: 15%;
+  aspect-ratio: 9 / 19.5;
+  border: 5px solid #20221e;
+  border-radius: 22px;
+  box-shadow: 0 0 0 1px #62645a, -16px 24px 40px -16px #000;
+}
+.sheet-home .scene-phone-a {
+  left: 56%;
+  top: 22%;
+}
+.sheet-home .scene-phone-b {
+  right: 9%;
+  top: 9%;
+  width: 16%;
+}
+@media (max-width: 759px) {
+  /*
+   * Portrait stage, held like a dealt hand of cards (SOLitaire's own object):
+   * the laptop is the back card, upright at the top; the two phones fan out in
+   * front of it, tilted away from each other and overlapping in the middle,
+   * their bottoms over the laptop's lower edge. The nearer, larger phone
+   * (SOLitaire) sits on the left, over the laptop's dark mountain silhouette,
+   * so ElsewhereCo's buttons on the right stay clear.
+   *
+   * Positions are set from the top so they follow the laptop's height, which
+   * depends on the stage width; container units make that cross-axis math
+   * possible. Widths are capped so the fan still clears the stage floor on
+   * short screens. The fan opens as the ف finishes opening (--portal-settle
+   * 1→0) and spreads a little further as the scene leaves (--portal-leave
+   * 0→1); both variables come from the controller, and without it the fan
+   * simply sits open. `rotate` is its own property, so the controller's
+   * translate on `transform` leaves it alone.
+   */
+  .sheet-home .portal-scene-stage {
+    container-type: size;
+    --scene-laptop-top: 5cqh;
+    /* 92cqw wide at 16:10 → 57.5cqw tall (border-box, so borders are included). */
+    --scene-laptop-bottom: calc(var(--scene-laptop-top) + 57.5cqw);
+    /* 1 while the ف is still closed (the phones are stacked), 0 once it has opened (dealt out). */
+    --scene-fan-stack: var(--portal-settle, 0);
+    --scene-fan-open: calc(1 - var(--scene-fan-stack));
+    --scene-fan-spread: var(--portal-leave, 0);
+    background: radial-gradient(ellipse at 50% 40%, #171a14 0%, #0b0b0b 65%);
+  }
+  .sheet-home .scene-orbit {
+    display: none;
+  }
+  /* The ring is cropped to the stage so its arcs pass behind the laptop and out past the phones. */
+  .sheet-home .scene-orbit-portrait {
+    display: block;
+    opacity: 0.7;
+  }
+  .sheet-home .scene-laptop {
+    left: 4%;
+    top: var(--scene-laptop-top);
+    width: 92%;
+    border-width: 4px;
+    border-radius: 10px;
+  }
+  .sheet-home .scene-tablet {
+    display: none;
+  }
+  .sheet-home .scene-phone {
+    bottom: auto;
+    border-width: 4px;
+    border-radius: 18px;
+    transform-origin: 50% 100%;
+  }
+  /* Saqroon: the farther card, on the right, leaning right. 9:19.5 → height is 2.1667 × width. */
+  .sheet-home .scene-phone-a {
+    left: auto;
+    right: 14cqw;
+    top: calc(var(--scene-laptop-bottom) - 4cqh);
+    width: min(38cqw, calc((96cqh - var(--scene-laptop-bottom) + 4cqh) / 2.1667));
+    rotate: calc(4.5deg * var(--scene-fan-open) + 1.5deg * var(--scene-fan-spread));
+    /*
+     * Dealt from the middle of the stage: stacked behind the other card while the
+     * mark is closed, slid out to the right as it opens; then a drift back toward
+     * the middle as the scene leaves, so the tilted top stays on the stage.
+     */
+    translate: calc(-19cqw * var(--scene-fan-stack) - 6cqw * var(--scene-fan-spread)) 0;
+    /* The farther card sits a step back in the light. */
+    filter: brightness(0.92);
+  }
+  /* SOLitaire: the nearer card, on the left, higher and larger, leaning left. */
+  .sheet-home .scene-phone-b {
+    right: auto;
+    left: 12cqw;
+    top: calc(var(--scene-laptop-bottom) - 9cqh);
+    width: min(42cqw, calc((96cqh - var(--scene-laptop-bottom) + 9cqh) / 2.1667));
+    rotate: calc(-5deg * var(--scene-fan-open) - 1.5deg * var(--scene-fan-spread));
+    translate: calc(17cqw * var(--scene-fan-stack) + 6cqw * var(--scene-fan-spread)) 0;
+  }
+}
+/* The laptop screen holds whichever picture "See it" swapped in, so it fills the screen at any shape. */
+.sheet-home .brand-portal .portal-scene-stage .scene-laptop .portal-photo {
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}

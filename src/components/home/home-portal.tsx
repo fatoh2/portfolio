@@ -5,12 +5,13 @@ import type { HomeCard } from "@/lib/home-cards";
 import { monogramCounter, monogramPath } from "@/lib/monogram";
 import { BrandMonogram } from "../brand-monogram";
 import { PortalMotion } from "../portal-motion";
+import { PortalScene } from "../portal-scene";
 import { IslandBoundary } from "./island-boundary";
 import { PortalPicture, type PortalShot } from "./portal-picture";
 
 /**
  * The zoom through the ف: the markup PortalMotion drives (its eight `data-portal-*` hooks), opening onto
- * one project's picture. PortalMotion itself is unchanged; PortalPicture swaps the picture on "See it".
+ * the old page's scene of devices. Its laptop screen is PortalPicture, which "See it" swaps; PortalMotion is unchanged.
  */
 export function HomePortal({ locale, cards }: { locale: Locale; cards: HomeCard[] }) {
   const shots: PortalShot[] = cards.map((card) => {
@@ -49,9 +50,13 @@ export function HomePortal({ locale, cards }: { locale: Locale; cards: HomeCard[
           </section>
           <div className="portal-scene">
             <div className="portal-photo-frame">
-              <IslandBoundary island="portal-picture">
-                <PortalPicture shots={shots} />
-              </IslandBoundary>
+              <PortalScene
+                laptop={
+                  <IslandBoundary island="portal-picture">
+                    <PortalPicture shots={shots} />
+                  </IslandBoundary>
+                }
+              />
             </div>
             <p className="portal-caption portal-banner-caption" data-portal-caption="">
               <span data-portal-caption-text="">{first.caption}</span>

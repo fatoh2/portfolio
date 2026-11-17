@@ -1,12 +1,14 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 
 /**
  * The scene the mark opens onto: real captures in drawn device frames, each on
  * its own depth so the controller can move them at different rates. Every
  * screen is a file under /public, so a product can be swapped by replacing one
- * image. The laptop screen is the gate image the controller waits for.
+ * image. The laptop screen is the gate image the controller waits for; the homepage passes its own
+ * `laptop` screen (PortalPicture), which "See it" swaps.
  */
-export function PortalScene() {
+export function PortalScene({ laptop }: { laptop?: ReactNode } = {}) {
   return (
     <div className="portal-media portal-scene-stage" data-portal-media>
       <div className="scene-glow" aria-hidden="true" data-portal-depth="0" />
@@ -25,7 +27,7 @@ export function PortalScene() {
       </svg>
       <div className="scene-device scene-laptop" data-portal-depth="1">
         <div className="scene-screen">
-          <Image
+          {laptop ?? <Image
             src="/work/elsewhereco/desktop.webp"
             alt="ElsewhereCo's Arabic expedition homepage on a laptop"
             width={2880}
@@ -34,7 +36,7 @@ export function PortalScene() {
             priority
             className="portal-photo"
             data-portal-photo=""
-          />
+          />}
         </div>
       </div>
       <div className="scene-device scene-tablet" data-portal-depth="1.3">
