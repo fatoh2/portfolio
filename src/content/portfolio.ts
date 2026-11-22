@@ -692,7 +692,7 @@ export const projects: PortfolioProject[] = [
       { src: "/work/wind-up-toys/push.png", width: 780, height: 1688, alt: tx("Level 3: the duck wound two clicks behind the penguin, with step marks 1 and 2 ahead of it", "المرحلة الثالثة: البطة معبّأة نقرتين خلف البطريق، وأمامها علامتا الخطوتين 1 و2", "שלב 3: הברווז נמתח שני קליקים מאחורי הפינגווין, ולפניו סימני הצעדים 1 ו-2"), caption: tx("A toy pushes what is in front of it, exactly as far as it walks", "اللعبة تدفع ما أمامها بقدر ما تمشي تمامًا", "צעצוע דוחף את מה שלפניו בדיוק כמרחק שהוא הולך"), fit: "contain" },
     ],
     links: [apkLink(
-      "/downloads/Wind-up-Toys-0.1.0-rough-1-4-tester.apk",
+      "/downloads/Wind-up-Toys-0.1.0-rough-1-5-dial-tester.apk",
       tx(
         "Debug-signed tester build 0.1.0, not a Play Store release. The drawings are stand-ins and it has not been played on a physical phone yet. Android will ask you to allow installs from your browser.",
         "نسخة اختبار 0.1.0 موقعة بمفتاح تطوير وليست إصدارًا على Google Play. الرسومات مؤقتة ولم تُجرَّب بعد على هاتف حقيقي. سيطلب أندرويد السماح بالتثبيت من المتصفح.",
