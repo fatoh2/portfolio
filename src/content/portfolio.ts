@@ -643,6 +643,67 @@ export const projects: PortfolioProject[] = [
     customerPath: "startup",
   },
   {
+    slug: "wind-up-toys",
+    title: "Wind-up Toys",
+    category: tx("One-thumb puzzle game", "لعبة ألغاز بإبهام واحد", "משחק פאזל לאגודל אחד"),
+    summary: tx(
+      "A one-thumb puzzle game for phones: press a wind-up toy, circle your thumb to wind its key one click per step, and lift to let it walk to its place.",
+      "لعبة ألغاز للهاتف تُلعب بإبهام واحد: اضغط على لعبة زنبركية، وأدر إبهامك حولها لتعبئة مفتاحها نقرةً لكل خطوة، ثم ارفع إصبعك لتمشي إلى مكانها.",
+      "משחק פאזל לטלפון שמשחקים באגודל אחד: לוחצים על צעצוע קפיצי, מסובבים את האגודל סביבו כדי למתוח את המפתח, קליק אחד לכל צעד, ומרימים את האצבע כדי שילך למקומו.",
+    ),
+    problem: tx(
+      "A puzzle played with one thumb and no instructions still has to offer real choices. Each toy walks exactly as many steps as you wind it, and toys push each other and fall, so both the order and the count matter.",
+      "لغز يُلعب بإبهام واحد ومن دون تعليمات يجب أن يقدّم خيارات حقيقية. كل لعبة تمشي بعدد الخطوات التي عبّأتها تمامًا، والألعاب تدفع بعضها وتسقط، لذلك يهمّ الترتيب والعدد معًا.",
+      "פאזל שמשחקים באגודל אחד ובלי הוראות צריך עדיין לתת בחירות אמיתיות. כל צעצוע הולך בדיוק כמספר הצעדים שמתחתם, והצעצועים דוחפים זה את זה ונופלים, ולכן גם הסדר וגם המספר חשובים.",
+    ),
+    audience: tx("Phone players who like short puzzles", "لاعبو الهاتف الذين يحبون الألغاز القصيرة", "שחקני טלפון שאוהבים פאזלים קצרים"),
+    role: tx("Game design, level generator and solver, and Android packaging", "تصميم اللعبة ومولّد المراحل والحلّال وتجهيز أندرويد", "עיצוב המשחק, מחולל שלבים ופותר, ואריזה לאנדרואיד"),
+    status: "in-development",
+    statusNote: tx(
+      "Work in progress: rough playable build 1, with 30 levels and stand-in drawings. Automated and browser checks pass; it has not been played on a physical phone yet.",
+      "قيد العمل: النسخة الأولى القابلة للعب، فيها 30 مرحلة ورسومات مؤقتة. الفحوصات الآلية وفحوصات المتصفح تنجح، ولم تُجرَّب بعد على هاتف حقيقي.",
+      "בעבודה: גרסה ראשונה שאפשר לשחק בה, עם 30 שלבים וציורים זמניים. הבדיקות האוטומטיות ובדיקות הדפדפן עוברות; טרם שוחקה בטלפון אמיתי.",
+    ),
+    capabilities: [
+      tx("Wind a toy by circling your thumb around it: one click and one numbered step mark per quarter turn.", "تعبئة اللعبة بتدوير الإبهام حولها: نقرة وعلامة خطوة مرقّمة لكل ربع دورة.", "מותחים צעצוע בסיבוב האגודל סביבו: קליק אחד וסימן צעד ממוספר לכל רבע סיבוב."),
+      tx("30 levels: four teach the rules without words and the rest are puzzles. 23 of them were picked from 1,210 generated boards by a solver and simulated players.", "30 مرحلة: أربع منها تعلّم القواعد من دون كلمات والباقي ألغاز. اختيرت 23 منها من بين 1210 لوحة مولّدة بواسطة حلّال ولاعبين محاكين.", "30 שלבים: ארבעה מלמדים את החוקים בלי מילים והשאר פאזלים. 23 מהם נבחרו מתוך 1,210 לוחות שנוצרו, בעזרת פותר ושחקנים מדומים."),
+      tx("Undo takes back one wind at a time, Retry restarts a level and can itself be undone, and a level left halfway survives Android closing the app.", "زر التراجع يلغي تعبئة واحدة في كل مرة، وزر الإعادة يبدأ المرحلة من جديد ويمكن التراجع عنه أيضًا، والمرحلة غير المكتملة تبقى محفوظة إذا أغلق أندرويد التطبيق.", "ביטול מחזיר מתיחה אחת בכל פעם, התחלה מחדש מאפסת שלב ואפשר לבטל גם אותה, ושלב שנעזב באמצע נשמר גם אם אנדרואיד סוגר את האפליקציה."),
+      tx("A tester build with a build stamp, any level on a long press, and a Report button that shares the moves and the last thumb paths.", "نسخة اختبار تعرض رقم البناء، وتفتح أي مرحلة بضغطة طويلة، وفيها زر تقرير يشارك الحركات وآخر مسارات الإبهام.", "גרסת בדיקה עם חותמת בנייה, פתיחת כל שלב בלחיצה ארוכה, וכפתור דיווח שמשתף את המהלכים ואת מסלולי האגודל האחרונים."),
+    ],
+    evidence: [
+      tx("Android tester APK 0.1.0, rough build 1", "ملف APK للاختبار على أندرويد، الإصدار 0.1.0، النسخة الأولى", "קובץ APK לבדיקה באנדרואיד, גרסה 0.1.0, בנייה ראשונה"),
+      tx("A solver check of every level on each build", "فحص كل مرحلة بالحلّال في كل بناء", "בדיקת פותר לכל שלב בכל בנייה"),
+      tx("Browser tests of the first launch, winding, Undo, saving and reports", "اختبارات متصفح للتشغيل الأول والتعبئة والتراجع والحفظ والتقارير", "בדיקות דפדפן להפעלה ראשונה, מתיחה, ביטול, שמירה ודיווחים"),
+    ],
+    stack: ["TypeScript", "Canvas 2D", "Web Audio", "Capacitor 8", "Android", "Playwright"],
+    architecture: [
+      { label: tx("Thumb crank", "مقبض الإبهام", "ידית האגודל"), detail: tx("Turns a circling thumb into clicks, one per quarter turn.", "يحوّل دوران الإبهام إلى نقرات، نقرة لكل ربع دورة.", "הופכת סיבוב של האגודל לקליקים, קליק לכל רבע סיבוב.") },
+      { label: tx("Toy rules", "قواعد الألعاب", "חוקי הצעצועים"), detail: tx("Walking, pushing, falling and the stuck-toy check, shared by the game and the solver.", "المشي والدفع والسقوط وكشف اللعبة العالقة، مشتركة بين اللعبة والحلّال.", "הליכה, דחיפה, נפילה וזיהוי צעצוע תקוע, משותפים למשחק ולפותר.") },
+      { label: tx("Level tools", "أدوات المراحل", "כלי שלבים"), detail: tx("A generator, a solver and simulated players that pick levels and check each build.", "مولّد وحلّال ولاعبون محاكون يختارون المراحل ويفحصون كل بناء.", "מחולל, פותר ושחקנים מדומים שבוחרים שלבים ובודקים כל בנייה.") },
+    ],
+    nextStep: tx(
+      "Play-test on a phone, watch a first-time player on level 1, then decide on art and harder levels.",
+      "تجربة اللعب على هاتف، ومراقبة لاعب جديد في المرحلة الأولى، ثم اتخاذ القرار بشأن الرسومات والمراحل الأصعب.",
+      "לשחק בטלפון, לצפות בשחקן חדש בשלב הראשון, ואז להחליט על הגרפיקה ועל שלבים קשים יותר.",
+    ),
+    media: [
+      { src: "/work/wind-up-toys/two-shelves.png", width: 780, height: 1688, alt: tx("Level 25: a robot and two ducks on the top shelf and a bear below, with dashed outlines marking each toy's place", "المرحلة 25: روبوت وبطتان على الرف العلوي ودب في الأسفل، وخطوط متقطعة تحدد مكان كل لعبة", "שלב 25: רובוט ושני ברווזים על המדף העליון ודוב למטה, וקווים מקווקווים מסמנים את מקומו של כל צעצוע"), caption: tx("Every toy has a marked place to reach", "لكل لعبة مكان محدد عليها أن تصل إليه", "לכל צעצוע יש מקום מסומן שאליו הוא צריך להגיע"), fit: "contain" },
+      { src: "/work/wind-up-toys/winding.png", width: 780, height: 1688, alt: tx("Level 1: the duck's key wound three clicks, with step marks 1, 2 and 3 on the shelf and the third on its place", "المرحلة الأولى: مفتاح البطة معبّأ ثلاث نقرات، مع علامات الخطوات 1 و2 و3 على الرف والثالثة على مكانها", "שלב 1: המפתח של הברווז נמתח שלושה קליקים, עם סימני צעדים 1, 2 ו-3 על המדף והשלישי על מקומו"), caption: tx("One click per quarter turn, one step per click", "نقرة لكل ربع دورة، وخطوة لكل نقرة", "קליק לכל רבע סיבוב, צעד לכל קליק"), fit: "contain" },
+      { src: "/work/wind-up-toys/push.png", width: 780, height: 1688, alt: tx("Level 3: the duck wound two clicks behind the penguin, with step marks 1 and 2 ahead of it", "المرحلة الثالثة: البطة معبّأة نقرتين خلف البطريق، وأمامها علامتا الخطوتين 1 و2", "שלב 3: הברווז נמתח שני קליקים מאחורי הפינגווין, ולפניו סימני הצעדים 1 ו-2"), caption: tx("A toy pushes what is in front of it, exactly as far as it walks", "اللعبة تدفع ما أمامها بقدر ما تمشي تمامًا", "צעצוע דוחף את מה שלפניו בדיוק כמרחק שהוא הולך"), fit: "contain" },
+    ],
+    links: [apkLink(
+      "/downloads/Wind-up-Toys-0.1.0-rough-1-tester.apk",
+      tx(
+        "Debug-signed tester build 0.1.0, not a Play Store release. The drawings are stand-ins and it has not been played on a physical phone yet. Android will ask you to allow installs from your browser.",
+        "نسخة اختبار 0.1.0 موقعة بمفتاح تطوير وليست إصدارًا على Google Play. الرسومات مؤقتة ولم تُجرَّب بعد على هاتف حقيقي. سيطلب أندرويد السماح بالتثبيت من المتصفح.",
+        "גרסת בדיקה 0.1.0 בחתימת פיתוח, לא גרסה בחנות Play. הציורים זמניים והיא טרם נבדקה בטלפון אמיתי. אנדרואיד יבקש לאשר התקנה מהדפדפן.",
+      ),
+      tx("Download Android tester build (APK)", "تحميل نسخة الاختبار لأندرويد (APK)", "הורדת גרסת בדיקה לאנדרואיד (APK)"),
+    )],
+    featured: false,
+    customerPath: "startup",
+  },
+  {
     slug: "solitaire",
     title: "SOLitaire",
     category: tx("Competitive mobile product", "منتج موبايل تنافسي", "מוצר מובייל תחרותי"),

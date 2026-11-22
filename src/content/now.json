@@ -1,7 +1,12 @@
 [
   {
+    "slug": "nedaa-lifestyle",
+    "updated": "2026-11-18",
+    "phase": "Running the studio from the app — plugin 0.7.2 live (approvals, attendance, payments, schedule, reports,…"
+  },
+  {
     "slug": "bab",
-    "updated": "2026-10-24",
+    "updated": "2026-11-11",
     "phase": "Building"
   },
   {
@@ -13,11 +18,6 @@
     "slug": "solitaire",
     "updated": "2026-10-18",
     "phase": "Court Table redesign on staging"
-  },
-  {
-    "slug": "nedaa-lifestyle",
-    "updated": "2026-10-17",
-    "phase": "Running the studio from the app — plugin 0.7.2 live (approvals, attendance, payments, schedule, reports,…"
   },
   {
     "slug": "elsewhereco",

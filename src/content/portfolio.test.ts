@@ -138,15 +138,18 @@ describe("customer-first portfolio content", () => {
     }
   });
 
-  it("publishes the localized Little Keepsakes preview with its actual APK and captures", () => {
-    const project = getProject("little-keepsakes");
-    expect(project?.featured).toBe(true);
+  it.each([
+    ["little-keepsakes", true, "/downloads/Little-Keepsakes-0.3.1-preview.apk"],
+    ["wind-up-toys", false, "/downloads/Wind-up-Toys-0.1.0-rough-1-tester.apk"],
+  ])("publishes the localized %s preview with its actual APK and captures", (slug, featured, href) => {
+    const project = getProject(slug);
+    expect(project?.featured).toBe(featured);
     expect(project?.status).toBe("in-development");
     expect(project?.links).toHaveLength(1);
     const apk = project?.links[0];
     expect(apk?.kind).toBe("download");
-    expect(apk?.href).toBe("/downloads/Little-Keepsakes-0.3.1-preview.apk");
-    if (!project || !apk) throw new Error("Missing Little Keepsakes preview");
+    expect(apk?.href).toBe(href);
+    if (!project || !apk) throw new Error(`Missing ${slug} preview`);
     const apkPath = join(process.cwd(), "public", apk.href);
     expect(existsSync(apkPath)).toBe(true);
     expect(statSync(apkPath).size).toBeGreaterThan(1_000_000);
