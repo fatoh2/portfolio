@@ -140,7 +140,7 @@ describe("customer-first portfolio content", () => {
 
   it.each([
     ["little-keepsakes", true, "/downloads/Little-Keepsakes-0.3.1-preview.apk"],
-    ["wind-up-toys", false, "/downloads/Wind-up-Toys-0.1.0-rough-1-tester.apk"],
+    ["wind-up-toys", false, "/downloads/Wind-up-Toys-0.1.0-rough-1-2-tester.apk"],
   ])("publishes the localized %s preview with its actual APK and captures", (slug, featured, href) => {
     const project = getProject(slug);
     expect(project?.featured).toBe(featured);
