@@ -699,6 +699,14 @@ export const projects: PortfolioProject[] = [
         "גרסת בדיקה 0.1.0 בחתימת פיתוח, לא גרסה בחנות Play. הציורים זמניים והיא טרם נבדקה בטלפון אמיתי. אנדרואיד יבקש לאשר התקנה מהדפדפן.",
       ),
       tx("Download Android tester build (APK)", "تحميل نسخة الاختبار لأندرويد (APK)", "הורדת גרסת בדיקה לאנדרואיד (APK)"),
+    ), apkLink(
+      "/downloads/Wind-up-Toys-Lab-0.1.0-rough-1-7-tester.apk",
+      tx(
+        "A separate tester app that installs beside the game and leaves its progress alone: 12 hard levels, with a one-tap rating after each. Debug-signed, not a Play Store release. Android will ask you to allow installs from your browser.",
+        "تطبيق اختبار منفصل يُثبَّت بجانب اللعبة ولا يمس تقدّمها: 12 مرحلة صعبة، مع تقييم بنقرة واحدة بعد كل مرحلة. موقّع بمفتاح تطوير وليس إصدارًا على Google Play. سيطلب أندرويد السماح بالتثبيت من المتصفح.",
+        "אפליקציית בדיקה נפרדת שמותקנת לצד המשחק ולא נוגעת בהתקדמות שלו: 12 שלבים קשים, עם דירוג בהקשה אחת אחרי כל שלב. בחתימת פיתוח, לא גרסה בחנות Play. אנדרואיד יבקש לאשר התקנה מהדפדפן.",
+      ),
+      tx("Download the Lab tester app (APK)", "تحميل تطبيق الاختبار Lab لأندرويد (APK)", "הורדת אפליקציית הבדיקה Lab לאנדרואיד (APK)"),
     )],
     featured: false,
     customerPath: "startup",
